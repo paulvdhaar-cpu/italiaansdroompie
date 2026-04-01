@@ -32,13 +32,20 @@
   "geo": { "@type": "GeoCoordinates", "latitude": 43.1, "longitude": 13.5 },
   "openingHours": "June 01 - September 15",
   "priceRange": "€18 - €178",
+  "image": "https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2025/11/Zwembad-1-scaled-e1762685294547.jpg",
   "amenityFeature": [
     {"@type": "LocationFeatureSpecification", "name": "Swimming Pool", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true},
-    {"@type": "LocationFeatureSpecification", "name": "Playground", "value": true}
+    {"@type": "LocationFeatureSpecification", "name": "Playground", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Glamping Tents", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Safari Tent", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Lodge Tent", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Organic Wine", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Olive Garden", "value": true}
   ]
 }
 </script>
+<link rel="canonical" href="https://sanprocolo.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -797,6 +804,70 @@ nav.scrolled {
 
 .btn-small:hover { background: var(--gold); border-color: var(--gold); color: var(--bg); }
 
+/* ── EXPERIENCES ── */
+#experiences { padding: 100px 48px; background: var(--bg2); }
+
+.experiences-header { max-width: 1280px; margin: 0 auto 52px; }
+
+.experiences-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.exp-card {
+  position: relative; border-radius: 2px; overflow: hidden;
+  aspect-ratio: 3/4;
+}
+
+.exp-card-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  filter: brightness(0.45) saturate(1.15);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.exp-card:hover .exp-card-bg {
+  transform: scale(1.05);
+  filter: brightness(0.55) saturate(1.25);
+}
+
+.exp-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(30,18,9,0.96) 0%, rgba(30,18,9,0.15) 55%, transparent 100%);
+}
+
+.exp-card-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 36px 32px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.exp-eyebrow {
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 10px;
+}
+
+.exp-eyebrow::before {
+  content: ''; display: inline-block;
+  width: 16px; height: 1px; background: var(--gold);
+}
+
+.exp-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.85rem; font-weight: 300; line-height: 1.1;
+  color: var(--cream); letter-spacing: -0.01em;
+}
+
+.exp-title em { font-style: italic; color: var(--gold); }
+
+.exp-desc {
+  font-size: 13px; font-weight: 300;
+  color: rgba(245,234,214,0.55); line-height: 1.7;
+}
+
 /* ── TESTIMONIALS ── */
 .testimonials { padding: 100px 48px; background: var(--bg2); }
 
@@ -1233,6 +1304,10 @@ a:focus-visible, button:focus-visible {
   .stay-header .btn-outline { width: 100%; text-align: center; }
   .stay-cards { grid-template-columns: 1fr; }
 
+  #experiences { padding: 64px 24px; }
+  .experiences-grid { grid-template-columns: 1fr; gap: 10px; }
+  .exp-card { aspect-ratio: 4/3; }
+
   .testimonials { padding: 64px 24px; }
   .testimonials-grid { grid-template-columns: 1fr; }
 
@@ -1393,7 +1468,7 @@ a:focus-visible, button:focus-visible {
         <h2 class="section-title reveal reveal-delay-1">Where a family<br><em>fell in love with Italy</em></h2>
       </div>
       <p class="about-text reveal reveal-delay-2">David and Lisette weren't looking for a project. They were looking for a life — one where their three children grew up with dirty knees and neighbours who became friends. When they first drove up the hill to San Procolo and saw the valley below, they didn't need to discuss it.</p>
-      <p class="about-text reveal reveal-delay-2">They've kept it small on purpose. Thirty pitches, a handful of tents, a pool with a view. Nothing that needs managing from a distance. Most evenings you'll find David somewhere on site — he'll probably invite you to sit down for a glass of Centanni wine before you've had a chance to say no.</p>
+      <p class="about-text reveal reveal-delay-2">They've kept it small on purpose. Thirty pitches, a handful of glamping tents, a pool with a view. Nothing that needs managing from a distance. Most evenings you'll find David somewhere on site — he'll probably invite you to sit down for a glass of Centanni wine before you've had a chance to say no.</p>
       <h3 class="about-subheading reveal reveal-delay-3">A proper campsite, not a resort</h3>
       <p class="about-text reveal reveal-delay-3">Kids roam freely here. Parents actually unwind. The mornings begin with fresh bread on the terrace and the days end with fireflies and that particular stillness that only seems to exist in the Italian hills.</p>
       <a href="#activities" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;">See What Awaits →</a>
@@ -1538,8 +1613,8 @@ a:focus-visible, button:focus-visible {
 <section id="stay">
   <div class="stay-header">
     <div>
-      <div class="section-eyebrow reveal">Accommodation</div>
-      <h2 class="section-title reveal reveal-delay-1">Where your family<br><em>sleeps on the hill</em></h2>
+      <div class="section-eyebrow reveal">Glamping in Le Marche</div>
+      <h2 class="section-title reveal reveal-delay-1">Where your family sleeps —<br><em>glamping tent, lodge or pitch</em></h2>
     </div>
     <a href="#contact" class="btn-outline reveal">Check Availability →</a>
   </div>
@@ -1547,7 +1622,7 @@ a:focus-visible, button:focus-visible {
     <div class="stay-card reveal">
       <div class="stay-card-image">
         <div class="stay-card-img" style="background-image: url('https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2021/01/20180511_105154-scaled-e1610190184928-1024x1024.jpg');"></div>
-        <span class="stay-card-tag">Bring Your Own</span>
+        <span class="stay-card-tag">Camping Pitch</span>
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title">Camping Pitch</h3>
@@ -1561,11 +1636,11 @@ a:focus-visible, button:focus-visible {
     <div class="stay-card reveal reveal-delay-1">
       <div class="stay-card-image">
         <div class="stay-card-img" style="background-image: url('https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2021/01/IMG_5655-scaled-e1610209550264-1024x1024.jpg');"></div>
-        <span class="stay-card-tag">Fully Equipped</span>
+        <span class="stay-card-tag">Glamping Tent</span>
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title">Safari &amp; Tunnel Tent</h3>
-        <p class="stay-card-desc">Ready-pitched tents with beds, linen and everything you need. Safari tent sleeps up to 4. Tunnel tent is perfect for couples.</p>
+        <p class="stay-card-desc">Ready-pitched glamping tents with beds, linen and everything you need. Safari tent sleeps up to 4. Tunnel tent is perfect for couples.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-from">From</span><span class="stay-price-value">€70 <span>/ night</span></span></div>
           <a href="https://sanprocolo.com/reserveringen/" class="btn-small">Book</a>
@@ -1575,17 +1650,58 @@ a:focus-visible, button:focus-visible {
     <div class="stay-card reveal reveal-delay-2">
       <div class="stay-card-image">
         <div class="stay-card-img" style="background-image: url('https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2021/01/IMG-20210109-WA0000-e1610198938879.jpg');"></div>
-        <span class="stay-card-tag">New 2024</span>
+        <span class="stay-card-tag">Lodge &amp; Chalet</span>
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title">Lodge Tent &amp; Chalet</h3>
-        <p class="stay-card-desc">The ultimate comfort on the hill. Luxury Lodge Tent and private Chalet include linen, full amenities and panoramic terraces.</p>
+        <p class="stay-card-desc">The ultimate glamping experience. Luxury Lodge Tent and private Chalet include linen, full amenities and panoramic terraces over Le Marche.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-from">From</span><span class="stay-price-value">€95 <span>/ night</span></span></div>
           <a href="https://sanprocolo.com/reserveringen/" class="btn-small">Book</a>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences">
+  <div class="experiences-header">
+    <div class="section-eyebrow reveal">Only Here</div>
+    <h2 class="section-title reveal reveal-delay-1">Three things you<br><em>won't find anywhere else</em></h2>
+  </div>
+  <div class="experiences-grid">
+
+    <div class="exp-card reveal">
+      <div class="exp-card-bg" style="background-image: url('https://wsrv.nl/?url=cdn.mos.cms.futurecdn.net/XZoJDhkoDJDZ2zNeY5FV68.jpg&w=1200&q=85');"></div>
+      <div class="exp-card-overlay"></div>
+      <div class="exp-card-content">
+        <div class="exp-eyebrow">From the garden</div>
+        <h3 class="exp-title">Harvest your<br><em>own olives</em></h3>
+        <p class="exp-desc">Walk the grove, pick the fruit, press it the same afternoon. David will show you how. The children will eat the bread before it cools.</p>
+      </div>
+    </div>
+
+    <div class="exp-card reveal reveal-delay-1">
+      <div class="exp-card-bg" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5d1b12a8c352fe000114d399/cd3d218b-8e60-451f-823a-ad7d3e5b6ab1/Wine+tasting+Sicily+-+alcamo');"></div>
+      <div class="exp-card-overlay"></div>
+      <div class="exp-card-content">
+        <div class="exp-eyebrow">From mamma's kitchen</div>
+        <h3 class="exp-title">Pasta the<br><em>original way</em></h3>
+        <p class="exp-desc">No shortcuts, no packets. Flour, eggs, hands. The recipe hasn't changed in three generations — and it shows in the first mouthful.</p>
+      </div>
+    </div>
+
+    <div class="exp-card reveal reveal-delay-2">
+      <div class="exp-card-bg" style="background-image: url('https://www.gustopiustore.com/wp-content/uploads/2022/06/centanni-1.jpg');"></div>
+      <div class="exp-card-overlay"></div>
+      <div class="exp-card-content">
+        <div class="exp-eyebrow">From the hillside</div>
+        <h3 class="exp-title">Wine from<br><em>Giacomo Centanni</em></h3>
+        <p class="exp-desc">Organic. Local. Named after the farmer who makes it three valleys over. Open a bottle at the long table on a Tuesday evening and you'll understand why people keep coming back.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
