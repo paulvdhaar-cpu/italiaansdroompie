@@ -48,27 +48,29 @@
 <link rel="canonical" href="https://sanprocolo.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:       oklch(11% 0.035 88);
-  --bg2:      oklch(14% 0.038 88);
-  --bg3:      oklch(18% 0.042 88);
-  --gold:     oklch(44% 0.12 108);
-  --gold-h:   oklch(38% 0.11 108);
-  --cream:    oklch(91% 0.016 92);
-  --muted:    oklch(91% 0.016 92 / 0.52);
-  --subtle:   oklch(91% 0.016 92 / 0.25);
-  --border:   oklch(44% 0.12 108 / 0.28);
-  --border2:  oklch(91% 0.016 92 / 0.12);
+  --bg:       oklch(95% 0.016 86);
+  --bg2:      oklch(92% 0.020 85);
+  --bg3:      oklch(88% 0.026 84);
+  --gold:     oklch(44% 0.095 115);
+  --gold-h:   oklch(38% 0.090 115);
+  --peach:    oklch(72% 0.082 33);
+  --peach-h:  oklch(65% 0.090 30);
+  --cream:    oklch(18% 0.020 80);
+  --muted:    oklch(36% 0.015 80);
+  --subtle:   oklch(58% 0.012 80);
+  --border:   oklch(44% 0.095 115 / 0.28);
+  --border2:  oklch(18% 0.020 80 / 0.10);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   background-color: var(--bg);
   color: var(--cream);
   font-size: 16px;
@@ -89,10 +91,10 @@ nav {
 
 nav.scrolled {
   padding: 14px 48px;
-  background: oklch(13% 0.036 88 / 0.96);
+  background: oklch(44% 0.095 115 / 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid oklch(38% 0.090 115 / 0.35);
 }
 
 .nav-logo {
@@ -153,7 +155,7 @@ nav.scrolled {
   background: transparent;
   border: 1px solid oklch(44% 0.12 108 / 0.5);
   color: var(--gold);
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-size: 10px; font-weight: 600;
   letter-spacing: 2px; text-transform: uppercase;
   border-radius: 2px; cursor: pointer;
@@ -210,11 +212,11 @@ nav.scrolled {
 }
 
 .mobile-menu-book {
-  font-family: 'Hanken Grotesk', sans-serif !important;
+  font-family: 'Jost', sans-serif !important;
   font-style: normal !important;
   font-size: 11px !important; font-weight: 600 !important;
   letter-spacing: 2px !important; text-transform: uppercase !important;
-  background: var(--gold); color: var(--bg) !important;
+  background: var(--peach); color: oklch(18% 0.020 80) !important;
   padding: 14px 32px !important; border-radius: 2px;
   margin-top: 12px;
 }
@@ -245,8 +247,8 @@ nav.scrolled {
 .hero-overlay {
   position: absolute; inset: 0;
   background:
-    linear-gradient(135deg, rgba(18,12,7,0.6) 0%, transparent 55%),
-    linear-gradient(to top, rgba(18,12,7,0.95) 0%, rgba(18,12,7,0.15) 60%);
+    linear-gradient(135deg, rgba(12,7,3,0.72) 0%, transparent 55%),
+    linear-gradient(to top, rgba(12,7,3,0.97) 0%, rgba(12,7,3,0.22) 60%);
 }
 
 .hero-noise {
@@ -305,8 +307,8 @@ nav.scrolled {
 
 .btn-primary {
   padding: 15px 34px;
-  background: var(--gold); color: var(--bg);
-  font-family: 'Hanken Grotesk', sans-serif;
+  background: var(--peach); color: oklch(18% 0.020 80);
+  font-family: 'Jost', sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 2.5px; text-transform: uppercase;
   border: none; border-radius: 2px;
@@ -315,15 +317,15 @@ nav.scrolled {
 }
 
 .btn-primary:hover {
-  background: var(--gold-h);
+  background: var(--peach-h);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px oklch(44% 0.12 108 / 0.3);
+  box-shadow: 0 8px 24px oklch(72% 0.082 33 / 0.4);
 }
 
 .btn-outline {
   padding: 14px 28px;
   background: transparent; color: rgba(245,234,214,0.65);
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-size: 10px; font-weight: 500;
   letter-spacing: 2px; text-transform: uppercase;
   border: 1px solid rgba(245,234,214,0.2); border-radius: 2px;
@@ -378,7 +380,7 @@ nav.scrolled {
 }
 
 .hero-stat-label {
-  font-size: 9px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 2px; text-transform: uppercase;
   color: rgba(245,234,214,0.3);
 }
@@ -498,7 +500,7 @@ nav.scrolled {
 }
 
 .about-badge-label {
-  font-size: 9px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 2px; text-transform: uppercase;
   color: rgba(245,234,214,0.35); margin-top: 5px;
 }
@@ -632,13 +634,13 @@ nav.scrolled {
 
 .act-photo-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, rgba(18,12,7,0.82));
+  background: linear-gradient(to bottom, transparent 18%, rgba(10,5,2,0.92));
 }
 
 .act-card-label { position: relative; z-index: 2; }
 
 .act-card-eyebrow {
-  font-size: 9px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--muted); margin-bottom: 7px;
   display: flex; align-items: center; gap: 8px;
@@ -734,7 +736,7 @@ nav.scrolled {
 .stay-card-tag {
   position: absolute; top: 14px; left: 14px; z-index: 2;
   background: var(--gold); color: var(--bg);
-  font-size: 9px; font-weight: 700;
+  font-size: 11px; font-weight: 600;
   letter-spacing: 1.5px; text-transform: uppercase;
   padding: 5px 12px; border-radius: 2px;
 }
@@ -761,7 +763,7 @@ nav.scrolled {
 .stay-price { display: flex; flex-direction: column; gap: 1px; }
 
 .stay-price-from {
-  font-size: 9px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 1.5px; text-transform: uppercase;
   color: rgba(245,234,214,0.3);
 }
@@ -772,14 +774,14 @@ nav.scrolled {
 }
 
 .stay-price-value span {
-  font-size: 12px; font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 12px; font-family: 'Jost', sans-serif;
   color: rgba(245,234,214,0.3);
 }
 
 .btn-small {
   padding: 8px 18px;
   border: 1px solid oklch(44% 0.12 108 / 0.4); color: var(--gold);
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-size: 10px; font-weight: 600;
   letter-spacing: 1.5px; text-transform: uppercase;
   border-radius: 2px; text-decoration: none;
@@ -807,18 +809,18 @@ nav.scrolled {
 .exp-card-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  filter: brightness(0.45) saturate(1.15);
+  filter: brightness(0.38) saturate(1.15);
   transition: transform 0.6s ease, filter 0.6s ease;
 }
 
 .exp-card:hover .exp-card-bg {
   transform: scale(1.05);
-  filter: brightness(0.55) saturate(1.25);
+  filter: brightness(0.48) saturate(1.25);
 }
 
 .exp-card-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(30,18,9,0.96) 0%, rgba(30,18,9,0.15) 55%, transparent 100%);
+  background: linear-gradient(to top, rgba(12,6,2,0.97) 0%, rgba(12,6,2,0.32) 55%, transparent 100%);
 }
 
 .exp-card-content {
@@ -828,7 +830,7 @@ nav.scrolled {
 }
 
 .exp-eyebrow {
-  font-size: 9px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 2.5px; text-transform: uppercase;
   color: var(--gold);
   display: flex; align-items: center; gap: 10px;
@@ -873,7 +875,7 @@ nav.scrolled {
 .testimonial-text {
   font-family: 'Spectral', serif;
   font-size: 1.05rem; font-style: italic; font-weight: 300;
-  color: oklch(91% 0.016 92 / 0.82); line-height: 1.72;
+  color: oklch(22% 0.020 80 / 0.82); line-height: 1.72;
   margin-bottom: 24px; flex: 1;
 }
 
@@ -888,9 +890,9 @@ nav.scrolled {
 }
 
 .testimonial-author {
-  font-size: 9px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 1.5px; text-transform: uppercase;
-  color: oklch(91% 0.016 92 / 0.25);
+  color: oklch(42% 0.015 80 / 0.75);
 }
 
 /* ── SURROUNDINGS ── */
@@ -950,7 +952,7 @@ nav.scrolled {
 }
 
 .surround-label h3 {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-size: 9px; font-weight: 600;
   letter-spacing: 1.5px; text-transform: uppercase;
   color: rgba(245,234,214,0.72); margin: 0;
@@ -1127,7 +1129,7 @@ nav.scrolled {
   padding: 12px 16px;
   background: rgba(245,234,214,0.04);
   border: 1px solid rgba(245,234,214,0.16); border-radius: 2px;
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-size: 14px; font-weight: 300; color: var(--cream);
   outline: none; transition: border-color 0.2s;
   -webkit-appearance: none;
@@ -1178,7 +1180,7 @@ footer {
 }
 
 .footer-links-col-label {
-  font-size: 9px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--subtle); margin-bottom: 16px; display: block;
 }
@@ -1341,6 +1343,12 @@ a:focus-visible, button:focus-visible {
 }
 
 .avail-accom-list { display: flex; flex-direction: column; flex: 1; }
+@media (max-width: 768px) {
+  .avail-accom-list {
+    -webkit-mask-image: linear-gradient(to right, black 82%, transparent);
+    mask-image: linear-gradient(to right, black 82%, transparent);
+  }
+}
 
 .avail-accom-btn {
   width: 100%; padding: 14px 20px; background: transparent; border: none;
@@ -1348,8 +1356,8 @@ a:focus-visible, button:focus-visible {
   display: flex; flex-direction: column; gap: 3px; transition: background 0.2s; color: var(--cream);
 }
 .avail-accom-btn:last-child { border-bottom: none; }
-.avail-accom-btn:hover { background: oklch(20% 0.038 88); }
-.avail-accom-btn.active { background: oklch(20% 0.038 88); }
+.avail-accom-btn:hover { background: oklch(90% 0.024 100); }
+.avail-accom-btn.active { background: oklch(87% 0.032 112); }
 
 .avail-accom-name {
   font-family: 'Spectral', serif; font-size: 0.95rem; font-weight: 300;
@@ -1434,16 +1442,16 @@ a:focus-visible, button:focus-visible {
 .avail-summary.visible { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
 
 .avail-sum-block { display: flex; flex-direction: column; gap: 3px; }
-.avail-sum-label { font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--subtle); }
+.avail-sum-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--subtle); }
 .avail-sum-value { font-family: 'Spectral', serif; font-size: 0.98rem; font-weight: 300; color: var(--cream); }
 .avail-sum-value em { font-style: italic; color: var(--gold); }
 .avail-sum-divider { width: 1px; height: 32px; background: var(--border2); flex-shrink: 0; }
 .avail-sum-cta { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-.avail-sum-note { width: 100%; margin-top: 4px; font-size: 9px; font-weight: 300; color: var(--subtle); }
+.avail-sum-note { width: 100%; margin-top: 4px; font-size: 11px; font-weight: 300; color: var(--subtle); }
 
 .btn-avail-enquire {
   padding: 10px 22px; background: var(--gold); color: oklch(91% 0.016 92);
-  font-family: 'Hanken Grotesk', sans-serif; font-size: 10px; font-weight: 700;
+  font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase; border: none; border-radius: 2px;
   cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s;
 }
@@ -1470,6 +1478,170 @@ a:focus-visible, button:focus-visible {
   .avail-sum-cta { margin-left: 0; width: 100%; flex-direction: column; }
   .btn-avail-enquire { width: 100%; text-align: center; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   ULIVO PALETTE — SECTION OVERRIDES
+   Light sections use dark text via :root remapping.
+   Dark sections (hero, photo cards, footer) get explicit
+   light-text overrides below.
+   ═══════════════════════════════════════════════════════ */
+
+/* Hero tagline */
+.hero-tagline {
+  font-family: 'Spectral', serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+  font-weight: 300; font-style: italic;
+  color: oklch(94% 0.010 90 / 0.65);
+  margin-top: 8px; letter-spacing: 0.01em;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.7s ease 0.50s forwards;
+}
+
+/* Hero: force light text on dark overlay */
+.hero-eyebrow { color: oklch(44% 0.095 115) !important; }
+.hero-title { color: oklch(95% 0.008 92) !important; }
+.hero-sub   { color: oklch(94% 0.010 90 / 0.52) !important; }
+.hero-stat-value { color: oklch(95% 0.008 92) !important; }
+.hero-stat-label { color: oklch(94% 0.010 90 / 0.30) !important; }
+.hero-urgency    { color: oklch(94% 0.010 90 / 0.55) !important; }
+.hero-stats      { border-top-color: oklch(94% 0.010 90 / 0.09) !important; }
+.hero-stat       { border-right-color: oklch(94% 0.010 90 / 0.09) !important; }
+.scroll-indicator span { color: oklch(94% 0.010 90 / 0.28) !important; }
+
+/* Nav: light text (readable on hero dark overlay AND olive scrolled bg) */
+.nav-logo-mark { background: oklch(72% 0.082 33) !important; }
+.nav-logo-text { color: oklch(95% 0.008 92 / 0.90) !important; }
+.nav-links a   { color: oklch(94% 0.010 90 / 0.62) !important; }
+.nav-links a:hover { color: oklch(95% 0.008 92 / 0.92) !important; }
+.nav-links a::after { background: oklch(72% 0.082 33) !important; }
+.nav-lang a { color: oklch(94% 0.010 90 / 0.28) !important; }
+.nav-lang a:hover, .nav-lang a.active { color: oklch(72% 0.082 33) !important; }
+.btn-nav {
+  border-color: oklch(94% 0.010 90 / 0.35) !important;
+  color: oklch(94% 0.010 90 / 0.80) !important;
+}
+.btn-nav:hover {
+  background: oklch(72% 0.082 33) !important;
+  border-color: oklch(72% 0.082 33) !important;
+  color: oklch(18% 0.020 80) !important;
+}
+.nav-hamburger span { background: oklch(95% 0.008 92 / 0.75) !important; }
+
+/* Mobile menu: deep olive background, light text */
+.mobile-menu { background: oklch(34% 0.086 115) !important; }
+.mobile-menu a { color: oklch(94% 0.010 90 / 0.78) !important; }
+.mobile-menu a:hover { color: oklch(72% 0.082 33) !important; }
+.mobile-menu-divider { background: oklch(94% 0.010 90 / 0.14) !important; }
+
+/* Footer: olive */
+footer { background: oklch(34% 0.086 115) !important; }
+footer .footer-logo  { color: oklch(95% 0.008 92 / 0.90) !important; }
+footer .footer-tagline { color: oklch(94% 0.010 90 / 0.60) !important; }
+footer .footer-note  { color: oklch(94% 0.010 90 / 0.55) !important; }
+footer .footer-bottom { color: oklch(94% 0.010 90 / 0.35) !important; border-top-color: oklch(94% 0.010 90 / 0.10) !important; }
+footer .footer-links-col-label { color: oklch(94% 0.010 90 / 0.42) !important; }
+footer .footer-links a { color: oklch(94% 0.010 90 / 0.65) !important; }
+footer .footer-links a:hover { color: oklch(72% 0.082 33) !important; }
+
+/* Editorial pause: subtle dark text on bg3 */
+.editorial-pause-text { color: oklch(38% 0.015 80 / 0.68) !important; }
+
+/* Experience cards: photo-based, keep light text */
+.exp-eyebrow { color: oklch(72% 0.082 33) !important; }
+.exp-eyebrow::before { background: oklch(72% 0.082 33) !important; }
+.exp-title   { color: oklch(95% 0.008 92) !important; }
+.exp-title em { color: oklch(72% 0.082 33) !important; }
+.exp-desc    { color: oklch(94% 0.010 90 / 0.58) !important; }
+
+/* Activity photo card labels */
+.act-card-label .act-card-eyebrow { color: oklch(94% 0.010 90 / 0.58) !important; }
+.act-card-label .act-card-title   { color: oklch(95% 0.008 92) !important; }
+.act-card-label .act-card-sub     { color: oklch(94% 0.010 90 / 0.72) !important; }
+
+/* Activity text card: bg-dark → deep olive */
+.act-card-text.bg-dark {
+  background: oklch(34% 0.086 115) !important;
+  border-color: oklch(38% 0.090 115 / 0.20) !important;
+}
+.act-card-text.bg-dark .act-card-eyebrow { color: oklch(94% 0.010 90 / 0.52) !important; }
+.act-card-text.bg-dark .act-card-title   { color: oklch(95% 0.008 92) !important; }
+.act-card-text.bg-dark .act-card-sub     { color: oklch(94% 0.010 90 / 0.72) !important; }
+
+/* Activity text card: bg-gold → peach, dark text */
+.act-card-text.bg-gold { background: oklch(72% 0.082 33) !important; }
+.act-card-text.bg-gold .act-card-eyebrow { color: oklch(20% 0.020 80 / 0.55) !important; }
+.act-card-text.bg-gold .act-card-eyebrow::before { background: oklch(20% 0.020 80 / 0.45) !important; }
+.act-card-text.bg-gold .act-card-title { color: oklch(16% 0.022 80) !important; }
+.act-card-text.bg-gold .act-card-sub   { color: oklch(22% 0.020 80 / 0.70) !important; }
+
+/* Stay card tag → peach */
+.stay-card-tag { background: oklch(72% 0.082 33) !important; color: oklch(16% 0.022 80) !important; }
+
+/* Stay card hover shadow: lighter for light bg */
+.stay-card:hover { box-shadow: 0 24px 56px oklch(44% 0.095 115 / 0.15) !important; }
+
+/* btn-small on stay cards → peach */
+.btn-small { background: var(--peach) !important; color: oklch(16% 0.022 80) !important; border: none !important; }
+.btn-small:hover { background: var(--peach-h) !important; }
+
+/* Sea banner: photo bg, keep light text */
+.sea-banner-title     { color: oklch(95% 0.008 92) !important; }
+.sea-banner-title em  { color: oklch(72% 0.082 33) !important; }
+.sea-banner-sub       { color: oklch(94% 0.010 90 / 0.72) !important; }
+.sea-banner-content .section-eyebrow { color: oklch(94% 0.010 90 / 0.50) !important; }
+.sea-banner-content .section-eyebrow::before { background: oklch(94% 0.010 90 / 0.40) !important; }
+
+/* Gallery: fade to beige */
+.gallery-section::after { background: linear-gradient(to top, var(--bg), transparent) !important; }
+
+/* Story img overlay: fade to beige */
+.story-img-overlay { background: linear-gradient(to right, transparent 50%, var(--bg)) !important; }
+
+/* Persons picker CSS */
+.avail-persons-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0 4px;
+}
+.avail-person-btn {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent; color: var(--cream);
+  font-size: 16px; font-weight: 300; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.avail-person-btn:hover {
+  background: var(--gold); border-color: var(--gold);
+  color: oklch(96% 0.010 90);
+}
+.avail-persons-count {
+  font-family: 'Spectral', serif;
+  font-size: 1.4rem; font-weight: 300;
+  color: var(--cream); min-width: 22px; text-align: center;
+}
+.avail-persons-lbl {
+  font-size: 11px; font-weight: 400;
+  color: var(--muted); letter-spacing: 0.04em;
+}
+
+/* ── HOW BOOKING WORKS ── */
+.avail-howit {
+  display: flex; gap: 0; flex-wrap: wrap;
+  margin-top: 28px; max-width: 680px;
+}
+.avail-howit-step {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 13px; font-weight: 300;
+  color: var(--muted); line-height: 1.65;
+  flex: 1; min-width: 160px; padding-right: 24px;
+}
+.avail-howit-num {
+  font-family: 'Spectral', serif;
+  font-size: 1.6rem; font-weight: 300;
+  color: var(--gold); line-height: 1;
+  flex-shrink: 0; margin-top: -2px;
+}
+
 </style>
 </head>
 <body>
@@ -1478,6 +1650,7 @@ a:focus-visible, button:focus-visible {
 <div class="mobile-menu" id="mobile-menu">
   <a href="#about" class="mobile-menu-link">Our Story</a>
   <a href="#stay" class="mobile-menu-link">Where to Stay</a>
+  <a href="#activities" class="mobile-menu-link">Activities</a>
   <a href="#surroundings" class="mobile-menu-link">The Area</a>
   <a href="#facilities" class="mobile-menu-link">Facilities</a>
   <div class="mobile-menu-divider"></div>
@@ -1518,11 +1691,12 @@ a:focus-visible, button:focus-visible {
   <div class="hero-noise"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Camping · Monte Vidon Combatte · Le Marche · Italy</div>
-    <h1 class="hero-title"><em>Il dolce</em><br>far niente</h1>
-    <p class="hero-sub">The sweetness of doing nothing — on a hilltop in Le Marche, where the mornings smell of bread and the evenings don't end until they have to.</p>
+    <h1 class="hero-title">San<br>Procolo</h1>
+    <p class="hero-tagline"><em>Il dolce far niente</em> — the sweetness of doing nothing</p>
+    <p class="hero-sub">A family-run campsite on a hilltop in Le Marche — where the mornings smell of bread and the evenings don't end until they have to.</p>
     <div class="hero-cta">
       <a href="#contact" class="btn-primary">Book Your Stay</a>
-      <a href="#about" class="btn-outline">Discover More</a>
+      <a href="#about" class="btn-outline">Our Story</a>
     </div>
     <p class="hero-urgency">July &amp; August fill up fast — season runs 1 June to 15 September</p>
     <div class="hero-stats">
@@ -1568,8 +1742,8 @@ a:focus-visible, button:focus-visible {
         <div class="section-eyebrow reveal">Our Story</div>
         <h2 class="section-title reveal reveal-delay-1">Where a family<br><em>fell in love with Italy</em></h2>
       </div>
-      <p class="about-text reveal reveal-delay-2">David and Lisette weren't looking for a project. They were looking for a life — one where their three children grew up with dirty knees and neighbours who became friends. When they first drove up the hill to San Procolo and saw the valley below, they didn't need to discuss it.</p>
-      <p class="about-text reveal reveal-delay-2">They've kept it small on purpose. Thirty pitches, a handful of glamping tents, a pool with a view. Nothing that needs managing from a distance. Most evenings you'll find David somewhere on site — he'll probably invite you to sit down for a glass of Centanni wine before you've had a chance to say no.</p>
+      <p class="about-text reveal reveal-delay-2">Lisette and David weren't looking for a project. They were looking for a life — one where their three children grew up with dirty knees and neighbours who became friends. When they first drove up into Monte Vidon Combatte and saw the valley stretch out below them, they didn't need to discuss it.</p>
+      <p class="about-text reveal reveal-delay-2">They've kept it small on purpose — part agriturismo, part family escape. Thirty pitches, a handful of glamping tents, a pool with a view. Nothing overdone, nothing managed from afar. Most evenings you'll find Lisette somewhere on site — she'll probably invite you to sit down for a glass of Centanni wine before you've had a chance to say no.</p>
       <h3 class="about-subheading reveal reveal-delay-3">A proper campsite, not a resort</h3>
       <p class="about-text reveal reveal-delay-3">Kids roam freely here. Parents actually unwind. The mornings begin with fresh bread on the terrace and the days end with fireflies and that particular stillness that only seems to exist in the Italian hills.</p>
       <a href="#activities" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;">See What Awaits →</a>
@@ -1613,8 +1787,8 @@ a:focus-visible, button:focus-visible {
       <div class="story-panel">
         <div class="story-panel-inner">
           <div class="section-eyebrow">Evening</div>
-          <h3 class="story-panel-title">The Adriatic<br><em>can wait.</em></h3>
-          <p class="story-panel-text">It's twenty minutes away and you'll go tomorrow. Tonight, David opens the wine and the long table fills with people who arrived as strangers. There is no rush here. That is the whole point.</p>
+          <h3 class="story-panel-title">The Adriatic<br><em>can't wait.</em></h3>
+          <p class="story-panel-text">It's twenty minutes away and you'll go tomorrow. Tonight, Lisette and David open the wine and the long table fills with people who arrived as strangers. There is no rush here. That is the whole point.</p>
         </div>
       </div>
     </div>
@@ -1628,7 +1802,7 @@ a:focus-visible, button:focus-visible {
       <div class="section-eyebrow reveal">Life on the Hill</div>
       <h2 class="section-title reveal reveal-delay-1">Fill your days<br><em>the Italian way</em></h2>
     </div>
-    <p class="reveal reveal-delay-2">No agenda. No entertainment schedule. Just a hilltop, a swimming pool and 20 minutes to the Adriatic. The children will figure out the rest — and you'll be amazed what a week without screens does for all of you.</p>
+    <p class="reveal reveal-delay-2">No agenda. No programme. Just a hilltop, a swimming pool and 20 minutes to the Adriatic. The children will figure out the rest — and you'll be amazed what a week without screens does for all of you.</p>
   </div>
 
   <div class="activities-bento">
@@ -1658,7 +1832,7 @@ a:focus-visible, button:focus-visible {
       <div class="act-card-text bg-mid">
         <div class="act-card-eyebrow">In the olive grove</div>
         <div class="act-card-title">Nature &amp; butterflies</div>
-        <p class="act-card-sub">Something about the hillside draws children outside and keeps them there. The butterflies help. So do the olive groves, the lavender paths, the sense that something might be hiding around every corner.</p>
+        <p class="act-card-sub">Something about the hillside draws children outside and keeps them there. The olive groves, the lavender paths, the wildflowers — and the sense that something is always hiding around the next corner.</p>
       </div>
     </div>
 
@@ -1666,7 +1840,7 @@ a:focus-visible, button:focus-visible {
       <div class="act-card-text bg-dark">
         <div class="act-card-eyebrow">Twice a week</div>
         <div class="act-card-title">Italian evenings</div>
-        <p class="act-card-sub">Twice a week David and Lisette set up a long table. Neighbours who arrived as strangers. Local food, Centanni wine, and somehow still talking at midnight.</p>
+        <p class="act-card-sub">Twice a week Lisette and David set up a long table. Neighbours who arrived as strangers. Local food, Centanni wine, and somehow still talking at midnight.</p>
       </div>
     </div>
 
@@ -1696,7 +1870,7 @@ a:focus-visible, button:focus-visible {
       <div class="act-card-text bg-gold">
         <div class="act-card-eyebrow">Nearby</div>
         <div class="act-card-title">Medieval hilltowns</div>
-        <p class="act-card-sub">Fermo, Ascoli Piceno, Loreto. Marble squares, no tour groups, lunches that run into afternoon. David will tell you where to go.</p>
+        <p class="act-card-sub">Fermo, Ascoli Piceno, Loreto. Marble squares, no tour groups, lunches that run into afternoon. Lisette or David will point you in the right direction.</p>
       </div>
     </div>
 
@@ -1765,87 +1939,6 @@ a:focus-visible, button:focus-visible {
   </div>
 </section>
 
-<!-- AVAILABILITY -->
-<section id="availability">
-  <div class="avail-header">
-    <div class="section-eyebrow reveal">Plan Your Stay</div>
-    <h2 class="section-title reveal reveal-delay-1">When would you like<br><em>to come?</em></h2>
-    <p class="about-text reveal reveal-delay-2" style="margin-top:10px;font-size:14px;">Season runs 1 June – 15 September 2026. Choose your accommodation and pick your dates — David will write back within a day.</p>
-  </div>
-
-  <div class="avail-widget reveal">
-    <aside class="avail-sidebar">
-      <div class="avail-sidebar-label">Accommodation</div>
-      <div class="avail-accom-list">
-        <button class="avail-accom-btn active" data-type="pitch" data-price="18" data-min="2" data-units="8">
-          <span class="avail-accom-name">Camping Pitch</span>
-          <span class="avail-accom-price">From €18 / night</span>
-          <span class="avail-accom-guests">Your tent, your rules</span>
-        </button>
-        <button class="avail-accom-btn" data-type="safari" data-price="70" data-min="3" data-units="1">
-          <span class="avail-accom-name">Safari Tent</span>
-          <span class="avail-accom-price">From €70 / night</span>
-          <span class="avail-accom-guests">Sleeps up to 4 · 1 available</span>
-        </button>
-        <button class="avail-accom-btn" data-type="tunnel" data-price="70" data-min="3" data-units="2">
-          <span class="avail-accom-name">Tunnel Tent</span>
-          <span class="avail-accom-price">From €70 / night</span>
-          <span class="avail-accom-guests">Made for couples · 2 available</span>
-        </button>
-        <button class="avail-accom-btn" data-type="lodge" data-price="95" data-min="3" data-units="2">
-          <span class="avail-accom-name">Lodge Tent</span>
-          <span class="avail-accom-price">From €95 / night</span>
-          <span class="avail-accom-guests">Our favourite · 2 available</span>
-        </button>
-        <button class="avail-accom-btn" data-type="chalet" data-price="95" data-min="3" data-units="1">
-          <span class="avail-accom-name">Chalet</span>
-          <span class="avail-accom-price">From €95 / night</span>
-          <span class="avail-accom-guests">Best views on site · 1 available</span>
-        </button>
-      </div>
-    </aside>
-
-    <div class="avail-main">
-      <div class="avail-month-nav">
-        <button class="avail-nav-btn" id="availPrevBtn" aria-label="Previous month">&#8592;</button>
-        <div class="avail-month-labels" id="availMonthLabels"></div>
-        <button class="avail-nav-btn" id="availNextBtn" aria-label="Next month">&#8594;</button>
-      </div>
-      <div class="avail-calendars" id="availCalendars"></div>
-      <div class="avail-hint" id="availHint">
-        <div class="avail-hint-dot"></div>
-        <span id="availHintText">Pick the night you arrive</span>
-      </div>
-      <div class="avail-summary" id="availSummary">
-        <div class="avail-sum-block">
-          <div class="avail-sum-label">Stay</div>
-          <div class="avail-sum-value" id="availSumType">—</div>
-        </div>
-        <div class="avail-sum-divider"></div>
-        <div class="avail-sum-block">
-          <div class="avail-sum-label">Dates</div>
-          <div class="avail-sum-value" id="availSumDates">—</div>
-        </div>
-        <div class="avail-sum-divider"></div>
-        <div class="avail-sum-block">
-          <div class="avail-sum-label">Nights</div>
-          <div class="avail-sum-value" id="availSumNights">—</div>
-        </div>
-        <div class="avail-sum-divider"></div>
-        <div class="avail-sum-block">
-          <div class="avail-sum-label">Estimate</div>
-          <div class="avail-sum-value" id="availSumPrice">—</div>
-        </div>
-        <div class="avail-sum-cta">
-          <a href="#contact" class="btn-avail-enquire" id="availEnquireBtn">Write to David &amp; Lisette →</a>
-          <button class="btn-avail-clear" id="availClearBtn">Clear</button>
-        </div>
-        <p class="avail-sum-note">David will write back within a day with availability and exact pricing.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- EXPERIENCES -->
 <section id="experiences">
   <div class="experiences-header">
@@ -1860,7 +1953,7 @@ a:focus-visible, button:focus-visible {
       <div class="exp-card-content">
         <div class="exp-eyebrow">From the garden</div>
         <h3 class="exp-title">Harvest your<br><em>own olives</em></h3>
-        <p class="exp-desc">Walk the grove, pick the fruit, press it the same afternoon. David will show you how. The children will eat the bread before it cools.</p>
+        <p class="exp-desc">Walk the grove, pick the fruit, press it the same afternoon. Lisette or David will show you how. The children will eat the bread before it cools.</p>
       </div>
     </div>
 
@@ -1868,9 +1961,9 @@ a:focus-visible, button:focus-visible {
       <div class="exp-card-bg" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5d1b12a8c352fe000114d399/cd3d218b-8e60-451f-823a-ad7d3e5b6ab1/Wine+tasting+Sicily+-+alcamo');"></div>
       <div class="exp-card-overlay"></div>
       <div class="exp-card-content">
-        <div class="exp-eyebrow">From mamma's kitchen</div>
-        <h3 class="exp-title">Pasta the<br><em>original way</em></h3>
-        <p class="exp-desc">No shortcuts, no packets. Flour, eggs, hands. The recipe hasn't changed in three generations — and it shows in the first mouthful.</p>
+        <div class="exp-eyebrow">If you're lucky</div>
+        <h3 class="exp-title">A pasta lesson<br><em>from a neighbour</em></h3>
+        <p class="exp-desc">Some things here can't be planned. Flour, eggs, hands — and a neighbour who still makes it the way her grandmother did. When the timing is right, it just happens.</p>
       </div>
     </div>
 
@@ -1913,6 +2006,105 @@ a:focus-visible, button:focus-visible {
           <div class="testimonial-author">The Hendersons · United Kingdom</div>
           <div class="testimonial-stars">★★★★★</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVAILABILITY -->
+<section id="availability">
+  <div class="avail-header">
+    <div class="section-eyebrow reveal">Plan Your Stay</div>
+    <h2 class="section-title reveal reveal-delay-1">When would you like<br><em>to come?</em></h2>
+    <p class="about-text reveal reveal-delay-2" style="margin-top:10px;font-size:14px;">Season runs 1 June – 15 September 2026. Stays are confirmed by enquiry — not an automated booking system.</p>
+  <div class="avail-howit reveal reveal-delay-3">
+    <div class="avail-howit-step"><span class="avail-howit-num">1</span><span>Choose your accommodation and select arrival &amp; departure dates below</span></div>
+    <div class="avail-howit-step"><span class="avail-howit-num">2</span><span>Click "Write to Lisette &amp; David" to send your request</span></div>
+    <div class="avail-howit-step"><span class="avail-howit-num">3</span><span>Lisette confirms within 24 hours and sends a payment link</span></div>
+  </div>
+  </div>
+
+  <div class="avail-widget reveal">
+    <aside class="avail-sidebar">
+      <div class="avail-sidebar-label">Accommodation</div>
+      <div class="avail-accom-list">
+        <button class="avail-accom-btn active" data-type="pitch" data-price="18" data-min="2" data-units="8">
+          <span class="avail-accom-name">Camping Pitch</span>
+          <span class="avail-accom-price">From €18 / night</span>
+          <span class="avail-accom-guests">Your tent, your rules</span>
+        </button>
+        <button class="avail-accom-btn" data-type="safari" data-price="70" data-min="3" data-units="1">
+          <span class="avail-accom-name">Safari Tent</span>
+          <span class="avail-accom-price">From €70 / night</span>
+          <span class="avail-accom-guests">Sleeps up to 4 · 1 available</span>
+        </button>
+        <button class="avail-accom-btn" data-type="tunnel" data-price="70" data-min="3" data-units="2">
+          <span class="avail-accom-name">Tunnel Tent</span>
+          <span class="avail-accom-price">From €70 / night</span>
+          <span class="avail-accom-guests">Made for couples · 2 available</span>
+        </button>
+        <button class="avail-accom-btn" data-type="lodge" data-price="95" data-min="3" data-units="2">
+          <span class="avail-accom-name">Lodge Tent</span>
+          <span class="avail-accom-price">From €95 / night</span>
+          <span class="avail-accom-guests">Our favourite · 2 available</span>
+        </button>
+        <button class="avail-accom-btn" data-type="chalet" data-price="95" data-min="3" data-units="1">
+          <span class="avail-accom-name">Chalet</span>
+          <span class="avail-accom-price">From €95 / night</span>
+          <span class="avail-accom-guests">Best views on site · 1 available</span>
+        </button>
+      </div>
+
+      <div class="avail-sidebar-label" style="margin-top:22px;">Number of persons</div>
+      <div class="avail-persons-row">
+        <button class="avail-person-btn" id="personsDecBtn" aria-label="Fewer persons">−</button>
+        <span class="avail-persons-count" id="personsCount">2</span>
+        <span class="avail-persons-lbl">persons</span>
+        <button class="avail-person-btn" id="personsIncBtn" aria-label="More persons">+</button>
+      </div>
+    </aside>
+
+    <div class="avail-main">
+      <div class="avail-month-nav">
+        <button class="avail-nav-btn" id="availPrevBtn" aria-label="Previous month">&#8592;</button>
+        <div class="avail-month-labels" id="availMonthLabels"></div>
+        <button class="avail-nav-btn" id="availNextBtn" aria-label="Next month">&#8594;</button>
+      </div>
+      <div class="avail-calendars" id="availCalendars"></div>
+      <div class="avail-hint" id="availHint">
+        <div class="avail-hint-dot"></div>
+        <span id="availHintText">Pick the night you arrive</span>
+      </div>
+      <div class="avail-summary" id="availSummary">
+        <div class="avail-sum-block">
+          <div class="avail-sum-label">Stay</div>
+          <div class="avail-sum-value" id="availSumType">—</div>
+        </div>
+        <div class="avail-sum-divider"></div>
+        <div class="avail-sum-block">
+          <div class="avail-sum-label">Dates</div>
+          <div class="avail-sum-value" id="availSumDates">—</div>
+        </div>
+        <div class="avail-sum-divider"></div>
+        <div class="avail-sum-block">
+          <div class="avail-sum-label">Nights</div>
+          <div class="avail-sum-value" id="availSumNights">—</div>
+        </div>
+        <div class="avail-sum-divider"></div>
+        <div class="avail-sum-block">
+          <div class="avail-sum-label">Persons</div>
+          <div class="avail-sum-value" id="availSumPersons">—</div>
+        </div>
+        <div class="avail-sum-divider"></div>
+        <div class="avail-sum-block">
+          <div class="avail-sum-label">From</div>
+          <div class="avail-sum-value" id="availSumPrice">—</div>
+        </div>
+        <div class="avail-sum-cta">
+          <a href="#contact" class="btn-avail-enquire" id="availEnquireBtn">Write to Lisette &amp; David →</a>
+          <button class="btn-avail-clear" id="availClearBtn">Clear</button>
+        </div>
+        <p class="avail-sum-note">Lisette will write back within a day with availability and exact pricing.</p>
       </div>
     </div>
   </div>
@@ -1998,7 +2190,7 @@ a:focus-visible, button:focus-visible {
     </div>
     <div class="amenity-row">
       <div class="amenity-k">Organic Wine</div>
-      <div class="amenity-v">From Giacomo Centanni, three valleys over. Available on site. David will tell you which one to open with dinner.</div>
+      <div class="amenity-v">From Giacomo Centanni, three valleys over. Available on site. Lisette will tell you which one to open with dinner.</div>
     </div>
     <div class="amenity-row">
       <div class="amenity-k">Free Wi-Fi</div>
@@ -2010,7 +2202,7 @@ a:focus-visible, button:focus-visible {
     </div>
     <div class="amenity-row">
       <div class="amenity-k">Local Advice</div>
-      <div class="amenity-v">David &amp; Lisette's own guide to markets, restaurants, hidden beaches and the spots the guidebooks haven't found yet.</div>
+      <div class="amenity-v">Lisette &amp; David's own guide to markets, restaurants, hidden beaches and the spots the guidebooks haven't found yet.</div>
     </div>
     <div class="amenity-row">
       <div class="amenity-k">Laundry &amp; Baby Gear</div>
@@ -2105,7 +2297,7 @@ a:focus-visible, button:focus-visible {
     </div>
     <div>
       <p class="footer-note">"This little corner of Le Marche has been our home and our life for almost twenty years. If you're reading this, we hope it becomes part of yours too."</p>
-      <p class="footer-note" style="margin-top:10px;font-size:0.85rem;color:oklch(91% 0.016 92 / 0.28);">— David &amp; Lisette</p>
+      <p class="footer-note" style="margin-top:10px;font-size:0.85rem;color:oklch(91% 0.016 92 / 0.28);">— Lisette &amp; David</p>
     </div>
     <div>
       <span class="footer-links-col-label">Find Us</span>
@@ -2274,10 +2466,11 @@ a:focus-visible, button:focus-visible {
     const nights = Math.round((checkOut - checkIn) / DAY_MS);
     const fmt    = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
 
-    document.getElementById('availSumType').textContent   = name;
-    document.getElementById('availSumDates').innerHTML    = `${fmt(checkIn)} <em>→</em> ${fmt(checkOut)}`;
-    document.getElementById('availSumNights').textContent = `${nights}`;
-    document.getElementById('availSumPrice').innerHTML    = `from <em>€${nights * price}</em>`;
+    document.getElementById('availSumType').textContent    = name;
+    document.getElementById('availSumDates').innerHTML     = `${fmt(checkIn)} <em>→</em> ${fmt(checkOut)}`;
+    document.getElementById('availSumNights').textContent  = `${nights}`;
+    document.getElementById('availSumPersons').textContent = `${persons}`;
+    document.getElementById('availSumPrice').innerHTML     = `<em>€${nights * price}</em>`;
 
     el.classList.add('visible');
   }
@@ -2329,6 +2522,15 @@ a:focus-visible, button:focus-visible {
   document.getElementById('availNextBtn').addEventListener('click', () => {
     if (viewMonth === 11) { viewMonth = 0; viewYear++; } else viewMonth++;
     render();
+  });
+
+  // Persons
+  let persons = 2;
+  document.getElementById('personsDecBtn').addEventListener('click', () => {
+    if (persons > 1) { persons--; document.getElementById('personsCount').textContent = persons; updateSummary(); }
+  });
+  document.getElementById('personsIncBtn').addEventListener('click', () => {
+    if (persons < 12) { persons++; document.getElementById('personsCount').textContent = persons; updateSummary(); }
   });
 
   // Clear
