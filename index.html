@@ -104,18 +104,13 @@ nav.scrolled {
   gap: 12px; text-decoration: none; z-index: 102;
 }
 
-.nav-logo-mark {
-  width: 6px; height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
+.nav-logo-mark { display: none; }
 
 .nav-logo-text {
   font-family: 'Spectral', serif;
   font-size: 16px; font-weight: 300;
   letter-spacing: 4px; text-transform: uppercase;
-  color: rgba(245,234,214,0.88);
+  color: var(--peach);
   transition: color 0.3s ease;
 }
 
@@ -1552,7 +1547,6 @@ a:focus-visible, button:focus-visible {
 .hero-urgency    { color: oklch(94% 0.010 90 / 0.55); }
 
 /* Nav: peach accents */
-.nav-logo-mark { background: var(--peach); }
 .nav-links a::after { background: var(--peach); }
 .nav-lang a:hover, .nav-lang a.active { color: var(--peach); }
 .btn-nav { border-color: oklch(94% 0.010 90 / 0.35); color: oklch(94% 0.010 90 / 0.80); }
@@ -1678,7 +1672,6 @@ footer .footer-links a:hover   { color: var(--peach); }
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark"></div>
     <span class="nav-logo-text">San Procolo</span>
   </a>
   <ul class="nav-links">
