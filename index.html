@@ -231,7 +231,7 @@ nav.scrolled {
   position: absolute; inset: 0;
   background-image: url('https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2025/11/Zwembad-1-scaled-e1762685294547.jpg');
   background-size: cover; background-position: center;
-  filter: brightness(0.62) saturate(1.1);
+  filter: brightness(0.85) saturate(1.05);
   animation: kenBurnsHero 30s ease-in-out infinite alternate;
 }
 
@@ -244,8 +244,8 @@ nav.scrolled {
 .hero-overlay {
   position: absolute; inset: 0;
   background:
-    linear-gradient(135deg, rgba(12,7,3,0.42) 0%, transparent 55%),
-    linear-gradient(to top, rgba(12,7,3,0.78) 0%, rgba(12,7,3,0.10) 60%);
+    linear-gradient(135deg, rgba(12,7,3,0.22) 0%, transparent 55%),
+    linear-gradient(to top, rgba(12,7,3,0.55) 0%, rgba(12,7,3,0.05) 65%);
 }
 
 .hero-noise {
@@ -1260,9 +1260,9 @@ a:focus-visible, button:focus-visible {
 
   #about { padding: 64px 24px; }
   .about { grid-template-columns: 1fr; gap: 48px; }
-  .about-image { aspect-ratio: 4/3; }
+  .about-image { aspect-ratio: 4/5; max-width: 360px; margin: 0 auto; }
   .about-badge { left: 16px; bottom: -16px; }
-  .about-image-inner .img-bg { background-position: center 90%; }
+  .about-image-inner .img-bg { background-position: center !important; background-size: cover !important; }
 
   .story-inner { grid-template-columns: 1fr; }
   .story-image-sticky { position: relative; height: 65vw; }
@@ -1448,7 +1448,7 @@ a:focus-visible, button:focus-visible {
 
 .avail-day.empty { pointer-events: none; }
 .avail-day.out-of-season { color: oklch(91% 0.016 92 / 0.18); pointer-events: none; cursor: default; }
-.avail-day.unavailable { color: oklch(36% 0.015 80 / 0.45); pointer-events: none; cursor: default; text-decoration: line-through; text-decoration-color: oklch(72% 0.082 33 / 0.6); text-decoration-thickness: 1px; }
+.avail-day.unavailable { color: oklch(50% 0.110 30 / 0.95); background: oklch(72% 0.082 33 / 0.22); pointer-events: none; cursor: default; text-decoration: line-through; text-decoration-color: oklch(58% 0.130 30 / 0.95); text-decoration-thickness: 1.5px; font-weight: 500; }
 .avail-day.available:hover { background: var(--bg3); }
 .avail-day.in-range { background: oklch(44% 0.12 108 / 0.15); }
 .avail-day.check-in,
