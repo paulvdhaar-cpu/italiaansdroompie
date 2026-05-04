@@ -1448,6 +1448,7 @@ a:focus-visible, button:focus-visible {
 
 .avail-day.empty { pointer-events: none; }
 .avail-day.out-of-season { color: oklch(91% 0.016 92 / 0.18); pointer-events: none; cursor: default; }
+.avail-day.unavailable { color: oklch(36% 0.015 80 / 0.45); pointer-events: none; cursor: default; text-decoration: line-through; text-decoration-color: oklch(72% 0.082 33 / 0.6); text-decoration-thickness: 1px; }
 .avail-day.available:hover { background: var(--bg3); }
 .avail-day.in-range { background: oklch(44% 0.12 108 / 0.15); }
 .avail-day.check-in,
@@ -2046,9 +2047,9 @@ footer .footer-links a:hover   { color: var(--peach); }
           <span class="avail-accom-price">From €18 / night</span>
           <span class="avail-accom-guests">Your tent, your rules</span>
         </button>
-        <button class="avail-accom-btn" data-type="safari" data-price="70" data-min="3" data-units="1">
+        <button class="avail-accom-btn" data-type="safari" data-price="90" data-min="3" data-units="1">
           <span class="avail-accom-name">Safari Tent</span>
-          <span class="avail-accom-price">From €70 / night</span>
+          <span class="avail-accom-price">From €90 / night</span>
           <span class="avail-accom-guests">Sleeps up to 4 · 1 available</span>
         </button>
         <button class="avail-accom-btn" data-type="tunnel" data-price="70" data-min="3" data-units="2">
@@ -2056,9 +2057,9 @@ footer .footer-links a:hover   { color: var(--peach); }
           <span class="avail-accom-price">From €70 / night</span>
           <span class="avail-accom-guests">Made for couples · 2 available</span>
         </button>
-        <button class="avail-accom-btn" data-type="lodge" data-price="95" data-min="3" data-units="2">
+        <button class="avail-accom-btn" data-type="lodge" data-price="100" data-min="3" data-units="2">
           <span class="avail-accom-name">Lodge Tent</span>
-          <span class="avail-accom-price">From €95 / night</span>
+          <span class="avail-accom-price">From €100 / night</span>
           <span class="avail-accom-guests">Our favourite · 2 available</span>
         </button>
         <button class="avail-accom-btn" data-type="chalet" data-price="95" data-min="3" data-units="1">
@@ -2117,7 +2118,7 @@ footer .footer-links a:hover   { color: var(--peach); }
           <a href="#contact" class="btn-avail-enquire" id="availEnquireBtn">Write to Lisette &amp; David →</a>
           <button class="btn-avail-clear" id="availClearBtn">Clear</button>
         </div>
-        <p class="avail-sum-note">Lisette will write back within a day with availability and exact pricing.</p>
+        <p class="avail-sum-note">Indicative total, includes cleaning. Lisette confirms within a day with the exact price.</p>
       </div>
     </div>
   </div>
@@ -2264,38 +2265,46 @@ footer .footer-links a:hover   { color: var(--peach); }
     </div>
     <div>
       <div class="section-eyebrow reveal" style="margin-bottom:24px;">Make an Enquiry</div>
-      <form class="contact-form reveal reveal-delay-1" onsubmit="handleSubmit(event)">
+      <form id="enquiryForm" class="contact-form reveal reveal-delay-1" onsubmit="handleSubmit(event)">
         <div class="form-row">
-          <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="Marco"></div>
-          <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Rossi"></div>
+          <div class="form-group"><label class="form-label">First Name</label><input id="fFirst" name="firstName" type="text" class="form-input" placeholder="Marco" required></div>
+          <div class="form-group"><label class="form-label">Last Name</label><input id="fLast" name="lastName" type="text" class="form-input" placeholder="Rossi" required></div>
         </div>
-        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="marco@example.com"></div>
+        <div class="form-group"><label class="form-label">Email</label><input id="fEmail" name="email" type="email" class="form-input" placeholder="marco@example.com" required></div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Arrival</label><input type="date" class="form-input"></div>
-          <div class="form-group"><label class="form-label">Departure</label><input type="date" class="form-input"></div>
+          <div class="form-group"><label class="form-label">Arrival</label><input id="fArrival" name="arrival" type="date" class="form-input" required></div>
+          <div class="form-group"><label class="form-label">Departure</label><input id="fDeparture" name="departure" type="date" class="form-input" required></div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Accommodation</label>
-            <select class="form-select">
+            <select id="fAccom" name="accommodation" class="form-select" required>
               <option value="">Select type</option>
-              <option>Camping Pitch</option>
-              <option>Safari Tent</option>
-              <option>Tunnel Tent</option>
-              <option>Lodge Tent</option>
-              <option>Chalet</option>
+              <option value="Camping Pitch">Camping Pitch</option>
+              <option value="Safari Tent">Safari Tent</option>
+              <option value="Tunnel Tent">Tunnel Tent</option>
+              <option value="Lodge Tent">Lodge Tent</option>
+              <option value="Chalet">Chalet</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label">Guests</label>
-            <select class="form-select">
-              <option>1 person</option><option>2 people</option>
-              <option>3 people</option><option>4+ people</option>
+            <select id="fGuests" name="guests" class="form-select">
+              <option value="1">1 person</option>
+              <option value="2" selected>2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+              <option value="5">5 people</option>
+              <option value="6">6 people</option>
+              <option value="7">7+ people</option>
             </select>
           </div>
         </div>
-        <div class="form-group"><label class="form-label">Message (optional)</label><textarea class="form-textarea" placeholder="Any questions or special requests..."></textarea></div>
+        <div class="form-group"><label class="form-label">Message (optional)</label><textarea id="fMessage" name="message" class="form-textarea" placeholder="Any questions or special requests... (note: pets cannot be accommodated)"></textarea></div>
+        <input type="hidden" id="fEstimate" name="estimate" value="">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
         <button type="submit" class="btn-primary" style="border:none;cursor:pointer;">Send Enquiry →</button>
+        <p id="formStatus" style="margin-top:10px;font-size:13px;color:var(--muted);min-height:18px;"></p>
       </form>
     </div>
   </div>
@@ -2368,36 +2377,183 @@ footer .footer-links a:hover   { color: var(--peach); }
     revealAll();
   }
 
-  // Form submit
+  // Form submit — posts to Google Apps Script web app
+  // Replace APPS_SCRIPT_URL with the deployed web app URL once you have it
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz2OYR8b77L7A2vRukh3Yy_MGeaYcWBi-3783qdHfiruYkVwn76wAuAmydGE4H8L-yswg/exec';
+
   function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    btn.textContent = 'Sent! We\'ll be in touch.';
-    btn.style.background = 'rgba(245,234,214,0.15)';
-    btn.style.color = 'rgba(245,234,214,0.6)';
+    const form   = e.target;
+    const btn    = form.querySelector('button[type="submit"]');
+    const status = document.getElementById('formStatus');
+
+    // Honeypot — bots fill hidden fields, humans don't
+    if (form.elements['website'].value) {
+      status.textContent = 'Thanks!';
+      btn.disabled = true;
+      return;
+    }
+
+    const data = {
+      firstName:     form.elements['firstName'].value.trim(),
+      lastName:      form.elements['lastName'].value.trim(),
+      email:         form.elements['email'].value.trim(),
+      arrival:       form.elements['arrival'].value,
+      departure:     form.elements['departure'].value,
+      accommodation: form.elements['accommodation'].value,
+      guests:        form.elements['guests'].value,
+      message:       form.elements['message'].value.trim(),
+      estimate:      form.elements['estimate'].value,
+      submittedAt:   new Date().toISOString()
+    };
+
     btn.disabled = true;
+    btn.textContent = 'Sending...';
+    status.textContent = '';
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data)
+    })
+    .then(() => {
+      btn.textContent = 'Sent — Lisette will be in touch';
+      btn.style.background = 'rgba(245,234,214,0.15)';
+      btn.style.color = 'rgba(245,234,214,0.6)';
+      status.textContent = 'Thanks. You\'ll hear from Lisette within a day, and a confirmation has been sent to your inbox.';
+      form.reset();
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'Send Enquiry →';
+      status.textContent = 'Something went wrong. Please try again or email info@sanprocolo.com directly.';
+    });
   }
 </script>
 
 
 <script>
 (function () {
+  // ── CONFIG ────────────────────────────────────────────────────────────
+  // Replace these with the published-as-CSV URLs of each Google Sheet tab.
+  // Format per row: from,to,units_blocked  (header row required)
+  // Example:        2026-07-05,2026-07-12,1
+  const CSV_URLS = {
+    pitch:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQlmm2a6TNVFWMVwainrBqpRU13_aFM2egxTtE_eE5zsQjfhhBCMls5_txu9OXQU7wDhJDhzfD0havd/pub?gid=1207067613&single=true&output=csv',
+    safari: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQlmm2a6TNVFWMVwainrBqpRU13_aFM2egxTtE_eE5zsQjfhhBCMls5_txu9OXQU7wDhJDhzfD0havd/pub?gid=1801129135&single=true&output=csv',
+    tunnel: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQlmm2a6TNVFWMVwainrBqpRU13_aFM2egxTtE_eE5zsQjfhhBCMls5_txu9OXQU7wDhJDhzfD0havd/pub?gid=1473363028&single=true&output=csv',
+    lodge:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQlmm2a6TNVFWMVwainrBqpRU13_aFM2egxTtE_eE5zsQjfhhBCMls5_txu9OXQU7wDhJDhzfD0havd/pub?gid=1337548682&single=true&output=csv',
+    chalet: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQlmm2a6TNVFWMVwainrBqpRU13_aFM2egxTtE_eE5zsQjfhhBCMls5_txu9OXQU7wDhJDhzfD0havd/pub?gid=1098019077&single=true&output=csv'
+  };
+
+  const UNITS = { pitch: 8, safari: 1, tunnel: 2, lodge: 2, chalet: 1 };
+
+  // Indicative all-in pricing. Cleaning fee added once per stay.
+  // Lodge has flat per-night rate. Chalet, Safari, Tunnel: base for 2, +€10 per extra person.
+  // Pitch: €18 per night + €10 per person.
+  const PRICING = {
+    pitch:  { laag: 18,  hoog: 18,  cleaning: 0  },
+    safari: { laag: 90,  hoog: 115, cleaning: 45 },
+    tunnel: { laag: 70,  hoog: 85,  cleaning: 35 },
+    lodge:  { laag: 100, hoog: 178, cleaning: 75 },
+    chalet: { laag: 95,  hoog: 125, cleaning: 75 }
+  };
+
+  const ACCOM_LABEL = {
+    pitch: 'Camping Pitch', safari: 'Safari Tent', tunnel: 'Tunnel Tent',
+    lodge: 'Lodge Tent',    chalet: 'Chalet'
+  };
+
+  // ── CONSTANTS ─────────────────────────────────────────────────────────
   const SEASON_START = new Date(2026, 5, 1);   // 1 Jun 2026
   const SEASON_END   = new Date(2026, 8, 15);  // 15 Sep 2026
+  const HIGH_START   = new Date(2026, 6, 1);   // 1 Jul 2026 — hoogseizoen begin
+  const HIGH_END     = new Date(2026, 8, 2);   // 2 Sep 2026 — hoogseizoen einde (exclusive)
   const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const DOW    = ['Mo','Tu','We','Th','Fr','Sa','Su'];
   const DAY_MS = 86400000;
 
-  let viewYear  = 2026;
-  let viewMonth = 5; // June
+  // ── STATE ─────────────────────────────────────────────────────────────
+  let viewYear   = 2026;
+  let viewMonth  = 5; // June
   let activeType = 'pitch';
-  let checkIn  = null;
-  let checkOut = null;
-  let hovering = null;
+  let checkIn    = null;
+  let checkOut   = null;
+  let hovering   = null;
+  let persons    = 2;
 
+  // type -> Map<isoDate, units_blocked>
+  const blockedByType = {};
+
+  // ── HELPERS ───────────────────────────────────────────────────────────
   const strip = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
   const sameDay = (a, b) => a && b && a.getTime() === b.getTime();
+  const isoDate = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   const isInSeason = d => d >= strip(SEASON_START) && d <= strip(SEASON_END);
+  const isHigh  = d => d >= strip(HIGH_START) && d < strip(HIGH_END);
+
+  function isDayUnavailable(type, iso) {
+    const m = blockedByType[type];
+    if (!m) return false;
+    return (m.get(iso) || 0) >= (UNITS[type] || 1);
+  }
+
+  function rangeHasUnavailable(type, from, to) {
+    for (let d = new Date(from); d < to; d.setDate(d.getDate() + 1)) {
+      if (isDayUnavailable(type, isoDate(d))) return true;
+    }
+    return false;
+  }
+
+  function parseCsv(text) {
+    const map = new Map();
+    const lines = text.trim().split(/\r?\n/);
+    for (let i = 1; i < lines.length; i++) {  // skip header row
+      const row = lines[i].split(',').map(s => s.trim().replace(/^"|"$/g, ''));
+      if (row.length < 2) continue;
+      const from = row[0], to = row[1];
+      const units = parseInt(row[2], 10) || 1;
+      if (!from || !to) continue;
+      const start = strip(new Date(from));
+      const end   = strip(new Date(to));
+      if (isNaN(start) || isNaN(end)) continue;
+      for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) {
+        const iso = isoDate(d);
+        map.set(iso, (map.get(iso) || 0) + units);
+      }
+    }
+    return map;
+  }
+
+  function loadAvailability(type) {
+    if (blockedByType[type]) return Promise.resolve();
+    const url = CSV_URLS[type];
+    if (!url || url.indexOf('REPLACE_WITH') === 0) {
+      blockedByType[type] = new Map();
+      return Promise.resolve();
+    }
+    return fetch(url)
+      .then(r => r.ok ? r.text() : '')
+      .then(text => { blockedByType[type] = parseCsv(text); })
+      .catch(() => { blockedByType[type] = new Map(); });
+  }
+
+  function calcEstimate(type, ci, co, ppl) {
+    const p = PRICING[type];
+    if (!p || !ci || !co) return 0;
+    let total = 0;
+    for (let d = new Date(ci); d < co; d.setDate(d.getDate() + 1)) {
+      const rate = isHigh(d) ? p.hoog : p.laag;
+      let extra = 0;
+      if (type === 'pitch')                          extra = ppl * 10;
+      else if (type !== 'lodge')                     extra = Math.max(0, ppl - 2) * 10;
+      // lodge: flat, no per-person
+      total += rate + extra;
+    }
+    total += p.cleaning;
+    return total;
+  }
 
   function renderCal(year, month) {
     const first  = new Date(year, month, 1);
@@ -2415,19 +2571,21 @@ footer .footer-links a:hover   { color: var(--peach); }
     for (let n = 1; n <= last.getDate(); n++) {
       const d   = new Date(year, month, n);
       const ins = isInSeason(d);
+      const iso = `${year}-${String(month+1).padStart(2,'0')}-${String(n).padStart(2,'0')}`;
+      const unavail = ins && isDayUnavailable(activeType, iso);
       const ci  = sameDay(d, checkIn);
       const co  = sameDay(d, checkOut);
       const ir  = !ci && !co && checkIn && rangeEnd && d > checkIn && d < rangeEnd;
 
       let cls = 'avail-day';
-      if (!ins)     cls += ' out-of-season';
-      else          cls += ' available';
+      if (!ins)         cls += ' out-of-season';
+      else if (unavail) cls += ' unavailable';
+      else              cls += ' available';
       if (ci && co) cls += ' check-in check-out';
       else if (ci)  cls += ' check-in';
       else if (co)  cls += ' check-out';
       else if (ir)  cls += ' in-range';
 
-      const iso = `${year}-${String(month+1).padStart(2,'0')}-${String(n).padStart(2,'0')}`;
       html += `<div class="${cls}" data-date="${iso}">${n}</div>`;
     }
     html += '</div></div>';
@@ -2474,16 +2632,16 @@ footer .footer-links a:hover   { color: var(--peach); }
     if (!checkIn || !checkOut) { el.classList.remove('visible'); return; }
 
     const btn    = document.querySelector('.avail-accom-btn.active');
-    const price  = parseInt(btn.dataset.price);
     const name   = btn.querySelector('.avail-accom-name').textContent;
     const nights = Math.round((checkOut - checkIn) / DAY_MS);
     const fmt    = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+    const total  = calcEstimate(activeType, checkIn, checkOut, persons);
 
     document.getElementById('availSumType').textContent    = name;
     document.getElementById('availSumDates').innerHTML     = `${fmt(checkIn)} <em>→</em> ${fmt(checkOut)}`;
     document.getElementById('availSumNights').textContent  = `${nights}`;
     document.getElementById('availSumPersons').textContent = `${persons}`;
-    document.getElementById('availSumPrice').innerHTML     = `<em>€${nights * price}</em>`;
+    document.getElementById('availSumPrice').innerHTML     = `<em>€${total}</em>`;
 
     el.classList.add('visible');
   }
@@ -2492,9 +2650,10 @@ footer .footer-links a:hover   { color: var(--peach); }
   document.getElementById('availCalendars').addEventListener('click', e => {
     const el = e.target.closest('.avail-day.available');
     if (!el) return;
-    const d   = strip(new Date(el.dataset.date));
-    const btn = document.querySelector('.avail-accom-btn.active');
-    const min = parseInt(btn.dataset.min);
+    const d    = strip(new Date(el.dataset.date));
+    const btn  = document.querySelector('.avail-accom-btn.active');
+    const min  = parseInt(btn.dataset.min);
+    const name = btn.querySelector('.avail-accom-name').textContent;
 
     if (!checkIn || checkOut) {
       checkIn = d; checkOut = null;
@@ -2505,6 +2664,11 @@ footer .footer-links a:hover   { color: var(--peach); }
       if (nights < min) {
         document.getElementById('availHintText').textContent =
           `${name} requires a minimum of ${min} nights — please choose a later departure`;
+        return;
+      }
+      if (rangeHasUnavailable(activeType, checkIn, d)) {
+        document.getElementById('availHintText').textContent =
+          'Selected range crosses an unavailable date — please pick another period';
         return;
       }
       checkOut = d;
@@ -2542,7 +2706,6 @@ footer .footer-links a:hover   { color: var(--peach); }
   });
 
   // Persons
-  let persons = 2;
   document.getElementById('personsDecBtn').addEventListener('click', () => {
     if (persons > 1) { persons--; document.getElementById('personsCount').textContent = persons; updateSummary(); }
   });
@@ -2555,7 +2718,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     checkIn = checkOut = hovering = null; render();
   });
 
-  // Accommodation type switch
+  // Accommodation type switch — fetch availability for the chosen type
   document.querySelectorAll('.avail-accom-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.avail-accom-btn').forEach(b => b.classList.remove('active'));
@@ -2563,10 +2726,28 @@ footer .footer-links a:hover   { color: var(--peach); }
       activeType = btn.dataset.type;
       checkIn = checkOut = hovering = null;
       render();
+      loadAvailability(activeType).then(render);
     });
   });
 
+  // Prefill the contact form when "Write to Lisette" is clicked
+  document.getElementById('availEnquireBtn').addEventListener('click', () => {
+    if (!checkIn || !checkOut) return;
+    const fAccom    = document.getElementById('fAccom');
+    const fArrival  = document.getElementById('fArrival');
+    const fDepart   = document.getElementById('fDeparture');
+    const fGuests   = document.getElementById('fGuests');
+    const fEstimate = document.getElementById('fEstimate');
+    if (fArrival)  fArrival.value  = isoDate(checkIn);
+    if (fDepart)   fDepart.value   = isoDate(checkOut);
+    if (fAccom)    fAccom.value    = ACCOM_LABEL[activeType] || '';
+    if (fGuests)   fGuests.value   = String(Math.min(persons, 7));
+    if (fEstimate) fEstimate.value = `€${calcEstimate(activeType, checkIn, checkOut, persons)} indicative (incl. cleaning)`;
+  });
+
+  // Initial render plus first availability fetch
   render();
+  loadAvailability(activeType).then(render);
 })();
 </script>
 
