@@ -2118,7 +2118,7 @@ footer .footer-links a:hover   { color: var(--peach); }
           <a href="#contact" class="btn-avail-enquire" id="availEnquireBtn">Write to Lisette &amp; David →</a>
           <button class="btn-avail-clear" id="availClearBtn">Clear</button>
         </div>
-        <p class="avail-sum-note">Indicative total, includes cleaning. Lisette confirms within a day with the exact price.</p>
+        <p class="avail-sum-note">Total includes cleaning. Lisette confirms availability within a day.</p>
       </div>
     </div>
   </div>
@@ -2506,19 +2506,49 @@ footer .footer-links a:hover   { color: var(--peach); }
     return false;
   }
 
+  // Parses a CSV line, handling quoted fields that may contain commas
+  function parseCsvLine(line) {
+    const out = [];
+    let cur = '';
+    let inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') {
+        if (inQ && line[i+1] === '"') { cur += '"'; i++; }
+        else { inQ = !inQ; }
+      } else if (c === ',' && !inQ) {
+        out.push(cur); cur = '';
+      } else {
+        cur += c;
+      }
+    }
+    out.push(cur);
+    return out;
+  }
+
+  // Parse a date string in any common format and return a stripped Date
+  function parseDateFlex(s) {
+    if (!s) return null;
+    s = String(s).trim();
+    let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (m) return strip(new Date(+m[1], +m[2]-1, +m[3]));
+    m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+    if (m) return strip(new Date(+m[3], +m[2]-1, +m[1]));
+    const d = new Date(s);
+    return isNaN(d) ? null : strip(d);
+  }
+
   function parseCsv(text) {
     const map = new Map();
     const lines = text.trim().split(/\r?\n/);
     for (let i = 1; i < lines.length; i++) {  // skip header row
-      const row = lines[i].split(',').map(s => s.trim().replace(/^"|"$/g, ''));
+      const row = parseCsvLine(lines[i]).map(s => s.trim().replace(/^"|"$/g, ''));
       if (row.length < 2) continue;
-      const from = row[0], to = row[1];
+      const from = parseDateFlex(row[0]);
+      const to   = parseDateFlex(row[1]);
       const units = parseInt(row[2], 10) || 1;
       if (!from || !to) continue;
-      const start = strip(new Date(from));
-      const end   = strip(new Date(to));
-      if (isNaN(start) || isNaN(end)) continue;
-      for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) {
+      for (let d = new Date(from); d < to; d.setDate(d.getDate() + 1)) {
         const iso = isoDate(d);
         map.set(iso, (map.get(iso) || 0) + units);
       }
@@ -2742,7 +2772,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     if (fDepart)   fDepart.value   = isoDate(checkOut);
     if (fAccom)    fAccom.value    = ACCOM_LABEL[activeType] || '';
     if (fGuests)   fGuests.value   = String(Math.min(persons, 7));
-    if (fEstimate) fEstimate.value = `€${calcEstimate(activeType, checkIn, checkOut, persons)} indicative (incl. cleaning)`;
+    if (fEstimate) fEstimate.value = `€${calcEstimate(activeType, checkIn, checkOut, persons)} (incl. cleaning)`;
   });
 
   // Initial render plus first availability fetch
