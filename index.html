@@ -345,10 +345,8 @@ nav.scrolled {
   content: '';
   display: inline-block; width: 5px; height: 5px;
   background: var(--gold); border-radius: 50%; flex-shrink: 0;
-  animation: urgencyPulse 2.2s ease-in-out infinite;
 }
 
-@keyframes urgencyPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 .hero-stats {
   margin-top: 52px;
@@ -828,13 +826,13 @@ nav.scrolled {
 .exp-card-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  filter: brightness(0.38) saturate(1.15);
+  filter: brightness(0.54) saturate(1.15);
   transition: transform 0.6s ease, filter 0.6s ease;
 }
 
 .exp-card:hover .exp-card-bg {
   transform: scale(1.05);
-  filter: brightness(0.48) saturate(1.25);
+  filter: brightness(0.62) saturate(1.25);
 }
 
 .exp-card-overlay {
@@ -894,7 +892,7 @@ nav.scrolled {
 .testimonial-text {
   font-family: 'Spectral', serif;
   font-size: 1.05rem; font-style: italic; font-weight: 300;
-  color: oklch(22% 0.020 80 / 0.82); line-height: 1.72;
+  color: oklch(22% 0.020 80); line-height: 1.72;
   margin-bottom: 24px; flex: 1;
 }
 
@@ -972,7 +970,7 @@ nav.scrolled {
 
 .surround-label h3 {
   font-family: 'Jost', sans-serif;
-  font-size: 9px; font-weight: 600;
+  font-size: 11px; font-weight: 600;
   letter-spacing: 1.5px; text-transform: uppercase;
   color: rgba(245,234,214,0.72); margin: 0;
 }
@@ -1098,7 +1096,7 @@ nav.scrolled {
 .contact-detail { display: flex; flex-direction: column; gap: 4px; }
 
 .contact-detail-label {
-  font-size: 9px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
 }
 
@@ -1140,7 +1138,7 @@ nav.scrolled {
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 
 .form-label {
-  font-size: 9px; font-weight: 600;
+  font-size: 11px; font-weight: 600;
   letter-spacing: 2px; text-transform: uppercase;
   color: oklch(34% 0.060 115 / 0.75);
 }
@@ -1313,7 +1311,7 @@ a:focus-visible, button:focus-visible {
 
   .sea-banner { height: 380px; }
   .sea-banner-content { padding: 0 24px; }
-  .sea-banner-sub { display: none; }
+  .sea-banner-sub { font-size: 12px; max-width: 100%; }
 
   #facilities { padding: 64px 24px; }
   .amenity-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
@@ -1604,13 +1602,13 @@ footer .footer-links a:hover   { color: var(--peach); }
 
     .cw-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 28px; background: var(--sage-dark); color: var(--white);
+      padding: 12px 28px; background: var(--terra); color: oklch(18% 0.020 80);
       border: none; border-radius: var(--radius-sm);
       font-size: .85rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
       cursor: pointer; transition: background .15s, transform .1s;
       min-height: 48px; width: 100%; font-family: inherit;
     }
-    .cw-btn:hover { background: var(--sage-mid); }
+    .cw-btn:hover { background: oklch(64% 0.090 33); }
     .cw-btn:active { transform: scale(.98); }
     .cw-btn:disabled { background: var(--cream-mid); color: var(--ink-light); cursor: not-allowed; }
     .cw-btn:focus-visible { outline: 2px solid var(--sage-dark); outline-offset: 2px; }
@@ -1860,6 +1858,14 @@ footer .footer-links a:hover   { color: var(--peach); }
     }
     .mobile-lang--menu a.active,
     .mobile-lang--menu a:hover { color: var(--gold); }
+
+    /* Story heading word-rise reveal */
+    .story-panel-title .rw-word { display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:0.12em; margin-bottom:-0.12em; }
+    .story-panel-title .rw-word > span { display:inline-block; transform:translateY(115%); transition:transform .7s cubic-bezier(.16,1,.3,1); }
+    .story-panel-title .rw-word.in > span { transform:translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .story-panel-title .rw-word > span { transform:none; transition:none; }
+    }
 </style>
 </head>
 <body>
@@ -1872,7 +1878,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <a href="#surroundings" class="mobile-menu-link" data-i18n="nav_area">The Area</a>
   <a href="#facilities" class="mobile-menu-link" data-i18n="nav_facilities">Facilities</a>
   <div class="mobile-menu-divider"></div>
-  <a href="#contact" class="mobile-menu-book" data-i18n="nav_book_stay">Book Your Stay</a>
+  <a href="#availability" class="mobile-menu-book" data-i18n="nav_book_stay">Book Your Stay</a>
   <div class="mobile-lang mobile-lang--menu">
     <a href="#" onclick="setLang('en');return false;" data-lang="en">EN</a>
     <a href="#" onclick="setLang('nl');return false;" data-lang="nl">NL</a>
@@ -1926,7 +1932,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
       <div class="hero-stat">
         <span class="hero-stat-value">2007</span>
-        <span class="hero-stat-label">Est.</span>
+        <span class="hero-stat-label" data-i18n="stat_est">Family-Run Since</span>
       </div>
       <div class="hero-stat">
         <span class="hero-stat-value">20km</span>
@@ -2511,9 +2517,9 @@ footer .footer-links a:hover   { color: var(--peach); }
     <div class="contact-info">
       <div>
         <div class="section-eyebrow reveal" data-i18n="contact_eyebrow">Get in Touch</div>
-        <h2 class="section-title reveal reveal-delay-1" data-i18n="contact_title">Get in<br><em>touch</em></h2>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="contact_title">Write to<br><em>Lisette</em></h2>
       </div>
-      <p class="about-text reveal reveal-delay-2"><span data-i18n="contact_intro">Season opens 1 June and closes 15 September. No pets, sorry — the open hillside is part of what makes the place work for families.</span></p>
+      <p class="about-text reveal reveal-delay-2"><span data-i18n="contact_intro">Send Lisette a message and she'll come back to you within a day. The season runs 1 June to 15 September. We can't take pets, sorry — the open hillside is part of what makes the place work for families.</span></p>
       <div class="contact-detail reveal">
         <span class="contact-detail-label" data-i18n="contact_l_address">Address</span>
         <span class="contact-detail-value" data-i18n="contact_v_address">Monte Vidon Combatte, Le Marche, Italy</span>
@@ -2738,7 +2744,7 @@ const TRANSLATIONS = {
     hero_sub:'Thirty pitches, a few glamping tents, a pool with a view across the valley. Twenty minutes from the Adriatic, an hour from the snowy peaks of the Sibillini.',
     hero_btn_story:'Read Our Story',
     hero_urgency:'Open 1 June to 15 September — July and August fill up early',
-    stat_sea:'Above Sea Level', stat_beach:'To the Beach',
+    stat_sea:'Above Sea Level', stat_beach:'To the Beach', stat_est:'Family-Run Since',
     // Editorial
     editorial_text:'A campsite in the Italian hills where slow living is not a concept — it is simply how things are.',
     // About
@@ -2880,8 +2886,8 @@ const TRANSLATIONS = {
     fac_laundry_v:'Washing machine, six euros a cycle. Cots and highchairs on request.',
     // Contact
     contact_eyebrow:'Get in Touch',
-    contact_title:'Get in<br><em>touch</em>',
-    contact_intro:'Season opens 1 June and closes 15 September. No pets, sorry — the open hillside is part of what makes the place work for families.',
+    contact_title:'Write to<br><em>Lisette</em>',
+    contact_intro:'Send Lisette a message and she\'ll come back to you within a day. The season runs 1 June to 15 September. We can\'t take pets, sorry — the open hillside is part of what makes the place work for families.',
     contact_l_address:'Address', contact_v_address:'Monte Vidon Combatte, Le Marche, Italy',
     contact_l_phone:'Phone', contact_l_email:'Email', contact_l_season:'Season',
     contact_v_season:'1 June – 15 September',
@@ -2909,7 +2915,7 @@ const TRANSLATIONS = {
     hero_sub:'Dertig plaatsen, een paar glamping-tenten, een zwembad met uitzicht over het dal. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.',
     hero_btn_story:'Ons Verhaal',
     hero_urgency:'Open 1 juni tot 15 september — Juli en augustus zijn snel vol',
-    stat_sea:'Boven Zeeniveau', stat_beach:'Naar het Strand',
+    stat_sea:'Boven Zeeniveau', stat_beach:'Naar het Strand', stat_est:'Familiebedrijf sinds',
     // Editorial
     editorial_text:'De meeste gasten maken na twee dagen geen plannen meer.',
     // About
@@ -3030,8 +3036,8 @@ const TRANSLATIONS = {
     fac_laundry_v:'Wasmachine beschikbaar voor zes euro per beurt. Kinderbedjes en kinderstoelen op aanvraag.',
     // Contact
     contact_eyebrow:'Neem contact op',
-    contact_title:'Neem<br><em>contact op</em>',
-    contact_intro:'Het seizoen loopt van 1 juni tot 15 september. Huisdieren zijn helaas niet welkom.',
+    contact_title:'Schrijf<br><em>Lisette</em>',
+    contact_intro:'Stuur Lisette een bericht en je hoort binnen een dag van haar. Het seizoen loopt van 1 juni tot 15 september. Huisdieren kunnen we helaas niet ontvangen — de open heuvel is juist wat de plek voor gezinnen zo fijn maakt.',
     contact_l_address:'Adres', contact_v_address:'Monte Vidon Combatte, Le Marche, Italië',
     contact_l_phone:'Telefoon', contact_l_email:'E-mail', contact_l_season:'Seizoen',
     contact_v_season:'1 juni – 15 september',
@@ -3097,6 +3103,8 @@ function setLang(lang) {
   });
   // Re-translate any currently-visible widget dynamic content
   if (typeof cwRefreshLang === 'function') cwRefreshLang(lang);
+  // Re-apply story heading word-rise after innerHTML was rewritten
+  if (typeof initStoryReveal === 'function') initStoryReveal();
 
   // Sync lang buttons (desktop + mobile)
   document.querySelectorAll('[data-lang]').forEach(a => {
@@ -3477,6 +3485,46 @@ function cwValidate() {
   if (!ok) $cw('f-name').focus();
   return ok;
 }
+</script>
+
+<script>
+// ── Story heading word-rise reveal ─────────────────────────────────────────────
+function rwWrapWords(markup){
+  return markup.replace(/<[^>]+>|[^<]+/g, function(tok){
+    if (tok.charAt(0) === '<') return tok;           // keep <br>, <em>, </em>
+    return tok.split(/(\s+)/).map(function(part){
+      if (part === '' || /^\s+$/.test(part)) return part;  // keep whitespace
+      return '<span class="rw-word"><span>'+part+'</span></span>';
+    }).join('');
+  });
+}
+var rwReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function rwRevealEl(el){
+  if (el.dataset.rwShown === '1') return;
+  el.dataset.rwShown = '1';
+  var words = el.querySelectorAll('.rw-word');
+  if (rwReduce){ words.forEach(function(w){ w.classList.add('in'); }); return; }
+  words.forEach(function(w,i){ setTimeout(function(){ w.classList.add('in'); }, i*90); });
+}
+var rwObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if (e.isIntersecting){ rwRevealEl(e.target); rwObserver.unobserve(e.target); } });
+}, { threshold: 0.2 }) : null;
+function initStoryReveal(){
+  document.querySelectorAll('.story-panel-title').forEach(function(el){
+    if (el.querySelector('.rw-word')) return;        // already split & intact
+    el.innerHTML = rwWrapWords(el.innerHTML);
+    el.dataset.rwShown = '';                          // reset reveal state after (re)split
+    if (rwObserver) rwObserver.observe(el); else rwRevealEl(el);
+  });
+}
+document.addEventListener('DOMContentLoaded', initStoryReveal);
+// Safety net: if anything is still hidden after 4s (e.g. observer never fired), reveal it
+setTimeout(function(){
+  document.querySelectorAll('.story-panel-title').forEach(function(el){
+    if (el.dataset.rwShown !== '1') rwRevealEl(el);
+  });
+}, 4000);
+// ────────────────────────────────────────────────────────────────────────────
 </script>
 </body>
 </html>
