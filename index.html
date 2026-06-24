@@ -1253,7 +1253,7 @@ a:focus-visible, button:focus-visible {
   .nav-hamburger { display: flex; }
 
   .hero-content { padding: 0 24px; }
-  .hero { padding: 0 0 80px; min-height: 100dvh; }
+  .hero { justify-content: flex-start; padding: 104px 0 60px; min-height: 100dvh; }
   .hero-title { font-size: clamp(3.2rem, 15vw, 5rem); }
   .hero-sub { font-size: 14px; max-width: 100%; }
   .hero-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -1867,6 +1867,8 @@ footer .footer-links a:hover   { color: var(--peach); }
     @media (prefers-reduced-motion: reduce) {
       .story-panel-title .rw-word > span { transform:none; transition:none; }
     }
+
+    .cw-tabs { display: none; }
 </style>
 </head>
 <body>
@@ -2027,7 +2029,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">They've kept the campsite small on purpose. Eighteen pitches, a handful of glamping tents, a pool, a terrace, an olive grove. No animation team, no entertainment programme, no resort feeling. Just a family-run place where Lisette and David are usually around, and will probably end up pouring you a glass of wine before you've made it back to your tent.</p>
       <h3 class="about-subheading reveal reveal-delay-3" data-i18n="about_sub">A proper campsite, not a resort</h3>
       <p class="about-text reveal reveal-delay-3" data-i18n="about_p3">Kids run around barefoot. You can actually relax. Mornings start with fresh bread on the terrace and evenings tend to last longer than you planned.</p>
-      <a href="#activities" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">See What Awaits →</a>
+      <a href="#availability" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Check Availability →</a>
     </div>
   </div>
 </section>
@@ -2141,7 +2143,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_pitch_p">Spacious terraced pitches with valley views. Tents, caravans, motorhomes. Electricity included.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">From</span><span class="stay-price-value">€18 <span>/ night</span></span></div>
-          <a href="https://sanprocolo.com/reserveringen/" class="btn-small" data-i18n="book_btn">Book</a>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
     </div>
@@ -2155,7 +2157,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_safari_p">Ready to walk into. Beds made, linen included. The safari tent sleeps four, the tunnel tent is set up for couples.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">From</span><span class="stay-price-value">€70 <span>/ night</span></span></div>
-          <a href="https://sanprocolo.com/reserveringen/" class="btn-small" data-i18n="book_btn">Book</a>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
     </div>
@@ -2169,7 +2171,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_lodge_p">Our most comfortable option. Full amenities, private terrace, the same valley view from your bed.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">From</span><span class="stay-price-value">€95 <span>/ night</span></span></div>
-          <a href="https://sanprocolo.com/reserveringen/" class="btn-small" data-i18n="book_btn">Book</a>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
     </div>
@@ -2267,9 +2269,6 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="cw-tabs" role="tablist" aria-label="Weergave kiezen">
     <button class="cw-tab" role="tab" id="tab-search" aria-controls="panel-search" aria-selected="true">
       <span data-i18n="cw_tab_search">Beschikbaarheid zoeken</span>
-    </button>
-    <button class="cw-tab" role="tab" id="tab-grid" aria-controls="panel-grid" aria-selected="false">
-      <span data-i18n="cw_tab_grid">Bezettingsoverzicht</span>
     </button>
   </div>
 
@@ -2756,7 +2755,7 @@ const TRANSLATIONS = {
     about_p2:'They\'ve kept the campsite small on purpose. Eighteen pitches, a handful of glamping tents, a pool, a terrace, an olive grove. No animation team, no entertainment programme, no resort feeling. Just a family-run place where Lisette and David are usually around, and will probably end up pouring you a glass of wine before you\'ve made it back to your tent.',
     about_sub:'A proper campsite, not a resort',
     about_p3:'Kids run around barefoot. You can actually relax. Mornings start with fresh bread on the terrace and evenings tend to last longer than you planned.',
-    about_cta:'See What Awaits →',
+    about_cta:'Check Availability →',
     // Gallery
     cap_sibillini:'Sibillini at dusk', cap_pool:'The pool', cap_campsite:'The campsite',
     cap_hills:'Le Marche hills, Apennines in the distance', cap_sunset:'Sunset over San Procolo',
@@ -2927,7 +2926,7 @@ const TRANSLATIONS = {
     about_p2:'De camping bestaat sinds 2007, maar Lisette en David runnen hem sinds 2026. Ze hebben hem klein gehouden: achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard. Er is geen animatieteam en geen entertainmentprogramma. Lisette en David zijn er bijna altijd, en er is een goede kans dat je voor het einde van de avond met hen een glas Centanni-wijn drinkt.',
     about_sub:'Een echte camping, geen resort',
     about_p3:'Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was, zeker als de lange tafel gedekt wordt voor gasten en buren samen.',
-    about_cta:'Ontdek wat er wacht →',
+    about_cta:'Bekijk beschikbaarheid →',
     // Gallery
     cap_sibillini:'De Sibillini bij avondlicht', cap_pool:'Het zwembad', cap_campsite:'De camping',
     cap_hills:'De heuvels van Le Marche, de Apennijnen in de verte', cap_sunset:'Zonsondergang boven San Procolo',
