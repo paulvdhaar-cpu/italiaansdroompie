@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paulvdhaar-cpu.github.io/italiaansdroompie/sitemap.xml
