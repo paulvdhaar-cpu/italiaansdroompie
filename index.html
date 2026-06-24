@@ -1910,8 +1910,8 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="mobile-menu-divider"></div>
   <a href="#availability" class="mobile-menu-book" data-i18n="nav_book_stay">Book Your Stay</a>
   <div class="mobile-lang mobile-lang--menu">
-    <a href="#" onclick="setLang('en');return false;" data-lang="en">EN</a>
-    <a href="#" onclick="window.location.href='nl/';return false;" data-lang="nl">NL</a>
+    <a href="#" onclick="window.location.href='/italiaansdroompie/';return false;" data-lang="en">EN</a>
+    <a href="#" onclick="window.location.href='/italiaansdroompie/nl/';return false;" data-lang="nl">NL</a>
   </div>
 </div>
 
@@ -1929,8 +1929,8 @@ footer .footer-links a:hover   { color: var(--peach); }
   </ul>
   <div class="nav-right">
     <div class="nav-lang">
-      <a href="#" class="active" data-lang="en" onclick="setLang('en');return false;">EN</a>
-      <a href="#" data-lang="nl" onclick="window.location.href='nl/';return false;">NL</a>
+      <a href="#" class="active" data-lang="en" onclick="window.location.href='/italiaansdroompie/';return false;">EN</a>
+      <a href="#" data-lang="nl" onclick="window.location.href='/italiaansdroompie/nl/';return false;">NL</a>
       <a href="#" data-lang="de" style="opacity:0.35;cursor:default;" title="Coming soon">DE</a>
       <a href="#" data-lang="it" style="opacity:0.35;cursor:default;" title="Coming soon">IT</a>
     </div>
@@ -3130,7 +3130,7 @@ const TRANSLATIONS = {
   }
 };
 
-let currentLang = localStorage.getItem('sp_lang') || 'en';
+let currentLang = 'en';
 
 // Stamp form load time for bot detection
 (function() {
