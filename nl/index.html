@@ -58,20 +58,20 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:       oklch(95% 0.016 86);
-  --bg2:      oklch(92% 0.020 85);
-  --bg3:      oklch(88% 0.026 84);
-  --gold:     oklch(44% 0.095 115);
-  --gold-h:   oklch(38% 0.090 115);
-  --peach:    oklch(72% 0.082 33);
-  --peach-h:  oklch(65% 0.090 30);
+  --bg:       oklch(89% 0.030 67);
+  --bg2:      oklch(85% 0.032 67);
+  --bg3:      oklch(80% 0.034 66);
+  --gold:     oklch(65% 0.051 91);
+  --gold-h:   oklch(57% 0.055 91);
+  --peach:    oklch(55% 0.099 40);
+  --peach-h:  oklch(48% 0.100 38);
   --cream:    oklch(18% 0.020 80);
   --muted:    oklch(36% 0.015 80);
   --subtle:   oklch(58% 0.012 80);
-  --border:   oklch(44% 0.095 115 / 0.28);
+  --border:   oklch(55% 0.050 91 / 0.30);
   --border2:    oklch(18% 0.020 80 / 0.10);
-  --olive-dark: oklch(34% 0.086 115);
-  --light:      oklch(95% 0.008 92);
+  --olive-dark: oklch(38% 0.055 95);
+  --light:      oklch(96% 0.012 78);
 }
 
 html { scroll-behavior: smooth; }
@@ -98,7 +98,7 @@ nav {
 
 nav.scrolled {
   padding: 14px 48px;
-  background: oklch(44% 0.095 115 / 0.97);
+  background: oklch(36% 0.052 96 / 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid oklch(38% 0.090 115 / 0.35);
@@ -115,7 +115,7 @@ nav.scrolled {
   font-family: 'Spectral', serif;
   font-size: 16px; font-weight: 300;
   letter-spacing: 4px; text-transform: uppercase;
-  color: oklch(58% 0.110 35);
+  color: oklch(55% 0.099 40);
   transition: color 0.3s ease;
 }
 
@@ -155,8 +155,8 @@ nav.scrolled {
 .btn-nav {
   padding: 9px 22px;
   background: transparent;
-  border: 1px solid oklch(44% 0.12 108 / 0.5);
-  color: var(--gold);
+  border: 1px solid oklch(65% 0.051 91 / 0.5);
+  color: oklch(96% 0.015 78);
   font-family: 'Jost', sans-serif;
   font-size: 10px; font-weight: 600;
   letter-spacing: 2px; text-transform: uppercase;
@@ -218,7 +218,7 @@ nav.scrolled {
   font-style: normal;
   font-size: 11px; font-weight: 600;
   letter-spacing: 2px; text-transform: uppercase;
-  background: var(--peach); color: var(--cream);
+  background: var(--peach); color: oklch(96% 0.015 78);
   padding: 14px 32px; border-radius: 2px;
   margin-top: 12px;
 }
@@ -302,7 +302,7 @@ nav.scrolled {
 
 .btn-primary {
   padding: 15px 34px;
-  background: var(--peach); color: oklch(18% 0.020 80);
+  background: var(--peach); color: oklch(96% 0.015 78);
   font-family: 'Jost', sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 2.5px; text-transform: uppercase;
@@ -1143,7 +1143,7 @@ nav.scrolled {
 .form-label {
   font-size: 11px; font-weight: 600;
   letter-spacing: 2px; text-transform: uppercase;
-  color: oklch(34% 0.060 115 / 0.75);
+  color: oklch(40% 0.045 95 / 0.75);
 }
 
 .form-input, .form-select, .form-textarea {
@@ -1151,7 +1151,7 @@ nav.scrolled {
   background: rgba(0,0,0,0.03);
   border: 1px solid oklch(34% 0.060 115 / 0.30); border-radius: 2px;
   font-family: 'Jost', sans-serif;
-  font-size: 14px; font-weight: 300; color: oklch(22% 0.04 115);
+  font-size: 14px; font-weight: 300; color: oklch(24% 0.035 90);
   outline: none; transition: border-color 0.2s;
   -webkit-appearance: none;
 }
@@ -1166,7 +1166,7 @@ nav.scrolled {
 
 .form-textarea { resize: vertical; min-height: 100px; }
 
-.form-select option { background: var(--bg2); color: oklch(22% 0.04 115); }
+.form-select option { background: var(--bg2); color: oklch(24% 0.035 90); }
 
 /* ── FOOTER ── */
 footer {
@@ -1393,7 +1393,7 @@ a:focus-visible, button:focus-visible {
 .nav-links a::after { background: var(--peach); }
 .nav-lang a:hover, .nav-lang a.active { color: var(--peach); }
 .btn-nav { border-color: oklch(94% 0.010 90 / 0.35); color: oklch(94% 0.010 90 / 0.80); }
-.btn-nav:hover { background: var(--peach); border-color: var(--peach); color: var(--cream); }
+.btn-nav:hover { background: var(--peach); border-color: var(--peach); color: oklch(96% 0.015 78); }
 
 /* Mobile menu: deep olive background */
 .mobile-menu { background: var(--olive-dark); }
@@ -1434,9 +1434,9 @@ footer .footer-links a:hover   { color: var(--peach); }
 .act-card-text.bg-gold .act-card-sub             { color: oklch(22% 0.020 80 / 0.70); }
 
 /* Stay cards */
-.stay-card-tag  { background: var(--peach); color: var(--cream); }
+.stay-card-tag  { background: var(--peach); color: oklch(96% 0.015 78); }
 .stay-card:hover { box-shadow: 0 24px 56px oklch(44% 0.095 115 / 0.15); }
-.btn-small      { background: var(--peach); color: var(--cream); border: none; }
+.btn-small      { background: var(--peach); color: oklch(96% 0.015 78); border: none; }
 .btn-small:hover { background: var(--peach-h); }
 
 /* Sea banner: light text */
@@ -1506,21 +1506,21 @@ footer .footer-links a:hover   { color: var(--peach); }
     .cw-widget,
     dialog#booking-modal {
       --cream:       oklch(18% 0.020 80);
-      --cream-mid:   oklch(92% 0.020 85);
-      --cream-dark:  oklch(88% 0.026 84);
-      --sand:        oklch(82% 0.032 84);
-      --sage-dark:   oklch(44% 0.095 115);
-      --sage-mid:    oklch(38% 0.090 115);
-      --sage-light:  oklch(88% 0.050 130);
-      --sage-faint:  oklch(93% 0.030 120);
-      --terra:       oklch(72% 0.082 33);
-      --terra-light: oklch(91% 0.042 33);
+      --cream-mid:   oklch(85% 0.032 67);
+      --cream-dark:  oklch(80% 0.034 66);
+      --sand:        oklch(74% 0.036 66);
+      --sage-dark:   oklch(65% 0.051 91);
+      --sage-mid:    oklch(57% 0.055 91);
+      --sage-light:  oklch(88% 0.045 100);
+      --sage-faint:  oklch(93% 0.028 95);
+      --terra:       oklch(55% 0.099 40);
+      --terra-light: oklch(89% 0.045 40);
       --amber-light: oklch(93% 0.040 75);
-      --amber-text:  oklch(44% 0.095 115);
+      --amber-text:  oklch(65% 0.051 91);
       --ink:         oklch(18% 0.020 80);
       --ink-mid:     oklch(36% 0.015 80);
       --ink-light:   oklch(58% 0.012 80);
-      --white:       oklch(99% 0.006 86);
+      --white:       oklch(97% 0.012 78);
       --red:         oklch(42% 0.130 25);
       --red-light:   oklch(92% 0.040 25);
       --radius:      2px;
@@ -1578,7 +1578,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     .cw-field label {
       display: block;
       font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--ink-mid); margin-bottom: 7px;
+      color: oklch(40% 0.045 95 / 0.75); margin-bottom: 7px;
     }
     .cw-field input,
     .cw-field select {
@@ -1605,13 +1605,13 @@ footer .footer-links a:hover   { color: var(--peach); }
 
     .cw-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 28px; background: var(--terra); color: oklch(18% 0.020 80);
+      padding: 12px 28px; background: var(--terra); color: oklch(96% 0.015 78);
       border: none; border-radius: var(--radius-sm);
-      font-size: .85rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+      font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
       cursor: pointer; transition: background .15s, transform .1s;
       min-height: 48px; width: 100%; font-family: inherit;
     }
-    .cw-btn:hover { background: oklch(64% 0.090 33); }
+    .cw-btn:hover { background: oklch(48% 0.100 38); }
     .cw-btn:active { transform: scale(.98); }
     .cw-btn:disabled { background: var(--cream-mid); color: var(--ink-light); cursor: not-allowed; }
     .cw-btn:focus-visible { outline: 2px solid var(--sage-dark); outline-offset: 2px; }
@@ -1754,7 +1754,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     .cw-legend-dot--depart { background: linear-gradient(90deg, var(--terra-light) 50%, var(--sage-light) 50%); }
 
     dialog#booking-modal {
-      border: 1px solid oklch(88% 0.026 84); border-radius: 2px;
+      border: 1px solid oklch(80% 0.034 66); border-radius: 2px;
       box-shadow: 0 8px 40px rgba(44,42,38,.18); padding: 0;
       max-width: 460px; width: calc(100% - 32px); max-height: 90vh;
       overflow-y: auto; background: oklch(97% 0.006 92);
@@ -1763,7 +1763,7 @@ footer .footer-links a:hover   { color: var(--peach); }
 
     .cw-modal-header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 22px 22px 16px; border-bottom: 1px solid oklch(92% 0.020 85);
+      padding: 22px 22px 16px; border-bottom: 1px solid oklch(85% 0.032 67);
     }
     .cw-modal-header h2 {
       font-size: 1rem; font-weight: 600; color: oklch(18% 0.020 80); letter-spacing: .01em;
@@ -1774,7 +1774,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       display: flex; align-items: center; justify-content: center;
       border-radius: 50%; flex-shrink: 0; font-family: inherit;
     }
-    .cw-modal-close:hover { background: oklch(92% 0.020 85); color: oklch(18% 0.020 80); }
+    .cw-modal-close:hover { background: oklch(85% 0.032 67); color: oklch(18% 0.020 80); }
     .cw-modal-body { padding: 20px 22px 24px; }
 
     .cw-steps { display: flex; gap: 4px; margin-bottom: 18px; }
@@ -2052,8 +2052,8 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="section-eyebrow reveal" data-i18n="about_eyebrow">Ons Verhaal</div>
         <h2 class="section-title reveal reveal-delay-1" data-i18n="about_title">Hoe een vakantie<br><em>een thuis werd</em></h2>
       </div>
-      <p class="about-text reveal reveal-delay-2" data-i18n="about_p1">Lisette en David kwamen voor het eerst in de zomer naar Le Marche, op vakantie met drie jonge kinderen. Op een middag reden ze toevallig door Monte Vidon Combatte. Het dal lag beneden hen, breed en stil, de Apennijnen in de verte. Ze zijn sindsdien nooit helemaal teruggegaan.</p>
-      <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">De camping bestaat sinds 2007, maar Lisette en David runnen hem sinds 2026. Ze hebben hem klein gehouden: achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard. Er is geen animatieteam en geen entertainmentprogramma. Lisette en David zijn er bijna altijd, en er is een goede kans dat je voor het einde van de avond met hen een glas Centanni-wijn drinkt.</p>
+      <p class="about-text reveal reveal-delay-2" data-i18n="about_p1">Italië lag hun al jaren na aan het hart. David vroeg Lisette hier ten huwelijk en hier kwamen ze later ook terug om te trouwen, dus het land was al deel van hun verhaal lang voordat ze eraan dachten om er te wonen. Wat ze het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.</p>
+      <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">De camping verwelkomt gasten sinds 2007 en wat ze boven Monte Vidon Combatte aantroffen was een plek die al met zorg was aangelegd, op een van de mooiste plekjes van het dal, met meer potentie dan ze in één zomer konden waarmaken. Sinds 2026 runnen ze hem zelf en met z'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. Ze houden het bewust klein en persoonlijk. Achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van hen in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.</p>
       <h3 class="about-subheading reveal reveal-delay-3" data-i18n="about_sub">Een echte camping, geen resort</h3>
       <p class="about-text reveal reveal-delay-3" data-i18n="about_p3">Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was, zeker als de lange tafel gedekt wordt voor gasten en buren samen.</p>
       <a href="#availability" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Bekijk beschikbaarheid →</a>
@@ -2778,8 +2778,8 @@ const TRANSLATIONS = {
     badge_label:'Your hosts · Le Marche',
     about_eyebrow:'Our Story',
     about_title:'To a hilltop<br><em>in Le Marche</em>',
-    about_p1:'Lisette and David came here on holiday and ended up staying. They had three young kids, a feeling that life back home was running a little too fast, and one afternoon up in Monte Vidon Combatte where the valley opened up below them and they looked at each other and knew. The campsite has been welcoming guests since 2007, Lisette and David have run it since 2026, and between them they\'ve made it something that feels entirely their own.',
-    about_p2:'They\'ve kept the campsite small on purpose. Eighteen pitches, a handful of glamping tents, a pool, a terrace, an olive grove. No animation team, no entertainment programme, no resort feeling. Just a family-run place where Lisette and David are usually around, and will probably end up pouring you a glass of wine before you\'ve made it back to your tent.',
+    about_p1:'Italy had been close to their hearts for years. David proposed to Lisette here, and it was here that they later came back to marry, so the country was part of their story long before they thought of living in it. What they loved most was the slower pace of life, the long meals and the unhurried days. So with three young kids and Fred the dog in tow, moving south felt less like a leap than the obvious next step.',
+    about_p2:'The campsite has welcomed guests since 2007, and what they found above Monte Vidon Combatte was a place already laid out with care, on one of the loveliest spots in the valley, with more potential than they could get to in a single summer. They have run it since 2026, and between the two of them there is always something on the go, a small improvement this week, a bigger idea for next winter. They keep it small and personal on purpose. Eighteen pitches, a handful of glamping tents, a pool, a terrace, an olive grove, and usually one of them nearby, likely to pour you a glass of wine before you have made it back to your tent.',
     about_sub:'A proper campsite, not a resort',
     about_p3:'Kids run around barefoot. You can actually relax. Mornings start with fresh bread on the terrace and evenings tend to last longer than you planned.',
     about_cta:'Check Availability →',
@@ -2962,8 +2962,8 @@ const TRANSLATIONS = {
     badge_label:'Jullie gastheren · Le Marche',
     about_eyebrow:'Ons Verhaal',
     about_title:'Hoe een vakantie<br><em>een thuis werd</em>',
-    about_p1:'Lisette en David kwamen voor het eerst in de zomer naar Le Marche, op vakantie met drie jonge kinderen. Op een middag reden ze toevallig door Monte Vidon Combatte. Het dal lag beneden hen, breed en stil, de Apennijnen in de verte. Ze zijn sindsdien nooit helemaal teruggegaan.',
-    about_p2:'De camping bestaat sinds 2007, maar Lisette en David runnen hem sinds 2026. Ze hebben hem klein gehouden: achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard. Er is geen animatieteam en geen entertainmentprogramma. Lisette en David zijn er bijna altijd, en er is een goede kans dat je voor het einde van de avond met hen een glas Centanni-wijn drinkt.',
+    about_p1:'Italië lag hun al jaren na aan het hart. David vroeg Lisette hier ten huwelijk en hier kwamen ze later ook terug om te trouwen, dus het land was al deel van hun verhaal lang voordat ze eraan dachten om er te wonen. Wat ze het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.',
+    about_p2:'De camping verwelkomt gasten sinds 2007 en wat ze boven Monte Vidon Combatte aantroffen was een plek die al met zorg was aangelegd, op een van de mooiste plekjes van het dal, met meer potentie dan ze in één zomer konden waarmaken. Sinds 2026 runnen ze hem zelf en met z\'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. Ze houden het bewust klein en persoonlijk. Achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van hen in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.',
     about_sub:'Een echte camping, geen resort',
     about_p3:'Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was, zeker als de lange tafel gedekt wordt voor gasten en buren samen.',
     about_cta:'Bekijk beschikbaarheid →',
