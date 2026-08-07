@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Security headers (also configure at server/CDN level for full protection) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src https://script.google.com https://docs.google.com; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src https://script.google.com https://script.googleusercontent.com https://docs.google.com; frame-ancestors 'none';">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Camping San Procolo — een kleine familiecamping op een heuvel in Le Marche, Italië. Glampingtenten, chalets, zwembad, oude olijfbomen en de Adriatische kust op 20 minuten. Open 1 juni – 15 september.">
@@ -36,7 +36,7 @@
   },
   "geo": { "@type": "GeoCoordinates", "latitude": 43.1, "longitude": 13.5 },
   "openingHours": "June 01 - September 15",
-  "priceRange": "€18 - €178",
+  "priceRange": "€18 - €110",
   "image": "https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2025/11/Zwembad-1-scaled-e1762685294547.jpg",
   "amenityFeature": [
     {"@type": "LocationFeatureSpecification", "name": "Swimming Pool", "value": true},
@@ -96,15 +96,20 @@ nav {
   transition: all 0.3s ease;
 }
 
+/* Transparent bar (no coloured strip), soft shadow keeps elements legible */
 nav.scrolled {
   padding: 14px 48px;
-  background: oklch(33% 0.048 85 / 0.97);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid oklch(38% 0.090 115 / 0.35);
+  background: transparent;
 }
+/* Scrolled over the beige page: darken elements so they read without a bar */
+nav.scrolled .nav-links a,
+nav.scrolled .nav-lang a { color: var(--muted); }
+nav.scrolled .nav-lang a.active { color: var(--peach); }
+nav.scrolled .btn-nav { color: var(--peach); border-color: oklch(55% 0.099 40 / 0.45); }
+nav.scrolled .nav-hamburger span { background: var(--cream); }
 
 .nav-logo {
+  position: absolute; left: 50%; transform: translateX(-50%);
   display: flex; align-items: center;
   gap: 12px; text-decoration: none; z-index: 102;
 }
@@ -116,6 +121,7 @@ nav.scrolled {
   font-size: 16px; font-weight: 300;
   letter-spacing: 4px; text-transform: uppercase;
   color: oklch(55% 0.099 40);
+  text-shadow: 0 1px 10px rgba(20,12,6,0.28);
   transition: color 0.3s ease;
 }
 
@@ -176,12 +182,14 @@ nav.scrolled {
   flex-direction: column; justify-content: center; gap: 5px;
   background: none; border: none; cursor: pointer;
   padding: 11px; min-width: 44px; min-height: 44px; z-index: 102;
+  margin-left: auto;
 }
 
 .nav-hamburger span {
   display: block; width: 22px; height: 1.5px;
   background: rgba(245,234,214,0.7); transition: all 0.3s ease;
   transform-origin: center;
+  filter: drop-shadow(0 1px 4px rgba(20,12,6,0.35));
 }
 
 .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.7px, 4.7px); }
@@ -283,7 +291,7 @@ nav.scrolled {
   animation: fadeUp 0.9s ease 0.35s forwards;
 }
 
-.hero-title em { font-style: italic; color: var(--gold); }
+.hero-title em { font-style: normal; color: inherit; }
 
 .hero-sub {
   margin-top: 28px;
@@ -436,7 +444,7 @@ nav.scrolled {
   color: var(--cream); letter-spacing: -0.02em;
 }
 
-.section-title em { font-style: italic; color: var(--gold); }
+.section-title em { font-style: normal; color: inherit; }
 
 /* Spectral OpenType refinements */
 .hero-title, .section-title, .story-panel-title, .exp-title,
@@ -562,7 +570,7 @@ nav.scrolled {
   color: var(--cream); letter-spacing: -0.02em;
 }
 
-.story-panel-title em { font-style: italic; color: var(--gold); }
+.story-panel-title em { font-style: normal; color: inherit; }
 
 .story-panel-text {
   font-size: 15px; font-weight: 300;
@@ -867,7 +875,7 @@ nav.scrolled {
   color: var(--cream); letter-spacing: -0.01em;
 }
 
-.exp-title em { font-style: italic; color: var(--gold); }
+.exp-title em { font-style: normal; color: inherit; }
 
 .exp-desc {
   font-size: 13px; font-weight: 300;
@@ -1376,12 +1384,13 @@ a:focus-visible, button:focus-visible {
 .hero-tagline {
   font-family: 'Spectral', serif;
   font-size: clamp(1.1rem, 2.2vw, 1.55rem);
-  font-weight: 300; font-style: italic;
+  font-weight: 300; font-style: normal;
   color: oklch(94% 0.010 90 / 0.90);
   margin-top: 8px; letter-spacing: 0.01em;
   opacity: 0; transform: translateY(20px);
   animation: fadeUp 0.7s ease 0.50s forwards;
 }
+.hero-tagline em { font-style: normal; }
 
 /* Hero: light text on dark overlay */
 .hero-title      { color: var(--light); }
@@ -1679,79 +1688,6 @@ footer .footer-links a:hover   { color: var(--peach); }
     }
     @keyframes cw-shimmer { to { background-position: -200% 0; } }
 
-    .cw-grid-controls {
-      display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; margin-bottom: 18px;
-    }
-    .cw-grid-controls .cw-field { flex: 1; min-width: 140px; }
-    .cw-month-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
-    .cw-month-nav button {
-      width: 44px; height: 44px; border: 1px solid var(--cream-dark); border-radius: var(--radius-sm);
-      background: var(--white); font-size: 1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background .15s, border-color .15s; color: var(--ink-mid); font-family: inherit;
-    }
-    .cw-month-nav button:hover { background: var(--cream-mid); border-color: var(--sand); color: var(--ink); }
-    .cw-month-nav button:focus-visible { outline: 2px solid var(--sage-mid); outline-offset: 1px; }
-    .cw-month-nav span {
-      font-weight: 600; font-size: .88rem; min-width: 130px;
-      text-align: center; color: var(--ink); letter-spacing: .01em;
-    }
-
-    .cw-grid-outer {
-      overflow: hidden; border: 1px solid var(--cream-dark); border-radius: var(--radius-sm);
-    }
-    .cw-grid-scroll {
-      overflow-x: auto; -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin; scrollbar-color: var(--cream-dark) transparent;
-    }
-    .cw-grid-scroll::-webkit-scrollbar { height: 5px; }
-    .cw-grid-scroll::-webkit-scrollbar-thumb { background: var(--cream-dark); border-radius: 3px; }
-
-    .cw-grid-table { border-collapse: collapse; min-width: 100%; table-layout: fixed; }
-    .cw-grid-table th,
-    .cw-grid-table td { border: 1px solid var(--cream-dark); text-align: center; vertical-align: middle; }
-
-    .cw-grid-table th:first-child,
-    .cw-grid-table td:first-child {
-      min-width: 90px; max-width: 90px; width: 90px;
-      font-weight: 600; font-size: .78rem; text-align: left; padding: 0 10px;
-      background: var(--cream-mid); color: var(--ink-mid); position: sticky; left: 0; z-index: 2;
-    }
-    .cw-grid-table th:not(:first-child) {
-      width: 36px; min-width: 36px; max-width: 36px; padding: 6px 2px;
-      font-size: .75rem; font-weight: 600;
-      background: var(--cream-mid); color: var(--ink-mid); letter-spacing: .02em;
-    }
-    .cw-grid-table td:not(:first-child) {
-      width: 36px; min-width: 36px; max-width: 36px; height: 44px; padding: 0; cursor: pointer;
-    }
-    .cw-grid-table th.cw-today { background: var(--sage-faint) !important; color: var(--sage-dark); }
-    .cw-grid-table td.cw-today { outline: 2px solid var(--sage-mid); outline-offset: -2px; }
-
-    .cw-grid-section td {
-      background: var(--cream-dark) !important; font-weight: 700; font-size: .75rem;
-      text-transform: uppercase; letter-spacing: .08em; color: var(--ink-mid);
-      padding: 6px 10px !important; cursor: default !important; text-align: left !important;
-    }
-
-    .cw-cell--free    { background: var(--sage-light); }
-    .cw-cell--booked  { background: var(--terra-light); }
-    .cw-cell--arrive  { background: linear-gradient(90deg, var(--sage-light) 50%, var(--terra-light) 50%); }
-    .cw-cell--depart  { background: linear-gradient(90deg, var(--terra-light) 50%, var(--sage-light) 50%); }
-    .cw-grid-table td:not(:first-child):not(.cw-cell--booked):hover { filter: brightness(.94); }
-    .cw-grid-table th.cw-weekend { background: var(--cream-dark) !important; }
-    .cw-grid-table td.cw-cell--free.cw-weekend { background: oklch(84% 0.042 130); }
-
-    .cw-legend {
-      display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px;
-      font-size: .78rem; color: var(--ink-mid);
-    }
-    .cw-legend-item { display: flex; align-items: center; gap: 7px; }
-    .cw-legend-dot { width: 14px; height: 14px; border-radius: 2px; border: 1px solid rgba(44,42,38,.08); }
-    .cw-legend-dot--free   { background: var(--sage-light); }
-    .cw-legend-dot--booked { background: var(--terra-light); }
-    .cw-legend-dot--arrive { background: linear-gradient(90deg, var(--sage-light) 50%, var(--terra-light) 50%); }
-    .cw-legend-dot--depart { background: linear-gradient(90deg, var(--terra-light) 50%, var(--sage-light) 50%); }
 
     dialog#booking-modal {
       border: 1px solid oklch(80% 0.034 66); border-radius: 2px;
@@ -1844,8 +1780,6 @@ footer .footer-links a:hover   { color: var(--peach); }
       .cw-unit-card__price { text-align: left; }
       .cw-modal-summary { grid-template-columns: 1fr; }
       .cw-modal-price { flex-direction: column; gap: 4px; }
-      .cw-grid-table th:first-child,
-      .cw-grid-table td:first-child { min-width: 70px; max-width: 70px; width: 70px; font-size: .75rem; }
     }
 
     /* Mobile menu language switcher */
@@ -1949,9 +1883,9 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="hero-content">
     <h1 class="hero-title">San<br>Procolo</h1>
     <p class="hero-tagline"><em data-i18n="hero_tagline">Een kleine familiescamping tussen de bergen en de zee</em></p>
-    <p class="hero-sub" data-i18n="hero_sub">Achttien plaatsen, een paar glamping-tenten, een zwembad met uitzicht over het dal. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.</p>
+    <p class="hero-sub" data-i18n="hero_sub">Achttien plaatsen, een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.</p>
     <div class="hero-cta">
-      <a href="#contact" class="btn-primary" data-i18n="nav_book_stay">Boek je Verblijf</a>
+      <a href="#availability" class="btn-primary" data-i18n="nav_book_stay">Boek je Verblijf</a>
       <a href="#about" class="btn-outline" data-i18n="hero_btn_story">Ons Verhaal</a>
     </div>
     <p class="hero-urgency" data-i18n="hero_urgency">Open 1 juni tot 15 september — Juli en augustus zijn snel vol</p>
@@ -2007,7 +1941,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="story-panel-inner">
           <div class="section-eyebrow" data-i18n="story_aft_ey">'s Middags</div>
           <h3 class="story-panel-title" data-i18n="story_aft_h">Het zwembad<br><em>is het middelpunt</em></h3>
-          <p class="story-panel-text" data-i18n="story_aft_p">Kinderen in het water, ouders met een boek of een koud biertje, het dal dat zich beneden uitstrekt in de hitte. Sommige gasten pakken de auto en zijn in twintig minuten op het strand bij Grottammare. Anderen komen de camping niet af.</p>
+          <p class="story-panel-text" data-i18n="story_aft_p">Kinderen in het water, ouders met een boek of een koud biertje, de vallei die zich beneden uitstrekt in de hitte. Sommige gasten pakken de auto en zijn in twintig minuten op het strand bij Grottammare. Anderen komen de camping niet af.</p>
         </div>
       </div>
       <div class="story-panel">
@@ -2039,7 +1973,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <h2 class="section-title reveal reveal-delay-1" data-i18n="about_title">Hoe een vakantie<br><em>een thuis werd</em></h2>
       </div>
       <p class="about-text reveal reveal-delay-2" data-i18n="about_p1">Italië lag hun al jaren na aan het hart. David vroeg Lisette hier ten huwelijk en hier kwamen ze later ook terug om te trouwen, dus het land was al deel van hun verhaal lang voordat ze eraan dachten om er te wonen. Wat ze het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.</p>
-      <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">De camping verwelkomt gasten sinds 2007 en wat ze boven Monte Vidon Combatte aantroffen was een plek die al met zorg was aangelegd, op een van de mooiste plekjes van het dal, met meer potentie dan ze in één zomer konden waarmaken. Sinds 2026 runnen ze hem zelf en met z'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. Ze houden het bewust klein en persoonlijk. Achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van hen in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.</p>
+      <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">De camping verwelkomt gasten sinds 2007 en wat ze boven Monte Vidon Combatte aantroffen was een plek die al met zorg was aangelegd, op een van de mooiste plekjes van de vallei, met meer potentie dan ze in één zomer konden waarmaken. Sinds 2026 runnen ze hem zelf en met z'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. Ze houden het bewust klein en persoonlijk. Achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van hen in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.</p>
       <h3 class="about-subheading reveal reveal-delay-3" data-i18n="about_sub">Een echte camping, geen resort</h3>
       <p class="about-text reveal reveal-delay-3" data-i18n="about_p3">Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was, zeker als de lange tafel gedekt wordt voor gasten en buren samen.</p>
       <a href="#availability" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Bekijk beschikbaarheid →</a>
@@ -2064,7 +1998,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="act-card-label">
           <div class="act-card-eyebrow" data-i18n="act_pool_ey">De hele zomer</div>
           <div class="act-card-title" data-i18n="act_pool_h">Het zwembad</div>
-          <p class="act-card-sub" data-i18n="act_pool_p">Kinderen in het water, ouders met een boek aan de rand, het dal beneden wazig in de middaghitte.</p>
+          <p class="act-card-sub" data-i18n="act_pool_p">Kinderen in het water, ouders met een boek aan de rand, de vallei beneden wazig in de middaghitte.</p>
         </div>
       </div>
     </div>
@@ -2136,7 +2070,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <h3 class="stay-card-title" data-i18n="stay_pitch_h">Kampeerplaats</h3>
         <p class="stay-card-desc" data-i18n="stay_pitch_p">Ruime terrassen geschikt voor tent, caravan of camper. Elektra inbegrepen.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€18 <span>/ night</span></span></div>
+          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€18 <span data-i18n="per_night_slash">/ nacht</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
         </div>
       </div>
@@ -2150,7 +2084,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <h3 class="stay-card-title" data-i18n="stay_safari_h">Safari- en tunneltent</h3>
         <p class="stay-card-desc" data-i18n="stay_safari_p">Instapklaar, beddengoed inbegrepen. De safaritent is geschikt voor vier personen, de tunneltent is ingericht voor stellen.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€70 <span>/ night</span></span></div>
+          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€70 <span data-i18n="per_night_slash">/ nacht</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
         </div>
       </div>
@@ -2162,9 +2096,9 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title" data-i18n="stay_lodge_h">Lodge tent en chalet</h3>
-        <p class="stay-card-desc" data-i18n="stay_lodge_p">De meest comfortabele optie op de camping. Privéterras, volledig uitgerust, hetzelfde dalzicht als de rest van de camping.</p>
+        <p class="stay-card-desc" data-i18n="stay_lodge_p">De meest comfortabele optie op de camping. Privéterras, volledig uitgerust, hetzelfde uitzicht over de vallei als de rest van de camping.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€95 <span>/ night</span></span></div>
+          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€95 <span data-i18n="per_night_slash">/ nacht</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
         </div>
       </div>
@@ -2222,21 +2156,21 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="testimonial-card reveal">
         <p class="testimonial-text">Lisette and David really care about their guests. They make you feel at home without being too much around. The hospitality just flows. And the place itself is beautiful — the view from our pitch made us stop what we were doing more than once.</p>
         <div class="testimonial-footer">
-          <div class="testimonial-author">Familie de Vries · Netherlands</div>
+          <div class="testimonial-author">Familie de Vries · <span data-i18n="test_c_nl">Nederland</span></div>
           <div class="testimonial-stars">★★★★★</div>
         </div>
       </div>
       <div class="testimonial-card reveal reveal-delay-1">
-        <p class="testimonial-text">Wir waren zu zweit und haben einfach abgeschaltet. Das Pool, die frischen Croissants, die Stille abends. David und Lisette sind da, wenn man sie braucht, und lassen einen sonst in Ruhe. Genau richtig.</p>
+        <p class="testimonial-text">Wir waren zu zweit und haben einfach abgeschaltet. Der Pool, die frischen Croissants, die Stille abends. David und Lisette sind da, wenn man sie braucht, und lassen einen sonst in Ruhe. Genau richtig.</p>
         <div class="testimonial-footer">
-          <div class="testimonial-author">Familie Müller · Germany</div>
+          <div class="testimonial-author">Familie Müller · <span data-i18n="test_c_de">Duitsland</span></div>
           <div class="testimonial-stars">★★★★★</div>
         </div>
       </div>
       <div class="testimonial-card reveal reveal-delay-2">
         <p class="testimonial-text">Came as a couple, didn't want a programme, didn't want a resort. Got exactly that. Beautiful spot, lovely hosts, ended up sitting at the long table on a Tuesday and staying for three hours. We're already thinking about next year.</p>
         <div class="testimonial-footer">
-          <div class="testimonial-author">Sarah &amp; James · United Kingdom</div>
+          <div class="testimonial-author">Sarah &amp; James · <span data-i18n="test_c_uk">Verenigd Koninkrijk</span></div>
           <div class="testimonial-stars">★★★★★</div>
         </div>
       </div>
@@ -2257,10 +2191,10 @@ footer .footer-links a:hover   { color: var(--peach); }
   </div>
   </div>
 
-  <div class="cw-widget" role="region" aria-label="Reserveringswidget">
+  <div class="cw-widget" role="region" aria-label="Reserveringswidget" data-i18n-aria-label="cw_widget_aria">
 
   <!-- Tabs -->
-  <div class="cw-tabs" role="tablist" aria-label="Weergave kiezen">
+  <div class="cw-tabs" role="tablist" aria-label="Choose view">
     <button class="cw-tab" role="tab" id="tab-search" aria-controls="panel-search" aria-selected="true">
       <span data-i18n="cw_tab_search">Beschikbaarheid zoeken</span>
     </button>
@@ -2280,7 +2214,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="cw-field">
         <label for="s-type" data-i18n="cw_accom_type">Accommodatietype</label>
         <div class="cw-select-wrap">
-          <select id="s-type" aria-label="Kies accommodatietype">
+          <select id="s-type" aria-label="Accommodatietype" data-i18n-aria-label="cw_accom_type">
             <option value="" data-i18n="cw_all_types">Alle types</option>
             <option value="pitch" data-i18n="cw_pitch">Kampeerplaats</option>
             <option value="chalet">Chalet</option>
@@ -2292,54 +2226,16 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
       <div class="cw-field">
         <label for="s-guests" data-i18n="cw_persons">Aantal personen</label>
-        <input type="number" id="s-guests" min="1" max="12" value="2" aria-label="Aantal personen" autocomplete="off">
+        <input type="number" id="s-guests" min="1" max="12" value="2" aria-label="Aantal personen" data-i18n-aria-label="cw_persons" autocomplete="off">
       </div>
       <div class="cw-field cw-field--full">
-        <button type="submit" class="cw-btn" id="search-btn" aria-label="Beschikbaarheid controleren">
+        <button type="submit" class="cw-btn" id="search-btn" aria-label="Beschikbaarheid controleren" data-i18n-aria-label="cw_check_avail">
           <span data-i18n="cw_check_avail">Beschikbaarheid controleren</span>
         </button>
       </div>
     </form>
     <div class="cw-banner" id="search-error" role="alert" aria-live="assertive" tabindex="-1"></div>
-    <div id="search-results" class="cw-results" aria-live="polite" aria-label="Zoekresultaten"></div>
-  </div>
-
-  <!-- Grid panel -->
-  <div class="cw-panel" role="tabpanel" id="panel-grid" aria-labelledby="tab-grid">
-    <div class="cw-grid-controls">
-      <div class="cw-field">
-        <label for="g-type" data-i18n="cw_accom_label">Accommodatie</label>
-        <div class="cw-select-wrap">
-          <select id="g-type" aria-label="Filter op accommodatietype">
-            <option value="" data-i18n="cw_all_types">Alle types</option>
-            <option value="pitch" data-i18n="cw_pitches">Kampeerplaatsen</option>
-            <option value="chalet">Chalets</option>
-            <option value="safari">Safari tenten</option>
-            <option value="tunnel">Tunnel tenten</option>
-            <option value="lodge">Lodge tenten</option>
-          </select>
-        </div>
-      </div>
-      <div class="cw-month-nav">
-        <button id="grid-prev" aria-label="Vorige maand">‹</button>
-        <span id="grid-month-label" aria-live="polite"></span>
-        <button id="grid-next" aria-label="Volgende maand">›</button>
-      </div>
-    </div>
-    <div class="cw-grid-outer" role="region" aria-label="Bezettingsoverzicht">
-      <div class="cw-grid-scroll" tabindex="0">
-        <table class="cw-grid-table" id="grid-table">
-          <thead id="grid-thead"></thead>
-          <tbody id="grid-tbody"></tbody>
-        </table>
-      </div>
-    </div>
-    <div class="cw-legend" aria-label="Legenda">
-      <div class="cw-legend-item"><div class="cw-legend-dot cw-legend-dot--free"></div><span data-i18n="cw_avail">Beschikbaar</span></div>
-      <div class="cw-legend-item"><div class="cw-legend-dot cw-legend-dot--booked"></div><span data-i18n="cw_booked">Bezet</span></div>
-      <div class="cw-legend-item"><div class="cw-legend-dot cw-legend-dot--arrive"></div><span data-i18n="cw_arrive">Aankomstdag</span></div>
-      <div class="cw-legend-item"><div class="cw-legend-dot cw-legend-dot--depart"></div><span data-i18n="cw_depart">Vertrekdag</span></div>
-    </div>
+    <div id="search-results" class="cw-results" aria-live="polite" aria-label="Zoekresultaten" data-i18n-aria-label="cw_results_aria"></div>
   </div>
 
 </div><!-- /.cw-widget -->
@@ -2368,12 +2264,12 @@ footer .footer-links a:hover   { color: var(--peach); }
       <form id="booking-form" novalidate>
         <div class="cw-form-row">
           <label for="f-name"><span data-i18n="cw_f_name">Naam</span> <span aria-hidden="true">*</span></label>
-          <input type="text" id="f-name" autocomplete="name" aria-required="true" placeholder="Voor- en achternaam">
+          <input type="text" id="f-name" autocomplete="name" aria-required="true" placeholder="Voor- en achternaam" data-i18n-placeholder="cw_ph_name">
           <p class="cw-field-error" id="e-name" role="alert" aria-live="polite"></p>
         </div>
         <div class="cw-form-row">
           <label for="f-email"><span data-i18n="cw_f_email">E-mailadres</span> <span aria-hidden="true">*</span></label>
-          <input type="email" id="f-email" autocomplete="email" aria-required="true" placeholder="naam@voorbeeld.nl">
+          <input type="email" id="f-email" autocomplete="email" aria-required="true" placeholder="naam@voorbeeld.nl" data-i18n-placeholder="cw_ph_email">
           <p class="cw-field-error" id="e-email" role="alert" aria-live="polite"></p>
         </div>
         <div class="cw-form-row">
@@ -2382,7 +2278,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         </div>
         <div class="cw-form-row">
           <label for="f-notes" data-i18n="cw_f_notes">Opmerkingen</label>
-          <textarea id="f-notes" placeholder="Bijv. aankomsttijd, bijzondere wensen..."></textarea>
+          <textarea id="f-notes" placeholder="Bijv. aankomsttijd, bijzondere wensen…" data-i18n-placeholder="cw_ph_notes"></textarea>
         </div>
         <div class="cw-modal-actions">
           <button type="button" class="cw-btn cw-btn-outline" id="modal-back" data-i18n="cw_back">Terug</button>
@@ -2450,30 +2346,24 @@ footer .footer-links a:hover   { color: var(--peach); }
 <!-- FACILITIES -->
 <section id="facilities">
   <div class="facilities-header">
-    <div class="section-eyebrow reveal" data-i18n="fac_eyebrow">Op de camping</div>
-    <h2 class="section-title reveal reveal-delay-1" data-i18n="fac_title">Eenvoudige dingen,<br><em>goed gedaan</em></h2>
-  </div>
-  <div class="facilities-featured">
-    <div class="facility-card reveal">
-      <div class="facility-card-img" style="background-image: url('../terrace.jpg');"></div>
-      <div class="facility-card-body">
-        <div class="facility-card-name" data-i18n="fac_terrace_name">Terras en bar</div>
-        <p class="facility-card-desc" data-i18n="fac_terrace_desc">Elke ochtend vers brood en cappuccino. Twee keer per week in het hoogseizoen een gezamenlijk diner aan de lange tafel, voor gasten en buren samen. Geen reservering nodig.</p>
-      </div>
-    </div>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="fac_title">Op de camping</h2>
   </div>
   <div class="amenity-list reveal" style="border-top: 1px solid var(--border2); margin-top: 16px;">
     <div class="amenity-row">
-      <div class="amenity-k" data-i18n="fac_pool_k">Zwembad</div>
-      <div class="amenity-v" data-i18n="fac_pool_v">Vijf bij tien meter, open van negen tot acht, met uitzicht over het dal.</div>
+      <div class="amenity-k" data-i18n="fac_terrace_name">Terras en bar</div>
+      <div class="amenity-v" data-i18n="fac_terrace_desc">Elke ochtend vers brood en cappuccino. Twee keer per week in het hoogseizoen een gezamenlijk diner aan de lange tafel, voor gasten en buren samen. Geen reservering nodig.</div>
     </div>
     <div class="amenity-row">
-      <div class="amenity-k" data-i18n="fac_kids_k">Kinderspeeltuin</div>
+      <div class="amenity-k" data-i18n="fac_pool_k">Zwembad</div>
+      <div class="amenity-v" data-i18n="fac_pool_v">Vijf bij tien meter, open van negen tot acht, met uitzicht over de vallei.</div>
+    </div>
+    <div class="amenity-row">
+      <div class="amenity-k" data-i18n="fac_kids_k">Speeltuin</div>
       <div class="amenity-v" data-i18n="fac_kids_v">Glijbaan, schommels, trampoline, tafeltennis en een heuvel om in te verdwijnen.</div>
     </div>
     <div class="amenity-row">
       <div class="amenity-k" data-i18n="fac_wine_k">Biologische wijn</div>
-      <div class="amenity-v" data-i18n="fac_wine_v">Van Giacomo Centanni, drie dalen verderop. Biologisch, en altijd op voorraad.</div>
+      <div class="amenity-v" data-i18n="fac_wine_v">Van Giacomo Centanni, drie valleien verderop. Biologisch, en altijd op voorraad.</div>
     </div>
     <div class="amenity-row">
       <div class="amenity-k" data-i18n="fac_wifi_k">Gratis wifi</div>
@@ -2498,7 +2388,7 @@ footer .footer-links a:hover   { color: var(--peach); }
 <section id="faq">
   <div class="faq-inner">
     <div class="section-eyebrow reveal" data-i18n="faq_eyebrow">Voordat je komt</div>
-    <h2 class="section-title reveal reveal-delay-1" data-i18n="faq_title">Goed om te<br><em>weten</em></h2>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="faq_title">Goed om te weten</h2>
     <div class="faq-list reveal reveal-delay-2">
       <details class="faq-item">
         <summary class="faq-q" data-i18n="faq_q1">Hoe ver is de zee?</summary>
@@ -2506,7 +2396,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </details>
       <details class="faq-item">
         <summary class="faq-q" data-i18n="faq_q2">Is het een fijne plek voor jonge kinderen?</summary>
-        <div class="faq-a" data-i18n="faq_a2">Bij ons kamperen vooral gezinnen en de camping is helemaal op hen ingericht. Er is een zwembad met uitzicht, een speeltuin met schommels, een glijbaan en een grote trampoline, tafeltennis en een olijfgaard om in te ravotten. Kinderbedjes en kinderstoelen zijn er gewoon als je ze nodig hebt. Rustig, veilig en kindvriendelijk: de meeste kinderen hebben op de tweede ochtend alweer een vriendje gevonden.</div>
+        <div class="faq-a" data-i18n="faq_a2">Bij ons kamperen vooral gezinnen en de camping is helemaal op hen ingericht. Er is een zwembad met uitzicht, een speeltuin met schommels, een glijbaan en een grote trampoline, tafeltennis en een olijfgaard om in te ravotten. Kinderbedjes en kinderstoelen zijn er op aanvraag. Rustig, veilig en kindvriendelijk: de meeste kinderen hebben op de tweede ochtend alweer een vriendje gevonden.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q" data-i18n="faq_q3">Mogen we onze hond meenemen?</summary>
@@ -2514,7 +2404,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </details>
       <details class="faq-item">
         <summary class="faq-q" data-i18n="faq_q4">Naar welke luchthaven vlieg je het best?</summary>
-        <div class="faq-a" data-i18n="faq_a4">De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden is Pescara de andere makkelijke keuze, meestal met de meeste zomervluchten, en daar landen dan ook veel van onze Britse en Duitse gasten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje.</div>
+        <div class="faq-a" data-i18n="faq_a4">De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden ligt Pescara, meestal met de meeste zomervluchten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q" data-i18n="faq_q5">Wat zit er in de tenten?</summary>
@@ -2530,7 +2420,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     <div class="contact-info">
       <div>
         <div class="section-eyebrow reveal" data-i18n="contact_eyebrow">Neem contact op</div>
-        <h2 class="section-title reveal reveal-delay-1" data-i18n="contact_title">Schrijf<br><em>Lisette</em></h2>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="contact_title">Bericht Lisette</h2>
       </div>
       <p class="about-text reveal reveal-delay-2"><span data-i18n="contact_intro">Stuur Lisette een bericht en je hoort binnen een dag van haar. Het seizoen loopt van 1 juni tot 15 september. Huisdieren kunnen we helaas niet ontvangen — de open heuvel is juist wat de plek voor gezinnen zo fijn maakt.</span></p>
       <div class="contact-detail reveal">
@@ -2559,7 +2449,7 @@ footer .footer-links a:hover   { color: var(--peach); }
           <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(245,234,214,0.04)" stroke-width="1"></line>
           <line x1="200" y1="0" x2="200" y2="300" stroke="rgba(245,234,214,0.04)" stroke-width="1"></line>
         </svg>
-        <div style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:oklch(28% 0.04 115);background:rgba(255,255,255,0.80);padding:5px 14px;border-radius:20px;white-space:nowrap;">Open in Maps →</div>
+        <div style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:oklch(28% 0.04 115);background:rgba(255,255,255,0.80);padding:5px 14px;border-radius:20px;white-space:nowrap;" data-i18n="open_maps">Bekijk op de kaart →</div>
       </a>
     </div>
     <div>
@@ -2567,28 +2457,28 @@ footer .footer-links a:hover   { color: var(--peach); }
       <form id="enquiryForm" class="contact-form reveal reveal-delay-1" onsubmit="handleSubmit(event)">
           <input type="hidden" id="form-loaded-at" name="form_loaded_at" value="">
         <div class="form-row">
-          <div class="form-group"><label class="form-label" data-i18n="form_firstname">Voornaam</label><input id="fFirst" name="firstName" type="text" class="form-input" placeholder="Marco" required></div>
-          <div class="form-group"><label class="form-label" data-i18n="form_lastname">Achternaam</label><input id="fLast" name="lastName" type="text" class="form-input" placeholder="Rossi" required></div>
+          <div class="form-group"><label class="form-label" for="fFirst" data-i18n="form_firstname">Voornaam</label><input id="fFirst" name="firstName" type="text" class="form-input" placeholder="Marco" required></div>
+          <div class="form-group"><label class="form-label" for="fLast" data-i18n="form_lastname">Achternaam</label><input id="fLast" name="lastName" type="text" class="form-input" placeholder="Rossi" required></div>
         </div>
-        <div class="form-group"><label class="form-label" data-i18n="form_email">E-mail</label><input id="fEmail" name="email" type="email" class="form-input" placeholder="marco@example.com" required></div>
+        <div class="form-group"><label class="form-label" for="fEmail" data-i18n="form_email">E-mail</label><input id="fEmail" name="email" type="email" class="form-input" placeholder="marco@example.com" required></div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label" data-i18n="form_arrival">Aankomst</label><input id="fArrival" name="arrival" type="date" class="form-input" required></div>
-          <div class="form-group"><label class="form-label" data-i18n="form_departure">Vertrek</label><input id="fDeparture" name="departure" type="date" class="form-input" required></div>
+          <div class="form-group"><label class="form-label" for="fArrival" data-i18n="form_arrival">Aankomst</label><input id="fArrival" name="arrival" type="date" class="form-input" required></div>
+          <div class="form-group"><label class="form-label" for="fDeparture" data-i18n="form_departure">Vertrek</label><input id="fDeparture" name="departure" type="date" class="form-input" required></div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" data-i18n="form_accom">Accommodatie</label>
+            <label class="form-label" for="fAccom" data-i18n="form_accom">Accommodatie</label>
             <select id="fAccom" name="accommodation" class="form-select" required>
               <option value="" data-i18n="form_select">Kies type</option>
-              <option value="Camping Pitch">Camping Pitch</option>
-              <option value="Safari Tent">Safari Tent</option>
-              <option value="Tunnel Tent">Tunnel Tent</option>
-              <option value="Lodge Tent">Lodge Tent</option>
-              <option value="Chalet">Chalet</option>
+              <option value="Camping Pitch" data-i18n="form_ac_pitch">Kampeerplaats</option>
+              <option value="Safari Tent" data-i18n="form_ac_safari">Safaritent</option>
+              <option value="Tunnel Tent" data-i18n="form_ac_tunnel">Tunneltent</option>
+              <option value="Lodge Tent" data-i18n="form_ac_lodge">Lodgetent</option>
+              <option value="Chalet" data-i18n="form_ac_chalet">Chalet</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label" data-i18n="form_guests">Gasten</label>
+            <label class="form-label" for="fGuests" data-i18n="form_guests">Gasten</label>
             <select id="fGuests" name="guests" class="form-select">
               <option value="1" data-i18n="form_1p">1 persoon</option>
               <option value="2" selected data-i18n="form_2p">2 personen</option>
@@ -2600,7 +2490,7 @@ footer .footer-links a:hover   { color: var(--peach); }
             </select>
           </div>
         </div>
-        <div class="form-group"><label class="form-label" data-i18n="form_message">Bericht (optioneel)</label><textarea id="fMessage" name="message" class="form-textarea" placeholder="Any questions or special requests... (note: pets cannot be accommodated)"></textarea></div>
+        <div class="form-group"><label class="form-label" for="fMessage" data-i18n="form_message">Bericht (optioneel)</label><textarea id="fMessage" name="message" class="form-textarea" placeholder="Any questions or special requests... (note: pets cannot be accommodated)"></textarea></div>
         <input type="hidden" id="fEstimate" name="estimate" value="">
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
         <button type="submit" class="btn-primary" style="border:none;cursor:pointer;" data-i18n="form_submit">Aanvraag Versturen →</button>
@@ -2696,7 +2586,7 @@ footer .footer-links a:hover   { color: var(--peach); }
 
     // Honeypot — bots fill hidden fields, humans don't
     if (form.elements['website'].value) {
-      status.textContent = 'Thanks!';
+      status.textContent = cwT('cf_thanks');
       btn.disabled = true;
       return;
     }
@@ -2715,26 +2605,26 @@ footer .footer-links a:hover   { color: var(--peach); }
     };
 
     btn.disabled = true;
-    btn.textContent = 'Sending...';
+    btn.textContent = cwT('cf_sending');
     status.textContent = '';
 
     fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      mode: 'cors',
+      mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(data)
     })
     .then(() => {
-      btn.textContent = 'Sent — Lisette will be in touch';
+      btn.textContent = cwT('cf_sent_btn');
       btn.style.background = 'rgba(245,234,214,0.15)';
       btn.style.color = 'rgba(245,234,214,0.6)';
-      status.textContent = 'Thanks. You\'ll hear from Lisette within a day, and a confirmation has been sent to your inbox.';
+      status.textContent = cwT('cf_sent_status');
       form.reset();
     })
     .catch(() => {
       btn.disabled = false;
-      btn.textContent = 'Send Enquiry →';
-      status.textContent = 'Something went wrong. Please try again or email info@sanprocolo.com directly.';
+      btn.textContent = cwT('form_submit');
+      status.textContent = cwT('cf_error');
     });
   }
 </script>
@@ -2859,7 +2749,7 @@ const TRANSLATIONS = {
     sea_title:'20 minutes<br><em>to the sea</em>',
     sea_sub:'Sandy beaches, turquoise water, and the kind of bar that serves cold beer in a plastic cup and you wouldn\'t have it any other way. Hill by morning. Coast by afternoon.',
     // Facilities
-    fac_eyebrow:'On Site', fac_title:'Simple things,<br><em>done well</em>',
+    fac_eyebrow:'On Site', fac_title:'On the campsite',
     fac_terrace_name:'Terrace &amp; Bar',
     fac_terrace_desc:'Fresh bread and cappuccino every morning. Twice a week in high season, an Italian dinner on the long table. No reservations needed.',
     fac_pool_k:'Swimming Pool',
@@ -2873,12 +2763,11 @@ const TRANSLATIONS = {
     fac_olive_k:'Olive &amp; Herb Gardens',
     fac_olive_v:'Olive trees, lavender, oleander. Guests can join the harvest in September.',
     // Availability widget
-    cw_tab_search:'Check Availability', cw_tab_grid:'Occupancy Overview',
+    cw_tab_search:'Check Availability',
     cw_arrival:'Arrival', cw_departure:'Departure',
     cw_accom_type:'Accommodation type', cw_persons:'Number of guests',
-    cw_all_types:'All types', cw_pitch:'Camping pitch', cw_pitches:'Camping pitches',
+    cw_all_types:'All types', cw_pitch:'Camping pitch',
     cw_check_avail:'Check availability', cw_accom_label:'Accommodation',
-    cw_avail:'Available', cw_booked:'Occupied', cw_arrive:'Arrival day', cw_depart:'Departure day',
     cw_modal_title:'Request your booking', cw_close:'Close',
     cw_step1:'Step 1 of 2 — Review your choice', cw_step2:'Step 2 of 2 — Your details',
     cw_cancel:'Cancel', cw_continue:'Continue', cw_back:'Back', cw_submit:'Request booking',
@@ -2895,6 +2784,14 @@ const TRANSLATIONS = {
     cw_per_night:'per night', cw_total:'Total',
     cw_np:'s', cw_persons_unit:'persons', cw_nights_unit:'nights',
     cw_type:'Type', cw_num_nights:'Number of nights', cw_total_price:'Total price', cw_request:'request',
+    cw_busy:'Sending…', cw_confirm_body:'Thank you. Your booking request has been received. Lisette will confirm by email shortly.', cw_err_generic:'Something went wrong. Please try again.',
+    cw_err_name:'Name is required', cw_err_email_req:'A valid email is required',
+    cw_widget_aria:'Booking widget', cw_results_aria:'Search results',
+    cw_ph_name:'Full name', cw_ph_email:'name@example.com', cw_ph_notes:'E.g. arrival time, special requests…',
+    per_night_slash:'/ night', open_maps:'Open in Maps →',
+    cf_sending:'Sending…', cf_sent_btn:'Sent. Lisette will be in touch', cf_sent_status:'Thanks. You will hear from Lisette within a day.', cf_error:'Something went wrong. Please try again or email info@sanprocolo.com directly.', cf_thanks:'Thanks!',
+    form_ac_pitch:'Camping Pitch', form_ac_safari:'Safari Tent', form_ac_tunnel:'Tunnel Tent', form_ac_lodge:'Lodge Tent', form_ac_chalet:'Chalet',
+    test_c_nl:'Netherlands', test_c_de:'Germany', test_c_uk:'United Kingdom',
     fac_advice_k:'Local Advice',
     fac_advice_v:'Lisette &amp; David\'s own list of markets, restaurants, hidden beaches and the spots the guidebooks haven\'t found.',
     fac_laundry_k:'Laundry &amp; Baby Gear',
@@ -2940,7 +2837,7 @@ const TRANSLATIONS = {
     nav_book_now:'Boek Nu', nav_book_stay:'Boek je Verblijf',
     // Hero
     hero_tagline:'Een kleine familiescamping tussen de bergen en de zee',
-    hero_sub:'Achttien plaatsen, een paar glamping-tenten, een zwembad met uitzicht over het dal. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.',
+    hero_sub:'Achttien plaatsen, een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.',
     hero_btn_story:'Ons Verhaal',
     hero_urgency:'Open 1 juni tot 15 september — Juli en augustus zijn snel vol',
     stat_sea:'Boven Zeeniveau', stat_beach:'Naar het Strand', stat_est:'Open sinds',
@@ -2951,7 +2848,7 @@ const TRANSLATIONS = {
     about_eyebrow:'Ons Verhaal',
     about_title:'Hoe een vakantie<br><em>een thuis werd</em>',
     about_p1:'Italië lag hun al jaren na aan het hart. David vroeg Lisette hier ten huwelijk en hier kwamen ze later ook terug om te trouwen, dus het land was al deel van hun verhaal lang voordat ze eraan dachten om er te wonen. Wat ze het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.',
-    about_p2:'De camping verwelkomt gasten sinds 2007 en wat ze boven Monte Vidon Combatte aantroffen was een plek die al met zorg was aangelegd, op een van de mooiste plekjes van het dal, met meer potentie dan ze in één zomer konden waarmaken. Sinds 2026 runnen ze hem zelf en met z\'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. Ze houden het bewust klein en persoonlijk. Achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van hen in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.',
+    about_p2:'De camping verwelkomt gasten sinds 2007 en wat ze boven Monte Vidon Combatte aantroffen was een plek die al met zorg was aangelegd, op een van de mooiste plekjes van de vallei, met meer potentie dan ze in één zomer konden waarmaken. Sinds 2026 runnen ze hem zelf en met z\'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. Ze houden het bewust klein en persoonlijk. Achttien plaatsen, een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van hen in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.',
     about_sub:'Een echte camping, geen resort',
     about_p3:'Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was, zeker als de lange tafel gedekt wordt voor gasten en buren samen.',
     about_cta:'Bekijk beschikbaarheid →',
@@ -2964,7 +2861,7 @@ const TRANSLATIONS = {
     story_morn_p:'Espresso onder de olijfbomen. Niemand heeft een programma.',
     story_aft_ey:'\'s Middags',
     story_aft_h:'Het zwembad<br><em>is het middelpunt</em>',
-    story_aft_p:'Kinderen in het water, ouders met een boek of een koud biertje, het dal dat zich beneden uitstrekt in de hitte. Sommige gasten pakken de auto en zijn in twintig minuten op het strand bij Grottammare. Anderen komen de camping niet af.',
+    story_aft_p:'Kinderen in het water, ouders met een boek of een koud biertje, de vallei die zich beneden uitstrekt in de hitte. Sommige gasten pakken de auto en zijn in twintig minuten op het strand bij Grottammare. Anderen komen de camping niet af.',
     story_eve_ey:'\'s Avonds',
     story_eve_h:'De lange tafel,<br><em>twee keer per week</em>',
     story_eve_p:'Lokaal eten, wijn van Centanni, buren en gasten door elkaar. De kinderen spelen buiten in het donker, en niemand gaat eerder weg.',
@@ -2975,7 +2872,7 @@ const TRANSLATIONS = {
     act_bread_ey:'Elke ochtend', act_bread_h:'Vers brood op het terras',
     act_bread_p:'Cornetti nog warm, espresso onder de olijfbomen. Niemand heeft een programma.',
     act_pool_ey:'De hele zomer', act_pool_h:'Het zwembad',
-    act_pool_p:'Kinderen in het water, ouders met een boek aan de rand, het dal beneden wazig in de middaghitte.',
+    act_pool_p:'Kinderen in het water, ouders met een boek aan de rand, de vallei beneden wazig in de middaghitte.',
     act_olive_ey:'In het seizoen', act_olive_h:'Olijvenoogst',
     act_olive_p:'Ben je er in september? Dan ben je welkom om mee te oogsten — een ochtend in de gaard, en de lange lunch die er altijd op volgt.',
     act_table_ey:'Twee keer per week', act_table_h:'De lange tafel',
@@ -2997,7 +2894,7 @@ const TRANSLATIONS = {
     stay_safari_tag:'Glamping Tent', stay_safari_h:'Safari- en tunneltent',
     stay_safari_p:'Instapklaar, beddengoed inbegrepen. De safaritent is geschikt voor vier personen, de tunneltent is ingericht voor stellen.',
     stay_lodge_tag:'Lodge &amp; Chalet', stay_lodge_h:'Lodge tent en chalet',
-    stay_lodge_p:'De meest comfortabele optie op de camping. Privéterras, volledig uitgerust, hetzelfde dalzicht als de rest van de camping.',
+    stay_lodge_p:'De meest comfortabele optie op de camping. Privéterras, volledig uitgerust, hetzelfde uitzicht over de vallei als de rest van de camping.',
     from_label:'Vanaf', book_btn:'Boek',
     avail_pitch_price:'Vanaf €18 / nacht', avail_safari_price:'Vanaf €90 / nacht',
     avail_tunnel_price:'Vanaf €70 / nacht', avail_lodge_price:'Vanaf €100 / nacht',
@@ -3045,15 +2942,15 @@ const TRANSLATIONS = {
     sea_title:'20 minuten<br><em>naar zee</em>',
     sea_sub:'Twintig minuten rijden en je staat op een strand waar de Italianen zelf naartoe gaan: zandig, kalm, weinig buitenlanders. Een bar met koud bier en goed uitzicht.',
     // Facilities
-    fac_eyebrow:'Op de camping', fac_title:'Eenvoudige dingen,<br><em>goed gedaan</em>',
+    fac_eyebrow:'Op de camping', fac_title:'Op de camping',
     fac_terrace_name:'Terras en bar',
     fac_terrace_desc:'Elke ochtend vers brood en cappuccino. Twee keer per week in het hoogseizoen een gezamenlijk diner aan de lange tafel, voor gasten en buren samen. Geen reservering nodig.',
     fac_pool_k:'Zwembad',
-    fac_pool_v:'Vijf bij tien meter, open van negen tot acht, met uitzicht over het dal.',
-    fac_kids_k:'Kinderspeeltuin',
+    fac_pool_v:'Vijf bij tien meter, open van negen tot acht, met uitzicht over de vallei.',
+    fac_kids_k:'Speeltuin',
     fac_kids_v:'Glijbaan, schommels, trampoline, tafeltennis en een heuvel om in te verdwijnen.',
     fac_wine_k:'Biologische wijn',
-    fac_wine_v:'Van Giacomo Centanni, drie dalen verderop. Biologisch, en altijd op voorraad.',
+    fac_wine_v:'Van Giacomo Centanni, drie valleien verderop. Biologisch, en altijd op voorraad.',
     fac_wifi_k:'Gratis wifi',
     fac_wifi_v:'Op het terras en bij de speeltuin.',
     fac_olive_k:'Olijf- en kruidentuin',
@@ -3064,7 +2961,7 @@ const TRANSLATIONS = {
     fac_laundry_v:'Wasmachine beschikbaar voor zes euro per beurt. Kinderbedjes en kinderstoelen op aanvraag.',
     // Contact
     contact_eyebrow:'Neem contact op',
-    contact_title:'Schrijf<br><em>Lisette</em>',
+    contact_title:'Bericht Lisette',
     contact_intro:'Stuur Lisette een bericht en je hoort binnen een dag van haar. Het seizoen loopt van 1 juni tot 15 september. Huisdieren kunnen we helaas niet ontvangen — de open heuvel is juist wat de plek voor gezinnen zo fijn maakt.',
     contact_l_address:'Adres', contact_v_address:'Monte Vidon Combatte, Le Marche, Italië',
     contact_l_phone:'Telefoon', contact_l_email:'E-mail', contact_l_season:'Seizoen',
@@ -3083,24 +2980,23 @@ const TRANSLATIONS = {
     footer_copy:'© 2026 Camping San Procolo · Monte Vidon Combatte · Le Marche, Italië',
     // FAQ
     faq_eyebrow:'Voordat je komt',
-    faq_title:'Goed om te<br><em>weten</em>',
+    faq_title:'Goed om te weten',
     faq_q1:'Hoe ver is de zee?',
     faq_a1:'Zo\'n twintig minuten rijden. Het dichtstbijzijnde strand vind je bij Porto San Giorgio en Lido di Fermo. Wil je iets mooiers, rijd dan tien minuten verder naar de palmenkust Riviera delle Palme, met plaatsen als Cupra Marittima en Grottammare. Veel gasten zwemmen \'s ochtends bij ons en liggen \'s middags aan zee.',
     faq_q2:'Is het een fijne plek voor jonge kinderen?',
-    faq_a2:'Bij ons kamperen vooral gezinnen en de camping is helemaal op hen ingericht. Er is een zwembad met uitzicht, een speeltuin met schommels, een glijbaan en een grote trampoline, tafeltennis en een olijfgaard om in te ravotten. Kinderbedjes en kinderstoelen zijn er gewoon als je ze nodig hebt. Rustig, veilig en kindvriendelijk: de meeste kinderen hebben op de tweede ochtend alweer een vriendje gevonden.',
+    faq_a2:'Bij ons kamperen vooral gezinnen en de camping is helemaal op hen ingericht. Er is een zwembad met uitzicht, een speeltuin met schommels, een glijbaan en een grote trampoline, tafeltennis en een olijfgaard om in te ravotten. Kinderbedjes en kinderstoelen zijn er op aanvraag. Rustig, veilig en kindvriendelijk: de meeste kinderen hebben op de tweede ochtend alweer een vriendje gevonden.',
     faq_q3:'Mogen we onze hond meenemen?',
     faq_a3:'We hebben zelf een hond, een lieverd die Fred heet, maar we hebben ervoor gekozen om San Procolo vrij te houden van honden van gasten. Met een open heuvel, een grasveld bij het zwembad en veel kleine kinderen die blootsvoets rondrennen, blijft het zo voor iedereen rustig. Fred verwelkomt jullie graag namens ons allemaal.',
     faq_q4:'Naar welke luchthaven vlieg je het best?',
-    faq_a4:'De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden is Pescara de andere makkelijke keuze, meestal met de meeste zomervluchten, en daar landen dan ook veel van onze Britse en Duitse gasten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje.',
+    faq_a4:'De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden ligt Pescara, meestal met de meeste zomervluchten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje.',
     faq_q5:'Wat zit er in de tenten?',
     faq_a5:'In de safari- en lodgetenten vind je echte bedden, een volwaardige keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De tunneltenten en kampeerplaatsen maken gebruik van ons sanitairgebouw. In beide gevallen zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen.',
     // Availability widget
-    cw_tab_search:'Beschikbaarheid zoeken', cw_tab_grid:'Bezettingsoverzicht',
+    cw_tab_search:'Beschikbaarheid zoeken',
     cw_arrival:'Aankomst', cw_departure:'Vertrek',
     cw_accom_type:'Accommodatietype', cw_persons:'Aantal personen',
-    cw_all_types:'Alle types', cw_pitch:'Kampeerplaats', cw_pitches:'Kampeerplaatsen',
+    cw_all_types:'Alle types', cw_pitch:'Kampeerplaats',
     cw_check_avail:'Beschikbaarheid controleren', cw_accom_label:'Accommodatie',
-    cw_avail:'Beschikbaar', cw_booked:'Bezet', cw_arrive:'Aankomstdag', cw_depart:'Vertrekdag',
     cw_modal_title:'Boeking aanvragen', cw_close:'Sluiten',
     cw_step1:'Stap 1 van 2 — Controleer uw keuze', cw_step2:'Stap 2 van 2 — Uw gegevens',
     cw_cancel:'Annuleren', cw_continue:'Doorgaan', cw_back:'Terug', cw_submit:'Boeking aanvragen',
@@ -3116,7 +3012,15 @@ const TRANSLATIONS = {
     cw_results_title:'{n} accommodatie{s} beschikbaar voor {nights} nacht{ns}',
     cw_per_night:'per nacht', cw_total:'Totaal',
     cw_np:'en', cw_persons_unit:'personen', cw_nights_unit:'nachten',
-    cw_type:'Type', cw_num_nights:'Aantal nachten', cw_total_price:'Totaalprijs', cw_request:'aanvragen'
+    cw_type:'Type', cw_num_nights:'Aantal nachten', cw_total_price:'Totaalprijs', cw_request:'aanvragen',
+    cw_busy:'Bezig…', cw_confirm_body:'Bedankt. Je aanvraag is ontvangen. Lisette bevestigt binnenkort per e-mail.', cw_err_generic:'Er is iets misgegaan. Probeer het opnieuw.',
+    cw_err_name:'Naam is verplicht', cw_err_email_req:'Vul een geldig e-mailadres in',
+    cw_widget_aria:'Reserveringswidget', cw_results_aria:'Zoekresultaten',
+    cw_ph_name:'Voor- en achternaam', cw_ph_email:'naam@voorbeeld.nl', cw_ph_notes:'Bijv. aankomsttijd, bijzondere wensen…',
+    per_night_slash:'/ nacht', open_maps:'Bekijk op de kaart →',
+    cf_sending:'Bezig…', cf_sent_btn:'Verzonden. Lisette neemt contact op', cf_sent_status:'Bedankt. Je hoort binnen een dag van Lisette.', cf_error:'Er ging iets mis. Probeer het opnieuw of mail rechtstreeks naar info@sanprocolo.com.', cf_thanks:'Bedankt!',
+    form_ac_pitch:'Kampeerplaats', form_ac_safari:'Safaritent', form_ac_tunnel:'Tunneltent', form_ac_lodge:'Lodgetent', form_ac_chalet:'Chalet',
+    test_c_nl:'Nederland', test_c_de:'Duitsland', test_c_uk:'Verenigd Koninkrijk'
   }
 };
 
@@ -3153,13 +3057,6 @@ function setLang(lang) {
   document.querySelectorAll('[data-lang]').forEach(a => {
     a.classList.toggle('active', a.getAttribute('data-lang') === lang);
   });
-
-  // Sync enquiry button text in availability widget (built dynamically)
-  const enquireBtn = document.getElementById('availEnquireBtn');
-  if (enquireBtn) {
-    const key = enquireBtn.getAttribute('data-i18n');
-    if (key && TRANSLATIONS[lang][key]) enquireBtn.innerHTML = TRANSLATIONS[lang][key];
-  }
 }
 
 document.addEventListener('DOMContentLoaded', () => { setLang(currentLang); });
@@ -3171,18 +3068,18 @@ document.addEventListener('DOMContentLoaded', () => { setLang(currentLang); });
 // ── Camping Widget ─────────────────────────────────────────────────────────────
 
 const CW_UNITS = [
-  { id: 'u1',  type: 'pitch',  name: 'Pitch 1',       capacity: 4, pricePerNight: 22,  minStay: 1 },
-  { id: 'u2',  type: 'pitch',  name: 'Pitch 2',       capacity: 6, pricePerNight: 25,  minStay: 1 },
-  { id: 'u3',  type: 'pitch',  name: 'Pitch 3',       capacity: 4, pricePerNight: 22,  minStay: 1 },
-  { id: 'u4',  type: 'pitch',  name: 'Pitch 4',       capacity: 5, pricePerNight: 22,  minStay: 1 },
-  { id: 'u5',  type: 'chalet', name: 'Chalet A',      capacity: 6, pricePerNight: 89,  minStay: 3 },
-  { id: 'u6',  type: 'chalet', name: 'Chalet B',      capacity: 4, pricePerNight: 79,  minStay: 3 },
-  { id: 'u7',  type: 'chalet', name: 'Chalet C',      capacity: 8, pricePerNight: 99,  minStay: 3 },
-  { id: 'u8',  type: 'safari', name: 'Safari 1',      capacity: 2, pricePerNight: 59,  minStay: 2 },
-  { id: 'u9',  type: 'safari', name: 'Safari 2',      capacity: 2, pricePerNight: 59,  minStay: 2 },
-  { id: 'u10', type: 'safari', name: 'Safari 3',      capacity: 4, pricePerNight: 69,  minStay: 2 },
-  { id: 'u11', type: 'tunnel', name: 'Tunnel Tent 1', capacity: 2, pricePerNight: 70,  minStay: 2 },
-  { id: 'u12', type: 'tunnel', name: 'Tunnel Tent 2', capacity: 2, pricePerNight: 70,  minStay: 2 },
+  { id: 'u1',  type: 'pitch',  name: 'Pitch 1',       capacity: 4, pricePerNight: 18,  minStay: 1 },
+  { id: 'u2',  type: 'pitch',  name: 'Pitch 2',       capacity: 6, pricePerNight: 22,  minStay: 1 },
+  { id: 'u3',  type: 'pitch',  name: 'Pitch 3',       capacity: 4, pricePerNight: 18,  minStay: 1 },
+  { id: 'u4',  type: 'pitch',  name: 'Pitch 4',       capacity: 5, pricePerNight: 20,  minStay: 1 },
+  { id: 'u5',  type: 'chalet', name: 'Chalet A',      capacity: 6, pricePerNight: 95,  minStay: 3 },
+  { id: 'u6',  type: 'chalet', name: 'Chalet B',      capacity: 4, pricePerNight: 99,  minStay: 3 },
+  { id: 'u7',  type: 'chalet', name: 'Chalet C',      capacity: 8, pricePerNight: 110, minStay: 3 },
+  { id: 'u8',  type: 'safari', name: 'Safari 1',      capacity: 4, pricePerNight: 70,  minStay: 2 },
+  { id: 'u9',  type: 'safari', name: 'Safari 2',      capacity: 4, pricePerNight: 70,  minStay: 2 },
+  { id: 'u10', type: 'safari', name: 'Safari 3',      capacity: 4, pricePerNight: 80,  minStay: 2 },
+  { id: 'u11', type: 'tunnel', name: 'Tunnel Tent 1', capacity: 2, pricePerNight: 75,  minStay: 2 },
+  { id: 'u12', type: 'tunnel', name: 'Tunnel Tent 2', capacity: 2, pricePerNight: 75,  minStay: 2 },
   { id: 'u13', type: 'lodge',  name: 'Lodge Tent',    capacity: 4, pricePerNight: 100, minStay: 3 },
 ];
 
@@ -3212,7 +3109,6 @@ const _cwBookings = [...CW_SEED];
 
 function _cwOvlp(b, ci, co) { return b.checkIn < co && b.checkOut > ci; }
 function cwGetUnits(type) { return type ? CW_UNITS.filter(u => u.type === type) : [...CW_UNITS]; }
-function cwGetBookings(from, to) { return _cwBookings.filter(b => b.status === 'confirmed' && _cwOvlp(b, from, to)); }
 function cwGetAvail(ci, co, type) {
   const busy = new Set(_cwBookings.filter(b => b.status === 'confirmed' && _cwOvlp(b, ci, co)).map(b => b.unitId));
   return CW_UNITS.filter(u => !busy.has(u.id) && (!type || u.type === type));
@@ -3227,12 +3123,10 @@ function cwT(k, vars) {
 function cwEsc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
+function cwPrice(n) { const s = Number(n).toFixed(2); return currentLang === 'nl' ? s.replace('.', ',') : s; }
 function cwRefreshLang(lang) {
-  // Re-render grid if visible so month names translate
-  const gridPanel = document.getElementById('panel-grid');
-  if (gridPanel && gridPanel.classList.contains('is-active')) cwRenderGrid();
   // Update select option text
-  const selects = ['s-type','g-type'];
+  const selects = ['s-type'];
   selects.forEach(id => {
     const sel = document.getElementById(id);
     if (!sel) return;
@@ -3244,7 +3138,6 @@ function cwRefreshLang(lang) {
 }
 
 const cwSt = {
-  gridYear: null, gridMonth: null, gridTypeFilter: '',
   bk: { unitId: null, unitName: null, unitType: null, checkIn: null, checkOut: null,
         nights: 0, pricePerNight: 0, total: 0, minStay: 1 },
 };
@@ -3265,7 +3158,6 @@ document.querySelectorAll('.cw-tab').forEach(tab => {
     document.querySelectorAll('.cw-panel').forEach(p => p.classList.remove('is-active'));
     tab.setAttribute('aria-selected','true');
     document.getElementById(tab.getAttribute('aria-controls')).classList.add('is-active');
-    if (tab.id === 'tab-grid') cwRenderGrid();
   });
 });
 
@@ -3337,112 +3229,11 @@ function cwRenderResults(units, ci, co, nights) {
       '</div>'+
       '<div class="cw-unit-card__price">\u20ac'+unit.pricePerNight+
         '<small>'+cwT('cw_per_night')+'</small>'+
-        '<span class="total-price">'+cwT('cw_total')+' \u20ac'+(nights*unit.pricePerNight).toFixed(2)+'</span>'+
+        '<span class="total-price">'+cwT('cw_total')+' \u20ac'+cwPrice(nights*unit.pricePerNight)+'</span>'+
       '</div>';
     card.addEventListener('click', () => cwOpenModal(unit, ci, co, nights));
     card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); cwOpenModal(unit,ci,co,nights); } });
     res.appendChild(card);
-  });
-}
-
-// Grid
-const cwNow = new Date();
-cwSt.gridYear = cwNow.getFullYear(); cwSt.gridMonth = cwNow.getMonth();
-const CW_MONTHS = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
-const CW_DAYS   = ['Z','M','D','W','D','V','Z'];
-
-$cw('grid-prev').addEventListener('click', () => {
-  if (cwSt.gridMonth===0) { cwSt.gridMonth=11; cwSt.gridYear--; } else cwSt.gridMonth--;
-  cwRenderGrid();
-});
-$cw('grid-next').addEventListener('click', () => {
-  if (cwSt.gridMonth===11) { cwSt.gridMonth=0; cwSt.gridYear++; } else cwSt.gridMonth++;
-  cwRenderGrid();
-});
-$cw('g-type').addEventListener('change', e => { cwSt.gridTypeFilter = e.target.value; cwRenderGrid(); });
-
-$cw('grid-tbody').addEventListener('click', e => {
-  const cell = e.target.closest('td[data-date][data-unit]');
-  if (!cell) return;
-  if (['cw-cell--booked','cw-cell--arrive','cw-cell--depart'].some(c => cell.classList.contains(c))) return;
-  if (cell.dataset.date < cwTodayISO) return;
-  const unit = CW_UNITS.find(u => u.id === cell.dataset.unit);
-  if (!unit) return;
-  const co = new Date(cell.dataset.date); co.setDate(co.getDate() + unit.minStay);
-  document.querySelector('[aria-controls="panel-search"]').click();
-  $cw('s-type').value = unit.type;
-  $cw('s-checkin').value = cell.dataset.date;
-  $cw('s-checkout').value = cwISO(co);
-  $cw('s-checkout').min = cwISO(co);
-  $cw('search-form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));
-});
-
-function cwRenderGrid() {
-  const yr = cwSt.gridYear, mo = cwSt.gridMonth;
-  const days = new Date(yr, mo+1, 0).getDate();
-  const today = cwISO(new Date());
-  $cw('grid-month-label').textContent = CW_MONTHS[mo]+' '+yr;
-
-  const from = yr+'-'+String(mo+1).padStart(2,'0')+'-01';
-  const to   = yr+'-'+String(mo+1).padStart(2,'0')+'-'+String(days).padStart(2,'0');
-  const bks  = cwGetBookings(from, to);
-
-  const cellMap = {};
-  bks.forEach(b => {
-    for (let d = new Date(b.checkIn); d < new Date(b.checkOut); d.setDate(d.getDate()+1)) {
-      const k = b.unitId+'_'+cwISO(d), nx = cwISO(new Date(d.getTime()+86400000));
-      cellMap[k] = cwISO(d)===b.checkIn ? 'arrive' : nx===b.checkOut ? 'depart' : 'booked';
-    }
-    const dk = b.unitId+'_'+b.checkOut;
-    if (!cellMap[dk]) cellMap[dk] = 'free';
-  });
-
-  const units = cwGetUnits(cwSt.gridTypeFilter || undefined);
-  const dayArr = Array.from({length:days},(_,i)=>i+1);
-
-  const thead = $cw('grid-thead');
-  thead.innerHTML = '';
-  const hr = document.createElement('tr');
-  const th0 = document.createElement('th'); th0.scope='col'; th0.textContent='Eenheid'; hr.appendChild(th0);
-  dayArr.forEach(d => {
-    const th = document.createElement('th'); th.scope='col';
-    const iso = yr+'-'+String(mo+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-    const dow = new Date(iso).getDay();
-    th.innerHTML = '<span style="display:block">'+d+'</span><span style="font-weight:400;opacity:.55">'+CW_DAYS[dow]+'</span>';
-    if (dow===0||dow===6) th.classList.add('cw-weekend');
-    if (iso===today) th.classList.add('cw-today');
-    hr.appendChild(th);
-  });
-  thead.appendChild(hr);
-
-  const tbody = $cw('grid-tbody');
-  tbody.innerHTML = '';
-  const typeLabels = {pitch:'Kampeerplaatsen',chalet:'Chalets',safari:'Safari Tenten',tunnel:'Tunnel Tenten',lodge:'Lodge Tenten'};
-  let lastType = null;
-
-  units.forEach(unit => {
-    if (unit.type !== lastType) {
-      lastType = unit.type;
-      const sr = document.createElement('tr'); sr.className='cw-grid-section';
-      const std = document.createElement('td'); std.colSpan=days+1; std.textContent=typeLabels[unit.type]||unit.type;
-      sr.appendChild(std); tbody.appendChild(sr);
-    }
-    const row = document.createElement('tr');
-    const ntd = document.createElement('td'); ntd.textContent=unit.name; row.appendChild(ntd);
-    dayArr.forEach(d => {
-      const iso = yr+'-'+String(mo+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-      const status = cellMap[unit.id+'_'+iso] || 'free';
-      const dow = new Date(iso).getDay();
-      const td = document.createElement('td');
-      td.dataset.date=iso; td.dataset.unit=unit.id;
-      td.classList.add('cw-cell--'+status);
-      if (dow===0||dow===6) td.classList.add('cw-weekend');
-      if (iso===today) td.classList.add('cw-today');
-      if (iso<today) { td.style.opacity='.4'; td.style.cursor='default'; }
-      td.setAttribute('aria-label', unit.name+' '+cwFmt(iso)+': '+({free:cwT('cw_avail'),booked:cwT('cw_booked'),arrive:cwT('cw_arrive'),depart:cwT('cw_depart')}[status]||status));
-      row.appendChild(td);
-    });
-    tbody.appendChild(row);
   });
 }
 
@@ -3457,7 +3248,7 @@ function cwOpenModal(unit, ci, co, nights) {
     '<dt>'+cwT('cw_arrival')+'</dt><dd>'+cwFmt(ci)+'</dd>'+
     '<dt>'+cwT('cw_departure')+'</dt><dd>'+cwFmt(co)+'</dd>'+
     '<dt>'+cwT('cw_num_nights')+'</dt><dd>'+nights+'</dd>'+
-    '<div class="cw-modal-price"><span class="label">'+cwT('cw_total_price')+'</span><span class="total">\u20ac '+(nights*unit.pricePerNight).toFixed(2)+'</span></div>';
+    '<div class="cw-modal-price"><span class="label">'+cwT('cw_total_price')+'</span><span class="total">\u20ac '+cwPrice(nights*unit.pricePerNight)+'</span></div>';
   cwStep(1); cwModal.showModal(); $cw('modal-close').focus();
 }
 
@@ -3487,7 +3278,7 @@ $cw('booking-form').addEventListener('submit', async e => {
   e.preventDefault();
   if (!cwValidate()) return;
   const btn = $cw('modal-submit');
-  btn.disabled = true; btn.textContent = 'Bezig\u2026';
+  btn.disabled = true; btn.textContent = cwT('cw_busy');
   await new Promise(r => setTimeout(r, 400));
   try {
     const payload = {
@@ -3500,30 +3291,28 @@ $cw('booking-form').addEventListener('submit', async e => {
       guestPhone: $cw('f-phone').value.trim(),
       notes:      $cw('f-notes').value.trim(),
     };
-    try {
-      await fetch(APPS_SCRIPT_URL, {
-        method: 'POST', mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-    } catch (fe) { console.warn('Enquiry fetch (non-fatal):', fe); }
-    $cw('confirm-text').innerHTML = 'Thank you — your booking request has been received. Lisette will confirm by email shortly.';
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    $cw('confirm-text').innerHTML = cwT('cw_confirm_body');
     cwStep(3);
   } catch (err) {
-    cwBanner($cw('search-error'), 'Er is een fout opgetreden. Probeer het opnieuw.', 'error');
+    cwBanner($cw('search-error'), cwT('cw_err_generic'), 'error');
     cwCloseModal(); $cw('search-btn').focus();
   } finally {
-    btn.disabled = false; btn.textContent = 'Aanvraag versturen';
+    btn.disabled = false; btn.textContent = cwT('cw_submit');
   }
 });
 
 function cwValidate() {
   let ok = true;
   const name = $cw('f-name').value.trim(), email = $cw('f-email').value.trim();
-  if (!name) { $cw('e-name').textContent='Naam is verplicht'; $cw('f-name').classList.add('is-invalid'); ok=false; }
+  if (!name) { $cw('e-name').textContent=cwT('cw_err_name'); $cw('f-name').classList.add('is-invalid'); ok=false; }
   else { $cw('e-name').textContent=''; $cw('f-name').classList.remove('is-invalid'); }
   if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    $cw('e-email').textContent='Geldig e-mailadres is verplicht'; $cw('f-email').classList.add('is-invalid'); ok=false;
+    $cw('e-email').textContent=cwT('cw_err_email_req'); $cw('f-email').classList.add('is-invalid'); ok=false;
   } else { $cw('e-email').textContent=''; $cw('f-email').classList.remove('is-invalid'); }
   if (!ok) $cw('f-name').focus();
   return ok;
@@ -3587,7 +3376,7 @@ setTimeout(function(){
       "name": "Is het een fijne plek voor jonge kinderen?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Bij ons kamperen vooral gezinnen en de camping is helemaal op hen ingericht. Er is een zwembad met uitzicht, een speeltuin met schommels, een glijbaan en een grote trampoline, tafeltennis en een olijfgaard om in te ravotten. Kinderbedjes en kinderstoelen zijn er gewoon als je ze nodig hebt. Rustig, veilig en kindvriendelijk: de meeste kinderen hebben op de tweede ochtend alweer een vriendje gevonden."
+        "text": "Bij ons kamperen vooral gezinnen en de camping is helemaal op hen ingericht. Er is een zwembad met uitzicht, een speeltuin met schommels, een glijbaan en een grote trampoline, tafeltennis en een olijfgaard om in te ravotten. Kinderbedjes en kinderstoelen zijn er op aanvraag. Rustig, veilig en kindvriendelijk: de meeste kinderen hebben op de tweede ochtend alweer een vriendje gevonden."
       }
     },
     {
@@ -3603,7 +3392,7 @@ setTimeout(function(){
       "name": "Naar welke luchthaven vlieg je het best?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden is Pescara de andere makkelijke keuze, meestal met de meeste zomervluchten, en daar landen dan ook veel van onze Britse en Duitse gasten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje."
+        "text": "De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden ligt Pescara, meestal met de meeste zomervluchten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje."
       }
     },
     {
