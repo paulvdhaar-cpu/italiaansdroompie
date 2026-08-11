@@ -110,7 +110,7 @@ nav.scrolled .btn-nav { color: var(--peach); border-color: oklch(55% 0.099 40 / 
 nav.scrolled .nav-hamburger span { background: var(--cream); }
 
 .nav-logo {
-  position: fixed; top: 22px; left: 50%; transform: translateX(-50%);
+  position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
   display: flex; align-items: center;
   gap: 12px; text-decoration: none; z-index: 102;
 }
@@ -122,9 +122,6 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 }
 /* Light logo over the hero photo; dark logo once scrolled onto the beige page */
 .nav-logo-img { filter: drop-shadow(0 1px 6px rgba(20,12,6,0.25)); }
-.nav-logo-img--dark { display: none; }
-body.past-hero .nav-logo-img--light { display: none; }
-body.past-hero .nav-logo-img--dark { display: block; }
 
 .nav-logo-text {
   font-family: 'DM Serif Display', serif;
@@ -1868,8 +1865,7 @@ footer .footer-links a:hover   { color: var(--peach); }
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo" aria-label="Camping San Procolo">
-    <img class="nav-logo-img nav-logo-img--light" src="../logo-light.png" alt="Camping San Procolo — Le Marche, Italy">
-    <img class="nav-logo-img nav-logo-img--dark" src="../logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-img" src="../logo-light.png" alt="Camping San Procolo — Le Marche, Italy">
   </a>
   <ul class="nav-links">
     <li><a href="#about" data-i18n="nav_story">Ons Verhaal</a></li>
@@ -2547,10 +2543,7 @@ footer .footer-links a:hover   { color: var(--peach); }
 </footer>
 
 <script>
-  // Menu bar scrolls away with the page; the fixed logo swaps light→dark past the hero
-  window.addEventListener('scroll', () => {
-    document.body.classList.toggle('past-hero', window.scrollY > window.innerHeight * 0.75);
-  }, { passive: true });
+  // Nav (logo + menu) scrolls away with the page — only visible at the top
 
   // Hamburger menu
   const hamburger = document.getElementById('hamburger');
