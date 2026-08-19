@@ -1301,11 +1301,13 @@ a:focus-visible, button:focus-visible {
   .activities-header { grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
   .activities-bento {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 240px 200px 240px 200px 240px;
+    grid-auto-rows: minmax(200px, auto);
   }
   .act-morning { grid-column: span 2; }
   .act-pool    { grid-row: span 1; grid-column: span 1; }
   .act-beach   { grid-column: span 2; }
+  /* Let photo cards grow to fit their text on mobile (no clipped titles/copy) */
+  .act-card-photo { height: auto; min-height: 200px; }
 
   .gallery-grid {
     grid-template-columns: 1fr 1fr;
@@ -1363,10 +1365,11 @@ a:focus-visible, button:focus-visible {
   .hero-stat { border-right: none; padding-right: 0; margin-right: 0; border-bottom: 1px solid var(--border2); padding-bottom: 16px; }
   .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
 
-  .activities-bento { grid-template-columns: 1fr; grid-template-rows: auto; }
-  .act-morning, .act-pool, .act-beach { grid-column: span 1; grid-row: span 1; }
-  .act-card-photo { min-height: 220px; }
-  .act-card-text { min-height: 160px; }
+  /* Single clean stack — reset every card so no leftover span breaks the column */
+  .activities-bento { grid-template-columns: 1fr; grid-auto-rows: auto; grid-auto-flow: row; }
+  .activities-bento > .act-card { grid-column: auto; grid-row: auto; }
+  .act-card-photo { height: auto; min-height: 240px; }
+  .act-card-text  { height: auto; min-height: 160px; }
 
   .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 200px); }
   .gallery-cell:first-child { grid-column: span 1; }
@@ -1843,6 +1846,31 @@ footer .footer-links a:hover   { color: var(--peach); }
     /* Brand: no italics (DM fonts ship no italic — prevents faux-slant) */
     .mobile-menu a, .editorial-pause-text, .footer-note,
     em, i { font-style: normal; }
+
+  /* Floating "Check availability" button (FAB) — appears after the hero */
+  .fab{
+    position:fixed;z-index:60;
+    right:calc(18px + env(safe-area-inset-right));
+    bottom:calc(18px + env(safe-area-inset-bottom));
+    opacity:0;transform:translateY(16px);pointer-events:none;
+    transition:opacity .55s ease,transform .55s cubic-bezier(.2,.85,.25,1);
+  }
+  .fab.is-visible{opacity:1;transform:none;pointer-events:auto}
+  .fab .pcta{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--peach);color:oklch(96% 0.015 78);
+    font-family:'DM Sans',sans-serif;font-weight:700;font-size:10px;
+    letter-spacing:2.5px;text-transform:uppercase;
+    border:0;border-radius:2px;padding:15px 34px;min-height:44px;
+    cursor:pointer;white-space:nowrap;text-decoration:none;
+    box-shadow:0 4px 14px oklch(50% 0.05 60 / .16);
+    transition:background .25s,transform .25s,box-shadow .25s;
+  }
+  .fab .pcta:hover{background:var(--peach-h);transform:translateY(-1px);box-shadow:0 8px 24px oklch(72% 0.082 33 / .4)}
+  .fab .pcta svg{width:14px;height:14px}
+  .fab .pcta:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  @media (min-width:1024px){ .fab .pcta{padding:13px 28px;font-size:9px} }
+  @media (prefers-reduced-motion: reduce){ .fab,.fab .pcta{transition:none} }
 </style>
   <link rel="alternate" hreflang="nl" href="https://paulvdhaar-cpu.github.io/italiaansdroompie/">
   <link rel="alternate" hreflang="en" href="https://paulvdhaar-cpu.github.io/italiaansdroompie/en/">
@@ -1958,7 +1986,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="story-panel-inner">
           <div class="section-eyebrow" data-i18n="story_aft_ey">Afternoon</div>
           <h3 class="story-panel-title" data-i18n="story_aft_h">The pool is<br><em>the centre of things</em></h3>
-          <p class="story-panel-text" data-i18n="story_aft_p">Kids in the water, parents with a book or a beer, the valley stretching out below in the heat. Some people drive down to the beach. Some people don't.</p>
+          <p class="story-panel-text" data-i18n="story_aft_p">Kids in the water, parents with a book or a beer, the valley stretching out below in the heat. There is no lifeguard, so keep an eye out yourself. Some people drive down to the beach. Some people don't.</p>
         </div>
       </div>
       <div class="story-panel">
@@ -2015,7 +2043,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="act-card-label">
           <div class="act-card-eyebrow" data-i18n="act_pool_ey">All summer</div>
           <div class="act-card-title" data-i18n="act_pool_h">The pool</div>
-          <p class="act-card-sub" data-i18n="act_pool_p">Kids in the water, parents with a book on the edge, the valley below hazy in the afternoon heat. There is no lifeguard, so young children are yours to keep an eye on.</p>
+          <p class="act-card-sub" data-i18n="act_pool_p">Kids in the water, parents with a book on the edge, the valley below hazy in the afternoon heat. There is no lifeguard, so keep an eye out yourself.</p>
         </div>
       </div>
     </div>
@@ -2368,7 +2396,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="amenity-list reveal" style="border-top: 1px solid var(--border2); margin-top: 16px;">
     <div class="amenity-row">
       <div class="amenity-k" data-i18n="fac_terrace_name">Terrace &amp; Bar</div>
-      <div class="amenity-v" data-i18n="fac_terrace_desc">Fresh bread and cappuccino every morning. Twice a week in high season, an Italian dinner on the long table. No reservations needed.</div>
+      <div class="amenity-v" data-i18n="fac_terrace_desc">Cornetti still warm, espresso under the olive trees. It becomes a ritual by day two and an addiction by day four. Twice a week in high season, an Italian dinner on the long table. No reservations needed.</div>
     </div>
     <div class="amenity-row">
       <div class="amenity-k" data-i18n="fac_pool_k">Swimming Pool</div>
@@ -2655,6 +2683,7 @@ const TRANSLATIONS = {
     nav_story:'Our Story', nav_stay:'Where to Stay', nav_things:'Things to Do',
     nav_area:'The Area', nav_facilities:'Facilities',
     nav_book_now:'Book Now', nav_book_stay:'Book Your Stay',
+    fab_cta:'Check availability', fab_aria:'Go to availability',
     // Hero
     h1_seo:' Camping San Procolo, family glamping and camping in Le Marche, Italy',
     hero_tagline:'A small family campsite between the mountains and the sea',
@@ -2682,7 +2711,7 @@ const TRANSLATIONS = {
     story_morn_p:'Espresso under the olive trees. Nobody is in a hurry and by the second day, neither are you.',
     story_aft_ey:'Afternoon',
     story_aft_h:'The pool is<br><em>the centre of things</em>',
-    story_aft_p:'Kids in the water, parents with a book or a beer, the valley stretching out below in the heat. Some people drive down to the beach. Some people don\'t.',
+    story_aft_p:'Kids in the water, parents with a book or a beer, the valley stretching out below in the heat. There is no lifeguard, so keep an eye out yourself. Some people drive down to the beach. Some people don\'t.',
     story_eve_ey:'Evening',
     story_eve_h:'The long table,<br><em>twice a week</em>',
     story_eve_p:'Local food, local wine, neighbours and guests all mixed together. The kids end up running around in the dark and you end up staying later than you meant to.',
@@ -2693,7 +2722,7 @@ const TRANSLATIONS = {
     act_bread_ey:'Every morning', act_bread_h:'Fresh bread on the terrace',
     act_bread_p:'Cornetti still warm, espresso under the olive trees. It becomes a ritual by day two and an addiction by day four.',
     act_pool_ey:'All summer', act_pool_h:'The pool',
-    act_pool_p:'Kids in the water, parents with a book on the edge, the valley below hazy in the afternoon heat. There is no lifeguard, so young children are yours to keep an eye on.',
+    act_pool_p:'Kids in the water, parents with a book on the edge, the valley below hazy in the afternoon heat. There is no lifeguard, so keep an eye out yourself.',
     act_olive_ey:'In season', act_olive_h:'Olive harvest',
     act_olive_p:'If you are here in September, you are welcome to join — a morning in the grove, and the long lunch that always seems to follow.',
     act_table_ey:'Twice a week', act_table_h:'The long table',
@@ -2765,7 +2794,7 @@ const TRANSLATIONS = {
     // Facilities
     fac_eyebrow:'On Site', fac_title:'On the campsite',
     fac_terrace_name:'Terrace &amp; Bar',
-    fac_terrace_desc:'Fresh bread and cappuccino every morning. Twice a week in high season, an Italian dinner on the long table. No reservations needed.',
+    fac_terrace_desc:'Cornetti still warm, espresso under the olive trees. It becomes a ritual by day two and an addiction by day four. Twice a week in high season, an Italian dinner on the long table. No reservations needed.',
     fac_pool_k:'Swimming Pool',
     fac_pool_v:'Five by ten metres, open nine to eight, looking out over the valley. Where the kids spend most of their day and where you\'ll spend most of yours.',
     fac_kids_k:'Kids Playground',
@@ -2849,6 +2878,7 @@ const TRANSLATIONS = {
     nav_story:'Ons Verhaal', nav_stay:'Verblijf', nav_things:'Activiteiten',
     nav_area:'De Omgeving', nav_facilities:'Faciliteiten',
     nav_book_now:'Boek Nu', nav_book_stay:'Boek je Verblijf',
+    fab_cta:'Bekijk beschikbaarheid', fab_aria:'Ga naar beschikbaarheid',
     // Hero
     h1_seo:' Camping San Procolo, familiecamping en glamping in Le Marche, Italië',
     hero_tagline:'Een kleine familiecamping tussen de bergen en de zee',
@@ -2876,7 +2906,7 @@ const TRANSLATIONS = {
     story_morn_p:'Espresso onder de olijfbomen. Niemand heeft haast, en na een dag jij ook niet meer.',
     story_aft_ey:'\'s Middags',
     story_aft_h:'Het zwembad<br><em>is het middelpunt</em>',
-    story_aft_p:'Kinderen in het water, ouders met een boek of een koud biertje, de vallei die zich beneden uitstrekt in de hitte. Sommige gasten pakken de auto en zijn in twintig minuten op het strand bij Porto San Giorgio. Anderen komen de camping niet af.',
+    story_aft_p:'Kinderen in het water, ouders met een boek of een koud biertje, de vallei die zich beneden uitstrekt in de hitte. Er is geen badmeester, dus houd zelf even een oogje in het zeil. Sommige gasten pakken de auto en zijn in twintig minuten op het strand bij Porto San Giorgio. Anderen komen de camping niet af.',
     story_eve_ey:'\'s Avonds',
     story_eve_h:'De lange tafel,<br><em>twee keer per week</em>',
     story_eve_p:'Lokaal eten, wijn van Centanni, buren en gasten door elkaar. De kinderen spelen buiten in het donker, en niemand gaat eerder weg.',
@@ -2887,7 +2917,7 @@ const TRANSLATIONS = {
     act_bread_ey:'Elke ochtend', act_bread_h:'Vers brood op het terras',
     act_bread_p:'Cornetti nog warm, espresso onder de olijfbomen. Binnen een paar dagen een gewoonte die je niet meer kwijt wilt.',
     act_pool_ey:'De hele zomer', act_pool_h:'Het zwembad',
-    act_pool_p:'Kinderen in het water, ouders met een boek aan de rand, de vallei beneden wazig in de middaghitte. Er is geen badmeester, dus houd je kinderen zelf in de gaten.',
+    act_pool_p:'Kinderen in het water, ouders met een boek aan de rand, de vallei beneden wazig in de middaghitte. Er is geen badmeester, dus houd zelf even een oogje in het zeil.',
     act_olive_ey:'In het seizoen', act_olive_h:'Olijvenoogst',
     act_olive_p:'Ben je er in september? Dan ben je welkom om mee te oogsten — een ochtend in de gaard, en de lange lunch die er altijd op volgt.',
     act_table_ey:'Twee keer per week', act_table_h:'De lange tafel',
@@ -2959,7 +2989,7 @@ const TRANSLATIONS = {
     // Facilities
     fac_eyebrow:'Op de camping', fac_title:'Op de camping',
     fac_terrace_name:'Terras en bar',
-    fac_terrace_desc:'Elke ochtend vers brood en cappuccino. Twee keer per week in het hoogseizoen een gezamenlijk diner aan de lange tafel, voor gasten en buren samen. Geen reservering nodig.',
+    fac_terrace_desc:'Cornetti nog warm, espresso onder de olijfbomen. Binnen een paar dagen een gewoonte die je niet meer kwijt wilt. Twee keer per week in het hoogseizoen een gezamenlijk diner aan de lange tafel, voor gasten en buren samen. Geen reservering nodig.',
     fac_pool_k:'Zwembad',
     fac_pool_v:'Vijf bij tien meter, open van negen tot acht, met uitzicht over de vallei.',
     fac_kids_k:'Speeltuin',
@@ -3420,6 +3450,35 @@ setTimeout(function(){
     }
   ]
 }
+</script>
+<!-- Floating "Check availability" button -->
+<div class="fab" id="fab">
+  <button class="pcta" type="button" id="fab-cta" data-i18n-aria-label="fab_aria" aria-label="Go to availability">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="4.5" width="18" height="16" rx="1.5"></rect><path d="M3 9h18M8 2.5v4M16 2.5v4"></path>
+    </svg>
+    <span data-i18n="fab_cta">Check availability</span>
+  </button>
+</div>
+<script>
+(function(){
+  var fab=document.getElementById('fab'), cta=document.getElementById('fab-cta');
+  if(!fab||!cta) return;
+  function update(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    if(y>window.innerHeight*0.85) fab.classList.add('is-visible');
+    else fab.classList.remove('is-visible');
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  update();
+  cta.addEventListener('click',function(){
+    var el=document.getElementById('availability'); if(!el) return;
+    var top=el.getBoundingClientRect().top+(window.pageYOffset||0)-10;
+    var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    try{ window.scrollTo({top:top,behavior:rm?'auto':'smooth'}); }catch(e){ window.scrollTo(0,top); }
+  });
+})();
 </script>
 </body>
 </html>
