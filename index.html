@@ -306,11 +306,14 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 .hero-title em { font-style: normal; color: var(--gold); }
 
 .hero-sub {
-  margin-top: 28px;
-  font-size: 15px; font-weight: 400;
-  color: rgba(245,234,214,0.52); max-width: 400px; line-height: 1.85;
+  margin-top: 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: 300; letter-spacing: 0;
+  color: oklch(94% 0.010 90 / 0.78);
+  max-width: 52ch; line-height: 1.65;
   opacity: 0; transform: translateY(20px);
-  animation: fadeUp 0.7s ease 0.5s forwards;
+  animation: fadeUp 0.7s ease 0.55s forwards;
 }
 
 .hero-cta {
@@ -470,7 +473,8 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 
 .about {
   display: grid; grid-template-columns: 64% 36%;
-  gap: 72px; align-items: center;
+  gap: 72px; align-items: start;
+  grid-auto-flow: dense;
   max-width: 1280px; margin: 0 auto;
 }
 .about-content { grid-column: 1; }
@@ -484,8 +488,8 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 .about-drawing { display: block; width: 100%; height: auto; }
 .about-drawing-cap {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.35rem; font-weight: 400;
-  color: var(--cream); line-height: 1;
+  font-size: 1.2rem; font-weight: 400;
+  color: var(--gold); line-height: 1;
   margin-top: 8px;
 }
 
@@ -753,6 +757,7 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   overflow: hidden;
   border: 1px solid var(--border2);
   transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+  display: flex; flex-direction: column;
 }
 
 .stay-card:hover {
@@ -787,7 +792,7 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   padding: 5px 12px; border-radius: 2px;
 }
 
-.stay-card-body { padding: 28px; }
+.stay-card-body { padding: 28px; display: flex; flex-direction: column; flex: 1; }
 
 .stay-card-title {
   font-family: 'DM Serif Display', serif;
@@ -804,6 +809,7 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   display: flex; align-items: center;
   justify-content: space-between;
   padding-top: 16px; border-top: 1px solid var(--border2);
+  margin-top: auto;
 }
 
 .stay-price { display: flex; flex-direction: column; gap: 1px; }
@@ -1437,7 +1443,7 @@ a:focus-visible, button:focus-visible {
 
 /* Hero: light text on dark overlay */
 .hero-title      { color: var(--light); }
-.hero-sub        { color: oklch(96% 0.008 90 / 0.82); }
+.hero-sub        { color: oklch(94% 0.010 90 / 0.78); }
 .hero-stat-value { color: var(--light); }
 .hero-urgency    { color: oklch(94% 0.010 90 / 0.55); }
 
@@ -2027,8 +2033,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="hero-content">
     <h1 class="hero-title">San<br>Procolo<span class="visually-hidden" data-i18n="h1_seo"> Camping San Procolo, familiecamping en glamping in Le Marche, Italië</span></h1>
     <p class="hero-slogan">Il dolce far niente</p>
-    <p class="hero-tagline"><em data-i18n="hero_tagline">Een kleine familiecamping tussen de bergen en de zee</em></p>
-    <p class="hero-sub" data-i18n="hero_sub">Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.</p>
+    <p class="hero-sub" data-i18n="hero_sub">Een kleine familiecamping tussen de bergen en de zee. Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.</p>
     <div class="hero-cta">
       <a href="#availability" class="btn-primary" data-i18n="nav_book_stay">Boek je Verblijf</a>
       <a href="#about" class="btn-outline" data-i18n="hero_btn_story">Ons Verhaal</a>
@@ -2105,7 +2110,6 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="about">
     <div class="about-image reveal">
       <img class="about-drawing" src="gezin.png" alt="David, Lisette en hun gezin" loading="lazy">
-      <div class="about-drawing-cap">David &amp; Lisette</div>
     </div>
     <div class="about-content">
       <div>
@@ -2896,8 +2900,9 @@ const TRANSLATIONS = {
     // Hero
     h1_seo:' Camping San Procolo, family glamping and camping in Le Marche, Italy',
     hero_tagline:'A small family campsite between the mountains and the sea',
+    // (merged into hero_sub — element removed from hero)
     hero_meaning:'the sweetness of doing nothing',
-    hero_sub:'Eighteen pitches, a few of them glamping tents, a pool with a view across the valley. Twenty minutes from the Adriatic, an hour from the snowy peaks of the Sibillini.',
+    hero_sub:'A small family campsite between the mountains and the sea. Eighteen pitches, a few of them glamping tents, a pool with a view across the valley. Twenty minutes from the Adriatic, an hour from the snowy peaks of the Sibillini.',
     hero_btn_story:'Read Our Story',
     hero_urgency:'Open 22 May to 2 October — July and August fill up early',
     stat_sea:'Above Sea Level', stat_beach:'To the Beach', stat_est:'Open Since',
@@ -3109,7 +3114,7 @@ const TRANSLATIONS = {
     h1_seo:' Camping San Procolo, familiecamping en glamping in Le Marche, Italië',
     hero_tagline:'Een kleine familiecamping tussen de bergen en de zee',
     hero_meaning:'de zoetheid van het niksdoen',
-    hero_sub:'Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.',
+    hero_sub:'Een kleine familiecamping tussen de bergen en de zee. Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.',
     hero_btn_story:'Ons Verhaal',
     hero_urgency:'Open 22 mei tot 2 oktober — Juli en augustus zijn snel vol',
     stat_sea:'Boven Zeeniveau', stat_beach:'Naar het Strand', stat_est:'Open sinds',
