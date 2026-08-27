@@ -469,16 +469,24 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 #about { padding: 100px 48px; background: var(--bg2); }
 
 .about {
-  display: grid; grid-template-columns: 36% 64%;
+  display: grid; grid-template-columns: 64% 36%;
   gap: 72px; align-items: center;
   max-width: 1280px; margin: 0 auto;
 }
+.about-content { grid-column: 1; }
+.about-image   { grid-column: 2; }
 
 .about-image {
   position: relative;
-  aspect-ratio: 4/5;
-  max-width: 400px;
-  border-radius: 2px; overflow: visible;
+  max-width: 460px;
+  text-align: center;
+}
+.about-drawing { display: block; width: 100%; height: auto; }
+.about-drawing-cap {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.35rem; font-weight: 400;
+  color: var(--cream); line-height: 1;
+  margin-top: 8px;
 }
 
 .about-image-inner {
@@ -1285,7 +1293,8 @@ a:focus-visible, button:focus-visible {
 
   #about { padding: 64px 24px; }
   .about { grid-template-columns: 1fr; gap: 48px; }
-  .about-image { aspect-ratio: 4/5; }
+  .about-content, .about-image { grid-column: auto; }
+  .about-image { max-width: 360px; margin: 0 auto; }
   .about-badge { left: 16px; bottom: -16px; }
   .about-image-inner .img-bg { background-position: center; }
 
@@ -1419,7 +1428,7 @@ a:focus-visible, button:focus-visible {
   font-size: clamp(14px, 1.5vw, 16px);
   font-weight: 300; font-style: normal;
   color: oklch(94% 0.010 90 / 0.72);
-  margin-top: 24px; letter-spacing: 0;
+  margin-top: 15px; letter-spacing: 0;
   max-width: 30ch; line-height: 1.55;
   opacity: 0; transform: translateY(20px);
   animation: fadeUp 0.7s ease 0.72s forwards;
@@ -2018,7 +2027,6 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="hero-content">
     <h1 class="hero-title">San<br>Procolo<span class="visually-hidden" data-i18n="h1_seo"> Camping San Procolo, family glamping and camping in Le Marche, Italy</span></h1>
     <p class="hero-slogan">Il dolce far niente</p>
-    <p class="hero-meaning" data-i18n="hero_meaning">the sweetness of doing nothing</p>
     <p class="hero-tagline"><em data-i18n="hero_tagline">A small family campsite between the mountains and the sea</em></p>
     <p class="hero-sub" data-i18n="hero_sub">Eighteen pitches, a few of them glamping tents, a pool with a view across the valley. Twenty minutes from the Adriatic, an hour from the snowy peaks of the Sibillini.</p>
     <div class="hero-cta">
@@ -2096,12 +2104,8 @@ footer .footer-links a:hover   { color: var(--peach); }
 <section id="about">
   <div class="about">
     <div class="about-image reveal">
-      <div class="about-image-inner">
-        <div class="img-bg" style="background-image: url('../david-lisette.jpg'); background-position: center top;"></div>
-      </div>
-      <div class="about-badge">
-        <div class="about-badge-value">David &amp; Lisette</div>
-      </div>
+      <img class="about-drawing" src="../gezin.png" alt="David, Lisette en hun gezin" loading="lazy">
+      <div class="about-drawing-cap">David &amp; Lisette</div>
     </div>
     <div class="about-content">
       <div>
