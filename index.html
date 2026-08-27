@@ -25,7 +25,7 @@
   "@context": "https://schema.org",
   "@type": "Campground",
   "name": "Camping San Procolo",
-  "description": "Family-run glamping and camping site in the hills of Le Marche, Italy. Safari tents, lodge tents, chalets and pitches with pool, olive garden and Adriatic Sea 20km away.",
+  "description": "Family-run glamping and camping in the hills of Le Marche, Italy. Camping pitches, glamping tents, tunnel tents, safari tents and a chalet, with a pool, olive garden and the Adriatic 20 minutes away.",
   "url": "https://paulvdhaar-cpu.github.io/italiaansdroompie/",
   "email": "info@sanprocolo.com",
   "telephone": "+31638073908",
@@ -36,7 +36,7 @@
     "addressCountry": "IT"
   },
   "geo": { "@type": "GeoCoordinates", "latitude": 43.1, "longitude": 13.5 },
-  "priceRange": "€18 - €110",
+  "priceRange": "€16 - €190",
   "image": "https://paulvdhaar-cpu.github.io/italiaansdroompie/poster-sibillini.jpg",
   "amenityFeature": [
     {"@type": "LocationFeatureSpecification", "name": "Swimming Pool", "value": true},
@@ -44,7 +44,8 @@
     {"@type": "LocationFeatureSpecification", "name": "Playground", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Glamping Tents", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Safari Tent", "value": true},
-    {"@type": "LocationFeatureSpecification", "name": "Lodge Tent", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Tunnel Tent", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Chalet", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Organic Wine", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Olive Garden", "value": true}
   ]
@@ -247,7 +248,7 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   min-height: 100dvh;
   display: flex; flex-direction: column;
   justify-content: flex-end;
-  padding: 0 0 96px;
+  padding: 132px 0 80px;
   position: relative; overflow: hidden;
 }
 
@@ -294,8 +295,8 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 
 .hero-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(4rem, 10vw, 10.5rem);
-  font-weight: 300; line-height: 0.92;
+  font-size: clamp(3.4rem, 8.4vw, 8.6rem);
+  font-weight: 300; line-height: 0.94;
   color: var(--cream); letter-spacing: -0.02em;
   max-width: 900px;
   opacity: 0; transform: translateY(28px);
@@ -365,7 +366,6 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   display: inline-block; width: 5px; height: 5px;
   background: var(--gold); border-radius: 50%; flex-shrink: 0;
 }
-
 
 .hero-stats {
   margin-top: 52px;
@@ -632,7 +632,6 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   width: 4px; height: 4px; border-radius: 50%;
   background: var(--gold); flex-shrink: 0;
 }
-
 
 
 /* ── ACTIVITIES ── */
@@ -1104,7 +1103,6 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   color: var(--muted); line-height: 1.65;
 }
 
-
 /* ── CONTACT ── */
 #contact { padding: 100px 48px; background: var(--bg2); }
 
@@ -1397,26 +1395,36 @@ a:focus-visible, button:focus-visible {
    ═══════════════════════════════════════════════════════ */
 
 /* Hero tagline */
-.hero-tagline {
+.hero-slogan {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
-  font-weight: 300; font-style: normal;
-  color: oklch(94% 0.010 90 / 0.90);
-  margin-top: 8px; letter-spacing: 0.01em;
+  font-weight: 400; text-transform: none;
+  font-size: clamp(1.6rem, 3.6vw, 2.35rem);
+  line-height: 1.1; letter-spacing: 0.005em;
+  color: oklch(78% 0.075 62);
+  margin: 20px 0 0;
   opacity: 0; transform: translateY(20px);
-  animation: fadeUp 0.7s ease 0.50s forwards;
+  animation: fadeUp 0.7s ease 0.55s forwards;
+}
+.hero-meaning {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: clamp(10px, 1.2vw, 11px);
+  letter-spacing: 3px; text-transform: uppercase;
+  color: oklch(92% 0.010 90 / 0.60);
+  margin: 11px 0 0;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.7s ease 0.64s forwards;
+}
+.hero-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: 300; font-style: normal;
+  color: oklch(94% 0.010 90 / 0.72);
+  margin-top: 24px; letter-spacing: 0;
+  max-width: 30ch; line-height: 1.55;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.7s ease 0.72s forwards;
 }
 .hero-tagline em { font-style: normal; }
-
-.hero-slogan {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(10px, 1.3vw, 12px);
-  font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase;
-  color: oklch(85% 0.055 66);
-  margin: 14px 0 0;
-  opacity: 0; transform: translateY(20px);
-  animation: fadeUp 0.7s ease 0.62s forwards;
-}
 
 /* Hero: light text on dark overlay */
 .hero-title      { color: var(--light); }
@@ -1486,7 +1494,6 @@ footer .footer-links a:hover   { color: var(--peach); }
 /* Story img overlay */
 .story-img-overlay { background: linear-gradient(to right, transparent 50%, var(--bg)); }
 
-
 /* Persons picker CSS */
 .avail-persons-row {
   display: flex; align-items: center; gap: 10px;
@@ -1531,7 +1538,6 @@ footer .footer-links a:hover   { color: var(--peach); }
   color: var(--gold); line-height: 1;
   flex-shrink: 0; margin-top: -2px;
 }
-
 
     /* ====================================================
        CAMPING WIDGET — cw-widget styles
@@ -1713,7 +1719,6 @@ footer .footer-links a:hover   { color: var(--peach); }
       border-radius: var(--radius-sm); margin-bottom: 8px;
     }
     @keyframes cw-shimmer { to { background-position: -200% 0; } }
-
 
     dialog#booking-modal {
       border: 1px solid oklch(80% 0.034 66); border-radius: 2px;
@@ -1901,11 +1906,13 @@ footer .footer-links a:hover   { color: var(--peach); }
   .carousel-dot.active{background:#fff;width:16px;border-radius:3px}
   @media (hover:none){.carousel-arrow{opacity:.9}}
   @media (prefers-reduced-motion:reduce){.carousel-track{transition:none}}
+  .stay-card-cap{display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.3px;color:var(--gold);margin:2px 0 12px}
+  .stay-card-cap svg{flex:0 0 auto;opacity:.85}
 
   /* Plattegrond */
   .plattegrond-wrap{max-width:1280px;margin:64px auto 0;text-align:center}
   .plattegrond-title{font-family:'DM Serif Display',serif;font-weight:300;font-size:1.6rem;color:var(--cream);margin:6px 0 24px}
-  .plattegrond-btn{display:block;width:100%;padding:0;border:1px solid var(--border2);border-radius:4px;overflow:hidden;background:var(--bg3);cursor:zoom-in;position:relative;line-height:0}
+  .plattegrond-btn{display:block;width:100%;max-width:640px;margin:0 auto;padding:0;border:0;border-radius:4px;overflow:hidden;background:transparent;cursor:zoom-in;position:relative;line-height:0}
   .plattegrond-btn img{display:block;width:100%;height:auto}
   .plattegrond-hint{position:absolute;bottom:12px;right:12px;background:rgba(20,12,6,.6);color:#fff;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:7px 13px;border-radius:100px;line-height:1}
   .plattegrond-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
@@ -1935,6 +1942,18 @@ footer .footer-links a:hover   { color: var(--peach); }
   .rates-row{display:grid;grid-template-columns:1fr 150px 150px;gap:0 20px;padding:13px 0;border-bottom:1px solid var(--border2)}
   .rates-name{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--cream)}
   .rates-price{font-family:'DM Sans',sans-serif;font-size:15px;text-align:right;font-variant-numeric:tabular-nums;color:var(--cream)}
+  /* price table inside the FAQ accordion */
+  .faq-rates{margin-top:.2rem}
+  .faq-rates .rates-sub{margin:0 0 4px;font-size:13px}
+  .faq-rates .rates-name{font-size:14px}
+  .faq-rates .rates-price{font-size:13px}
+  .faq-rates .rates-incl-text{font-size:12.5px}
+  .faq-rates .rates-season-name{font-size:9px}
+  .faq-rates .rates-season-dates{font-size:9px}
+  .faq-rates .rates-row{padding:11px 0}
+  .faq-rates .rates-colhead,.faq-rates .rates-row{grid-template-columns:1fr 108px 108px}
+  .faq-rates .rates-group{padding:24px 0 10px}
+  @media (max-width:640px){ .faq-rates .rates-colhead,.faq-rates .rates-row{grid-template-columns:1fr 76px 76px;gap:0 8px} }
   @media (max-width:640px){
     #tarieven{padding:64px 20px}
     .rates-colhead,.rates-row{grid-template-columns:1fr 82px 82px;gap:0 10px}
@@ -1956,7 +1975,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <a href="#stay" class="mobile-menu-link" data-i18n="nav_stay">Verblijf</a>
   <a href="#activities" class="mobile-menu-link" data-i18n="nav_activities">Activiteiten</a>
   <a href="#surroundings" class="mobile-menu-link" data-i18n="nav_area">De Omgeving</a>
-  <a href="#facilities" class="mobile-menu-link" data-i18n="nav_facilities">Faciliteiten</a>
+  <a href="#faq" class="mobile-menu-link" data-i18n="nav_faq">Goed om te weten</a>
   <div class="mobile-menu-divider"></div>
   <a href="#availability" class="mobile-menu-book" data-i18n="nav_book_stay">Boek je Verblijf</a>
   <div class="mobile-lang mobile-lang--menu">
@@ -1975,14 +1994,14 @@ footer .footer-links a:hover   { color: var(--peach); }
     <li><a href="#stay" data-i18n="nav_stay">Verblijf</a></li>
     <li><a href="#activities" data-i18n="nav_things">Activiteiten</a></li>
     <li><a href="#surroundings" data-i18n="nav_area">De Omgeving</a></li>
-    <li><a href="#facilities" data-i18n="nav_facilities">Faciliteiten</a></li>
+    <li><a href="#faq" data-i18n="nav_faq">Goed om te weten</a></li>
   </ul>
   <div class="nav-right">
     <div class="nav-lang">
       <a href="#" class="active" data-lang="nl" onclick="window.location.href='/italiaansdroompie/';return false;">NL</a>
       <a href="#" data-lang="en" onclick="window.location.href='/italiaansdroompie/en/';return false;">EN</a>
-      <a href="#" data-lang="de" style="opacity:0.35;cursor:default;" title="Coming soon">DE</a>
-      <a href="#" data-lang="it" style="opacity:0.35;cursor:default;" title="Coming soon">IT</a>
+      <a data-lang="de" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">DE</a>
+      <a data-lang="it" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">IT</a>
     </div>
     <a href="#availability" class="btn-nav" data-i18n="nav_book_now">Boek Nu</a>
   </div>
@@ -1999,6 +2018,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="hero-content">
     <h1 class="hero-title">San<br>Procolo<span class="visually-hidden" data-i18n="h1_seo"> Camping San Procolo, familiecamping en glamping in Le Marche, Italië</span></h1>
     <p class="hero-slogan">Il dolce far niente</p>
+    <p class="hero-meaning" data-i18n="hero_meaning">de zoetheid van het niksdoen</p>
     <p class="hero-tagline"><em data-i18n="hero_tagline">Een kleine familiecamping tussen de bergen en de zee</em></p>
     <p class="hero-sub" data-i18n="hero_sub">Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.</p>
     <div class="hero-cta">
@@ -2190,13 +2210,12 @@ footer .footer-links a:hover   { color: var(--peach); }
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Volgende foto">›</button>
           <div class="carousel-dots" aria-hidden="true"></div>
         </div>
-        <span class="stay-card-tag" data-i18n="stay_pitch_tag">Kampeerplek</span>
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title" data-i18n="stay_pitch_h">Kampeerplek</h3>
         <p class="stay-card-desc" data-i18n="stay_pitch_p">Ruime terrasplekken met valleizicht, voor tent, camper en caravan. Elektra inbegrepen. Niet alle plekken zijn met caravan bereikbaar.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€16 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <div class="stay-price"><span class="stay-price-value">€16 – €19 <span data-i18n="per_night_slash">/ nacht</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
         </div>
       </div>
@@ -2214,13 +2233,13 @@ footer .footer-links a:hover   { color: var(--peach); }
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Volgende foto">›</button>
           <div class="carousel-dots" aria-hidden="true"></div>
         </div>
-        <span class="stay-card-tag" data-i18n="stay_glamp_tag">Glampingtent</span>
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title" data-i18n="stay_glamp_h">Glampingtent</h3>
+        <div class="stay-card-cap"><svg viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M23 20v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span data-i18n="cap_4">Tot 4 personen</span></div>
         <p class="stay-card-desc" data-i18n="stay_glamp_p">Zo naar binnen: bedden opgemaakt, linnen inbegrepen, een eigen terras en hetzelfde valleizicht vanuit je bed.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€140 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <div class="stay-price"><span class="stay-price-value">€140 – €190 <span data-i18n="per_night_slash">/ nacht</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
         </div>
       </div>
@@ -2238,13 +2257,13 @@ footer .footer-links a:hover   { color: var(--peach); }
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Volgende foto">›</button>
           <div class="carousel-dots" aria-hidden="true"></div>
         </div>
-        <span class="stay-card-tag" data-i18n="stay_tunnel_tag">Tunneltent</span>
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title" data-i18n="stay_tunnel_h">Tunneltent</h3>
+        <div class="stay-card-cap"><svg viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M23 20v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span data-i18n="cap_2">Tot 2 personen</span></div>
         <p class="stay-card-desc" data-i18n="stay_tunnel_p">Een gezellige tent op een eigen plek, ingericht voor twee — bedden opgemaakt, zo te genieten.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€75 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <div class="stay-price"><span class="stay-price-value">€75 – €92 <span data-i18n="per_night_slash">/ nacht</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
         </div>
       </div>
@@ -2262,13 +2281,13 @@ footer .footer-links a:hover   { color: var(--peach); }
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Volgende foto">›</button>
           <div class="carousel-dots" aria-hidden="true"></div>
         </div>
-        <span class="stay-card-tag" data-i18n="stay_safari_tag">Safaritent</span>
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title" data-i18n="stay_safari_h">Safaritent</h3>
+        <div class="stay-card-cap"><svg viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M23 20v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span data-i18n="cap_4">Tot 4 personen</span></div>
         <p class="stay-card-desc" data-i18n="stay_safari_p">Een ruime safaritent voor vier personen. Bedden opgemaakt, linnen inbegrepen — neem alleen je koffer mee.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€108 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <div class="stay-price"><span class="stay-price-value">€108 – €138 <span data-i18n="per_night_slash">/ nacht</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
         </div>
       </div>
@@ -2286,13 +2305,13 @@ footer .footer-links a:hover   { color: var(--peach); }
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Volgende foto">›</button>
           <div class="carousel-dots" aria-hidden="true"></div>
         </div>
-        <span class="stay-card-tag" data-i18n="stay_chalet_tag">Chalet</span>
       </div>
       <div class="stay-card-body">
         <h3 class="stay-card-title" data-i18n="stay_chalet_h">Chalet</h3>
+        <div class="stay-card-cap"><svg viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M23 20v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span data-i18n="cap_4">Tot 4 personen</span></div>
         <p class="stay-card-desc" data-i18n="stay_chalet_p">Onze meest comfortabele optie: volledig uitgerust, een eigen terras en hetzelfde valleizicht vanuit je bed.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-from" data-i18n="from_label">Vanaf</span><span class="stay-price-value">€110 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <div class="stay-price"><span class="stay-price-value">€110 – €142 <span data-i18n="per_night_slash">/ nacht</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
         </div>
       </div>
@@ -2311,41 +2330,6 @@ footer .footer-links a:hover   { color: var(--peach); }
   </div>
 </section>
 
-<!-- TARIEVEN / RATES -->
-<section id="tarieven">
-  <div class="rates-inner reveal">
-    <div class="section-eyebrow" data-i18n="rates_eyebrow">Tarieven 2026</div>
-    <h2 class="rates-title" data-i18n="rates_title">Prijzen per nacht</h2>
-    <p class="rates-sub" data-i18n="rates_sub">Alle bedragen in euro's, per nacht.</p>
-
-    <div class="rates-incl">
-      <span class="rates-incl-label" data-i18n="rates_incl_label">Inbegrepen</span>
-      <span class="rates-incl-text" data-i18n="rates_incl_text">Eindschoonmaak zit bij glamping, safaritent en chalet in de prijs.</span>
-    </div>
-
-    <div class="rates-colhead">
-      <span></span>
-      <div class="rates-season"><span class="rates-season-name" data-i18n="rates_low">Laag seizoen</span><span class="rates-season-dates">22/05–09/07 · 05/09–30/09</span></div>
-      <div class="rates-season"><span class="rates-season-name" data-i18n="rates_high">Hoog seizoen</span><span class="rates-season-dates">10/07–04/09</span></div>
-    </div>
-
-    <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_stays">Verblijven</span><span class="rates-rule"></span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_glamp">Glampingtent</span><span class="rates-price">€ 140,00</span><span class="rates-price">€ 190,00</span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_safari">Safaritent</span><span class="rates-price">€ 108,00</span><span class="rates-price">€ 138,00</span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_chalet">Chalet</span><span class="rates-price">€ 110,00</span><span class="rates-price">€ 142,00</span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_tunnel">Tunneltent</span><span class="rates-price">€ 75,00</span><span class="rates-price">€ 92,00</span></div>
-
-    <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_camping">Kamperen</span><span class="rates-rule"></span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_pitch">Kampeerplek</span><span class="rates-price">€ 16,00</span><span class="rates-price">€ 19,00</span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_adult">Volwassen</span><span class="rates-price">€ 12,00</span><span class="rates-price">€ 13,50</span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_child">Kind tot 12 jaar</span><span class="rates-price">€ 10,00</span><span class="rates-price">€ 11,00</span></div>
-
-    <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_extras">Extra's</span><span class="rates-rule"></span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_fridge">Koelkast</span><span class="rates-price">€ 5,00</span><span class="rates-price">€ 5,00</span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_highchair">Kinderstoel</span><span class="rates-price">€ 2,00</span><span class="rates-price">€ 2,00</span></div>
-    <div class="rates-row"><span class="rates-name" data-i18n="rates_cot">Campingbedje mét matras</span><span class="rates-price">€ 5,00</span><span class="rates-price">€ 5,00</span></div>
-  </div>
-</section>
 
 <!-- EXPERIENCES -->
 <section id="experiences">
@@ -2402,7 +2386,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         </div>
       </div>
       <div class="testimonial-card reveal reveal-delay-1">
-        <p class="testimonial-text">Wir waren zu zweit und haben einfach abgeschaltet. Der Pool, die frischen Croissants, die Stille abends. David und Lisette sind da, wenn man sie braucht, und lassen einen sonst in Ruhe. Genau richtig.</p>
+        <p class="testimonial-text">Just the two of us, and we completely switched off. The pool, the fresh croissants, the quiet evenings. David and Lisette are there when you need them and otherwise leave you be. Exactly right.</p>
         <div class="testimonial-footer">
           <div class="testimonial-author">Familie Müller · <span data-i18n="test_c_de">Duitsland</span></div>
           <div class="testimonial-stars">★★★★★</div>
@@ -2461,7 +2445,7 @@ footer .footer-links a:hover   { color: var(--peach); }
             <option value="chalet">Chalet</option>
             <option value="safari">Safari tent</option>
             <option value="tunnel">Tunnel tent</option>
-            <option value="lodge">Lodge tent</option>
+            <option value="glamping">Glampingtent</option>
           </select>
         </div>
       </div>
@@ -2632,6 +2616,34 @@ footer .footer-links a:hover   { color: var(--peach); }
     <h2 class="section-title reveal reveal-delay-1" data-i18n="faq_title">Goed om te weten</h2>
     <div class="faq-list reveal reveal-delay-2">
       <details class="faq-item">
+        <summary class="faq-q" data-i18n="faq_price_q">Wat kost een verblijf?</summary>
+        <div class="faq-a faq-rates">
+          <p class="rates-sub" data-i18n="rates_sub">Alle bedragen in euro's, per nacht.</p>
+          <div class="rates-incl">
+            <span class="rates-incl-label" data-i18n="rates_incl_label">Inbegrepen</span>
+            <span class="rates-incl-text" data-i18n="rates_incl_text">Eindschoonmaak zit bij glamping, safaritent en chalet in de prijs.</span>
+          </div>
+          <div class="rates-colhead">
+            <span></span>
+            <div class="rates-season"><span class="rates-season-name" data-i18n="rates_low">Laag seizoen</span><span class="rates-season-dates">22/05–09/07 · 05/09–30/09</span></div>
+            <div class="rates-season"><span class="rates-season-name" data-i18n="rates_high">Hoog seizoen</span><span class="rates-season-dates">10/07–04/09</span></div>
+          </div>
+          <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_stays">Verblijven</span><span class="rates-rule"></span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_glamp">Glampingtent</span><span class="rates-price">€ 140,00</span><span class="rates-price">€ 190,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_safari">Safaritent</span><span class="rates-price">€ 108,00</span><span class="rates-price">€ 138,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_chalet">Chalet</span><span class="rates-price">€ 110,00</span><span class="rates-price">€ 142,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_tunnel">Tunneltent</span><span class="rates-price">€ 75,00</span><span class="rates-price">€ 92,00</span></div>
+          <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_camping">Kamperen</span><span class="rates-rule"></span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_pitch">Kampeerplek</span><span class="rates-price">€ 16,00</span><span class="rates-price">€ 19,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_adult">Volwassen</span><span class="rates-price">€ 12,00</span><span class="rates-price">€ 13,50</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_child">Kind tot 12 jaar</span><span class="rates-price">€ 10,00</span><span class="rates-price">€ 11,00</span></div>
+          <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_extras">Extra's</span><span class="rates-rule"></span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_fridge">Koelkast</span><span class="rates-price">€ 5,00</span><span class="rates-price">€ 5,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_highchair">Kinderstoel</span><span class="rates-price">€ 2,00</span><span class="rates-price">€ 2,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_cot">Campingbedje mét matras</span><span class="rates-price">€ 5,00</span><span class="rates-price">€ 5,00</span></div>
+        </div>
+      </details>
+      <details class="faq-item">
         <summary class="faq-q" data-i18n="faq_q1">Hoe ver is de zee?</summary>
         <div class="faq-a" data-i18n="faq_a1">Zo'n twintig minuten rijden. Het dichtstbijzijnde strand vind je bij Porto San Giorgio en Lido di Fermo. Wil je iets mooiers, rijd dan wat verder naar de palmenkust Riviera delle Palme, met plaatsen als Cupra Marittima en Grottammare — de langere rit waard. Veel gasten zwemmen 's ochtends bij ons en liggen 's middags aan zee.</div>
       </details>
@@ -2649,7 +2661,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </details>
       <details class="faq-item">
         <summary class="faq-q" data-i18n="faq_q5">Wat zit er in de tenten?</summary>
-        <div class="faq-a" data-i18n="faq_a5">In de safari- en lodgetenten vind je echte bedden, een volwaardige keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De tunneltenten en kampeerplaatsen maken gebruik van ons sanitairgebouw. In beide gevallen zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen.</div>
+        <div class="faq-a" data-i18n="faq_a5">In de glampingtent, safaritent en chalet vind je echte bedden, een keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De tunneltent en kampeerplaatsen maken gebruik van ons sanitairgebouw. Bij die drie zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen.</div>
       </details>
     </div>
   </div>
@@ -2714,7 +2726,7 @@ footer .footer-links a:hover   { color: var(--peach); }
               <option value="Camping Pitch" data-i18n="form_ac_pitch">Kampeerplaats</option>
               <option value="Safari Tent" data-i18n="form_ac_safari">Safaritent</option>
               <option value="Tunnel Tent" data-i18n="form_ac_tunnel">Tunneltent</option>
-              <option value="Lodge Tent" data-i18n="form_ac_lodge">Lodgetent</option>
+              <option value="Glamping Tent" data-i18n="form_ac_glamp">Glampingtent</option>
               <option value="Chalet" data-i18n="form_ac_chalet">Chalet</option>
             </select>
           </div>
@@ -2762,8 +2774,7 @@ footer .footer-links a:hover   { color: var(--peach); }
           </a>
         </li>
         <li><a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a></li>
-        <li><a href="#contact" data-i18n="footer_book">Boek een verblijf</a></li>
-        <li><a href="#" data-i18n="footer_privacy">Privacybeleid</a></li>
+        <li><a href="#availability" data-i18n="footer_book">Boek een verblijf</a></li>
       </ul>
     </div>
   </div>
@@ -2869,20 +2880,19 @@ footer .footer-links a:hover   { color: var(--peach); }
 
 
 
-
-
 <script id="i18n-script">
 // ── i18n ────────────────────────────────────────────────────────────────────
 const TRANSLATIONS = {
   en: {
     // Nav
     nav_story:'Our Story', nav_stay:'Where to Stay', nav_things:'Things to Do',
-    nav_area:'The Area', nav_facilities:'Facilities',
+    nav_area:'The Area', nav_facilities:'Facilities', nav_faq:'Good to Know',
     nav_book_now:'Book Now', nav_book_stay:'Book Your Stay',
     fab_cta:'Check availability', fab_aria:'Go to availability',
     // Hero
     h1_seo:' Camping San Procolo, family glamping and camping in Le Marche, Italy',
     hero_tagline:'A small family campsite between the mountains and the sea',
+    hero_meaning:'the sweetness of doing nothing',
     hero_sub:'Eighteen pitches, a few of them glamping tents, a pool with a view across the valley. Twenty minutes from the Adriatic, an hour from the snowy peaks of the Sibillini.',
     hero_btn_story:'Read Our Story',
     hero_urgency:'Open 22 May to 2 October — July and August fill up early',
@@ -2946,7 +2956,9 @@ const TRANSLATIONS = {
     stay_chalet_tag:'Chalet', stay_chalet_h:'Chalet',
     stay_chalet_p:'Our most comfortable option: full amenities, a private terrace and the same valley view from your bed.',
     carousel_prev:'Previous photo', carousel_next:'Next photo',
+    cap_4:'Up to 4 guests', cap_2:'Up to 2 guests',
     map_eyebrow:'The campsite', map_title:'Site map', map_hint:'Tap to enlarge', map_zoom:'Enlarge the site map',
+    faq_price_q:'What does a stay cost?',
     rates_eyebrow:'Rates 2026', rates_title:'Prices per night', rates_sub:'All amounts in euros, per night.',
     rates_incl_label:'Included', rates_incl_text:'Final cleaning is included for the glamping tent, safari tent and chalet.',
     rates_low:'Low season', rates_high:'High season',
@@ -3043,7 +3055,7 @@ const TRANSLATIONS = {
     cw_ph_name:'Full name', cw_ph_email:'name@example.com', cw_ph_notes:'E.g. arrival time, special requests…',
     per_night_slash:'/ night', open_maps:'Open in Maps →',
     cf_sending:'Sending…', cf_sent_btn:'Sent. Lisette will be in touch', cf_sent_status:'Thanks. You will hear from Lisette within a day.', cf_error:'Something went wrong. Please try again or email info@sanprocolo.com directly.', cf_thanks:'Thanks!',
-    form_ac_pitch:'Camping Pitch', form_ac_safari:'Safari Tent', form_ac_tunnel:'Tunnel Tent', form_ac_lodge:'Lodge Tent', form_ac_chalet:'Chalet',
+    form_ac_pitch:'Camping Pitch', form_ac_safari:'Safari Tent', form_ac_tunnel:'Tunnel Tent', form_ac_glamp:'Glamping Tent', form_ac_chalet:'Chalet',
     test_c_nl:'Netherlands', test_c_de:'Germany', test_c_uk:'United Kingdom',
     fac_advice_k:'Local Advice',
     fac_advice_v:'Lisette &amp; David\'s own list of markets, restaurants, hidden beaches and the spots the guidebooks haven\'t found.',
@@ -3080,18 +3092,19 @@ const TRANSLATIONS = {
     faq_q4:'Which airport should we fly into?',
     faq_a4:'The nearest airport is Ancona, just over an hour away. A little further south, Pescara is the other easy choice and usually has the most summer flights, which is why many of our British and German guests land there. Perugia, Bologna and Rome are options too, with seasonal flights from the Netherlands, Germany and the UK. You will want a car whichever you choose, since the hills and the coast are best on your own schedule.',
     faq_q5:'What do the tents come with?',
-    faq_a5:'The safari and lodge tents come with real beds, a proper kitchen, their own private bathroom and a covered terrace looking over the olive grove, so you only need to bring your suitcase. The tunnel tents and camping pitches use our shared facilities block. Either way the final cleaning is included, so there\'s nothing to scrub on your last morning.',
+    faq_a5:'The glamping tent, safari tent and chalet come with real beds, a kitchen, a private bathroom and a covered terrace over the olive grove, so you only need to bring your suitcase. The tunnel tent and camping pitches use our shared facilities block. For those three the final cleaning is included, so there\'s nothing to scrub on your last morning.',
   },
 
   nl: {
     // Nav
     nav_story:'Ons Verhaal', nav_stay:'Verblijf', nav_things:'Activiteiten',
-    nav_area:'De Omgeving', nav_facilities:'Faciliteiten',
+    nav_area:'De Omgeving', nav_facilities:'Faciliteiten', nav_faq:'Goed om te weten',
     nav_book_now:'Boek Nu', nav_book_stay:'Boek je Verblijf',
     fab_cta:'Bekijk beschikbaarheid', fab_aria:'Ga naar beschikbaarheid',
     // Hero
     h1_seo:' Camping San Procolo, familiecamping en glamping in Le Marche, Italië',
     hero_tagline:'Een kleine familiecamping tussen de bergen en de zee',
+    hero_meaning:'de zoetheid van het niksdoen',
     hero_sub:'Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.',
     hero_btn_story:'Ons Verhaal',
     hero_urgency:'Open 22 mei tot 2 oktober — Juli en augustus zijn snel vol',
@@ -3155,7 +3168,9 @@ const TRANSLATIONS = {
     stay_chalet_tag:'Chalet', stay_chalet_h:'Chalet',
     stay_chalet_p:'Onze meest comfortabele optie: volledig uitgerust, een eigen terras en hetzelfde valleizicht vanuit je bed.',
     carousel_prev:'Vorige foto', carousel_next:'Volgende foto',
+    cap_4:'Tot 4 personen', cap_2:'Tot 2 personen',
     map_eyebrow:'De camping', map_title:'Plattegrond', map_hint:'Tik om te vergroten', map_zoom:'Vergroot de plattegrond',
+    faq_price_q:'Wat kost een verblijf?',
     rates_eyebrow:'Tarieven 2026', rates_title:'Prijzen per nacht', rates_sub:'Alle bedragen in euro\'s, per nacht.',
     rates_incl_label:'Inbegrepen', rates_incl_text:'Eindschoonmaak zit bij glamping, safaritent en chalet in de prijs.',
     rates_low:'Laag seizoen', rates_high:'Hoog seizoen',
@@ -3259,7 +3274,7 @@ const TRANSLATIONS = {
     faq_q4:'Naar welke luchthaven vlieg je het best?',
     faq_a4:'De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden ligt Pescara, meestal met de meeste zomervluchten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje.',
     faq_q5:'Wat zit er in de tenten?',
-    faq_a5:'In de safari- en lodgetenten vind je echte bedden, een volwaardige keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De tunneltenten en kampeerplaatsen maken gebruik van ons sanitairgebouw. In beide gevallen zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen.',
+    faq_a5:'In de glampingtent, safaritent en chalet vind je echte bedden, een keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De tunneltent en kampeerplaatsen maken gebruik van ons sanitairgebouw. Bij die drie zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen.',
     // Availability widget
     cw_tab_search:'Beschikbaarheid zoeken',
     cw_arrival:'Aankomst', cw_departure:'Vertrek',
@@ -3288,7 +3303,7 @@ const TRANSLATIONS = {
     cw_ph_name:'Voor- en achternaam', cw_ph_email:'naam@voorbeeld.nl', cw_ph_notes:'Bijv. aankomsttijd, bijzondere wensen…',
     per_night_slash:'/ nacht', open_maps:'Bekijk op de kaart →',
     cf_sending:'Bezig…', cf_sent_btn:'Verzonden. Lisette neemt contact op', cf_sent_status:'Bedankt. Je hoort binnen een dag van Lisette.', cf_error:'Er ging iets mis. Probeer het opnieuw of mail rechtstreeks naar info@sanprocolo.com.', cf_thanks:'Bedankt!',
-    form_ac_pitch:'Kampeerplaats', form_ac_safari:'Safaritent', form_ac_tunnel:'Tunneltent', form_ac_lodge:'Lodgetent', form_ac_chalet:'Chalet',
+    form_ac_pitch:'Kampeerplaats', form_ac_safari:'Safaritent', form_ac_tunnel:'Tunneltent', form_ac_glamp:'Glampingtent', form_ac_chalet:'Chalet',
     test_c_nl:'Nederland', test_c_de:'Duitsland', test_c_uk:'Verenigd Koninkrijk'
   }
 };
@@ -3331,7 +3346,6 @@ function setLang(lang) {
 document.addEventListener('DOMContentLoaded', () => { setLang(currentLang); });
 // ────────────────────────────────────────────────────────────────────────────
 </script>
-
 
 <script>
 // ── Camping Widget ─────────────────────────────────────────────────────────────
@@ -3669,7 +3683,7 @@ setTimeout(function(){
       "name": "Wat zit er in de tenten?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "In de safari- en lodgetenten vind je echte bedden, een volwaardige keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De tunneltenten en kampeerplaatsen maken gebruik van ons sanitairgebouw. In beide gevallen zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen."
+        "text": "In de glampingtent, safaritent en chalet vind je echte bedden, een keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De tunneltent en kampeerplaatsen maken gebruik van ons sanitairgebouw. Bij die drie zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen."
       }
     }
   ]
@@ -3736,11 +3750,9 @@ setTimeout(function(){
 </div>
 <script>
 (function(){
-  // ── Booking redirect — TEMPORARY DEMO ──────────────────────────────────────
+  // ── Booking redirect ──────────────────────────────────────
   // All booking CTAs (nav, hero, stay cards, the floating button) open the
-  // CampingCare booking engine. Right now it points at CampingCare's DEMO account.
-  // TODO: replace 'demo' with the real San Procolo booking-engine slug once it is
-  // published in the CampingCare dashboard (booking.camping.care/<slug>).
+  // CampingCare booking engine. It points at the real San Procolo booking page.
   var BOOKING_URL = 'https://booking.camping.care/camping-san-procolo';
   function openBooking(e){
     if(e){ e.preventDefault(); }
