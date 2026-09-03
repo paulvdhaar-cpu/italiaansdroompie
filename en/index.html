@@ -612,8 +612,8 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 220px 220px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 480px 300px;
   gap: 3px;
 }
 
@@ -622,7 +622,12 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   background-size: cover; background-position: center;
 }
 
-.gallery-cell:first-child { grid-row: span 2; }
+/* Bento placement — top row: 3 portrait cells (2 cols each); bottom row: 2 landscape strips (3 cols each) */
+.gallery-grid > .gallery-cell:nth-child(1) { grid-column: 1 / 3; grid-row: 1; }
+.gallery-grid > .gallery-cell:nth-child(2) { grid-column: 3 / 5; grid-row: 1; }
+.gallery-grid > .gallery-cell:nth-child(3) { grid-column: 5 / 7; grid-row: 1; }
+.gallery-grid > .gallery-cell:nth-child(4) { grid-column: 1 / 4; grid-row: 2; }
+.gallery-grid > .gallery-cell:nth-child(5) { grid-column: 4 / 7; grid-row: 2; }
 
 /* Gallery cell captions */
 .gallery-cell { position: relative; }
@@ -633,8 +638,8 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   font-family: 'DM Sans', sans-serif;
   font-size: 10px; font-weight: 500;
   letter-spacing: 1.8px; text-transform: uppercase;
-  color: oklch(24% 0.018 80 / 0.78);
-  text-shadow: 0 1px 4px oklch(96% 0.012 78 / 0.35);
+  color: oklch(96% 0.008 92 / 0.88);
+  text-shadow: 0 1px 4px oklch(20% 0.020 80 / 0.55);
   background: transparent;
   padding: 4px 0;
   display: flex; align-items: center; gap: 6px;
@@ -1334,9 +1339,11 @@ a:focus-visible, button:focus-visible {
 
   .gallery-grid {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 160px 160px 160px;
+    grid-template-rows: 300px 300px 180px;
+    grid-auto-flow: row;
   }
-  .gallery-cell:first-child { grid-row: span 1; grid-column: span 2; }
+  .gallery-grid > .gallery-cell:nth-child(n) { grid-column: auto; grid-row: auto; }
+  .gallery-grid > .gallery-cell:nth-child(3) { grid-column: 1 / 3; }
 
   #stay { padding: 64px 24px; }
   .stay-header { flex-direction: column; align-items: flex-start; gap: 20px; }
@@ -1396,7 +1403,8 @@ a:focus-visible, button:focus-visible {
   .act-card-photo { height: auto; min-height: 240px; }
   .act-card-text  { height: auto; min-height: 160px; }
 
-  .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 200px); }
+  .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(3, 300px) repeat(2, 180px); grid-auto-flow: row; }
+  .gallery-grid > .gallery-cell:nth-child(n) { grid-column: auto; grid-row: auto; }
   .gallery-cell:first-child { grid-column: span 1; }
 
 }
@@ -2066,19 +2074,19 @@ footer .footer-links a:hover   { color: var(--peach); }
 <!-- GALLERY -->
 <section class="gallery-section">
   <div class="gallery-grid">
-    <div class="gallery-cell" style="background-image: url('../veld-portrait.jpg'); background-position: center 55%;">
-      <div class="gallery-cell-caption" data-i18n="cap_hills">Our view</div>
-    </div>
-    <div class="gallery-cell" style="background-image: url('../zwembad1.jpg'); background-position: center 78%;">
-      <div class="gallery-cell-caption" data-i18n="cap_pool">The pool</div>
-    </div>
-    <div class="gallery-cell" style="background-image: url('../druiven.jpg');">
+    <div class="gallery-cell" style="background-image: url('../druiven.jpg'); background-position: center 50%;">
       <div class="gallery-cell-caption" data-i18n="cap_grapes">The grapes</div>
     </div>
-    <div class="gallery-cell" style="background-image: url('../sibillini-dusk.jpg'); background-position: center 58%;">
+    <div class="gallery-cell" style="background-image: url('../zwembad1.jpg'); background-position: center 60%;">
+      <div class="gallery-cell-caption" data-i18n="cap_pool">The pool</div>
+    </div>
+    <div class="gallery-cell" style="background-image: url('../sibillini-dusk.jpg'); background-position: center 60%;">
       <div class="gallery-cell-caption" data-i18n="cap_sibillini">Sibillini at dusk</div>
     </div>
-    <div class="gallery-cell" style="background-image: url('../sunset.jpg'); background-position: center 60%;">
+    <div class="gallery-cell" style="background-image: url('../veld-portrait.jpg'); background-position: center 75%;">
+      <div class="gallery-cell-caption" data-i18n="cap_hills">Our view</div>
+    </div>
+    <div class="gallery-cell" style="background-image: url('../sunset.jpg'); background-position: center 65%;">
       <div class="gallery-cell-caption" data-i18n="cap_sunset">Sunset over San Procolo</div>
     </div>
   </div>
