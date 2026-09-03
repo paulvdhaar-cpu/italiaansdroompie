@@ -633,7 +633,8 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   font-family: 'DM Sans', sans-serif;
   font-size: 10px; font-weight: 500;
   letter-spacing: 1.8px; text-transform: uppercase;
-  color: oklch(95% 0.008 92 / 0.70);
+  color: oklch(24% 0.018 80 / 0.78);
+  text-shadow: 0 1px 4px oklch(96% 0.012 78 / 0.35);
   background: transparent;
   padding: 4px 0;
   display: flex; align-items: center; gap: 6px;
@@ -1057,7 +1058,7 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 .fac-gallery { max-width: 1280px; margin: 0 auto 40px; }
 .fac-gallery-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 260px;
   gap: 3px;
 }
@@ -1363,7 +1364,7 @@ a:focus-visible, button:focus-visible {
   .sea-banner-sub { font-size: 12px; max-width: 100%; }
 
   #facilities { padding: 64px 24px; }
-  .fac-gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(3, 200px); }
+  .fac-gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 200px); }
   .amenity-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
 
   #contact { padding: 64px 24px; }
@@ -2065,17 +2066,17 @@ footer .footer-links a:hover   { color: var(--peach); }
 <!-- GALLERY -->
 <section class="gallery-section">
   <div class="gallery-grid">
-    <div class="gallery-cell" style="background-image: url('../sibillini-dusk.jpg'); background-position: center 58%;">
-      <div class="gallery-cell-caption" data-i18n="cap_sibillini">Sibillini at dusk</div>
+    <div class="gallery-cell" style="background-image: url('../veld-portrait.jpg'); background-position: center 55%;">
+      <div class="gallery-cell-caption" data-i18n="cap_hills">Our view</div>
     </div>
-    <div class="gallery-cell" style="background-image: url('../zwembad1.jpg');">
+    <div class="gallery-cell" style="background-image: url('../zwembad1.jpg'); background-position: center 78%;">
       <div class="gallery-cell-caption" data-i18n="cap_pool">The pool</div>
     </div>
     <div class="gallery-cell" style="background-image: url('../druiven.jpg');">
       <div class="gallery-cell-caption" data-i18n="cap_grapes">The grapes</div>
     </div>
-    <div class="gallery-cell" style="background-image: url('../veld-portrait.jpg'); background-position: center 40%;">
-      <div class="gallery-cell-caption" data-i18n="cap_hills">Our view</div>
+    <div class="gallery-cell" style="background-image: url('../sibillini-dusk.jpg'); background-position: center 58%;">
+      <div class="gallery-cell-caption" data-i18n="cap_sibillini">Sibillini at dusk</div>
     </div>
     <div class="gallery-cell" style="background-image: url('../sunset.jpg'); background-position: center 60%;">
       <div class="gallery-cell-caption" data-i18n="cap_sunset">Sunset over San Procolo</div>
@@ -2245,8 +2246,9 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
-            <div class="carousel-slide" style="background-image: url('../glamping.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('../glamping1.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../glamping-tent.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../campsite.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../le-marche-hills.jpg')"></div>
           </div>
           <button type="button" class="carousel-arrow carousel-prev" data-i18n-aria-label="carousel_prev" aria-label="Previous photo">&#8249;</button>
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Next photo">&#8250;</button>
@@ -2292,9 +2294,8 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
-            <div class="carousel-slide" style="background-image: url('../glamping-tent.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('../campsite.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('../le-marche-hills.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../glamping.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../glamping1.jpg')"></div>
           </div>
           <button type="button" class="carousel-arrow carousel-prev" data-i18n-aria-label="carousel_prev" aria-label="Previous photo">&#8249;</button>
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Next photo">&#8250;</button>
@@ -2599,6 +2600,9 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
       <div class="gallery-cell" style="background-image: url('../olijf2.jpg'); background-position: center 45%;">
         <div class="gallery-cell-caption" data-i18n="cap_olive">In the olive garden</div>
+      </div>
+      <div class="gallery-cell" style="background-image: url('../bloem.jpg');">
+        <div class="gallery-cell-caption" data-i18n="cap_flowers">Wild flowers</div>
       </div>
       <div class="gallery-cell" style="background-image: url('../wijds-gezicht.jpg');">
         <div class="gallery-cell-caption" data-i18n="cap_view">Views over the valley</div>
@@ -2944,7 +2948,7 @@ const TRANSLATIONS = {
     // Gallery
     cap_sibillini:'Sibillini at dusk', cap_pool:'The pool', cap_grapes:'The grapes',
     cap_hills:'Our view', cap_sunset:'Sunset over San Procolo',
-    cap_playground:'The playground', cap_olive:'In the olive garden', cap_view:'Views over the valley',
+    cap_playground:'The playground', cap_olive:'In the olive garden', cap_flowers:'Wild flowers', cap_view:'Views over the valley',
     // Story panels
     story_morn_ey:'Morning',
     story_morn_h:'The bread arrives<br><em>still warm</em>',
@@ -3157,7 +3161,7 @@ const TRANSLATIONS = {
     // Gallery
     cap_sibillini:'De Sibillini bij avondlicht', cap_pool:'Het zwembad', cap_grapes:'De druiven',
     cap_hills:'Ons uitzicht', cap_sunset:'Zonsondergang boven San Procolo',
-    cap_playground:'De speeltuin', cap_olive:'In de olijfgaard', cap_view:'Uitzicht over de vallei',
+    cap_playground:'De speeltuin', cap_olive:'In de olijfgaard', cap_flowers:'Wilde bloemen', cap_view:'Uitzicht over de vallei',
     // Story panels
     story_morn_ey:'\'s Ochtends',
     story_morn_h:'Het brood staat klaar<br><em>als je wakker wordt</em>',
