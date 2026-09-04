@@ -953,6 +953,57 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   color: oklch(42% 0.015 80 / 0.75);
 }
 
+/* ── TESTIMONIALS: rating eyebrow + Google card ── */
+.section-eyebrow-link {
+  text-decoration: none; color: var(--gold);
+  transition: color 0.2s;
+  padding-bottom: 3px; border-bottom: 1px solid transparent;
+}
+.section-eyebrow-link::before { display: none; }
+.section-eyebrow-link:hover { color: var(--peach); border-bottom-color: currentColor; }
+.section-eyebrow-link .stars {
+  color: var(--peach); font-size: 12px; letter-spacing: 2px;
+  flex-shrink: 0;
+}
+
+.testimonial-google {
+  background: var(--bg3);
+  align-items: flex-start;
+}
+.testimonial-google .tg-header {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 22px;
+}
+.testimonial-google .g-mark { width: 14px; height: 14px; flex-shrink: 0; }
+.testimonial-google .tg-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.6rem; line-height: 1;
+  color: var(--cream); margin-bottom: 14px;
+}
+.testimonial-google .tg-num small {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; color: var(--muted); font-weight: 400;
+  margin-left: 6px;
+}
+.testimonial-google .tg-stars {
+  color: var(--peach); font-size: 14px;
+  letter-spacing: 3px; margin-bottom: 14px;
+}
+.testimonial-google .tg-count {
+  font-size: 12px; color: var(--muted); margin-bottom: 22px;
+  flex: 1;
+}
+.testimonial-google .tg-link {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--peach); text-decoration: none;
+  border-bottom: 1px solid transparent; padding-bottom: 2px;
+  transition: border-color 0.2s; align-self: flex-start;
+}
+.testimonial-google .tg-link:hover { border-bottom-color: currentColor; }
+
 /* ── SURROUNDINGS ── */
 #surroundings { padding: 100px 48px; background: var(--bg); }
 
@@ -2257,9 +2308,12 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
-            <div class="carousel-slide" style="background-image: url('glamping-tent.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('campsite.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('le-marche-hills.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('glamping1.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('glamping2.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('glamping3.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('glamping4.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('glamping5.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('glamping6.jpg')"></div>
           </div>
           <button type="button" class="carousel-arrow carousel-prev" data-i18n-aria-label="carousel_prev" aria-label="Vorige foto">‹</button>
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Volgende foto">›</button>
@@ -2305,8 +2359,8 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
-            <div class="carousel-slide" style="background-image: url('glamping.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('glamping1.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('safari-a.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('safari-b.jpg')"></div>
           </div>
           <button type="button" class="carousel-arrow carousel-prev" data-i18n-aria-label="carousel_prev" aria-label="Vorige foto">‹</button>
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Volgende foto">›</button>
@@ -2406,27 +2460,30 @@ footer .footer-links a:hover   { color: var(--peach); }
 <!-- TESTIMONIALS -->
 <section class="testimonials">
   <div style="max-width:1280px;margin:0 auto;">
-    <div class="section-eyebrow reveal" data-i18n="test_eyebrow">Gastbeoordelingen</div>
+    <a href="https://maps.app.goo.gl/33oT8wbpaGHjVCi79" target="_blank" rel="noopener" class="section-eyebrow section-eyebrow-link reveal" data-i18n="test_rating"><span class="stars">★★★★★</span>4,9 · 47 reviews op Google Maps →</a>
     <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:52px;" data-i18n="test_title">Wat families<br><em>over ons zeggen</em></h2>
     <div class="testimonials-grid">
       <div class="testimonial-card reveal">
-        <p class="testimonial-text">Lisette and David really care about their guests. They make you feel at home without being too much around. The hospitality just flows. And the place itself is beautiful — the view from our pitch made us stop what we were doing more than once.</p>
+        <p class="testimonial-text" data-i18n="test_q1">Wij vonden de camping fantastisch. Allereerst is het uitzicht prachtig, de omgeving rustig en bevind je je in een groene oase.</p>
         <div class="testimonial-footer">
-          <div class="testimonial-author">Familie de Vries · <span data-i18n="test_c_nl">Nederland</span></div>
+          <div class="testimonial-author">Mevr. Elbers · <span data-i18n="test_c_nl">Nederland</span></div>
           <div class="testimonial-stars">★★★★★</div>
         </div>
       </div>
-      <div class="testimonial-card reveal reveal-delay-1">
-        <p class="testimonial-text">Just the two of us, and we completely switched off. The pool, the fresh croissants, the quiet evenings. David and Lisette are there when you need them and otherwise leave you be. Exactly right.</p>
-        <div class="testimonial-footer">
-          <div class="testimonial-author">Familie Müller · <span data-i18n="test_c_de">Duitsland</span></div>
-          <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-card testimonial-google reveal reveal-delay-1">
+        <div class="tg-header">
+          <svg class="g-mark" viewbox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"></path><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"></path><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"></path><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"></path></svg>
+          <span data-i18n="test_google_label">Google Reviews</span>
         </div>
+        <div class="tg-num">4,9<small>/ 5</small></div>
+        <div class="tg-stars">★★★★★</div>
+        <div class="tg-count" data-i18n="test_google_count">Op basis van 47 reviews</div>
+        <a href="https://maps.app.goo.gl/33oT8wbpaGHjVCi79" target="_blank" rel="noopener" class="tg-link" data-i18n="test_google_link">Lees ze op Google →</a>
       </div>
       <div class="testimonial-card reveal reveal-delay-2">
-        <p class="testimonial-text">Came as a couple, didn't want a programme, didn't want a resort. Got exactly that. Beautiful spot, lovely hosts, ended up sitting at the long table on a Tuesday and staying for three hours. We're already thinking about next year.</p>
+        <p class="testimonial-text" data-i18n="test_q2">Prachtige kleinschalige camping met een geweldig uitzicht over een mooi heuvelachtig landschap.</p>
         <div class="testimonial-footer">
-          <div class="testimonial-author">Sarah &amp; James · <span data-i18n="test_c_uk">Verenigd Koninkrijk</span></div>
+          <div class="testimonial-author">Gijs · <span data-i18n="test_c_nl">Nederland</span></div>
           <div class="testimonial-stars">★★★★★</div>
         </div>
       </div>
@@ -2710,7 +2767,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <span class="contact-detail-label" data-i18n="contact_l_season">Seizoen</span>
         <span class="contact-detail-value" data-i18n="contact_v_season">22 mei – 2 oktober</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Camping+San+Procolo+Monte+Vidon+Combatte+Le+Marche+Italy" target="_blank" rel="noopener" class="contact-map reveal" style="background-image: url('contact-map.png'); background-size: cover; background-position: 44% 38%;">
+      <a href="https://maps.app.goo.gl/33oT8wbpaGHjVCi79/search/?api=1&amp;query=Camping+San+Procolo+Monte+Vidon+Combatte+Le+Marche+Italy" target="_blank" rel="noopener" class="contact-map reveal" style="background-image: url('contact-map.png'); background-size: cover; background-position: 44% 38%;">
         <div class="map-pulse"></div>
         <div class="map-pin-wrap"><div class="map-pin"></div></div>
         <svg viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
@@ -3004,6 +3061,10 @@ const TRANSLATIONS = {
     exp_wine_p:'Up here there are no city lights, so the night sky is something most of our guests have not seen in years. On a clear evening you can pick out the Milky Way from the terrace, and the children always stay up far too late looking for it.',
     // Testimonials
     test_eyebrow:'Guest Reviews',
+    test_rating:'<span class="stars">★★★★★</span>4.9 · 47 reviews on Google Maps →',
+    test_google_label:'Google Reviews',
+    test_google_count:'Based on 47 reviews',
+    test_google_link:'Read them on Google →',
     test_title:'What families<br><em>say about us</em>',
     // Availability
     avail_eyebrow:'Plan Your Stay',
@@ -3077,6 +3138,8 @@ const TRANSLATIONS = {
     cf_sending:'Sending…', cf_sent_btn:'Sent. Lisette will be in touch', cf_sent_status:'Thanks. You will hear from Lisette within a day.', cf_error:'Something went wrong. Please try again or email info@sanprocolo.com directly.', cf_thanks:'Thanks!',
     form_ac_pitch:'Camping Pitch', form_ac_safari:'Safari Tent', form_ac_tunnel:'Tunnel Tent', form_ac_glamp:'Glamping Tent', form_ac_chalet:'Chalet',
     test_c_nl:'Netherlands', test_c_de:'Germany', test_c_uk:'United Kingdom',
+    test_q1:'We thought the campsite was fantastic. Above all the view is beautiful, the surroundings are peaceful and you find yourself in a green oasis.',
+    test_q2:'A beautiful small-scale campsite with a wonderful view over a lovely, hilly landscape.',
     fac_advice_k:'Local Advice',
     fac_advice_v:'Lisette &amp; David\'s own list of markets, restaurants, hidden beaches and the spots the guidebooks haven\'t found.',
     fac_laundry_k:'Laundry &amp; Baby Gear',
@@ -3217,6 +3280,10 @@ const TRANSLATIONS = {
     exp_wine_p:'Hierboven zijn geen stadslichten, dus de sterrenhemel is iets wat de meeste van onze gasten in jaren niet hebben gezien. Op een heldere avond zie je vanaf het terras zelfs de Melkweg en blijven de kinderen altijd veel te laat op om hem te zoeken.',
     // Testimonials
     test_eyebrow:'Gastbeoordelingen',
+    test_rating:'<span class="stars">★★★★★</span>4,9 · 47 reviews op Google Maps →',
+    test_google_label:'Google Reviews',
+    test_google_count:'Op basis van 47 reviews',
+    test_google_link:'Lees ze op Google →',
     test_title:'Wat families<br><em>over ons zeggen</em>',
     // Availability
     avail_eyebrow:'Plan je Verblijf',
@@ -3325,7 +3392,9 @@ const TRANSLATIONS = {
     per_night_slash:'/ nacht', open_maps:'Bekijk op de kaart →',
     cf_sending:'Bezig…', cf_sent_btn:'Verzonden. Lisette neemt contact op', cf_sent_status:'Bedankt. Je hoort binnen een dag van Lisette.', cf_error:'Er ging iets mis. Probeer het opnieuw of mail rechtstreeks naar info@sanprocolo.com.', cf_thanks:'Bedankt!',
     form_ac_pitch:'Kampeerplaats', form_ac_safari:'Safaritent', form_ac_tunnel:'Tunneltent', form_ac_glamp:'Glampingtent', form_ac_chalet:'Chalet',
-    test_c_nl:'Nederland', test_c_de:'Duitsland', test_c_uk:'Verenigd Koninkrijk'
+    test_c_nl:'Nederland', test_c_de:'Duitsland', test_c_uk:'Verenigd Koninkrijk',
+    test_q1:'Wij vonden de camping fantastisch. Allereerst is het uitzicht prachtig, de omgeving rustig en bevind je je in een groene oase.',
+    test_q2:'Prachtige kleinschalige camping met een geweldig uitzicht over een mooi heuvelachtig landschap.'
   }
 };
 
