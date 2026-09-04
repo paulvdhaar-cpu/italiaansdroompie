@@ -956,6 +956,13 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 /* ── SURROUNDINGS ── */
 #surroundings { padding: 100px 48px; background: var(--bg); }
 
+.surround-image { max-width: 1280px; margin: 40px auto 0; }
+.surround-image-band {
+  height: 380px;
+  background-size: cover; background-repeat: no-repeat;
+  border-radius: 2px;
+}
+
 .surround-intro {
   max-width: 1280px; margin: 0 auto 52px;
   display: grid; grid-template-columns: 1fr 1fr;
@@ -1360,11 +1367,7 @@ a:focus-visible, button:focus-visible {
 
   #surroundings { padding: 64px 24px; }
   .surround-intro { grid-template-columns: 1fr; gap: 20px; }
-  .surround-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 180px 180px 180px;
-  }
-  .surround-card:first-child { grid-row: span 1; grid-column: span 2; }
+  .surround-image-band { height: 240px; }
 
   .sea-banner { height: 380px; }
   .sea-banner-content { padding: 0 24px; }
@@ -2012,7 +2015,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <a href="#surroundings" class="mobile-menu-link" data-i18n="nav_area">De Omgeving</a>
   <a href="#faq" class="mobile-menu-link" data-i18n="nav_faq">Goed om te weten</a>
   <div class="mobile-menu-divider"></div>
-  <a href="#availability" class="mobile-menu-book" data-i18n="nav_book_stay">Boek je Verblijf</a>
+  <a href="#availability" class="mobile-menu-book" data-i18n="nav_book_stay">Boek nu</a>
   <div class="mobile-lang mobile-lang--menu">
     <a href="#" onclick="window.location.href='/italiaansdroompie/';return false;" data-lang="nl" class="active">NL</a>
     <a href="#" onclick="window.location.href='/italiaansdroompie/en/';return false;" data-lang="en">EN</a>
@@ -2038,7 +2041,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <a data-lang="de" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">DE</a>
       <a data-lang="it" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">IT</a>
     </div>
-    <a href="#availability" class="btn-nav" data-i18n="nav_book_now">Boek Nu</a>
+    <a href="#availability" class="btn-nav" data-i18n="nav_book_now">Boek nu</a>
   </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -2055,7 +2058,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     <p class="hero-slogan">Il dolce far niente</p>
     <p class="hero-sub" data-i18n="hero_sub">Een kleine familiecamping tussen de bergen en de zee. Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.</p>
     <div class="hero-cta">
-      <a href="#availability" class="btn-primary" data-i18n="nav_book_stay">Boek je Verblijf</a>
+      <a href="#availability" class="btn-primary" data-i18n="nav_book_stay">Boek nu</a>
       <a href="#about" class="btn-outline" data-i18n="hero_btn_story">Ons Verhaal</a>
     </div>
     <p class="hero-urgency" data-i18n="hero_urgency">Open 22 mei tot 2 oktober — Juli en augustus zijn snel vol</p>
@@ -2136,10 +2139,10 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="section-eyebrow reveal" data-i18n="about_eyebrow">Ons Verhaal</div>
         <h2 class="section-title reveal reveal-delay-1" data-i18n="about_title">Hoe een vakantie<br><em>een thuis werd</em></h2>
       </div>
-      <p class="about-text reveal reveal-delay-2" data-i18n="about_p1">Al lange tijd was er een voorliefde voor Italië. David vroeg Lisette hier ten huwelijk en hier kwamen ze later ook terug om te trouwen, dus het land was al deel van hun verhaal lang voordat ze eraan dachten om er te wonen. Wat ze het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.</p>
+      <p class="about-text reveal reveal-delay-2" data-i18n="about_p1">Al lang hadden we een voorliefde voor Italië. David vroeg Lisette hier ten huwelijk en we kwamen later terug om te trouwen, dus het land was al deel van ons verhaal lang voordat we eraan dachten om er te wonen. Wat we het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.</p>
       <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">De camping verwelkomt gasten sinds 2007, op een plek die al met zorg was aangelegd, op een van de mooiste plekjes van de vallei. Vanaf eind 2026 hebben we het stokje overgenomen en met z'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. We houden het bewust klein en persoonlijk. Achttien plaatsen, waarvan een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van ons in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.</p>
       <h3 class="about-subheading reveal reveal-delay-3" data-i18n="about_sub">Een echte camping, geen resort</h3>
-      <p class="about-text reveal reveal-delay-3" data-i18n="about_p3">Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was, zeker als de lange tafel gedekt wordt voor gasten en buren samen.</p>
+      <p class="about-text reveal reveal-delay-3" data-i18n="about_p3">Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was.</p>
       <a href="#availability" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Bekijk beschikbaarheid →</a>
     </div>
   </div>
@@ -2171,7 +2174,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="act-card-text bg-dark">
         <div class="act-card-eyebrow" data-i18n="act_table_ey">Twee keer per week</div>
         <div class="act-card-title" data-i18n="act_table_h">De lange tafel</div>
-        <p class="act-card-sub" data-i18n="act_table_p">Lisette en David koken. Lokaal eten, wijn van Giacomo Centanni, buren en gasten door elkaar. Je blijft tot later dan je van plan was en niemand gaat eerder weg.</p>
+        <p class="act-card-sub" data-i18n="act_table_p">Lisette en David koken. Lokaal eten, buren en gasten door elkaar. Je blijft tot later dan je van plan was en niemand gaat eerder weg.</p>
       </div>
     </div>
 
@@ -2222,7 +2225,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="section-eyebrow reveal" data-i18n="stay_eyebrow">Glampen in Le Marche</div>
       <h2 class="section-title reveal reveal-delay-1" data-i18n="stay_title">Vind jouw<br><em>hoekje van Italië</em></h2>
     </div>
-    <a href="#availability" class="btn-outline reveal" data-i18n="stay_check">Bekijk Beschikbaarheid →</a>
+    <a href="#availability" class="btn-outline reveal" data-i18n="stay_check">Bekijk beschikbaarheid →</a>
   </div>
   <div class="stay-cards">
 
@@ -2245,7 +2248,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_pitch_p">Ruime terrasplekken met valleizicht, voor tent, camper en caravan. Elektra inbegrepen. Niet alle plekken zijn met caravan bereikbaar.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">€16 – €19 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2269,7 +2272,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_glamp_p">Zo naar binnen: bedden opgemaakt, linnen inbegrepen, een eigen terras en hetzelfde valleizicht vanuit je bed.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">€140 – €190 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2293,7 +2296,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_tunnel_p">Een gezellige tent op een eigen plek, ingericht voor twee — bedden opgemaakt, zo te genieten.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">€75 – €92 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2316,7 +2319,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_safari_p">Een ruime safaritent voor vier personen. Bedden opgemaakt, linnen inbegrepen — neem alleen je koffer mee.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">€108 – €138 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2337,10 +2340,10 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="stay-card-body">
         <h3 class="stay-card-title" data-i18n="stay_chalet_h">Chalet</h3>
         <div class="stay-card-cap"><svg viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M23 20v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span data-i18n="cap_4">Tot 4 personen</span></div>
-        <p class="stay-card-desc" data-i18n="stay_chalet_p">Onze meest comfortabele optie: volledig uitgerust, een eigen terras en hetzelfde valleizicht vanuit je bed.</p>
+        <p class="stay-card-desc" data-i18n="stay_chalet_p">Onze meest comfortabele optie: volledig uitgerust, een eigen terras en de rust van vier vaste muren om je heen.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">€110 – €142 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek</a>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2560,46 +2563,17 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="section-eyebrow reveal" data-i18n="surr_eyebrow">De Omgeving</div>
       <h2 class="section-title reveal reveal-delay-1" data-i18n="surr_title">Le Marche —<br><em>het stuk Italië dat de meeste reizigers niet kennen</em></h2>
     </div>
-    <p class="about-text reveal reveal-delay-2" style="font-size:15px;"><span data-i18n="surr_text">Le Marche ligt tussen de Apennijnen en de Adriatische Zee maar de meeste toeristen rijden er langs op weg naar Toscane of Puglia. Daardoor voelt het nog zoals je je Italië herinnert van vroeger: brede pleinen zonder souvenirsites, markten die echt voor de buurt zijn, trattoria's waar ze je naam onthouden na je tweede bezoek.</span></p>
+    <p class="about-text reveal reveal-delay-2" style="font-size:15px;"><span data-i18n="surr_text">Le Marche ligt tussen de Apennijnen en de Adriatische Zee maar de meeste toeristen rijden er langs op weg naar Toscane of Puglia. Daardoor voelt het nog zoals je je Italië herinnert van vroeger: brede pleinen zonder souvenirsites, markten die echt voor de buurt zijn, trattoria's waar ze je naam onthouden na je tweede bezoek. Ascoli Piceno voor de marmeren pleinen, Fermo voor de zaterdagmarkt, de Sibillini als je hoger de bergen in wilt.</span></p>
   </div>
-  <div class="surround-grid">
-    <div class="surround-card reveal">
-      <div class="surround-img" style="background-image: url('https://t3.ftcdn.net/jpg/04/77/35/02/360_F_477350213_8jNCoOtGn76q7c8Ge2tg0XdzF6MK5uvb.jpg');">
-        <div class="surround-overlay"></div>
-        <div class="surround-label"><h3 data-i18n="surr_coast">De Adriatische kust</h3></div>
-      </div>
-    </div>
-    <div class="surround-card reveal reveal-delay-1">
-      <div class="surround-img" style="background-image: url('https://images.visititaly.eu/uploads/articoli/gallery/sabulo-hill-city-of-fermo.jpg');">
-        <div class="surround-overlay"></div>
-        <div class="surround-label"><h3>Fermo</h3></div>
-      </div>
-    </div>
-    <div class="surround-card reveal reveal-delay-2">
-      <div class="surround-img" style="background-image: url('https://wsrv.nl/?url=images.unsplash.com/photo-1464822759023-fed622ff2c3b&amp;w=1200&amp;q=85');">
-        <div class="surround-overlay"></div>
-        <div class="surround-label"><h3>Monte Sibillini</h3></div>
-      </div>
-    </div>
-    <div class="surround-card reveal reveal-delay-1">
-      <div class="surround-img" style="background-image: url('https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2021/01/ascoli-piceno-1024x1024.jpg');">
-        <div class="surround-overlay"></div>
-        <div class="surround-label"><h3>Ascoli Piceno</h3></div>
-      </div>
-    </div>
-    <div class="surround-card reveal reveal-delay-2">
-      <div class="surround-img" style="background-image: url('https://www.anitavillas.com/blog/wp-content/uploads//loreto-what-to-see.jpg');">
-        <div class="surround-overlay"></div>
-        <div class="surround-label"><h3>Loreto</h3></div>
-      </div>
-    </div>
+  <div class="surround-image reveal reveal-delay-3">
+    <div class="surround-image-band" style="background-image: url('wijds-gezicht.jpg'); background-position: center 75%;"></div>
   </div>
 </section>
 
 <!-- FACILITIES -->
 <section id="facilities">
   <div class="facilities-header">
-    <h2 class="section-title reveal reveal-delay-1" data-i18n="fac_title">Op de camping</h2>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="fac_title">Op de <em>camping</em></h2>
   </div>
   <div class="fac-gallery reveal reveal-delay-2">
     <div class="fac-gallery-grid">
@@ -2620,7 +2594,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="amenity-list reveal" style="border-top: 1px solid var(--border2); margin-top: 16px;">
     <div class="amenity-row">
       <div class="amenity-k" data-i18n="fac_terrace_name">Terras en bar</div>
-      <div class="amenity-v" data-i18n="fac_terrace_desc">Elke ochtend vers brood en cappuccino. Twee keer per week in het hoogseizoen een gezamenlijk diner aan de lange tafel, voor gasten en buren samen. Reserveren gewenst.</div>
+      <div class="amenity-v" data-i18n="fac_terrace_desc">Vers brood, cappuccino en een terras waar je blijft plakken. Reserveren gewenst voor het diner.</div>
     </div>
     <div class="amenity-row">
       <div class="amenity-k" data-i18n="fac_pool_k">Zwembad</div>
@@ -2628,7 +2602,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     </div>
     <div class="amenity-row">
       <div class="amenity-k" data-i18n="fac_kids_k">Speeltuin</div>
-      <div class="amenity-v" data-i18n="fac_kids_v">Glijbaan, schommels, trampoline, tafeltennis en een heuvel om in te verdwijnen.</div>
+      <div class="amenity-v" data-i18n="fac_kids_v">Speeltuin — voor tussen het zwemmen door.</div>
     </div>
     <div class="amenity-row">
       <div class="amenity-k" data-i18n="fac_wine_k">Biologische wijn</div>
@@ -2719,7 +2693,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="section-eyebrow reveal" data-i18n="contact_eyebrow">Neem contact op</div>
         <h2 class="section-title reveal reveal-delay-1" data-i18n="contact_title">Bericht Lisette</h2>
       </div>
-      <p class="about-text reveal reveal-delay-2"><span data-i18n="contact_intro">Stuur Lisette een bericht en je hoort binnen een dag van haar. Het seizoen loopt van 22 mei tot 2 oktober. Huisdieren kunnen we helaas niet ontvangen — de open heuvel is juist wat de plek voor gezinnen zo fijn maakt.</span></p>
+      <p class="about-text reveal reveal-delay-2"><span data-i18n="contact_intro">Stuur Lisette een bericht en je hoort binnen een dag van haar. Het seizoen loopt van 22 mei tot 2 oktober.</span></p>
       <div class="contact-detail reveal">
         <span class="contact-detail-label" data-i18n="contact_l_address">Adres</span>
         <span class="contact-detail-value" data-i18n="contact_v_address">Monte Vidon Combatte, Le Marche, Italië</span>
@@ -2802,7 +2776,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <div class="footer-inner">
     <div>
       <span class="footer-logo">Camping San Procolo</span>
-      <p class="footer-tagline" data-i18n="footer_tagline">Familiescamping en glamping<br>Monte Vidon Combatte · Le Marche · Italië<br>Open 22 mei – 2 oktober</p>
+      <p class="footer-tagline" data-i18n="footer_tagline">Familiecamping en glamping<br>Monte Vidon Combatte · Le Marche · Italië<br>Open 22 mei – 2 oktober</p>
     </div>
     <div>
       <p class="footer-note" data-i18n="footer_quote">“Dit stukje Le Marche is ons thuis. Als je dit leest, hopen we dat het ook een stukje van het jouwe wordt.”</p>
@@ -2818,7 +2792,7 @@ footer .footer-links a:hover   { color: var(--peach); }
           </a>
         </li>
         <li><a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a></li>
-        <li><a href="#availability" data-i18n="footer_book">Boek een verblijf</a></li>
+        <li><a href="#availability" data-i18n="footer_book">Bekijk beschikbaarheid</a></li>
       </ul>
     </div>
   </div>
@@ -2931,7 +2905,7 @@ const TRANSLATIONS = {
     // Nav
     nav_story:'Our Story', nav_stay:'Where to Stay', nav_things:'Things to Do',
     nav_area:'The Area', nav_facilities:'Facilities', nav_faq:'Good to Know',
-    nav_book_now:'Book Now', nav_book_stay:'Book Your Stay',
+    nav_book_now:'Book now', nav_book_stay:'Book now',
     fab_cta:'Check availability', fab_aria:'Go to availability',
     // Hero
     h1_seo:' Camping San Procolo, family glamping and camping in Le Marche, Italy',
@@ -2949,10 +2923,10 @@ const TRANSLATIONS = {
     about_eyebrow:'Our Story',
     about_title:'To a hilltop<br><em>in Le Marche</em>',
     about_p1:'Italy had been close to their hearts for years. David proposed to Lisette here, and it was here that they later came back to marry, so the country was part of their story long before they thought of living in it. What they loved most was the slower pace of life, the long meals and the unhurried days. So with three young kids and Fred the dog in tow, moving south felt less like a leap than the obvious next step.',
-    about_p2:'The campsite has welcomed guests since 2007, and what they found above Monte Vidon Combatte was a place already laid out with care, on one of the loveliest spots in the valley, with more potential than they could get to in a single summer. They have run it since 2026, and between the two of them there is always something on the go, a small improvement this week, a bigger idea for next winter. They keep it small and personal on purpose. Eighteen pitches, a handful of them glamping tents, a pool, a terrace, an olive grove, and usually one of them nearby, likely to pour you a glass of wine before you have made it back to your tent.',
+    about_p2:'The campsite has welcomed guests since 2007, on a plot already laid out with care, on one of the loveliest spots in the valley. We took over at the end of 2026, and between the two of us there is always something on the go — a small improvement this week, a bigger idea for next winter. We keep it small and personal on purpose. Eighteen pitches, a handful of them glamping tents, a pool, a terrace, an olive grove, and usually one of us nearby, likely to pour you a glass of wine before you have made it back to your tent.',
     about_sub:'A proper campsite, not a resort',
     about_p3:'Kids run around barefoot. You can actually relax. Mornings start with fresh bread on the terrace and evenings tend to last longer than you planned.',
-    about_cta:'Check Availability →',
+    about_cta:'Check availability →',
     // Gallery
     cap_sibillini:'Sibillini at dusk', cap_pool:'The pool', cap_grapes:'The grapes',
     cap_hills:'Our view', cap_sunset:'Sunset over San Procolo',
@@ -2978,7 +2952,7 @@ const TRANSLATIONS = {
     act_olive_ey:'In season', act_olive_h:'Olive harvest',
     act_olive_p:'In October we harvest the olives — a morning in the grove, and the long lunch that always seems to follow.',
     act_table_ey:'Twice a week', act_table_h:'The long table',
-    act_table_p:'Lisette and David cook. Local food, Centanni wine, neighbours and guests mixed together. You end up staying until midnight and you\'re fine with that.',
+    act_table_p:'Lisette and David cook. Local food, neighbours and guests mixed together. You end up staying until midnight and you\'re fine with that.',
     act_beach_ey:'20 minutes away', act_beach_h:'Porto San Giorgio',
     act_beach_p:'A long sandy beach with a palm-lined promenade and a harbour. Gelato on the way back is part of the deal.',
     act_sib_ey:'40 minutes inland', act_sib_h:'The Sibillini',
@@ -2990,7 +2964,7 @@ const TRANSLATIONS = {
     // Stay
     stay_eyebrow:'Glamping in Le Marche',
     stay_title:'Find your<br><em>corner of Italy</em>',
-    stay_check:'Check Availability →',
+    stay_check:'Check availability →',
     stay_pitch_tag:'Camping pitch', stay_pitch_h:'Camping pitch',
     stay_pitch_p:'Spacious terraced pitches with valley views, for tents, campers and caravans. Electricity included. Some pitches are not caravan-accessible.',
     stay_glamp_tag:'Glamping tent', stay_glamp_h:'Glamping tent',
@@ -3000,7 +2974,7 @@ const TRANSLATIONS = {
     stay_safari_tag:'Safari tent', stay_safari_h:'Safari tent',
     stay_safari_p:'A roomy safari tent that sleeps four. Beds made, linen included — just bring your suitcase.',
     stay_chalet_tag:'Chalet', stay_chalet_h:'Chalet',
-    stay_chalet_p:'Our most comfortable option: full amenities, a private terrace and the same valley view from your bed.',
+    stay_chalet_p:'Our most comfortable option: full amenities, a private terrace and the quiet of proper walls around you.',
     carousel_prev:'Previous photo', carousel_next:'Next photo',
     cap_4:'Up to 4 guests', cap_2:'Up to 2 guests',
     map_eyebrow:'The campsite', map_title:'Site map', map_hint:'Tap to enlarge', map_zoom:'Enlarge the site map',
@@ -3012,9 +2986,9 @@ const TRANSLATIONS = {
     rates_glamp:'Glamping tent', rates_safari:'Safari tent', rates_chalet:'Chalet', rates_tunnel:'Tunnel tent',
     rates_pitch:'Camping pitch', rates_adult:'Adult', rates_child:'Child up to 12',
     rates_fridge:'Fridge', rates_highchair:'High chair', rates_cot:'Travel cot with mattress',
-    from_label:'From', book_btn:'Book',
+    from_label:'From', book_btn:'Book now',
     avail_pitch_price:'From €18 / night', avail_safari_price:'From €90 / night',
-    avail_tunnel_price:'From €70 / night', avail_lodge_price:'From €100 / night',
+    avail_tunnel_price:'From €70 / night', avail_glamp_price:'From €100 / night',
     avail_chalet_price:'From €95 / night',
     // Experiences
     exp_eyebrow:'Only Here',
@@ -3042,7 +3016,7 @@ const TRANSLATIONS = {
     avail_pitch_guests:'Your tent',
     avail_safari_guests:'Sleeps up to 4 · 1 available',
     avail_tunnel_guests:'Made for couples · 2 available',
-    avail_lodge_guests:'Our favourite · 2 available',
+    avail_glamp_guests:'Our favourite · 2 available',
     avail_chalet_guests:'Best views on site · 1 available',
     avail_persons_label:'Number of persons', avail_persons_unit:'persons',
     avail_hint:'Pick the night you arrive',
@@ -3053,20 +3027,20 @@ const TRANSLATIONS = {
     // Surroundings
     surr_eyebrow:'The Region',
     surr_title:'Le Marche —<br><em>the part of Italy most people still miss</em>',
-    surr_text:'Le Marche sits between the Apennines and the Adriatic. Most tourists drive past it on their way to Tuscany or Puglia, which is exactly why it still feels the way Italy used to feel. From the campsite you can be in the mountains in under an hour or at the sea in twenty minutes.',
+    surr_text:'Le Marche sits between the Apennines and the Adriatic. Most tourists drive past it on their way to Tuscany or Puglia, which is exactly why it still feels the way Italy used to feel. From the campsite you can be in the mountains in under an hour or at the sea in twenty minutes. Ascoli Piceno for its marble squares, Fermo for the Saturday market, the Sibillini when you want to be higher up in the mountains.',
     // Sea
     surr_coast:'The Adriatic coast',
     sea_eyebrow:'The Adriatic',
     sea_title:'20 minutes<br><em>to the sea</em>',
     sea_sub:'Sandy beaches, turquoise water, and the kind of bar that serves cold beer in a plastic cup and you wouldn\'t have it any other way. Hill by morning. Coast by afternoon.',
     // Facilities
-    fac_eyebrow:'On Site', fac_title:'On the campsite',
+    fac_eyebrow:'On Site', fac_title:'On the <em>campsite</em>',
     fac_terrace_name:'Terrace &amp; Bar',
-    fac_terrace_desc:'Fresh bread and cappuccino every morning. Twice a week in high season, an Italian dinner on the long table — reservation recommended.',
+    fac_terrace_desc:'Fresh bread, cappuccino and a terrace where you end up staying. Booking recommended for dinner.',
     fac_pool_k:'Swimming Pool',
     fac_pool_v:'Five by ten metres, open nine to eight, looking out over the valley. Where the kids spend most of their day and where you\'ll spend most of yours. There is no lifeguard, so keep an eye out yourself.',
     fac_kids_k:'Kids Playground',
-    fac_kids_v:'Playhouse, slide, swings, a big trampoline, table tennis. And a whole hillside to disappear into.',
+    fac_kids_v:'Playground — for the stretches between swims.',
     fac_wine_k:'Organic Wine',
     fac_wine_v:'From Giacomo Centanni, three valleys over. Organic, and always on site.',
     fac_wifi_k:'Free Wi-Fi',
@@ -3110,7 +3084,7 @@ const TRANSLATIONS = {
     // Contact
     contact_eyebrow:'Get in Touch',
     contact_title:'Write to<br><em>Lisette</em>',
-    contact_intro:'Send Lisette a message and she\'ll come back to you within a day. The season runs 22 May to 2 October. We can\'t take pets, sorry — the open hillside is part of what makes the place work for families.',
+    contact_intro:'Send Lisette a message and she\'ll come back to you within a day. The season runs 22 May to 2 October.',
     contact_l_address:'Address', contact_v_address:'Monte Vidon Combatte, Le Marche, Italy',
     contact_l_phone:'Phone', contact_l_email:'Email', contact_l_season:'Season',
     contact_v_season:'22 May – 2 October',
@@ -3124,7 +3098,7 @@ const TRANSLATIONS = {
     // Footer
     footer_tagline:'Family glamping &amp; camping<br>Monte Vidon Combatte · Le Marche · Italy<br>Open 22 May – 2 October',
     footer_quote:'“This little corner of Le Marche is our home. If you\'re reading this, we hope it becomes part of yours too.”',
-    footer_find:'Find Us', footer_book:'Book a Stay', footer_privacy:'Privacy Policy',
+    footer_find:'Find Us', footer_book:'Check availability', footer_privacy:'Privacy Policy',
     footer_copy:'© 2026 Camping San Procolo · Monte Vidon Combatte · Le Marche, Italy',
     // FAQ
     faq_eyebrow:'Before You Come',
@@ -3145,7 +3119,7 @@ const TRANSLATIONS = {
     // Nav
     nav_story:'Ons Verhaal', nav_stay:'Verblijf', nav_things:'Activiteiten',
     nav_area:'De Omgeving', nav_facilities:'Faciliteiten', nav_faq:'Goed om te weten',
-    nav_book_now:'Boek Nu', nav_book_stay:'Boek je Verblijf',
+    nav_book_now:'Boek nu', nav_book_stay:'Boek nu',
     fab_cta:'Bekijk beschikbaarheid', fab_aria:'Ga naar beschikbaarheid',
     // Hero
     h1_seo:' Camping San Procolo, familiecamping en glamping in Le Marche, Italië',
@@ -3161,10 +3135,10 @@ const TRANSLATIONS = {
     badge_label:'Jullie gastheren · Le Marche',
     about_eyebrow:'Ons Verhaal',
     about_title:'Hoe een vakantie<br><em>een thuis werd</em>',
-    about_p1:'Al lange tijd was er een voorliefde voor Italië. David vroeg Lisette hier ten huwelijk en hier kwamen ze later ook terug om te trouwen, dus het land was al deel van hun verhaal lang voordat ze eraan dachten om er te wonen. Wat ze het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.',
+    about_p1:'Al lang hadden we een voorliefde voor Italië. David vroeg Lisette hier ten huwelijk en we kwamen later terug om te trouwen, dus het land was al deel van ons verhaal lang voordat we eraan dachten om er te wonen. Wat we het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.',
     about_p2:'De camping verwelkomt gasten sinds 2007, op een plek die al met zorg was aangelegd, op een van de mooiste plekjes van de vallei. Vanaf eind 2026 hebben we het stokje overgenomen en met z\'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. We houden het bewust klein en persoonlijk. Achttien plaatsen, waarvan een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van ons in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.',
     about_sub:'Een echte camping, geen resort',
-    about_p3:'Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was, zeker als de lange tafel gedekt wordt voor gasten en buren samen.',
+    about_p3:'Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was.',
     about_cta:'Bekijk beschikbaarheid →',
     // Gallery
     cap_sibillini:'De Sibillini bij avondlicht', cap_pool:'Het zwembad', cap_grapes:'De druiven',
@@ -3191,7 +3165,7 @@ const TRANSLATIONS = {
     act_olive_ey:'In het seizoen', act_olive_h:'Olijvenoogst',
     act_olive_p:'In oktober oogsten wij de olijven: een ochtend in de gaard en de lange lunch die er altijd op volgt.',
     act_table_ey:'Twee keer per week', act_table_h:'De lange tafel',
-    act_table_p:'Lisette en David koken. Lokaal eten, wijn van Giacomo Centanni, buren en gasten door elkaar. Je blijft tot later dan je van plan was en niemand gaat eerder weg.',
+    act_table_p:'Lisette en David koken. Lokaal eten, buren en gasten door elkaar. Je blijft tot later dan je van plan was en niemand gaat eerder weg.',
     act_beach_ey:'20 minuten rijden', act_beach_h:'Porto San Giorgio',
     act_beach_p:'Op twintig minuten ligt Porto San Giorgio: een lang zandstrand met een palmenboulevard en een haven. Goede gelato op de terugweg.',
     act_sib_ey:'40 minuten landinwaarts', act_sib_h:'De Sibillini',
@@ -3203,7 +3177,7 @@ const TRANSLATIONS = {
     // Stay
     stay_eyebrow:'Glampen in Le Marche',
     stay_title:'Vind jouw<br><em>hoekje van Italië</em>',
-    stay_check:'Bekijk Beschikbaarheid →',
+    stay_check:'Bekijk beschikbaarheid →',
     stay_pitch_tag:'Kampeerplek', stay_pitch_h:'Kampeerplek',
     stay_pitch_p:'Ruime terrasplekken met valleizicht, voor tent, camper en caravan. Elektra inbegrepen. Niet alle plekken zijn met caravan bereikbaar.',
     stay_glamp_tag:'Glampingtent', stay_glamp_h:'Glampingtent',
@@ -3213,7 +3187,7 @@ const TRANSLATIONS = {
     stay_safari_tag:'Safaritent', stay_safari_h:'Safaritent',
     stay_safari_p:'Een ruime safaritent voor vier personen. Bedden opgemaakt, linnen inbegrepen — neem alleen je koffer mee.',
     stay_chalet_tag:'Chalet', stay_chalet_h:'Chalet',
-    stay_chalet_p:'Onze meest comfortabele optie: volledig uitgerust, een eigen terras en hetzelfde valleizicht vanuit je bed.',
+    stay_chalet_p:'Onze meest comfortabele optie: volledig uitgerust, een eigen terras en de rust van vier vaste muren om je heen.',
     carousel_prev:'Vorige foto', carousel_next:'Volgende foto',
     cap_4:'Tot 4 personen', cap_2:'Tot 2 personen',
     map_eyebrow:'De camping', map_title:'Plattegrond', map_hint:'Tik om te vergroten', map_zoom:'Vergroot de plattegrond',
@@ -3225,9 +3199,9 @@ const TRANSLATIONS = {
     rates_glamp:'Glampingtent', rates_safari:'Safaritent', rates_chalet:'Chalet', rates_tunnel:'Tunneltent',
     rates_pitch:'Kampeerplek', rates_adult:'Volwassen', rates_child:'Kind tot 12 jaar',
     rates_fridge:'Koelkast', rates_highchair:'Kinderstoel', rates_cot:'Campingbedje mét matras',
-    from_label:'Vanaf', book_btn:'Boek',
+    from_label:'Vanaf', book_btn:'Boek nu',
     avail_pitch_price:'Vanaf €18 / nacht', avail_safari_price:'Vanaf €90 / nacht',
-    avail_tunnel_price:'Vanaf €70 / nacht', avail_lodge_price:'Vanaf €100 / nacht',
+    avail_tunnel_price:'Vanaf €70 / nacht', avail_glamp_price:'Vanaf €100 / nacht',
     avail_chalet_price:'Vanaf €95 / nacht',
     // Experiences
     exp_eyebrow:'Alleen hier',
@@ -3255,7 +3229,7 @@ const TRANSLATIONS = {
     avail_pitch_guests:'Jouw tent',
     avail_safari_guests:'Slaapt tot 4 personen · 1 beschikbaar',
     avail_tunnel_guests:'Voor stellen · 2 beschikbaar',
-    avail_lodge_guests:'Onze favoriet · 2 beschikbaar',
+    avail_glamp_guests:'Onze favoriet · 2 beschikbaar',
     avail_chalet_guests:'Beste uitzicht · 1 beschikbaar',
     avail_persons_label:'Aantal personen', avail_persons_unit:'personen',
     avail_hint:'Kies je aankomstdatum',
@@ -3266,20 +3240,20 @@ const TRANSLATIONS = {
     // Surroundings
     surr_eyebrow:'De Omgeving',
     surr_title:'Le Marche —<br><em>het stuk Italië dat de meeste reizigers niet kennen</em>',
-    surr_text:'Le Marche ligt tussen de Apennijnen en de Adriatische Zee maar de meeste toeristen rijden er langs op weg naar Toscane of Puglia. Daardoor voelt het nog zoals je je Italië herinnert van vroeger: brede pleinen zonder souvenirsites, markten die echt voor de buurt zijn, trattoria\'s waar ze je naam onthouden na je tweede bezoek.',
+    surr_text:'Le Marche ligt tussen de Apennijnen en de Adriatische Zee maar de meeste toeristen rijden er langs op weg naar Toscane of Puglia. Daardoor voelt het nog zoals je je Italië herinnert van vroeger: brede pleinen zonder souvenirsites, markten die echt voor de buurt zijn, trattoria\'s waar ze je naam onthouden na je tweede bezoek. Ascoli Piceno voor de marmeren pleinen, Fermo voor de zaterdagmarkt, de Sibillini als je hoger de bergen in wilt.',
     // Sea
     surr_coast:'De Adriatische kust',
     sea_eyebrow:'De Adriatische Zee',
     sea_title:'20 minuten<br><em>naar zee</em>',
     sea_sub:'Twintig minuten rijden en je staat op een strand waar de Italianen zelf naartoe gaan: zandig, kalm, weinig buitenlanders. Een bar met koud bier en goed uitzicht.',
     // Facilities
-    fac_eyebrow:'Op de camping', fac_title:'Op de camping',
+    fac_eyebrow:'Op de camping', fac_title:'Op de <em>camping</em>',
     fac_terrace_name:'Terras en bar',
-    fac_terrace_desc:'Elke ochtend vers brood en cappuccino. Twee keer per week in het hoogseizoen een gezamenlijk diner aan de lange tafel, voor gasten en buren samen. Reserveren gewenst.',
+    fac_terrace_desc:'Vers brood, cappuccino en een terras waar je blijft plakken. Reserveren gewenst voor het diner.',
     fac_pool_k:'Zwembad',
     fac_pool_v:'Vijf bij tien meter, open van negen tot acht, met uitzicht over de vallei. Er is geen badmeester, dus houd zelf even een oogje in het zeil.',
     fac_kids_k:'Speeltuin',
-    fac_kids_v:'Glijbaan, schommels, trampoline, tafeltennis en een heuvel om in te verdwijnen.',
+    fac_kids_v:'Speeltuin — voor tussen het zwemmen door.',
     fac_wine_k:'Biologische wijn',
     fac_wine_v:'Van Giacomo Centanni, drie valleien verderop. Biologisch en altijd op voorraad.',
     fac_wifi_k:'Gratis wifi',
@@ -3293,7 +3267,7 @@ const TRANSLATIONS = {
     // Contact
     contact_eyebrow:'Neem contact op',
     contact_title:'Bericht Lisette',
-    contact_intro:'Stuur Lisette een bericht en je hoort binnen een dag van haar. Het seizoen loopt van 22 mei tot 2 oktober. Huisdieren kunnen we helaas niet ontvangen — de open heuvel is juist wat de plek voor gezinnen zo fijn maakt.',
+    contact_intro:'Stuur Lisette een bericht en je hoort binnen een dag van haar. Het seizoen loopt van 22 mei tot 2 oktober.',
     contact_l_address:'Adres', contact_v_address:'Monte Vidon Combatte, Le Marche, Italië',
     contact_l_phone:'Telefoon', contact_l_email:'E-mail', contact_l_season:'Seizoen',
     contact_v_season:'22 mei – 2 oktober',
@@ -3305,9 +3279,9 @@ const TRANSLATIONS = {
     form_5p:'5 personen', form_6p:'6 personen', form_7p:'7+ personen',
     form_message:'Bericht (optioneel)', form_submit:'Aanvraag Versturen →',
     // Footer
-    footer_tagline:'Familiescamping en glamping<br>Monte Vidon Combatte · Le Marche · Italië<br>Open 22 mei – 2 oktober',
+    footer_tagline:'Familiecamping en glamping<br>Monte Vidon Combatte · Le Marche · Italië<br>Open 22 mei – 2 oktober',
     footer_quote:'“Dit stukje Le Marche is ons thuis. Als je dit leest, hopen we dat het ook een stukje van het jouwe wordt.”',
-    footer_find:'Vind ons', footer_book:'Boek een verblijf', footer_privacy:'Privacybeleid',
+    footer_find:'Vind ons', footer_book:'Bekijk beschikbaarheid', footer_privacy:'Privacybeleid',
     footer_copy:'© 2026 Camping San Procolo · Monte Vidon Combatte · Le Marche, Italië',
     // FAQ
     faq_eyebrow:'Voordat je komt',
@@ -3410,7 +3384,7 @@ const CW_UNITS = [
   { id: 'u10', type: 'safari', name: 'Safari 3',      capacity: 4, pricePerNight: 80,  minStay: 2 },
   { id: 'u11', type: 'tunnel', name: 'Tunnel Tent 1', capacity: 2, pricePerNight: 75,  minStay: 2 },
   { id: 'u12', type: 'tunnel', name: 'Tunnel Tent 2', capacity: 2, pricePerNight: 75,  minStay: 2 },
-  { id: 'u13', type: 'lodge',  name: 'Lodge Tent',    capacity: 4, pricePerNight: 100, minStay: 3 },
+  { id: 'u13', type: 'glamp',  name: 'Glamping Tent', capacity: 4, pricePerNight: 100, minStay: 3 },
 ];
 
 const CW_SEED = [
@@ -3477,7 +3451,7 @@ function cwDays(a, b) { return Math.round((new Date(b) - new Date(a)) / 86400000
 function cwFmt(iso) { if (!iso) return '\u2014'; const [y,m,d] = iso.split('-'); return d+'-'+m+'-'+y; }
 function cwISO(d) { return d.toISOString().slice(0,10); }
 function cwTypeName(t) {
-  const m={pitch:'cw_pitch',chalet:'Chalet',safari:'Safari tent',tunnel:'Tunnel tent',lodge:'Lodge tent'};
+  const m={pitch:'cw_pitch',chalet:'Chalet',safari:'Safari tent',tunnel:'Tunnel tent',glamp:'Glamping tent'};
   const k=m[t]; return k&&k.startsWith('cw_')?cwT(k):k||t;
 }
 
