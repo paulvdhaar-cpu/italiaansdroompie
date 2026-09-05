@@ -1410,8 +1410,8 @@ a:focus-visible, button:focus-visible {
 
   #experiences { padding: 64px 24px; }
   .experiences-grid { grid-template-columns: 1fr; gap: 10px; }
-  .exp-card { aspect-ratio: 4/3; }
-  .exp-card-content { top: 45%; bottom: 0; padding: 20px 24px 24px; justify-content: flex-start; gap: 8px; }
+  .exp-card { aspect-ratio: 1/1; }
+  .exp-card-content { top: 20%; bottom: 0; padding: 16px 24px 24px; justify-content: flex-start; gap: 6px; }
 
   .testimonials { padding: 64px 24px; }
   .testimonials-grid { grid-template-columns: 1fr; }
@@ -2007,9 +2007,19 @@ footer .footer-links a:hover   { color: var(--peach); }
   .plattegrond-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
   /* Lightbox (plattegrond zoom) */
+  [data-carousel] .carousel-slide{cursor:zoom-in}
+  .lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:28px;line-height:1;cursor:pointer;z-index:301;display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .lightbox-nav:hover{background:rgba(255,255,255,.28)}
+  .lightbox-prev{left:20px}
+  .lightbox-next{right:20px}
+  @media (max-width:640px){
+    .lightbox-nav{width:44px;height:44px;font-size:24px}
+    .lightbox-prev{left:8px} .lightbox-next{right:8px}
+  }
   .lightbox{position:fixed;inset:0;z-index:300;background:rgba(15,9,4,.94);display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}
   .lightbox[hidden]{display:none}
-  .lightbox img{width:min(1600px,96vw);max-width:none;height:auto;border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .lightbox img{width:auto;max-width:min(1100px,92vw);max-height:86vh;height:auto;border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  #photo-lightbox img{max-width:min(720px,92vw)}
   .lightbox-close{position:fixed;top:16px;right:20px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:26px;line-height:1;cursor:pointer;z-index:301}
   .lightbox-close:hover{background:rgba(255,255,255,.28)}
 
@@ -2460,7 +2470,7 @@ footer .footer-links a:hover   { color: var(--peach); }
 <!-- TESTIMONIALS -->
 <section class="testimonials">
   <div style="max-width:1280px;margin:0 auto;">
-    <a href="https://maps.app.goo.gl/33oT8wbpaGHjVCi79" target="_blank" rel="noopener" class="section-eyebrow section-eyebrow-link reveal" data-i18n="test_rating"><span class="stars">★★★★★</span>4,9 · 47 reviews op Google Maps →</a>
+    <a href="https://www.google.com/maps/place/Camping+San+Procolo/@43.0598684,13.6204556,722m/data=!3m2!1e3!4b1!4m9!3m8!1s0x133206a4ebe44aa1:0x276c0fd2e27f6626!5m2!4m1!1i2!8m2!3d43.0598685!4d13.6253265!16s%2Fg%2F11b76tzymn" target="_blank" rel="noopener" class="section-eyebrow section-eyebrow-link reveal" data-i18n="test_rating"><span class="stars">★★★★★</span>4,9 · 47 reviews op Google Maps →</a>
     <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:52px;" data-i18n="test_title">Wat families<br><em>over ons zeggen</em></h2>
     <div class="testimonials-grid">
       <div class="testimonial-card reveal">
@@ -2478,7 +2488,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="tg-num">4,9<small>/ 5</small></div>
         <div class="tg-stars">★★★★★</div>
         <div class="tg-count" data-i18n="test_google_count">Op basis van 47 reviews</div>
-        <a href="https://maps.app.goo.gl/33oT8wbpaGHjVCi79" target="_blank" rel="noopener" class="tg-link" data-i18n="test_google_link">Lees ze op Google →</a>
+        <a href="https://www.google.com/maps/place/Camping+San+Procolo/@43.0598684,13.6204556,722m/data=!3m2!1e3!4b1!4m9!3m8!1s0x133206a4ebe44aa1:0x276c0fd2e27f6626!5m2!4m1!1i2!8m2!3d43.0598685!4d13.6253265!16s%2Fg%2F11b76tzymn" target="_blank" rel="noopener" class="tg-link" data-i18n="test_google_link">Lees ze op Google →</a>
       </div>
       <div class="testimonial-card reveal reveal-delay-2">
         <p class="testimonial-text" data-i18n="test_q2">Prachtige kleinschalige camping met een geweldig uitzicht over een mooi heuvelachtig landschap.</p>
@@ -2767,7 +2777,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <span class="contact-detail-label" data-i18n="contact_l_season">Seizoen</span>
         <span class="contact-detail-value" data-i18n="contact_v_season">22 mei – 2 oktober</span>
       </div>
-      <a href="https://maps.app.goo.gl/33oT8wbpaGHjVCi79/search/?api=1&amp;query=Camping+San+Procolo+Monte+Vidon+Combatte+Le+Marche+Italy" target="_blank" rel="noopener" class="contact-map reveal" style="background-image: url('contact-map.png'); background-size: cover; background-position: 44% 38%;">
+      <a href="https://www.google.com/maps/place/Camping+San+Procolo/@43.0598684,13.6204556,722m/data=!3m2!1e3!4b1!4m9!3m8!1s0x133206a4ebe44aa1:0x276c0fd2e27f6626!5m2!4m1!1i2!8m2!3d43.0598685!4d13.6253265!16s%2Fg%2F11b76tzymn/search/?api=1&amp;query=Camping+San+Procolo+Monte+Vidon+Combatte+Le+Marche+Italy" target="_blank" rel="noopener" class="contact-map reveal" style="background-image: url('contact-map.png'); background-size: cover; background-position: 44% 38%;">
         <div class="map-pulse"></div>
         <div class="map-pin-wrap"><div class="map-pin"></div></div>
         <svg viewbox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
@@ -3784,14 +3794,56 @@ setTimeout(function(){
   <button type="button" class="lightbox-close" id="map-close" aria-label="Sluiten">×</button>
   <img src="plattegrond.png" alt="Camping San Procolo">
 </div>
+<!-- Photo lightbox (accommodation carousels) -->
+<div class="lightbox" id="photo-lightbox" hidden>
+  <button type="button" class="lightbox-close" id="photo-close" aria-label="Sluiten">×</button>
+  <button type="button" class="lightbox-nav lightbox-prev" id="photo-prev" aria-label="Vorige">‹</button>
+  <button type="button" class="lightbox-nav lightbox-next" id="photo-next" aria-label="Volgende">›</button>
+  <img id="photo-lightbox-img" src="" alt="">
+</div>
 <script>
 (function(){
+  // Photo lightbox — used by all accommodation carousels
+  var pbLb=document.getElementById('photo-lightbox');
+  var pbImg=document.getElementById('photo-lightbox-img');
+  var pbState={imgs:[],i:0};
+  function pbShow(idx){
+    if(!pbState.imgs.length) return;
+    pbState.i=(idx+pbState.imgs.length)%pbState.imgs.length;
+    pbImg.src=pbState.imgs[pbState.i];
+  }
+  function pbOpen(imgs,startIdx){
+    pbState.imgs=imgs; pbShow(startIdx);
+    pbLb.hidden=false; document.body.style.overflow='hidden';
+  }
+  function pbShut(){ pbLb.hidden=true; document.body.style.overflow=''; pbImg.src=''; }
+  if(pbLb){
+    document.getElementById('photo-close').addEventListener('click',pbShut);
+    document.getElementById('photo-prev').addEventListener('click',function(){ pbShow(pbState.i-1); });
+    document.getElementById('photo-next').addEventListener('click',function(){ pbShow(pbState.i+1); });
+    pbLb.addEventListener('click',function(e){ if(e.target===pbLb) pbShut(); });
+    document.addEventListener('keydown',function(e){
+      if(pbLb.hidden) return;
+      if(e.key==='Escape') pbShut();
+      else if(e.key==='ArrowLeft') pbShow(pbState.i-1);
+      else if(e.key==='ArrowRight') pbShow(pbState.i+1);
+    });
+  }
+  function extractUrl(slide){
+    var m=slide.style.backgroundImage.match(/url\(['"]?([^'"]+?)['"]?\)/);
+    return m?m[1]:'';
+  }
   // Accommodation photo carousels
   document.querySelectorAll('[data-carousel]').forEach(function(car){
     var track=car.querySelector('.carousel-track');
     var slides=car.querySelectorAll('.carousel-slide');
     var dotsWrap=car.querySelector('.carousel-dots');
     var n=slides.length, i=0;
+    var carImgs=[].map.call(slides,extractUrl);
+    // Click each slide to open lightbox starting at that slide
+    slides.forEach(function(sl,idx){
+      sl.addEventListener('click',function(){ pbOpen(carImgs,idx); });
+    });
     if(n<2){ car.querySelectorAll('.carousel-arrow').forEach(function(a){ a.style.display='none'; }); return; }
     for(var d=0; d<n; d++){
       var b=document.createElement('button');
@@ -3805,14 +3857,19 @@ setTimeout(function(){
       dots.forEach(function(x,k){ x.classList.toggle('active',k===i); }); }
     car.querySelector('.carousel-prev').addEventListener('click',function(){ go(i-1); });
     car.querySelector('.carousel-next').addEventListener('click',function(){ go(i+1); });
-    var x0=null;
-    track.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; },{passive:true});
+    var x0=null, moved=false;
+    track.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; moved=false; },{passive:true});
+    track.addEventListener('touchmove',function(e){
+      if(x0!==null && Math.abs(e.touches[0].clientX-x0)>10) moved=true;
+    },{passive:true});
     track.addEventListener('touchend',function(e){
       if(x0===null) return;
       var dx=e.changedTouches[0].clientX-x0;
       if(Math.abs(dx)>40){ dx<0 ? go(i+1) : go(i-1); }
       x0=null;
     },{passive:true});
+    // Suppress click after swipe to avoid opening lightbox during swipe
+    track.addEventListener('click',function(e){ if(moved){ e.stopPropagation(); e.preventDefault(); moved=false; } },true);
   });
   // Plattegrond lightbox
   var lb=document.getElementById('map-lightbox');
