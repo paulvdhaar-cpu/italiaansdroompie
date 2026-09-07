@@ -1223,7 +1223,7 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 
 .contact-map:hover { border-color: var(--border); }
 
-.map-pin-wrap { position: relative; z-index: 2; }
+.map-pin-wrap { position: relative; z-index: 2; transform: translate(-48px, -22px); }
 
 .map-pulse {
   position: absolute; top: 50%; left: 50%;
@@ -1268,7 +1268,14 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   border-color: oklch(44% 0.095 115 / 0.70);
 }
 
-.form-textarea { resize: vertical; min-height: 100px; }
+.form-textarea { resize: vertical; min-height: 140px; }
+
+.form-hint {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.2px;
+  color: var(--muted); margin-top: 6px;
+  transition: color 0.2s;
+}
+.form-hint.is-ok { color: var(--gold); }
 
 .form-select option { background: var(--bg2); color: oklch(24% 0.035 90); }
 
@@ -2240,7 +2247,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     </div>
 
     <div class="act-card act-beach reveal">
-      <div class="act-card-photo" style="background-image: url('https://www.seatemperatu.re/site/images/illustration/mer-adriatique-croatie.jpg');">
+      <div class="act-card-photo" style="background-image: url('../giorgio.jpg');">
         <div class="act-photo-overlay"></div>
         <div class="act-card-label">
           <div class="act-card-eyebrow" data-i18n="act_beach_ey">20 minutes away</div>
@@ -2800,9 +2807,8 @@ footer .footer-links a:hover   { color: var(--peach); }
         <span class="contact-detail-value" data-i18n="contact_v_season">22 May – 2 October</span>
       </div>
       <a href="https://www.google.com/maps/place/Camping+San+Procolo/@43.0598684,13.6204556,722m/data=!3m2!1e3!4b1!4m9!3m8!1s0x133206a4ebe44aa1:0x276c0fd2e27f6626!5m2!4m1!1i2!8m2!3d43.0598685!4d13.6253265!16s%2Fg%2F11b76tzymn/search/?api=1&query=Camping+San+Procolo+Monte+Vidon+Combatte+Le+Marche+Italy" target="_blank" rel="noopener" class="contact-map reveal" style="background-image: url('../contact-map.png'); background-size: cover; background-position: 44% 38%;">
-        <div class="map-pulse"></div>
-        <div class="map-pin-wrap"><div class="map-pin"></div></div>
-        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
+        <div class="map-pin-wrap"><div class="map-pulse"></div><div class="map-pin"></div></div>
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:translate(-48px,-22px);">
           <circle cx="200" cy="150" r="90" stroke="oklch(35% 0.09 115 / 0.20)" stroke-width="1" fill="none"/>
           <circle cx="200" cy="150" r="60" stroke="oklch(35% 0.09 115 / 0.28)" stroke-width="1" fill="none"/>
           <circle cx="200" cy="150" r="30" stroke="oklch(35% 0.09 115 / 0.38)" stroke-width="1" fill="none"/>
@@ -2821,38 +2827,11 @@ footer .footer-links a:hover   { color: var(--peach); }
           <div class="form-group"><label class="form-label" for="fLast" data-i18n="form_lastname">Last Name</label><input id="fLast" name="lastName" type="text" class="form-input" placeholder="Rossi" required></div>
         </div>
         <div class="form-group"><label class="form-label" for="fEmail" data-i18n="form_email">Email</label><input id="fEmail" name="email" type="email" class="form-input" placeholder="marco@example.com" required></div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label" for="fArrival" data-i18n="form_arrival">Arrival</label><input id="fArrival" name="arrival" type="date" class="form-input" required></div>
-          <div class="form-group"><label class="form-label" for="fDeparture" data-i18n="form_departure">Departure</label><input id="fDeparture" name="departure" type="date" class="form-input" required></div>
+        <div class="form-group">
+          <label class="form-label" for="fMessage" data-i18n="form_message">Message</label>
+          <textarea id="fMessage" name="message" class="form-textarea" rows="6" required minlength="100" data-i18n-placeholder="form_msg_ph" placeholder="Tell us a little about your plans, your travel dates or anything you'd like to know."></textarea>
+          <p class="form-hint" id="fMessageHint" data-i18n="form_msg_hint" aria-live="polite">Minimum 100 characters</p>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="fAccom" data-i18n="form_accom">Accommodation</label>
-            <select id="fAccom" name="accommodation" class="form-select" required>
-              <option value="" data-i18n="form_select">Select type</option>
-              <option value="Tent Pitch" data-i18n="form_ac_tent">Tent Pitch</option>
-              <option value="Caravan / Camper Pitch" data-i18n="form_ac_camper">Caravan / Camper Pitch</option>
-              <option value="Bell Tent" data-i18n="form_ac_bell">Bell Tent</option>
-              <option value="Tunnel Tent" data-i18n="form_ac_tunnel">Tunnel Tent</option>
-              <option value="Safari Tent" data-i18n="form_ac_safari">Safari Tent</option>
-              <option value="Glamping Tent" data-i18n="form_ac_glamp">Glamping Tent</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="fGuests" data-i18n="form_guests">Guests</label>
-            <select id="fGuests" name="guests" class="form-select">
-              <option value="1" data-i18n="form_1p">1 person</option>
-              <option value="2" selected data-i18n="form_2p">2 people</option>
-              <option value="3" data-i18n="form_3p">3 people</option>
-              <option value="4" data-i18n="form_4p">4 people</option>
-              <option value="5" data-i18n="form_5p">5 people</option>
-              <option value="6" data-i18n="form_6p">6 people</option>
-              <option value="7" data-i18n="form_7p">7+ people</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group"><label class="form-label" for="fMessage" data-i18n="form_message">Message (optional)</label><textarea id="fMessage" name="message" class="form-textarea" placeholder="Any questions or special requests... (note: pets cannot be accommodated)"></textarea></div>
-        <input type="hidden" id="fEstimate" name="estimate" value="">
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
         <button type="submit" class="btn-primary" style="border:none;cursor:pointer;" data-i18n="form_submit">Send Enquiry →</button>
         <p id="formStatus" style="margin-top:10px;font-size:13px;color:var(--muted);min-height:18px;"></p>
@@ -2948,16 +2927,11 @@ footer .footer-links a:hover   { color: var(--peach); }
     }
 
     const data = {
-      firstName:     form.elements['firstName'].value.trim(),
-      lastName:      form.elements['lastName'].value.trim(),
-      email:         form.elements['email'].value.trim(),
-      arrival:       form.elements['arrival'].value,
-      departure:     form.elements['departure'].value,
-      accommodation: form.elements['accommodation'].value,
-      guests:        form.elements['guests'].value,
-      message:       form.elements['message'].value.trim(),
-      estimate:      form.elements['estimate'].value,
-      submittedAt:   new Date().toISOString()
+      firstName:   form.elements['firstName'].value.trim(),
+      lastName:    form.elements['lastName'].value.trim(),
+      email:       form.elements['email'].value.trim(),
+      message:     form.elements['message'].value.trim(),
+      submittedAt: new Date().toISOString()
     };
 
     btn.disabled = true;
@@ -3186,13 +3160,13 @@ const TRANSLATIONS = {
     contact_l_address:'Address', contact_v_address:'Monte Vidon Combatte, Le Marche, Italy',
     contact_l_phone:'Phone', contact_l_email:'Email', contact_l_season:'Season',
     contact_v_season:'22 May – 2 October',
-    form_eyebrow:'Make an Enquiry',
-    form_firstname:'First Name', form_lastname:'Last Name', form_email:'Email',
-    form_arrival:'Arrival', form_departure:'Departure',
-    form_accom:'Accommodation', form_select:'Select type', form_guests:'Guests',
-    form_1p:'1 person', form_2p:'2 people', form_3p:'3 people', form_4p:'4 people',
-    form_5p:'5 people', form_6p:'6 people', form_7p:'7+ people',
-    form_message:'Message (optional)', form_submit:'Send Enquiry →',
+    form_eyebrow:'Send us a message',
+    form_firstname:'First name', form_lastname:'Last name', form_email:'Email',
+    form_message:'Message',
+    form_msg_ph:'Tell us a little about your plans, your travel dates or anything you\'d like to know.',
+    form_msg_hint:'Minimum 100 characters',
+    form_msg_ok:'Ready to send',
+    form_submit:'Send message →',
     // Footer
     footer_tagline:'Family glamping &amp; camping<br>Monte Vidon Combatte · Le Marche · Italy<br>Open 22 May – 2 October',
     footer_quote:'“This little corner of Le Marche is our home. If you\'re reading this, we hope it becomes part of yours too.”',
@@ -3375,13 +3349,13 @@ const TRANSLATIONS = {
     contact_l_address:'Adres', contact_v_address:'Monte Vidon Combatte, Le Marche, Italië',
     contact_l_phone:'Telefoon', contact_l_email:'E-mail', contact_l_season:'Seizoen',
     contact_v_season:'22 mei – 2 oktober',
-    form_eyebrow:'Stuur een aanvraag',
+    form_eyebrow:'Stuur ons een bericht',
     form_firstname:'Voornaam', form_lastname:'Achternaam', form_email:'E-mail',
-    form_arrival:'Aankomst', form_departure:'Vertrek',
-    form_accom:'Accommodatie', form_select:'Kies type', form_guests:'Gasten',
-    form_1p:'1 persoon', form_2p:'2 personen', form_3p:'3 personen', form_4p:'4 personen',
-    form_5p:'5 personen', form_6p:'6 personen', form_7p:'7+ personen',
-    form_message:'Bericht (optioneel)', form_submit:'Aanvraag Versturen →',
+    form_message:'Bericht',
+    form_msg_ph:'Vertel ons iets over je plannen, mogelijke reisdata of waar je meer over wilt weten.',
+    form_msg_hint:'Minimaal 100 tekens',
+    form_msg_ok:'Klaar om te versturen',
+    form_submit:'Bericht versturen →',
     // Footer
     footer_tagline:'Familiecamping en glamping<br>Monte Vidon Combatte · Le Marche · Italië<br>Open 22 mei – 2 oktober',
     footer_quote:'“Dit stukje Le Marche is ons thuis. Als je dit leest, hopen we dat het ook een stukje van het jouwe wordt.”',
@@ -3446,6 +3420,31 @@ let currentLang = 'en';
     const el2 = document.getElementById('form-loaded-at');
     if (el2 && !el2.value) el2.value = Date.now();
   }, 0);
+})();
+
+// Live character counter for the enquiry message (minimum 100 chars)
+(function() {
+  const ta = document.getElementById('fMessage');
+  const hint = document.getElementById('fMessageHint');
+  if (!ta || !hint) return;
+  const MIN = 100;
+  const baseText = () => (TRANSLATIONS[currentLang] || {}).form_msg_hint || hint.textContent;
+  function tick() {
+    const n = ta.value.length;
+    if (n >= MIN) {
+      hint.textContent = ((TRANSLATIONS[currentLang] || {}).form_msg_ok || 'Ready to send') + ' — ' + n + ' / ' + MIN;
+      hint.classList.add('is-ok');
+    } else {
+      hint.textContent = baseText() + ' — ' + n + ' / ' + MIN;
+      hint.classList.remove('is-ok');
+    }
+  }
+  ta.addEventListener('input', tick);
+  // Re-run on language switch (setLang refreshes data-i18n; we hook a bit after)
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.closest && e.target.closest('.nav-lang')) setTimeout(tick, 30);
+  });
+  tick();
 })();
 
 function setLang(lang) {
