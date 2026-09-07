@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src https://script.google.com https://script.googleusercontent.com https://docs.google.com; frame-ancestors 'none';">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="description" content="Camping San Procolo — a family-run campsite on a hilltop in Le Marche, Italy. Glamping tents, chalets, pool, ancient olive trees and the Adriatic Sea 20 minutes away. Open 22 May – 2 October.">
+<meta name="description" content="Camping San Procolo — a family-run campsite on a hilltop in Le Marche, Italy. Glamping tents, bell tents, pool, ancient olive trees and the Adriatic Sea 20 minutes away. Open 22 May – 2 October.">
 <meta property="og:title" content="Camping San Procolo — Hilltop Glamping in Le Marche, Italy">
 <meta property="og:description" content="Harvest olives, chase butterflies, swim in the pool, reach the Adriatic in 20 minutes. A family-run campsite in the hills of Le Marche where slow Italian living still exists.">
 <meta property="og:image" content="https://paulvdhaar-cpu.github.io/italiaansdroompie/poster-sibillini.jpg">
@@ -25,7 +25,7 @@
   "@context": "https://schema.org",
   "@type": "Campground",
   "name": "Camping San Procolo",
-  "description": "Family-run glamping and camping in the hills of Le Marche, Italy. Camping pitches, glamping tents, tunnel tents, safari tents and a chalet, with a pool, olive garden and the Adriatic 20 minutes away.",
+  "description": "Family-run glamping and camping in the hills of Le Marche, Italy. Tent and caravan/camper pitches, glamping tents, tunnel tents, safari tents and a bell tent, with a pool, olive garden and the Adriatic 20 minutes away.",
   "url": "https://paulvdhaar-cpu.github.io/italiaansdroompie/en/",
   "email": "info@sanprocolo.com",
   "telephone": "+31638073908",
@@ -45,7 +45,7 @@
     {"@type": "LocationFeatureSpecification", "name": "Glamping Tents", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Safari Tent", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Tunnel Tent", "value": true},
-    {"@type": "LocationFeatureSpecification", "name": "Chalet", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Bell Tent", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Organic Wine", "value": true},
     {"@type": "LocationFeatureSpecification", "name": "Olive Garden", "value": true}
   ]
@@ -254,7 +254,7 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 
 .hero-bg {
   position: absolute; inset: 0;
-  background-image: url('https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2025/11/Zwembad-1-scaled-e1762685294547.jpg');
+  background-image: url('../header.jpg');
   background-size: cover; background-position: center;
   filter: brightness(0.85) saturate(1.05);
   animation: kenBurnsHero 30s ease-in-out infinite alternate;
@@ -2221,7 +2221,7 @@ footer .footer-links a:hover   { color: var(--peach); }
 
   <div class="activities-bento">
     <div class="act-card act-pool reveal reveal-delay-1">
-      <div class="act-card-photo" style="background-image: url('https://wsrv.nl/?url=sanprocolo.com/wp-content/uploads/2025/11/Zwembad-1-scaled-e1762685294547.jpg'); background-position: center top;">
+      <div class="act-card-photo" style="background-image: url('../zwembad2.jpg'); background-position: center;">
         <div class="act-photo-overlay"></div>
         <div class="act-card-label">
           <div class="act-card-eyebrow" data-i18n="act_pool_ey">All summer</div>
@@ -2294,10 +2294,9 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
-            <div class="carousel-slide" style="background-image: url('../veld.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('../chill-veld.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../tent1.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../tent2.jpg')"></div>
             <div class="carousel-slide" style="background-image: url('../sanitair.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('../weg.jpg')"></div>
           </div>
           <button type="button" class="carousel-arrow carousel-prev" data-i18n-aria-label="carousel_prev" aria-label="Previous photo">&#8249;</button>
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Next photo">&#8250;</button>
@@ -2305,8 +2304,8 @@ footer .footer-links a:hover   { color: var(--peach); }
         </div>
       </div>
       <div class="stay-card-body">
-        <h3 class="stay-card-title" data-i18n="stay_pitch_h">Camping pitch</h3>
-        <p class="stay-card-desc" data-i18n="stay_pitch_p">Spacious terraced pitches with valley views, for tents, campers and caravans. Electricity included. Some pitches are not caravan-accessible.</p>
+        <h3 class="stay-card-title" data-i18n="stay_tent_h">Tent pitch</h3>
+        <p class="stay-card-desc" data-i18n="stay_tent_p">Spacious terraced pitches with valley views, for tents only. Electricity included. Quiet, at the edge of the campsite.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">&euro;16 &ndash; &euro;19 <span data-i18n="per_night_slash">/ night</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Book</a>
@@ -2315,6 +2314,28 @@ footer .footer-links a:hover   { color: var(--peach); }
     </div>
 
     <div class="stay-card reveal reveal-delay-1">
+      <div class="stay-card-image">
+        <div class="carousel" data-carousel>
+          <div class="carousel-track">
+            <div class="carousel-slide" style="background-image: url('../weg.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../sanitair.jpg')"></div>
+          </div>
+          <button type="button" class="carousel-arrow carousel-prev" data-i18n-aria-label="carousel_prev" aria-label="Previous photo">&#8249;</button>
+          <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Next photo">&#8250;</button>
+          <div class="carousel-dots" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="stay-card-body">
+        <h3 class="stay-card-title" data-i18n="stay_camper_h">Caravan / camper pitch</h3>
+        <p class="stay-card-desc" data-i18n="stay_camper_p">Terraced pitches accessible for caravans and campers, with the same valley view. Electricity and hook-ups included.</p>
+        <div class="stay-card-footer">
+          <div class="stay-price"><span class="stay-price-value">&euro;18 &ndash; &euro;22 <span data-i18n="per_night_slash">/ night</span></span></div>
+          <a href="#availability" class="btn-small" data-i18n="book_btn">Book</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stay-card reveal reveal-delay-2">
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
@@ -2341,7 +2362,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
     </div>
 
-    <div class="stay-card reveal reveal-delay-2">
+    <div class="stay-card reveal">
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
@@ -2365,7 +2386,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
     </div>
 
-    <div class="stay-card reveal">
+    <div class="stay-card reveal reveal-delay-1">
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
@@ -2388,13 +2409,12 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
     </div>
 
-    <div class="stay-card reveal reveal-delay-1">
+    <div class="stay-card reveal reveal-delay-2">
       <div class="stay-card-image">
         <div class="carousel" data-carousel>
           <div class="carousel-track">
-            <div class="carousel-slide" style="background-image: url('../campsite.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('../glamping-tent.jpg')"></div>
-            <div class="carousel-slide" style="background-image: url('../sibillini-dusk.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../bell.jpg')"></div>
+            <div class="carousel-slide" style="background-image: url('../sanitair2.jpg')"></div>
           </div>
           <button type="button" class="carousel-arrow carousel-prev" data-i18n-aria-label="carousel_prev" aria-label="Previous photo">&#8249;</button>
           <button type="button" class="carousel-arrow carousel-next" data-i18n-aria-label="carousel_next" aria-label="Next photo">&#8250;</button>
@@ -2402,11 +2422,11 @@ footer .footer-links a:hover   { color: var(--peach); }
         </div>
       </div>
       <div class="stay-card-body">
-        <h3 class="stay-card-title" data-i18n="stay_chalet_h">Chalet</h3>
-        <div class="stay-card-cap"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M23 20v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="cap_4">Up to 4 guests</span></div>
-        <p class="stay-card-desc" data-i18n="stay_chalet_p">Our most comfortable option: full amenities, a private terrace and the quiet of proper walls around you.</p>
+        <h3 class="stay-card-title" data-i18n="stay_bell_h">Bell tent</h3>
+        <div class="stay-card-cap"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M23 20v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="cap_2">Up to 2 guests</span></div>
+        <p class="stay-card-desc" data-i18n="stay_bell_p">A classic canvas bell tent on its own pitch — real beds, linen included, and the iconic round shape. Cosy for two.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-value">&euro;110 &ndash; &euro;142 <span data-i18n="per_night_slash">/ night</span></span></div>
+          <div class="stay-price"><span class="stay-price-value">&euro;85 &ndash; &euro;115 <span data-i18n="per_night_slash">/ night</span></span></div>
           <a href="#availability" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
@@ -2539,10 +2559,11 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="cw-select-wrap">
           <select id="s-type" aria-label="Accommodation type" data-i18n-aria-label="cw_accom_type">
             <option value="" data-i18n="cw_all_types">Alle types</option>
-            <option value="pitch" data-i18n="cw_pitch">Kampeerplaats</option>
-            <option value="chalet">Chalet</option>
-            <option value="safari">Safari tent</option>
+            <option value="tent" data-i18n="cw_tent">Tentplek</option>
+            <option value="camper" data-i18n="cw_camper">Plek voor caravan/camper</option>
+            <option value="bell">Bell tent</option>
             <option value="tunnel">Tunnel tent</option>
+            <option value="safari">Safari tent</option>
             <option value="glamping">Glampingtent</option>
           </select>
         </div>
@@ -2706,7 +2727,7 @@ footer .footer-links a:hover   { color: var(--peach); }
           <p class="rates-sub" data-i18n="rates_sub">All amounts in euros, per night.</p>
           <div class="rates-incl">
             <span class="rates-incl-label" data-i18n="rates_incl_label">Included</span>
-            <span class="rates-incl-text" data-i18n="rates_incl_text">Final cleaning is included for the glamping tent, safari tent and chalet.</span>
+            <span class="rates-incl-text" data-i18n="rates_incl_text">Final cleaning is included for the glamping tent, safari tent and bell tent.</span>
           </div>
           <div class="rates-colhead">
             <span></span>
@@ -2716,10 +2737,11 @@ footer .footer-links a:hover   { color: var(--peach); }
           <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_stays">Stays</span><span class="rates-rule"></span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_glamp">Glamping tent</span><span class="rates-price">&euro; 140,00</span><span class="rates-price">&euro; 190,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_safari">Safari tent</span><span class="rates-price">&euro; 108,00</span><span class="rates-price">&euro; 138,00</span></div>
-          <div class="rates-row"><span class="rates-name" data-i18n="rates_chalet">Chalet</span><span class="rates-price">&euro; 110,00</span><span class="rates-price">&euro; 142,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_bell">Bell tent</span><span class="rates-price">&euro; 85,00</span><span class="rates-price">&euro; 115,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_tunnel">Tunnel tent</span><span class="rates-price">&euro; 75,00</span><span class="rates-price">&euro; 92,00</span></div>
           <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_camping">Camping</span><span class="rates-rule"></span></div>
-          <div class="rates-row"><span class="rates-name" data-i18n="rates_pitch">Camping pitch</span><span class="rates-price">&euro; 16,00</span><span class="rates-price">&euro; 19,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_tent">Tent pitch</span><span class="rates-price">&euro; 16,00</span><span class="rates-price">&euro; 19,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_camper">Caravan / camper pitch</span><span class="rates-price">&euro; 18,00</span><span class="rates-price">&euro; 22,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_adult">Adult</span><span class="rates-price">&euro; 12,00</span><span class="rates-price">&euro; 13,50</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_child">Child up to 12</span><span class="rates-price">&euro; 10,00</span><span class="rates-price">&euro; 11,00</span></div>
           <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_extras">Extras</span><span class="rates-rule"></span></div>
@@ -2746,7 +2768,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </details>
       <details class="faq-item">
         <summary class="faq-q" data-i18n="faq_q5">What do the tents come with?</summary>
-        <div class="faq-a" data-i18n="faq_a5">The glamping tent, safari tent and chalet come with real beds, a kitchen, a private bathroom and a covered terrace over the olive grove, so you only need to bring your suitcase. The tunnel tent and camping pitches use our shared facilities block. For those three the final cleaning is included, so there's nothing to scrub on your last morning.</div>
+        <div class="faq-a" data-i18n="faq_a5">The glamping and safari tents come with real beds, a kitchen, a private bathroom and a covered terrace over the olive grove, so you only need to bring your suitcase. The bell tent has real beds and linen but shares our sanitary block, together with the tunnel tent and camping pitches. Final cleaning is included for the glamping, safari and bell tents, so there's nothing to scrub on your last morning.</div>
       </details>
     </div>
   </div>
@@ -2808,11 +2830,12 @@ footer .footer-links a:hover   { color: var(--peach); }
             <label class="form-label" for="fAccom" data-i18n="form_accom">Accommodation</label>
             <select id="fAccom" name="accommodation" class="form-select" required>
               <option value="" data-i18n="form_select">Select type</option>
-              <option value="Camping Pitch" data-i18n="form_ac_pitch">Camping Pitch</option>
-              <option value="Safari Tent" data-i18n="form_ac_safari">Safari Tent</option>
+              <option value="Tent Pitch" data-i18n="form_ac_tent">Tent Pitch</option>
+              <option value="Caravan / Camper Pitch" data-i18n="form_ac_camper">Caravan / Camper Pitch</option>
+              <option value="Bell Tent" data-i18n="form_ac_bell">Bell Tent</option>
               <option value="Tunnel Tent" data-i18n="form_ac_tunnel">Tunnel Tent</option>
+              <option value="Safari Tent" data-i18n="form_ac_safari">Safari Tent</option>
               <option value="Glamping Tent" data-i18n="form_ac_glamp">Glamping Tent</option>
-              <option value="Chalet" data-i18n="form_ac_chalet">Chalet</option>
             </select>
           </div>
           <div class="form-group">
@@ -3032,26 +3055,28 @@ const TRANSLATIONS = {
     stay_eyebrow:'Glamping in Le Marche',
     stay_title:'Find your<br><em>corner of Italy</em>',
     stay_check:'Check availability →',
-    stay_pitch_tag:'Camping pitch', stay_pitch_h:'Camping pitch',
-    stay_pitch_p:'Spacious terraced pitches with valley views, for tents, campers and caravans. Electricity included. Some pitches are not caravan-accessible.',
+    stay_tent_tag:'Tent pitch', stay_tent_h:'Tent pitch',
+    stay_tent_p:'Spacious terraced pitches with valley views, for tents only. Electricity included. Quiet, at the edge of the campsite.',
+    stay_camper_tag:'Caravan / camper pitch', stay_camper_h:'Caravan / camper pitch',
+    stay_camper_p:'Terraced pitches accessible for caravans and campers, with the same valley view. Electricity and hook-ups included.',
     stay_glamp_tag:'Glamping tent', stay_glamp_h:'Glamping tent',
     stay_glamp_p:'Ready to walk into: beds made, linen included, your own terrace and the same valley view from your bed.',
     stay_tunnel_tag:'Tunnel tent', stay_tunnel_h:'Tunnel tent',
     stay_tunnel_p:'A cosy canvas tent on its own pitch, set up for two — beds made, ready to enjoy.',
     stay_safari_tag:'Safari tent', stay_safari_h:'Safari tent',
     stay_safari_p:'A roomy safari tent that sleeps four. Beds made, linen included — just bring your suitcase.',
-    stay_chalet_tag:'Chalet', stay_chalet_h:'Chalet',
-    stay_chalet_p:'Our most comfortable option: full amenities, a private terrace and the quiet of proper walls around you.',
+    stay_bell_tag:'Bell tent', stay_bell_h:'Bell tent',
+    stay_bell_p:'A classic canvas bell tent on its own pitch — real beds, linen included, and the iconic round shape. Cosy for two.',
     carousel_prev:'Previous photo', carousel_next:'Next photo',
     cap_4:'Up to 4 guests', cap_2:'Up to 2 guests',
     map_eyebrow:'The campsite', map_title:'Site map', map_hint:'Tap to enlarge', map_zoom:'Enlarge the site map',
     faq_price_q:'What does a stay cost?',
     rates_eyebrow:'Rates 2026', rates_title:'Prices per night', rates_sub:'All amounts in euros, per night.',
-    rates_incl_label:'Included', rates_incl_text:'Final cleaning is included for the glamping tent, safari tent and chalet.',
+    rates_incl_label:'Included', rates_incl_text:'Final cleaning is included for the glamping tent, safari tent and bell tent.',
     rates_low:'Low season', rates_high:'High season',
     rates_g_stays:'Stays', rates_g_camping:'Camping', rates_g_extras:'Extras',
-    rates_glamp:'Glamping tent', rates_safari:'Safari tent', rates_chalet:'Chalet', rates_tunnel:'Tunnel tent',
-    rates_pitch:'Camping pitch', rates_adult:'Adult', rates_child:'Child up to 12',
+    rates_glamp:'Glamping tent', rates_safari:'Safari tent', rates_bell:'Bell tent', rates_tunnel:'Tunnel tent',
+    rates_tent:'Tent pitch', rates_camper:'Caravan / camper pitch', rates_adult:'Adult', rates_child:'Child up to 12',
     rates_fridge:'Fridge', rates_highchair:'High chair', rates_cot:'Travel cot with mattress',
     from_label:'From', book_btn:'Book now',
     avail_pitch_price:'From €18 / night', avail_safari_price:'From €90 / night',
@@ -3146,7 +3171,7 @@ const TRANSLATIONS = {
     cw_ph_name:'Full name', cw_ph_email:'name@example.com', cw_ph_notes:'E.g. arrival time, special requests…',
     per_night_slash:'/ night', open_maps:'Open in Maps →',
     cf_sending:'Sending…', cf_sent_btn:'Sent. Lisette will be in touch', cf_sent_status:'Thanks. You will hear from Lisette within a day.', cf_error:'Something went wrong. Please try again or email info@sanprocolo.com directly.', cf_thanks:'Thanks!',
-    form_ac_pitch:'Camping Pitch', form_ac_safari:'Safari Tent', form_ac_tunnel:'Tunnel Tent', form_ac_glamp:'Glamping Tent', form_ac_chalet:'Chalet',
+    form_ac_tent:'Tent Pitch', form_ac_camper:'Caravan / Camper Pitch', form_ac_bell:'Bell Tent', form_ac_tunnel:'Tunnel Tent', form_ac_safari:'Safari Tent', form_ac_glamp:'Glamping Tent',
     test_c_nl:'Netherlands', test_c_de:'Germany', test_c_uk:'United Kingdom',
     test_q1:'We thought the campsite was fantastic. Above all the view is beautiful, the surroundings are peaceful and you find yourself in a green oasis.',
     test_q2:'A beautiful small-scale campsite with a wonderful view over a lovely, hilly landscape.',
@@ -3185,7 +3210,7 @@ const TRANSLATIONS = {
     faq_q4:'Which airport should we fly into?',
     faq_a4:'The nearest airport is Ancona, just over an hour away. A little further south, Pescara is the other easy choice and usually has the most summer flights, which is why many of our British and German guests land there. Perugia, Bologna and Rome are options too, with seasonal flights from the Netherlands, Germany and the UK. You will want a car whichever you choose, since the hills and the coast are best on your own schedule.',
     faq_q5:'What do the tents come with?',
-    faq_a5:'The glamping tent, safari tent and chalet come with real beds, a kitchen, a private bathroom and a covered terrace over the olive grove, so you only need to bring your suitcase. The tunnel tent and camping pitches use our shared facilities block. For those three the final cleaning is included, so there\'s nothing to scrub on your last morning.',
+    faq_a5:'The glamping and safari tents come with real beds, a kitchen, a private bathroom and a covered terrace over the olive grove, so you only need to bring your suitcase. The bell tent has real beds and linen but shares our sanitary block, together with the tunnel tent and camping pitches. Final cleaning is included for the glamping, safari and bell tents, so there\'s nothing to scrub on your last morning.',
   },
 
   nl: {
@@ -3251,26 +3276,28 @@ const TRANSLATIONS = {
     stay_eyebrow:'Glampen in Le Marche',
     stay_title:'Vind jouw<br><em>hoekje van Italië</em>',
     stay_check:'Bekijk beschikbaarheid →',
-    stay_pitch_tag:'Kampeerplek', stay_pitch_h:'Kampeerplek',
-    stay_pitch_p:'Ruime terrasplekken met valleizicht, voor tent, camper en caravan. Elektra inbegrepen. Niet alle plekken zijn met caravan bereikbaar.',
+    stay_tent_tag:'Tentplek', stay_tent_h:'Tentplek',
+    stay_tent_p:'Ruime terrasplekken met valleizicht, alleen voor tenten. Elektra inbegrepen. Rustig gelegen aan de rand van de camping.',
+    stay_camper_tag:'Plek voor caravan/camper', stay_camper_h:'Plek voor caravan/camper',
+    stay_camper_p:'Terrasplekken die met caravan of camper bereikbaar zijn, met hetzelfde valleizicht. Elektra en aansluitingen inbegrepen.',
     stay_glamp_tag:'Glampingtent', stay_glamp_h:'Glampingtent',
     stay_glamp_p:'Zo naar binnen: bedden opgemaakt, linnen inbegrepen, een eigen terras en hetzelfde valleizicht vanuit je bed.',
     stay_tunnel_tag:'Tunneltent', stay_tunnel_h:'Tunneltent',
     stay_tunnel_p:'Een gezellige tent op een eigen plek, ingericht voor twee — bedden opgemaakt, zo te genieten.',
     stay_safari_tag:'Safaritent', stay_safari_h:'Safaritent',
     stay_safari_p:'Een ruime safaritent voor vier personen. Bedden opgemaakt, linnen inbegrepen — neem alleen je koffer mee.',
-    stay_chalet_tag:'Chalet', stay_chalet_h:'Chalet',
-    stay_chalet_p:'Onze meest comfortabele optie: volledig uitgerust, een eigen terras en de rust van vier vaste muren om je heen.',
+    stay_bell_tag:'Bell tent', stay_bell_h:'Bell tent',
+    stay_bell_p:'Een klassieke canvas bell tent op een eigen plek — echte bedden, linnen inbegrepen en die iconische ronde vorm. Gezellig voor twee.',
     carousel_prev:'Vorige foto', carousel_next:'Volgende foto',
     cap_4:'Tot 4 personen', cap_2:'Tot 2 personen',
     map_eyebrow:'De camping', map_title:'Plattegrond', map_hint:'Tik om te vergroten', map_zoom:'Vergroot de plattegrond',
     faq_price_q:'Wat kost een verblijf?',
     rates_eyebrow:'Tarieven 2026', rates_title:'Prijzen per nacht', rates_sub:'Alle bedragen in euro\'s, per nacht.',
-    rates_incl_label:'Inbegrepen', rates_incl_text:'Eindschoonmaak zit bij glamping, safaritent en chalet in de prijs.',
+    rates_incl_label:'Inbegrepen', rates_incl_text:'Eindschoonmaak zit bij glamping, safaritent en bell tent in de prijs.',
     rates_low:'Laag seizoen', rates_high:'Hoog seizoen',
     rates_g_stays:'Verblijven', rates_g_camping:'Kamperen', rates_g_extras:'Extra\'s',
-    rates_glamp:'Glampingtent', rates_safari:'Safaritent', rates_chalet:'Chalet', rates_tunnel:'Tunneltent',
-    rates_pitch:'Kampeerplek', rates_adult:'Volwassen', rates_child:'Kind tot 12 jaar',
+    rates_glamp:'Glampingtent', rates_safari:'Safaritent', rates_bell:'Bell tent', rates_tunnel:'Tunneltent',
+    rates_tent:'Tentplek', rates_camper:'Plek voor caravan/camper', rates_adult:'Volwassen', rates_child:'Kind tot 12 jaar',
     rates_fridge:'Koelkast', rates_highchair:'Kinderstoel', rates_cot:'Campingbedje mét matras',
     from_label:'Vanaf', book_btn:'Boek nu',
     avail_pitch_price:'Vanaf €18 / nacht', avail_safari_price:'Vanaf €90 / nacht',
@@ -3372,7 +3399,7 @@ const TRANSLATIONS = {
     faq_q4:'Naar welke luchthaven vlieg je het best?',
     faq_a4:'De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden ligt Pescara, meestal met de meeste zomervluchten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje.',
     faq_q5:'Wat zit er in de tenten?',
-    faq_a5:'In de glampingtent, safaritent en chalet vind je echte bedden, een keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De tunneltent en kampeerplaatsen maken gebruik van ons sanitairgebouw. Bij die drie zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen.',
+    faq_a5:'In de glampingtent en safaritent vind je echte bedden, een keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard. Je hoeft eigenlijk alleen je koffer mee te nemen. De bell tent heeft echte bedden en linnen maar deelt ons sanitairgebouw, samen met de tunneltent en de kampeerplekken. Bij de glamping-, safari- en bell tent zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen.',
     // Availability widget
     cw_tab_search:'Beschikbaarheid zoeken',
     cw_arrival:'Aankomst', cw_departure:'Vertrek',
@@ -3401,7 +3428,7 @@ const TRANSLATIONS = {
     cw_ph_name:'Voor- en achternaam', cw_ph_email:'naam@voorbeeld.nl', cw_ph_notes:'Bijv. aankomsttijd, bijzondere wensen…',
     per_night_slash:'/ nacht', open_maps:'Bekijk op de kaart →',
     cf_sending:'Bezig…', cf_sent_btn:'Verzonden. Lisette neemt contact op', cf_sent_status:'Bedankt. Je hoort binnen een dag van Lisette.', cf_error:'Er ging iets mis. Probeer het opnieuw of mail rechtstreeks naar info@sanprocolo.com.', cf_thanks:'Bedankt!',
-    form_ac_pitch:'Kampeerplaats', form_ac_safari:'Safaritent', form_ac_tunnel:'Tunneltent', form_ac_glamp:'Glampingtent', form_ac_chalet:'Chalet',
+    form_ac_tent:'Tentplek', form_ac_camper:'Plek voor caravan/camper', form_ac_bell:'Bell tent', form_ac_tunnel:'Tunneltent', form_ac_safari:'Safaritent', form_ac_glamp:'Glampingtent',
     test_c_nl:'Nederland', test_c_de:'Duitsland', test_c_uk:'Verenigd Koninkrijk',
     test_q1:'Wij vonden de camping fantastisch. Allereerst is het uitzicht prachtig, de omgeving rustig en bevind je je in een groene oase.',
     test_q2:'Prachtige kleinschalige camping met een geweldig uitzicht over een mooi heuvelachtig landschap.'
@@ -3783,7 +3810,7 @@ setTimeout(function(){
       "name": "What do the tents come with?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The glamping tent, safari tent and chalet come with real beds, a kitchen, a private bathroom and a covered terrace over the olive grove, so you only need to bring your suitcase. The tunnel tent and camping pitches use our shared facilities block. For those three the final cleaning is included, so there's nothing to scrub on your last morning."
+        "text": "The glamping and safari tents come with real beds, a kitchen, a private bathroom and a covered terrace over the olive grove, so you only need to bring your suitcase. The bell tent has real beds and linen but shares our sanitary block, together with the tunnel tent and camping pitches. Final cleaning is included for the glamping, safari and bell tents, so there's nothing to scrub on your last morning."
       }
     }
   ]
