@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Content-editor — Camping San Procolo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        oklch(94% 0.014 78);
+    --bg2:       oklch(90% 0.028 68);
+    --bg3:       oklch(86% 0.030 68);
+    --panel:     oklch(96% 0.010 78);
+    --cream:     oklch(18% 0.020 80);
+    --muted:     oklch(38% 0.015 80);
+    --subtle:    oklch(58% 0.012 80);
+    --gold:      oklch(50% 0.055 85);
+    --gold-h:    oklch(43% 0.055 85);
+    --peach:     oklch(55% 0.099 40);
+    --peach-h:   oklch(48% 0.100 38);
+    --border:    oklch(50% 0.055 85 / 0.28);
+    --border2:   oklch(18% 0.020 80 / 0.10);
+    --ok:        oklch(52% 0.10 145);
+    --warn:      oklch(60% 0.14 60);
+    --err:       oklch(52% 0.19 25);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--cream);
+    font-size: 15px; line-height: 1.55;
+  }
+  button { font-family: inherit; cursor: pointer; }
+  a { color: var(--peach); text-decoration: none; }
+  a:hover { color: var(--peach-h); }
+
+  /* ── LOGIN ── */
+  .login {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 24px;
+    background:
+      radial-gradient(1200px 600px at 20% 10%, oklch(88% 0.035 70) 0%, transparent 60%),
+      radial-gradient(900px 500px at 90% 90%, oklch(88% 0.035 40 / 0.4) 0%, transparent 60%),
+      var(--bg);
+  }
+  .login-box {
+    background: var(--panel);
+    padding: 44px 42px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    box-shadow: 0 20px 60px oklch(20% 0.02 80 / 0.10);
+    max-width: 400px; width: 100%;
+  }
+  .login-eyebrow {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .login-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; line-height: 1.1;
+    color: var(--cream); margin-bottom: 8px;
+  }
+  .login-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .login-box input[type="password"] {
+    width: 100%; padding: 14px 16px;
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    background: var(--bg);
+    font-size: 15px; color: var(--cream);
+    font-family: inherit;
+    margin-bottom: 12px;
+  }
+  .login-box input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+  .login-box .err {
+    font-size: 12px; color: var(--err); margin-bottom: 8px; min-height: 16px;
+  }
+  .btn-primary {
+    display: inline-block; width: 100%;
+    padding: 13px 20px;
+    background: var(--peach); color: white;
+    border: 0; border-radius: 3px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--peach-h); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ── APP LAYOUT ── */
+  .app { display: none; grid-template-columns: 300px 1fr; height: 100vh; }
+  .app.on { display: grid; }
+
+  /* Sidebar */
+  .sidebar {
+    background: var(--panel);
+    border-right: 1px solid var(--border2);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .sidebar-head {
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid var(--border2);
+  }
+  .sidebar-eye {
+    font-size: 9px; font-weight: 600; letter-spacing: 2px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .sidebar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem; line-height: 1.1;
+    margin-top: 4px;
+  }
+  .sidebar-title em { font-style: normal; color: var(--gold); }
+  .sidebar-nav {
+    flex: 1; overflow-y: auto;
+    padding: 12px 0;
+  }
+  .sec-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; padding: 11px 24px;
+    background: transparent; border: 0;
+    text-align: left; font-size: 14px;
+    color: var(--muted);
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .sec-btn:hover { color: var(--cream); background: var(--bg); }
+  .sec-btn.active {
+    color: var(--cream); background: var(--bg);
+    border-left-color: var(--peach);
+    font-weight: 500;
+  }
+  .sec-btn .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); opacity: 0;
+  }
+  .sec-btn.dirty .dot { opacity: 1; }
+  .sidebar-foot {
+    padding: 14px 24px 16px;
+    border-top: 1px solid var(--border2);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .change-count {
+    font-size: 12px; color: var(--muted);
+    text-align: center;
+  }
+  .change-count strong { color: var(--cream); }
+  .btn-secondary {
+    padding: 12px 16px;
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border2); border-radius: 3px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  .btn-secondary:hover { color: var(--cream); border-color: var(--border); }
+  .btn-finalize {
+    padding: 13px 16px;
+    background: var(--peach); color: white;
+    border: 0; border-radius: 3px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .btn-finalize:hover { background: var(--peach-h); }
+  .btn-finalize:disabled { background: var(--bg3); color: var(--subtle); cursor: not-allowed; }
+
+  /* Main */
+  .main {
+    overflow-y: auto;
+    padding: 40px 48px 80px;
+    max-width: 900px;
+    width: 100%;
+    justify-self: start;
+  }
+  .sec-eyebrow {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sec-eyebrow::before {
+    content: ''; width: 22px; height: 1px; background: currentColor;
+  }
+  .sec-h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.1rem; line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .sec-h1 em { font-style: normal; color: var(--gold); }
+  .sec-intro {
+    font-size: 14px; color: var(--muted);
+    margin-bottom: 34px; max-width: 640px;
+  }
+
+  /* Cards / field groups */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border2);
+    border-radius: 4px;
+    padding: 28px 30px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem; margin-bottom: 4px;
+  }
+  .card-sub {
+    font-size: 12px; color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .field { margin-bottom: 22px; }
+  .field:last-child { margin-bottom: 0; }
+  .field-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .field-help {
+    font-size: 12px; color: var(--subtle);
+    margin-top: 5px; font-style: italic;
+  }
+  .lang-pair {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .lang-col { display: flex; flex-direction: column; }
+  .lang-tag {
+    display: inline-block;
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--gold);
+    padding: 2px 6px;
+    background: oklch(50% 0.055 85 / 0.10);
+    border-radius: 2px;
+    margin-bottom: 4px; align-self: flex-start;
+  }
+  .lang-tag.en { color: var(--peach); background: oklch(55% 0.099 40 / 0.10); }
+  input[type="text"], input[type="number"], textarea {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    background: var(--bg);
+    font-family: inherit; font-size: 14px;
+    color: var(--cream); line-height: 1.5;
+    resize: vertical;
+  }
+  input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px oklch(50% 0.055 85 / 0.14);
+  }
+  input.changed, textarea.changed {
+    background: oklch(50% 0.055 85 / 0.06);
+    border-color: oklch(50% 0.055 85 / 0.45);
+  }
+  textarea { min-height: 90px; }
+  textarea.tall { min-height: 140px; }
+
+  /* Two-column layout for prijs velden */
+  .row-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* ── FINALIZE MODAL ── */
+  .modal-mask {
+    display: none;
+    position: fixed; inset: 0; z-index: 100;
+    background: oklch(20% 0.02 80 / 0.55);
+    align-items: center; justify-content: center;
+    padding: 32px;
+  }
+  .modal-mask.on { display: flex; }
+  .modal {
+    background: var(--panel);
+    border-radius: 4px;
+    max-width: 560px; width: 100%;
+    max-height: 88vh; overflow-y: auto;
+    box-shadow: 0 40px 100px oklch(20% 0.02 80 / 0.30);
+  }
+  .modal-head {
+    padding: 26px 32px 20px;
+    border-bottom: 1px solid var(--border2);
+  }
+  .modal-head h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; line-height: 1.15;
+  }
+  .modal-head p { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .modal-body { padding: 22px 32px; }
+  .modal-body h3 {
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+    color: var(--muted); text-transform: uppercase;
+    margin-bottom: 12px;
+    margin-top: 20px;
+  }
+  .modal-body h3:first-child { margin-top: 0; }
+  .change-list {
+    list-style: none; padding: 0; margin: 0;
+    font-size: 13px; color: var(--cream);
+  }
+  .change-list li {
+    padding: 7px 0; border-bottom: 1px solid var(--border2);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .change-list li:last-child { border: 0; }
+  .change-list .lbl {
+    flex: 1; color: var(--muted);
+  }
+  .change-list .cnt {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem; color: var(--cream);
+    min-width: 28px; text-align: right;
+  }
+  .modal-foot {
+    padding: 20px 32px 26px;
+    border-top: 1px solid var(--border2);
+    display: flex; gap: 12px; justify-content: flex-end;
+  }
+  .none-msg {
+    font-size: 14px; color: var(--muted);
+    padding: 30px 0; text-align: center;
+  }
+
+  /* Toasts */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--cream); color: var(--panel);
+    padding: 12px 20px; border-radius: 3px;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.5px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s;
+    z-index: 200;
+    box-shadow: 0 10px 30px oklch(20% 0.02 80 / 0.25);
+  }
+  .toast.on { opacity: 1; }
+
+  /* Header bar */
+  .top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  .save-hint {
+    font-size: 11px; color: var(--subtle);
+    letter-spacing: 0.4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .save-hint::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--ok);
+  }
+
+  /* Small screens */
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { max-height: 40vh; }
+    .main { padding: 24px 20px 60px; }
+    .lang-pair { grid-template-columns: 1fr; gap: 14px; }
+    .row-inline { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div class="login" id="login">
+  <div class="login-box">
+    <div class="login-eyebrow">San Procolo · Redactie</div>
+    <h1 class="login-title">Content <em>editor</em></h1>
+    <p class="login-sub">Voer het wachtwoord in dat je van Paul hebt gekregen.</p>
+    <form id="loginForm" autocomplete="off">
+      <input type="password" id="pw" placeholder="Wachtwoord" required autofocus>
+      <div class="err" id="loginErr"></div>
+      <button type="submit" class="btn-primary">Open editor</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div class="app" id="app">
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-eye">Camping San Procolo</div>
+      <div class="sidebar-title">Content-<em>editor</em></div>
+    </div>
+    <nav class="sidebar-nav" id="secNav"></nav>
+    <div class="sidebar-foot">
+      <div class="change-count" id="chgCount">Geen wijzigingen</div>
+      <button class="btn-secondary" id="btnUndoAll">Alles ongedaan maken</button>
+      <button class="btn-finalize" id="btnFinalize">Wijzigingen finaliseren</button>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="top">
+      <div></div>
+      <div class="save-hint" id="saveHint">Draft opgeslagen</div>
+    </div>
+    <div id="secBody"></div>
+  </main>
+</div>
+
+<!-- ── FINALIZE MODAL ── -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Klaar om te versturen?</h2>
+      <p>Hieronder zie je een samenvatting van wat je hebt gewijzigd. Klik op "Download rapport" om een bestand op te slaan dat je aan Paul kunt sturen. Hij verwerkt het in de site.</p>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn-secondary" id="btnCancel">Terug</button>
+      <button class="btn-primary" style="width:auto" id="btnDownload">Download rapport</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   1) BASELINE — huidige content van de site
+   Verkregen uit source.html TRANSLATIONS
+============================================================ */
+const BASELINE = {
+  hero_tagline:            { nl:'Een kleine familiecamping tussen de bergen en de zee', en:'A small family campsite between the mountains and the sea' },
+  hero_sub:                { nl:'Een kleine familiecamping tussen de bergen en de zee. Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.', en:'A small family campsite between the mountains and the sea. Eighteen pitches, a few of them glamping tents, a pool with a view across the valley. Twenty minutes from the Adriatic, an hour from the snowy peaks of the Sibillini.' },
+  hero_urgency:            { nl:'Open 22 mei tot 2 oktober — juli en augustus lopen snel vol', en:'Open 22 May to 2 October — July and August fill up early' },
+  editorial_text:          { nl:'Een camping in de Italiaanse heuvels waar de dagen vanzelf trager gaan.', en:'A campsite in the Italian hills where slow living is not a concept — it is simply how things are.' },
+
+  about_p1:                { nl:'Al lang hadden we een voorliefde voor Italië. David vroeg Lisette hier ten huwelijk en we kwamen later terug om te trouwen, dus het land was al deel van ons verhaal lang voordat we eraan dachten om er te wonen. Wat we het mooiste vonden was het langzamere ritme, de lange maaltijden en de dagen zonder haast. Dus met drie jonge kinderen en hond Fred op sleeptouw voelde de verhuizing naar het zuiden minder als een sprong dan als de logische volgende stap.', en:'Italy had been close to our hearts for years. David proposed to Lisette here, and we came back later to marry, so the country was part of our story long before we thought of living in it. What we loved most was the slower pace of life, the long meals and the unhurried days. So with three young kids and Fred the dog in tow, moving south felt less like a leap than the obvious next step.' },
+  about_p2:                { nl:'De camping verwelkomt gasten sinds 2007, op een plek die al met zorg was aangelegd, op een van de mooiste plekjes van de vallei. Vanaf eind 2026 hebben we het stokje overgenomen en met z\'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. We houden het bewust klein en persoonlijk. Achttien plaatsen, waarvan een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van ons in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.', en:'The campsite has welcomed guests since 2007, on a plot already laid out with care, on one of the loveliest spots in the valley. We took over at the end of 2026, and between the two of us there is always something on the go — a small improvement this week, a bigger idea for next winter. We keep it small and personal on purpose. Eighteen pitches, a handful of them glamping tents, a pool, a terrace, an olive grove, and usually one of us nearby, likely to pour you a glass of wine before you have made it back to your tent.' },
+  about_p3:                { nl:'Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was.', en:'Kids run around barefoot. You can actually relax. Mornings start with fresh bread on the terrace and evenings tend to last longer than you planned.' },
+
+  story_morn_h:            { nl:'Het brood staat klaar<br><em>als je wakker wordt</em>', en:'The bread arrives<br><em>still warm</em>' },
+  story_morn_p:            { nl:'Espresso onder de olijfbomen. Niemand heeft haast, en na een dag jij ook niet meer.', en:'Espresso under the olive trees. Nobody is in a hurry and by the second day, neither are you.' },
+  story_aft_h:             { nl:'Het zwembad is<br><em>het middelpunt</em>', en:'The pool is<br><em>the centre of things</em>' },
+  story_aft_p:             { nl:'Kinderen in het water, ouders met een boek of een biertje, de vallei uitgestrekt in de hitte. Sommigen rijden naar de kust, anderen niet.', en:'Kids in the water, parents with a book or a beer, the valley stretching out below in the heat. Some people drive down to the beach. Some people don\'t.' },
+  story_eve_h:             { nl:'De lange tafel,<br><em>twee keer per week</em>', en:'The long table,<br><em>twice a week</em>' },
+  story_eve_p:             { nl:'Heerlijk aanschuiven samen met andere gasten in een ongedwongen sfeer. Wij schenken wijn van een lokale wijnboer en vertellen je er graag meer over.', en:'Local food, local wine, neighbours and guests all mixed together. The kids end up running around in the dark and you end up staying later than you meant to.' },
+
+  stay_glamp_h:            { nl:'Glampingtent', en:'Glamping tent' },
+  stay_glamp_p:            { nl:'Zo naar binnen: bedden opgemaakt, linnen inbegrepen, een eigen terras en hetzelfde valleizicht vanuit je bed.', en:'Ready to walk into: beds made, linen included, your own terrace and the same valley view from your bed.' },
+  stay_tent_h:             { nl:'Tentplek', en:'Tent pitch' },
+  stay_tent_p:             { nl:'Ruime terrasplekken met valleizicht, alleen voor tenten. Elektra inbegrepen. Rustig gelegen aan de rand van de camping.', en:'Spacious terraced pitches with valley views, for tents only. Electricity included. Quiet, at the edge of the campsite.' },
+  stay_camper_h:           { nl:'Plek voor caravan/camper', en:'Caravan / camper pitch' },
+  stay_camper_p:           { nl:'Terrasplekken die met caravan of camper bereikbaar zijn, met hetzelfde valleizicht. Elektra en aansluitingen inbegrepen.', en:'Terraced pitches accessible for caravans and campers, with the same valley view. Electricity and hook-ups included.' },
+  stay_bell_h:             { nl:'Bell tent', en:'Bell tent' },
+  stay_bell_p:             { nl:'Een klassieke canvas bell tent op een eigen plek — echte bedden, linnen inbegrepen en die iconische ronde vorm. Gezellig voor twee.', en:'A classic canvas bell tent on its own pitch — real beds, linen included, and the iconic round shape. Cosy for two.' },
+  stay_safari_h:           { nl:'Safaritent', en:'Safari tent' },
+  stay_safari_p:           { nl:'Een ruime safaritent voor vier personen. Bedden opgemaakt, linnen inbegrepen. Gebruikt ons gezamenlijke sanitairgebouw.', en:'A roomy safari tent that sleeps four. Beds made, linen included. Uses our shared sanitary block.' },
+
+  fac_terrace_desc:        { nl:'Vers brood, cappuccino en een terras waar je blijft plakken. Reserveren gewenst voor het diner.', en:'Fresh bread, cappuccino and a terrace where you end up staying. Booking recommended for dinner.' },
+  fac_pool_v:              { nl:'Vijf bij tien meter, open van negen tot acht, met uitzicht over de vallei. Waar de kinderen het grootste deel van hun dag doorbrengen en jij ook. Er is geen badmeester, dus houd zelf even een oogje in het zeil.', en:'Five by ten metres, open nine to eight, looking out over the valley. Where the kids spend most of their day and where you\'ll spend most of yours. There is no lifeguard, so keep an eye out yourself.' },
+  fac_kids_v:              { nl:'Speeltuin — voor tussen het zwemmen door.', en:'Playground — for the stretches between swims.' },
+  fac_wine_v:              { nl:'Van Giacomo Centanni, drie valleien verderop. Biologisch en altijd op voorraad.', en:'From Giacomo Centanni, three valleys over. Organic, and always on site.' },
+  fac_wifi_v:              { nl:'Over de hele camping.', en:'Right across the campsite.' },
+  fac_olive_v:             { nl:'Olijfbomen, lavendel, oleander. Geoogst in oktober.', en:'Olive trees, lavender, oleander. Harvested in October.' },
+  fac_advice_v:            { nl:'Onze eigen lijst met markten, restaurants, verborgen stranden en de plekjes die de reisgidsen nog niet gevonden hebben.', en:'Lisette & David\'s own list of markets, restaurants, hidden beaches and the spots the guidebooks haven\'t found.' },
+  fac_laundry_v:           { nl:'Wasmachine, zes euro per wasbeurt. Bedjes en kinderstoelen op aanvraag.', en:'Washing machine, six euros a cycle. Cots and highchairs on request.' },
+
+  act_pool_h:              { nl:'Het zwembad', en:'The pool' },
+  act_pool_p:              { nl:'Kinderen in het water, ouders met een boek aan de rand, de vallei beneden wazig in de middaghitte.', en:'Kids in the water, parents with a book on the edge, the valley below hazy in the afternoon heat.' },
+  act_table_h:             { nl:'De lange tafel', en:'The long table' },
+  act_table_p:             { nl:'Lisette en David koken. Lokaal eten, buren en gasten door elkaar. Je blijft tot later dan je van plan was en niemand gaat eerder weg.', en:'Lisette and David cook. Local food, neighbours and guests mixed together. You end up staying until midnight and you\'re fine with that.' },
+  act_beach_h:             { nl:'Porto San Giorgio', en:'Porto San Giorgio' },
+  act_beach_p:             { nl:'Een lang zandstrand met een palmenboulevard en een haven. Onderweg terug ijs eten hoort erbij.', en:'A long sandy beach with a palm-lined promenade and a harbour. Gelato on the way back is part of the deal.' },
+  act_kids_h:              { nl:'Speeltuin', en:'The playground' },
+  act_kids_p:              { nl:'Speelhuis, glijbaan, schommels, een grote trampoline en tafeltennis. En een hele heuvel om in te verdwijnen.', en:'Playhouse, slide, swings, a big trampoline, table tennis. And a whole hillside to disappear into.' },
+  act_sib_h:               { nl:'De Sibillini', en:'The Sibillini' },
+  act_sib_p:               { nl:'Een uur naar het zuidwesten en je staat op tweeduizend meter. Boerderijen die kaas verkopen, wandelpaden waar niemand loopt.', en:'An hour south-west and you\'re at two thousand metres. Farms selling cheese, walking paths that nobody uses.' },
+  act_towns_h:             { nl:'De heuveldorpjes', en:'The hill towns' },
+  act_towns_p:             { nl:'Fermo, Ascoli Piceno, Loreto. Marmeren pleinen, koffie op het terras, een gastvrijheid die er tijd voor neemt.', en:'Fermo, Ascoli Piceno, Loreto. Marble squares, espresso on the piazza, hospitality that takes its time.' },
+
+  exp_olive_ey:            { nl:'Rechtstreeks uit de boom', en:'Straight from the tree' },
+  exp_olive_h:             { nl:'Pluk je<br><em>eigen fruit</em>', en:'Pick your<br><em>own fruit</em>' },
+  exp_olive_p:             { nl:'We hebben meer fruitbomen dan we bij kunnen houden, dus ga je gang. Vijgen, pruimen, abrikozen, kersen, wat er die week rijp is mag je zelf plukken en warm van de zon opeten.', en:'We have more fruit trees than we can keep up with, so help yourself. Figs, plums, apricots, cherries, whatever is ripe that week is yours to pick and eat warm from the sun.' },
+  exp_tasting_ey:          { nl:'Zo af en toe', en:'Now and then' },
+  exp_tasting_h:           { nl:'Een proeverij met<br><em>lokale wijnboeren</em>', en:'A tasting with<br><em>local winemakers</em>' },
+  exp_tasting_p:           { nl:'Een paar keer per seizoen komt een wijnboer uit de vallei langs met een fles of drie. Hij schenkt en vertelt het verhaal erachter, jij proeft aan het terras. Vraag Lisette wanneer de volgende is.', en:'A few times a season a winemaker from the valley drops by with a bottle or three. They pour, they tell the story behind the wine, and you taste at the terrace. Ask Lisette when the next one is.' },
+  exp_wine_ey:             { nl:'Als het donker wordt', en:'After dark' },
+  exp_wine_h:              { nl:'Een hemel vol<br><em>sterren</em>', en:'A sky full<br><em>of stars</em>' },
+  exp_wine_p:              { nl:'Hierboven zijn geen stadslichten, dus de sterrenhemel is iets wat de meeste van onze gasten in jaren niet hebben gezien. Op een heldere avond zie je vanaf het terras zelfs de Melkweg en blijven de kinderen altijd veel te laat op om hem te zoeken.', en:'Up here there are no city lights, so the night sky is something most of our guests have not seen in years. On a clear evening you can pick out the Milky Way from the terrace, and the children always stay up far too late looking for it.' },
+
+  surr_title:              { nl:'Le Marche —<br><em>het stuk Italië dat de meeste reizigers niet kennen</em>', en:'Le Marche —<br><em>the part of Italy most people still miss</em>' },
+  surr_text:               { nl:'Le Marche ligt tussen de Apennijnen en de Adriatische Zee maar de meeste toeristen rijden er langs op weg naar Toscane of Puglia. Daardoor voelt het nog zoals je je Italië herinnert van vroeger: brede pleinen zonder souvenirsites, markten die echt voor de buurt zijn, trattoria\'s waar ze je naam onthouden na je tweede bezoek. Ascoli Piceno voor de marmeren pleinen, Fermo voor de zaterdagmarkt, de Sibillini als je hoger de bergen in wilt.', en:'Le Marche sits between the Apennines and the Adriatic. Most tourists drive past it on their way to Tuscany or Puglia, which is exactly why it still feels the way Italy used to feel. From the campsite you can be in the mountains in under an hour or at the sea in twenty minutes. Ascoli Piceno for its marble squares, Fermo for the Saturday market, the Sibillini when you want to be higher up in the mountains.' },
+
+  test_q1:                 { nl:'Wij vonden de camping fantastisch. Allereerst is het uitzicht prachtig, de omgeving rustig en bevind je je in een groene oase.', en:'We thought the campsite was fantastic. Above all the view is beautiful, the surroundings are peaceful and you find yourself in a green oasis.' },
+  test_q2:                 { nl:'Prachtige kleinschalige camping met een geweldig uitzicht over een mooi heuvelachtig landschap.', en:'A beautiful small-scale campsite with a wonderful view over a lovely, hilly landscape.' },
+  test_rating_score:       { nl:'4,9', en:'4.9' },
+  test_rating_count:       { nl:'47', en:'47' },
+
+  contact_intro:           { nl:'Stuur Lisette een bericht en je hoort binnen een dag van haar. Het seizoen loopt van 22 mei tot 2 oktober.', en:'Send Lisette a message and she\'ll come back to you within a day. The season runs 22 May to 2 October.' },
+
+  faq_q1:                  { nl:'Hoe ver is het naar zee?', en:'How far is the sea?' },
+  faq_a1:                  { nl:'Ongeveer twintig minuten. Het dichtstbijzijnde zandstrand is in Porto San Giorgio en Lido di Fermo. Iets verder naar het zuiden ligt de Riviera delle Palme met Cupra Marittima en Grottammare — die extra reistijd is de rit meer dan waard. Veel gezinnen bij ons zwemmen \'s ochtends in het zwembad en dippen \'s middags hun tenen in de Adriatische Zee.', en:'About twenty minutes. The nearest sand is at Porto San Giorgio and Lido di Fermo. A little further south you reach the palm-lined Riviera delle Palme, with Cupra Marittima and Grottammare, well worth the longer drive. Plenty of our families swim in the pool before lunch and put their toes in the Adriatic after.' },
+  faq_q2:                  { nl:'Is het geschikt voor jonge kinderen?', en:'Is it a good place for young children?' },
+  faq_a2:                  { nl:'Het is hier voornamelijk gezinnen en de plek is er ook voor gemaakt. Een zwembad met uitzicht, een speeltuin met schommels, een glijbaan en een grote trampoline, plus tafeltennis en een olijfgaard om in rond te struinen. Kinderbedjes en kinderstoelen zijn er wanneer je ze nodig hebt. Het is rustig en veilig, en de meeste kinderen hebben op de tweede ochtend al een vriendje of vriendinnetje gemaakt.', en:'It\'s mostly families here, and the place is made for them. There\'s a pool with a view, a playground with swings, a slide and a big trampoline, plus table tennis and an olive grove to roam. Cots and highchairs are there whenever you need them. It\'s quiet and safe, and most children have made a friend or two by the second morning.' },
+  faq_q3:                  { nl:'Kunnen we onze hond meenemen?', en:'Can we bring our dog?' },
+  faq_a3:                  { nl:'Wij hebben zelf een hond, een lieve ziel die Fred heet, maar we hebben gekozen om San Procolo hondvrij te houden voor onze gasten. Met een open heuvel, een grasveld bij het zwembad en heel wat kleine kinderen die op blote voeten rondrennen, is dat wat de plek voor iedereen rustig houdt. Fred verwelkomt je graag namens ons.', en:'We have a dog ourselves, a soft soul called Fred, but we have chosen to keep San Procolo free of guests\' dogs. With an open hillside, a lawn by the pool and a lot of small children running barefoot, it is what keeps the place calm for everyone. Fred will gladly do the welcoming on your behalf.' },
+  faq_q4:                  { nl:'Naar welke luchthaven vlieg je het best?', en:'Which airport should we fly into?' },
+  faq_a4:                  { nl:'De dichtstbijzijnde luchthaven is Ancona, op iets meer dan een uur rijden. Iets verder naar het zuiden ligt Pescara, meestal met de meeste zomervluchten. Ook Perugia, Bologna en Rome zijn een optie, met seizoensvluchten vanuit Nederland, Duitsland en het Verenigd Koninkrijk. Een auto is hier sowieso handig, want de heuvels en de kust verken je het fijnst op eigen houtje.', en:'The nearest airport is Ancona, just over an hour away. A little further south, Pescara is the other easy choice and usually has the most summer flights, which is why many of our British and German guests land there. Perugia, Bologna and Rome are options too, with seasonal flights from the Netherlands, Germany and the UK. You will want a car whichever you choose, since the hills and the coast are best on your own schedule.' },
+  faq_q5:                  { nl:'Wat zit er in de tenten?', en:'What do the tents come with?' },
+  faq_a5:                  { nl:'In de glampingtent vind je echte bedden, een keuken, een eigen badkamer en een overdekt terras met uitzicht op de olijfgaard — je hoeft eigenlijk alleen je koffer mee te nemen. De safari- en bell tent hebben echte bedden en linnen maar delen ons sanitairgebouw, samen met de kampeerplekken. Bij de glamping-, safari- en bell tent zit de eindschoonmaak erbij, dus op je laatste ochtend hoef je niets te poetsen.', en:'The glamping tent comes with real beds, a kitchen, a private bathroom and a covered terrace over the olive grove — you only need to bring your suitcase. The safari and bell tents have real beds and linen but share our sanitary block, together with the camping pitches. Final cleaning is included for the glamping, safari and bell tents, so there\'s nothing to scrub on your last morning.' },
+  faq_q6:                  { nl:'Grijs water en chemisch toilet', en:'Grey water and chemical toilet' },
+  faq_a6:                  { nl:'We hebben geen grijswater-afvoer en er is bij ons geen mogelijkheid om je chemisch toilet te legen of te reinigen. Houd hier rekening mee als je met een caravan of camper komt.', en:'We don\'t have a grey water disposal point, and there\'s no facility to empty or clean your chemical toilet on site. Please take this into account when planning a stay with a caravan or camper.' },
+
+  footer_tagline:          { nl:'Familiecamping en glamping<br>Monte Vidon Combatte · Le Marche · Italië<br>Open 22 mei – 2 oktober', en:'Family glamping &amp; camping<br>Monte Vidon Combatte · Le Marche · Italy<br>Open 22 May – 2 October' },
+  footer_quote:            { nl:'"Dit stukje Le Marche is ons thuis. Als je dit leest, hopen we dat het ook een stukje van jouw thuis wordt."', en:'"This little corner of Le Marche is our home. If you\'re reading this, we hope it becomes part of yours too."' }
+};
+
+/* Prices — separate structure. Not in TRANSLATIONS, hardcoded in HTML.
+   Rendered as its own section. */
+const PRICES = {
+  glamp:   { name:'Glampingtent',            low:140, high:190 },
+  safari:  { name:'Safaritent',              low:108, high:138 },
+  bell:    { name:'Bell tent',               low: 85, high:115 },
+  tent:    { name:'Tentplek',                low: 16, high: 19 },
+  camper:  { name:'Plek voor caravan/camper',low: 18, high: 22 },
+  adult:   { name:'Volwassene',              low: 12, high: 13.50 },
+  child:   { name:'Kind t/m 12 jaar',        low: 10, high: 11 },
+  fridge:  { name:'Koelkast',                low:  5, high:  5 },
+  highchair:{name:'Kinderstoel',             low:  2, high:  2 },
+  cot:     { name:'Reisbedje met matras',    low:  5, high:  5 }
+};
+
+/* ============================================================
+   2) SECTIES — configuration (order + fields per section)
+============================================================ */
+const SECTIONS = [
+  {
+    id: 'hero',
+    label: 'Bovenaan de pagina',
+    intro: 'De grote tekst en tagline die bezoekers als eerste zien.',
+    cards: [
+      { title: 'Slogan & tekst', sub: 'De tekst onder de titel "San Procolo".',
+        fields: [
+          { key:'hero_tagline', label:'Korte pay-off (tagline)', help:'Verschijnt vlak onder de titel.' },
+          { key:'hero_sub',     label:'Beschrijvende tekst', type:'textarea', help:'De uitgebreidere alinea eronder.' },
+          { key:'hero_urgency', label:'Urgentie-regel', help:'Bijv. "Open van … — juli en augustus lopen snel vol".' }
+        ]},
+      { title: 'Editorial quote', sub: 'De cursieve zin onder de hero, in een aparte band.',
+        fields: [
+          { key:'editorial_text', label:'Quote', type:'textarea' }
+        ]}
+    ]
+  },
+  {
+    id: 'about',
+    label: 'Ons verhaal',
+    intro: 'De sectie met de tekening en de drie alinea\'s over David & Lisette.',
+    cards: [
+      { title: 'Alinea 1 — waarom Italië',
+        fields: [ { key:'about_p1', type:'textarea' } ] },
+      { title: 'Alinea 2 — over de camping',
+        fields: [ { key:'about_p2', type:'textarea' } ] },
+      { title: 'Alinea 3 — over het ritme hier',
+        fields: [ { key:'about_p3', type:'textarea' } ] }
+    ]
+  },
+  {
+    id: 'story',
+    label: 'De dag op San Procolo',
+    intro: 'De drie panelen met "Ochtend / Middag / Avond" (scroll-story).',
+    cards: [
+      { title: 'Ochtend',
+        fields: [
+          { key:'story_morn_h', label:'Titel', help:'Gebruik <em>…</em> voor het olijfgroene accentwoord. Gebruik <br> voor een regelafbreking.' },
+          { key:'story_morn_p', label:'Tekst', type:'textarea' }
+        ]},
+      { title: 'Middag',
+        fields: [
+          { key:'story_aft_h', label:'Titel', help:'Gebruik <em>…</em> voor accent, <br> voor regelafbreking.' },
+          { key:'story_aft_p', label:'Tekst', type:'textarea' }
+        ]},
+      { title: 'Avond',
+        fields: [
+          { key:'story_eve_h', label:'Titel', help:'Gebruik <em>…</em> voor accent, <br> voor regelafbreking.' },
+          { key:'story_eve_p', label:'Tekst', type:'textarea' }
+        ]}
+    ]
+  },
+  {
+    id: 'stays',
+    label: 'Accommodaties',
+    intro: 'De 5 kaartjes met accommodaties. Titel + omschrijving per stuk.',
+    cards: [
+      { title: 'Glampingtent',
+        fields: [ { key:'stay_glamp_h', label:'Naam' }, { key:'stay_glamp_p', label:'Omschrijving', type:'textarea' } ] },
+      { title: 'Tentplek',
+        fields: [ { key:'stay_tent_h', label:'Naam' }, { key:'stay_tent_p', label:'Omschrijving', type:'textarea' } ] },
+      { title: 'Plek voor caravan/camper',
+        fields: [ { key:'stay_camper_h', label:'Naam' }, { key:'stay_camper_p', label:'Omschrijving', type:'textarea' } ] },
+      { title: 'Bell tent',
+        fields: [ { key:'stay_bell_h', label:'Naam' }, { key:'stay_bell_p', label:'Omschrijving', type:'textarea' } ] },
+      { title: 'Safaritent',
+        fields: [ { key:'stay_safari_h', label:'Naam' }, { key:'stay_safari_p', label:'Omschrijving', type:'textarea' } ] }
+    ]
+  },
+  {
+    id: 'prices',
+    label: 'Prijzen',
+    intro: 'Laag- en hoogseizoen tarieven. Alle bedragen in euro\'s per nacht.',
+    priceEditor: true
+  },
+  {
+    id: 'activities',
+    label: 'Activiteiten',
+    intro: 'De 6 kaartjes bij "Dingen om te doen — zo veel of zo weinig als je wilt".',
+    cards: [
+      { title: 'Zwembad',      fields:[ {key:'act_pool_h',   label:'Titel'}, {key:'act_pool_p',   label:'Tekst', type:'textarea'} ]},
+      { title: 'Lange tafel',  fields:[ {key:'act_table_h',  label:'Titel'}, {key:'act_table_p',  label:'Tekst', type:'textarea'} ]},
+      { title: 'Porto San Giorgio (strand)', fields:[ {key:'act_beach_h', label:'Titel'}, {key:'act_beach_p', label:'Tekst', type:'textarea'} ]},
+      { title: 'Speeltuin',    fields:[ {key:'act_kids_h',   label:'Titel'}, {key:'act_kids_p',   label:'Tekst', type:'textarea'} ]},
+      { title: 'De Sibillini', fields:[ {key:'act_sib_h',    label:'Titel'}, {key:'act_sib_p',    label:'Tekst', type:'textarea'} ]},
+      { title: 'Heuveldorpjes',fields:[ {key:'act_towns_h',  label:'Titel'}, {key:'act_towns_p',  label:'Tekst', type:'textarea'} ]}
+    ]
+  },
+  {
+    id: 'experiences',
+    label: 'Bijzondere ervaringen',
+    intro: 'De 3 grote kaarten met de "als je geluk hebt" ervaringen.',
+    cards: [
+      { title: 'Pluk je eigen fruit', fields:[
+        {key:'exp_olive_ey', label:'Kopje boven de titel (eyebrow)'},
+        {key:'exp_olive_h',  label:'Titel', help:'Gebruik <em>…</em> voor accent, <br> voor regelafbreking.'},
+        {key:'exp_olive_p',  label:'Tekst', type:'textarea'}
+      ]},
+      { title: 'Wijnproeverij', fields:[
+        {key:'exp_tasting_ey', label:'Eyebrow'},
+        {key:'exp_tasting_h',  label:'Titel'},
+        {key:'exp_tasting_p',  label:'Tekst', type:'textarea'}
+      ]},
+      { title: 'Sterrenhemel', fields:[
+        {key:'exp_wine_ey', label:'Eyebrow'},
+        {key:'exp_wine_h',  label:'Titel'},
+        {key:'exp_wine_p',  label:'Tekst', type:'textarea'}
+      ]}
+    ]
+  },
+  {
+    id: 'facilities',
+    label: 'Op de camping',
+    intro: 'Alle voorzieningen: terras, zwembad, speeltuin etc.',
+    cards: [
+      { title: 'Terras & Bar',       fields:[{key:'fac_terrace_desc', type:'textarea'}] },
+      { title: 'Zwembad',            fields:[{key:'fac_pool_v',       type:'textarea'}] },
+      { title: 'Speeltuin',          fields:[{key:'fac_kids_v'}] },
+      { title: 'Biologische wijn',   fields:[{key:'fac_wine_v'}] },
+      { title: 'Wifi',               fields:[{key:'fac_wifi_v'}] },
+      { title: 'Olijf- & kruiden­tuin', fields:[{key:'fac_olive_v'}] },
+      { title: 'Lokaal advies',      fields:[{key:'fac_advice_v', type:'textarea'}] },
+      { title: 'Wasserij & baby-benodigdheden', fields:[{key:'fac_laundry_v'}] }
+    ]
+  },
+  {
+    id: 'surroundings',
+    label: 'De omgeving (Le Marche)',
+    intro: 'Beschrijving van de regio onderaan de site.',
+    cards: [
+      { title: 'Titel & tekst',
+        fields: [
+          { key:'surr_title', label:'Titel', help:'Gebruik <em>…</em> voor accent, <br> voor regelafbreking.'},
+          { key:'surr_text',  label:'Tekst', type:'textarea' }
+        ]}
+    ]
+  },
+  {
+    id: 'testimonials',
+    label: 'Gastenreviews',
+    intro: 'De twee reviews naast de Google-samenvatting.',
+    cards: [
+      { title: 'Review 1', fields:[{key:'test_q1', type:'textarea'}] },
+      { title: 'Review 2', fields:[{key:'test_q2', type:'textarea'}] },
+      { title: 'Google-cijfer',
+        sub:'Wat er in de kaart in het midden staat.',
+        fields: [
+          { key:'test_rating_score', label:'Score (bijv. 4,9)', shared:true },
+          { key:'test_rating_count', label:'Aantal reviews', shared:true }
+        ]}
+    ]
+  },
+  {
+    id: 'faq',
+    label: 'Goed om te weten (FAQ)',
+    intro: 'De veelgestelde vragen onderaan de site.',
+    cards: [
+      { title:'Vraag 1', fields:[{key:'faq_q1', label:'Vraag'},{key:'faq_a1', label:'Antwoord', type:'textarea'}] },
+      { title:'Vraag 2', fields:[{key:'faq_q2', label:'Vraag'},{key:'faq_a2', label:'Antwoord', type:'textarea'}] },
+      { title:'Vraag 3', fields:[{key:'faq_q3', label:'Vraag'},{key:'faq_a3', label:'Antwoord', type:'textarea'}] },
+      { title:'Vraag 4', fields:[{key:'faq_q4', label:'Vraag'},{key:'faq_a4', label:'Antwoord', type:'textarea'}] },
+      { title:'Vraag 5', fields:[{key:'faq_q5', label:'Vraag'},{key:'faq_a5', label:'Antwoord', type:'textarea'}] },
+      { title:'Vraag 6', fields:[{key:'faq_q6', label:'Vraag'},{key:'faq_a6', label:'Antwoord', type:'textarea'}] }
+    ]
+  },
+  {
+    id: 'contact',
+    label: 'Contact',
+    intro: 'De introtekst boven het contactformulier.',
+    cards: [
+      { title:'Introtekst', fields:[{key:'contact_intro', type:'textarea'}] }
+    ]
+  },
+  {
+    id: 'footer',
+    label: 'Onderaan (footer)',
+    intro: 'De tagline en het citaat in de footer.',
+    cards: [
+      { title:'Tagline (open dates, locatie)', fields:[{key:'footer_tagline', type:'textarea', help:'Gebruik <br> voor regelafbrekingen.'}] },
+      { title:'Citaat van Lisette & David', fields:[{key:'footer_quote', type:'textarea'}] }
+    ]
+  }
+];
+
+/* ============================================================
+   3) STATE
+============================================================ */
+const PW = 'Klotenklapperuit93'; // simple gate — brother-level, not security
+const STORAGE_KEY = 'sanproc-editor-draft-v1';
+const AUTH_KEY = 'sanproc-editor-auth';
+
+let DRAFT = null;      // { [key]: {nl, en}, __prices: {...} }
+let PRICE_DRAFT = null;
+let currentSection = null;
+let saveTimer = null;
+
+function deepCopy(x) { return JSON.parse(JSON.stringify(x)); }
+function el(sel){ return document.querySelector(sel); }
+function ce(tag, cls){ const e=document.createElement(tag); if(cls) e.className=cls; return e; }
+
+function loadDraft() {
+  try {
+    const s = localStorage.getItem(STORAGE_KEY);
+    if (s) {
+      const p = JSON.parse(s);
+      DRAFT = p.content || deepCopy(BASELINE);
+      PRICE_DRAFT = p.prices || deepCopy(PRICES);
+      return;
+    }
+  } catch(e){}
+  DRAFT = deepCopy(BASELINE);
+  PRICE_DRAFT = deepCopy(PRICES);
+}
+function saveDraft() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({content:DRAFT, prices:PRICE_DRAFT}));
+    showSaveHint();
+  } catch(e){}
+}
+function showSaveHint(){
+  const h = el('#saveHint');
+  h.style.opacity='1';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{ h.style.opacity='0.5'; }, 1400);
+}
+
+/* ============================================================
+   4) DIFF
+============================================================ */
+function computeChanges() {
+  const changes = [];
+  Object.keys(BASELINE).forEach(k => {
+    const base = BASELINE[k];
+    const cur  = DRAFT[k] || base;
+    if (base.nl !== cur.nl) changes.push({ op:'update', path:k, lang:'nl', old:base.nl, new:cur.nl });
+    if (base.en !== cur.en) changes.push({ op:'update', path:k, lang:'en', old:base.en, new:cur.en });
+  });
+  Object.keys(PRICES).forEach(id => {
+    const base = PRICES[id];
+    const cur  = PRICE_DRAFT[id] || base;
+    if (base.low  !== cur.low)  changes.push({ op:'update', path:'price.'+id+'.low',  old:base.low,  new:cur.low });
+    if (base.high !== cur.high) changes.push({ op:'update', path:'price.'+id+'.high', old:base.high, new:cur.high });
+  });
+  return changes;
+}
+
+function updateChangeCount() {
+  const c = computeChanges();
+  el('#chgCount').innerHTML = c.length
+    ? '<strong>'+c.length+'</strong> ongepubliceerde wijziging'+(c.length===1?'':'en')
+    : 'Geen wijzigingen';
+  document.querySelectorAll('.sec-btn').forEach(b => {
+    const sid = b.dataset.section;
+    const hasChg = c.some(x => keyToSection(x.path) === sid);
+    b.classList.toggle('dirty', hasChg);
+  });
+  el('#btnFinalize').disabled = c.length === 0;
+  el('#btnUndoAll').disabled  = c.length === 0;
+}
+
+function keyToSection(path) {
+  if (path.startsWith('price.')) return 'prices';
+  for (const sec of SECTIONS) {
+    if (!sec.cards) continue;
+    for (const card of sec.cards) {
+      if (card.fields.some(f => f.key === path)) return sec.id;
+    }
+  }
+  return null;
+}
+
+/* ============================================================
+   5) RENDER
+============================================================ */
+function renderNav() {
+  const nav = el('#secNav');
+  nav.innerHTML='';
+  SECTIONS.forEach(sec => {
+    const b = ce('button','sec-btn');
+    b.dataset.section = sec.id;
+    b.innerHTML = '<span>'+sec.label+'</span><span class="dot"></span>';
+    b.onclick = ()=> selectSection(sec.id);
+    nav.appendChild(b);
+  });
+}
+
+function selectSection(id) {
+  currentSection = id;
+  document.querySelectorAll('.sec-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.section===id);
+  });
+  renderSection(id);
+  el('#main').scrollTo({top:0,behavior:'instant'});
+  updateChangeCount();
+}
+
+function renderSection(id) {
+  const sec = SECTIONS.find(s => s.id === id);
+  const body = el('#secBody');
+  body.innerHTML='';
+
+  const eye = ce('div','sec-eyebrow'); eye.textContent = 'Sectie'; body.appendChild(eye);
+  const h1  = ce('h1','sec-h1'); h1.innerHTML = sec.label; body.appendChild(h1);
+  const p   = ce('p','sec-intro'); p.textContent = sec.intro; body.appendChild(p);
+
+  if (sec.priceEditor) {
+    body.appendChild(renderPriceEditor());
+    return;
+  }
+
+  sec.cards.forEach(card => body.appendChild(renderCard(card)));
+}
+
+function renderCard(card) {
+  const el_ = ce('div','card');
+  if (card.title) { const t = ce('h2','card-title'); t.textContent = card.title; el_.appendChild(t); }
+  if (card.sub)   { const s = ce('p','card-sub');   s.textContent = card.sub;   el_.appendChild(s); }
+
+  card.fields.forEach(f => {
+    const wrap = ce('div','field');
+    if (f.label) {
+      const lbl = ce('div','field-label');
+      lbl.textContent = f.label;
+      wrap.appendChild(lbl);
+    }
+    if (f.shared) {
+      // Single input (no NL/EN split)
+      const inp = makeInput(f, 'nl');
+      wrap.appendChild(inp);
+      // mirror to EN
+      inp.addEventListener('input', ()=>{
+        if (!DRAFT[f.key]) DRAFT[f.key] = deepCopy(BASELINE[f.key]);
+        DRAFT[f.key].en = inp.value;
+      });
+    } else {
+      const pair = ce('div','lang-pair');
+      pair.appendChild(makeLangCol(f, 'nl'));
+      pair.appendChild(makeLangCol(f, 'en'));
+      wrap.appendChild(pair);
+    }
+    if (f.help) {
+      const h = ce('div','field-help');
+      h.textContent = f.help;
+      wrap.appendChild(h);
+    }
+    el_.appendChild(wrap);
+  });
+  return el_;
+}
+
+function makeLangCol(f, lang) {
+  const col = ce('div','lang-col');
+  const tag = ce('span', 'lang-tag'+(lang==='en'?' en':''));
+  tag.textContent = lang.toUpperCase();
+  col.appendChild(tag);
+  col.appendChild(makeInput(f, lang));
+  return col;
+}
+
+function makeInput(f, lang) {
+  const isTA = f.type === 'textarea';
+  const tag = isTA ? 'textarea' : 'input';
+  const inp = document.createElement(tag);
+  if (!isTA) inp.type = 'text';
+  if (isTA && f.type === 'textarea' && BASELINE[f.key] && BASELINE[f.key][lang] && BASELINE[f.key][lang].length > 200) {
+    inp.classList.add('tall');
+  }
+  const cur = (DRAFT[f.key] && DRAFT[f.key][lang] != null) ? DRAFT[f.key][lang] : BASELINE[f.key][lang];
+  inp.value = cur;
+  if (cur !== BASELINE[f.key][lang]) inp.classList.add('changed');
+  inp.addEventListener('input', ()=>{
+    if (!DRAFT[f.key]) DRAFT[f.key] = deepCopy(BASELINE[f.key]);
+    DRAFT[f.key][lang] = inp.value;
+    inp.classList.toggle('changed', inp.value !== BASELINE[f.key][lang]);
+    saveDraft();
+    updateChangeCount();
+  });
+  return inp;
+}
+
+function renderPriceEditor() {
+  const wrap = ce('div','card');
+  const t = ce('h2','card-title'); t.textContent = 'Tarieven'; wrap.appendChild(t);
+  const s = ce('p','card-sub'); s.textContent = 'Twee kolommen: laag- en hoogseizoen prijs (per nacht). Klik in een veld om te wijzigen.'; wrap.appendChild(s);
+
+  Object.keys(PRICES).forEach(id => {
+    const base = PRICES[id];
+    const cur  = PRICE_DRAFT[id] || base;
+    const f = ce('div','field');
+    const lbl = ce('div','field-label'); lbl.textContent = base.name; f.appendChild(lbl);
+    const row = ce('div','row-inline');
+
+    const lowCol = ce('div','lang-col');
+    const lowTag = ce('span','lang-tag'); lowTag.textContent='LAAG (€)'; lowCol.appendChild(lowTag);
+    const lowInp = document.createElement('input'); lowInp.type='number'; lowInp.step='0.5';
+    lowInp.value = cur.low;
+    if (cur.low !== base.low) lowInp.classList.add('changed');
+    lowInp.addEventListener('input', ()=>{
+      if (!PRICE_DRAFT[id]) PRICE_DRAFT[id] = deepCopy(base);
+      PRICE_DRAFT[id].low = parseFloat(lowInp.value) || 0;
+      lowInp.classList.toggle('changed', PRICE_DRAFT[id].low !== base.low);
+      saveDraft(); updateChangeCount();
+    });
+    lowCol.appendChild(lowInp);
+
+    const highCol = ce('div','lang-col');
+    const highTag = ce('span','lang-tag en'); highTag.textContent='HOOG (€)'; highCol.appendChild(highTag);
+    const highInp = document.createElement('input'); highInp.type='number'; highInp.step='0.5';
+    highInp.value = cur.high;
+    if (cur.high !== base.high) highInp.classList.add('changed');
+    highInp.addEventListener('input', ()=>{
+      if (!PRICE_DRAFT[id]) PRICE_DRAFT[id] = deepCopy(base);
+      PRICE_DRAFT[id].high = parseFloat(highInp.value) || 0;
+      highInp.classList.toggle('changed', PRICE_DRAFT[id].high !== base.high);
+      saveDraft(); updateChangeCount();
+    });
+    highCol.appendChild(highInp);
+
+    row.appendChild(lowCol);
+    row.appendChild(highCol);
+    f.appendChild(row);
+    wrap.appendChild(f);
+  });
+  return wrap;
+}
+
+/* ============================================================
+   6) FINALIZE
+============================================================ */
+function openFinalize() {
+  const changes = computeChanges();
+  const body = el('#modalBody');
+  body.innerHTML='';
+
+  if (!changes.length) {
+    body.innerHTML = '<div class="none-msg">Je hebt nog niets gewijzigd.</div>';
+    el('#btnDownload').disabled = true;
+  } else {
+    // Group by section
+    const bySec = {};
+    changes.forEach(ch => {
+      const sid = keyToSection(ch.path) || 'other';
+      bySec[sid] = (bySec[sid] || 0) + 1;
+    });
+    const h3 = ce('h3'); h3.textContent = 'Samenvatting per sectie'; body.appendChild(h3);
+    const ul = ce('ul','change-list');
+    SECTIONS.forEach(sec => {
+      if (!bySec[sec.id]) return;
+      const li = ce('li');
+      li.innerHTML = '<span class="lbl">'+sec.label+'</span><span class="cnt">'+bySec[sec.id]+'</span>';
+      ul.appendChild(li);
+    });
+    body.appendChild(ul);
+    const p = ce('p'); p.style.cssText='margin-top:22px;font-size:13px;color:var(--muted);line-height:1.55;';
+    p.innerHTML = 'Totaal <strong>'+changes.length+'</strong> veld'+(changes.length===1?'':'en')+' gewijzigd. Klik op "Download rapport" om een .json-bestand op te slaan. Stuur dat bestand aan Paul — hij verwerkt de wijzigingen op de site.';
+    body.appendChild(p);
+    el('#btnDownload').disabled = false;
+  }
+  el('#modalMask').classList.add('on');
+}
+function closeFinalize(){ el('#modalMask').classList.remove('on'); }
+
+function downloadReport() {
+  const changes = computeChanges();
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  const ts = now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'-'+pad(now.getHours())+pad(now.getMinutes());
+  const report = {
+    schema: 'sanproc-cms/1.0',
+    sessionId: ts + '-' + Math.random().toString(36).slice(2,6),
+    editor: 'broer',
+    generatedAt: now.toISOString(),
+    baseVersion: 'v-current',
+    summary: {
+      total: changes.length,
+      bySection: {}
+    },
+    changes: changes
+  };
+  changes.forEach(ch => {
+    const sid = keyToSection(ch.path) || 'other';
+    report.summary.bySection[sid] = (report.summary.bySection[sid]||0)+1;
+  });
+  const blob = new Blob([JSON.stringify(report,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'san-procolo-wijzigingen-'+ts+'.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('Rapport gedownload. Stuur het bestand aan Paul.');
+  closeFinalize();
+}
+
+function undoAll() {
+  if (!confirm('Weet je zeker dat je alle wijzigingen wilt weggooien? Dit kan niet ongedaan gemaakt worden.')) return;
+  DRAFT = deepCopy(BASELINE);
+  PRICE_DRAFT = deepCopy(PRICES);
+  saveDraft();
+  renderSection(currentSection);
+  updateChangeCount();
+  toast('Alle wijzigingen zijn ongedaan gemaakt.');
+}
+
+function toast(msg) {
+  const t = el('#toast');
+  t.textContent = msg;
+  t.classList.add('on');
+  setTimeout(()=> t.classList.remove('on'), 2600);
+}
+
+/* ============================================================
+   7) INIT & LOGIN
+============================================================ */
+function bootApp() {
+  el('#login').style.display='none';
+  el('#app').classList.add('on');
+  loadDraft();
+  renderNav();
+  selectSection(SECTIONS[0].id);
+  updateChangeCount();
+
+  el('#btnFinalize').addEventListener('click', openFinalize);
+  el('#btnCancel').addEventListener('click', closeFinalize);
+  el('#btnDownload').addEventListener('click', downloadReport);
+  el('#btnUndoAll').addEventListener('click', undoAll);
+  el('#modalMask').addEventListener('click', (e)=>{
+    if (e.target === el('#modalMask')) closeFinalize();
+  });
+}
+
+document.getElementById('loginForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const v = el('#pw').value.trim();
+  if (v === PW) {
+    localStorage.setItem(AUTH_KEY, '1');
+    bootApp();
+  } else {
+    el('#loginErr').textContent = 'Onjuist wachtwoord. Vraag Paul om hulp.';
+    el('#pw').value = '';
+    el('#pw').focus();
+  }
+});
+
+if (localStorage.getItem(AUTH_KEY) === '1') bootApp();
+</script>
+</body>
+</html>
