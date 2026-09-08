@@ -356,6 +356,110 @@
     background: var(--ok);
   }
 
+  /* ── VIEW-ON-SITE LINK ── */
+  .view-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold); text-decoration: none;
+    padding: 6px 10px; border-radius: 3px;
+    border: 1px solid var(--border);
+    background: transparent;
+    margin-bottom: 22px;
+    transition: all 0.15s;
+  }
+  .view-link:hover { background: var(--panel); color: var(--gold-h); }
+  .view-link svg { display: block; opacity: 0.7; }
+
+  /* ── RICH-TEXT TOOLBAR ── */
+  .rt-toolbar {
+    display: flex; gap: 2px; margin-bottom: 4px;
+    align-items: center;
+  }
+  .rt-btn {
+    padding: 3px 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    color: var(--subtle);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.12s;
+    min-width: 24px;
+    line-height: 1.2;
+  }
+  .rt-btn:hover { color: var(--gold); background: var(--bg2); border-color: var(--border2); }
+  .rt-btn.em    { color: var(--gold); font-style: italic; font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 14px; }
+  .rt-btn.br    { font-size: 11px; }
+  .rt-btn.link  { font-size: 11px; }
+  .rt-sep       { width: 1px; height: 14px; background: var(--border2); margin: 0 4px; }
+  .rt-help {
+    font-size: 10px; color: var(--subtle);
+    margin-left: auto;
+    font-style: italic;
+  }
+
+  /* ── ITEM-LIST FEATURES (reorder + add + remove) ── */
+  .card { position: relative; }
+  .card.dragging { opacity: 0.45; }
+  .card.drop-target { border-color: var(--peach); box-shadow: 0 0 0 2px oklch(55% 0.099 40 / 0.20); }
+  .card-actions {
+    position: absolute; top: 18px; right: 22px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .drag-handle {
+    width: 30px; height: 30px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--subtle);
+    background: transparent; border: 0; border-radius: 3px;
+    cursor: grab; transition: all 0.15s;
+    user-select: none;
+  }
+  .drag-handle:hover { background: var(--bg2); color: var(--muted); }
+  .drag-handle:active { cursor: grabbing; }
+  .drag-handle svg { display: block; }
+  .btn-remove {
+    width: 30px; height: 30px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--subtle);
+    background: transparent; border: 0; border-radius: 3px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .btn-remove:hover { background: oklch(52% 0.19 25 / 0.10); color: var(--err); }
+  .btn-remove svg { display: block; }
+  .add-btn {
+    width: 100%;
+    padding: 16px 20px;
+    background: transparent;
+    border: 1.5px dashed var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.3px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.15s;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+  .add-btn:hover {
+    color: var(--peach); border-color: var(--peach);
+    background: oklch(55% 0.099 40 / 0.04);
+  }
+  .add-btn svg { flex-shrink: 0; }
+  .card.is-new::before {
+    content: 'NIEUW';
+    position: absolute; top: -8px; left: 22px;
+    background: var(--peach); color: white;
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 3px 8px; border-radius: 2px;
+  }
+  .card-title-row {
+    display: flex; align-items: center; gap: 12px;
+    padding-right: 76px; /* room for action buttons */
+  }
+  .card-title-row .card-title { margin-bottom: 4px; }
+
   /* Small screens */
   @media (max-width: 900px) {
     .app { grid-template-columns: 1fr; }
@@ -589,18 +693,14 @@ const SECTIONS = [
   {
     id: 'stays',
     label: 'Accommodaties',
-    intro: 'De 5 kaartjes met accommodaties. Titel + omschrijving per stuk.',
+    intro: 'De 5 kaartjes met accommodaties. Sleep de kaarten om de volgorde op de site te wijzigen.',
+    sortable: true,
     cards: [
-      { title: 'Glampingtent',
-        fields: [ { key:'stay_glamp_h', label:'Naam' }, { key:'stay_glamp_p', label:'Omschrijving', type:'textarea' } ] },
-      { title: 'Tentplek',
-        fields: [ { key:'stay_tent_h', label:'Naam' }, { key:'stay_tent_p', label:'Omschrijving', type:'textarea' } ] },
-      { title: 'Plek voor caravan/camper',
-        fields: [ { key:'stay_camper_h', label:'Naam' }, { key:'stay_camper_p', label:'Omschrijving', type:'textarea' } ] },
-      { title: 'Bell tent',
-        fields: [ { key:'stay_bell_h', label:'Naam' }, { key:'stay_bell_p', label:'Omschrijving', type:'textarea' } ] },
-      { title: 'Safaritent',
-        fields: [ { key:'stay_safari_h', label:'Naam' }, { key:'stay_safari_p', label:'Omschrijving', type:'textarea' } ] }
+      { slot:'glamp',  title: 'Glampingtent',            fields: [ { key:'stay_glamp_h', label:'Naam' }, { key:'stay_glamp_p', label:'Omschrijving', type:'textarea' } ] },
+      { slot:'tent',   title: 'Tentplek',                fields: [ { key:'stay_tent_h', label:'Naam' }, { key:'stay_tent_p', label:'Omschrijving', type:'textarea' } ] },
+      { slot:'camper', title: 'Plek voor caravan/camper',fields: [ { key:'stay_camper_h', label:'Naam' }, { key:'stay_camper_p', label:'Omschrijving', type:'textarea' } ] },
+      { slot:'bell',   title: 'Bell tent',               fields: [ { key:'stay_bell_h', label:'Naam' }, { key:'stay_bell_p', label:'Omschrijving', type:'textarea' } ] },
+      { slot:'safari', title: 'Safaritent',              fields: [ { key:'stay_safari_h', label:'Naam' }, { key:'stay_safari_p', label:'Omschrijving', type:'textarea' } ] }
     ]
   },
   {
@@ -612,32 +712,34 @@ const SECTIONS = [
   {
     id: 'activities',
     label: 'Activiteiten',
-    intro: 'De 6 kaartjes bij "Dingen om te doen — zo veel of zo weinig als je wilt".',
+    intro: 'De 6 kaartjes bij "Dingen om te doen". Sleep om de volgorde te wijzigen.',
+    sortable: true,
     cards: [
-      { title: 'Zwembad',      fields:[ {key:'act_pool_h',   label:'Titel'}, {key:'act_pool_p',   label:'Tekst', type:'textarea'} ]},
-      { title: 'Lange tafel',  fields:[ {key:'act_table_h',  label:'Titel'}, {key:'act_table_p',  label:'Tekst', type:'textarea'} ]},
-      { title: 'Porto San Giorgio (strand)', fields:[ {key:'act_beach_h', label:'Titel'}, {key:'act_beach_p', label:'Tekst', type:'textarea'} ]},
-      { title: 'Speeltuin',    fields:[ {key:'act_kids_h',   label:'Titel'}, {key:'act_kids_p',   label:'Tekst', type:'textarea'} ]},
-      { title: 'De Sibillini', fields:[ {key:'act_sib_h',    label:'Titel'}, {key:'act_sib_p',    label:'Tekst', type:'textarea'} ]},
-      { title: 'Heuveldorpjes',fields:[ {key:'act_towns_h',  label:'Titel'}, {key:'act_towns_p',  label:'Tekst', type:'textarea'} ]}
+      { slot:'pool',  title: 'Zwembad',      fields:[ {key:'act_pool_h',   label:'Titel'}, {key:'act_pool_p',   label:'Tekst', type:'textarea'} ]},
+      { slot:'table', title: 'Lange tafel',  fields:[ {key:'act_table_h',  label:'Titel'}, {key:'act_table_p',  label:'Tekst', type:'textarea'} ]},
+      { slot:'beach', title: 'Porto San Giorgio (strand)', fields:[ {key:'act_beach_h', label:'Titel'}, {key:'act_beach_p', label:'Tekst', type:'textarea'} ]},
+      { slot:'kids',  title: 'Speeltuin',    fields:[ {key:'act_kids_h',   label:'Titel'}, {key:'act_kids_p',   label:'Tekst', type:'textarea'} ]},
+      { slot:'sib',   title: 'De Sibillini', fields:[ {key:'act_sib_h',    label:'Titel'}, {key:'act_sib_p',    label:'Tekst', type:'textarea'} ]},
+      { slot:'towns', title: 'Heuveldorpjes',fields:[ {key:'act_towns_h',  label:'Titel'}, {key:'act_towns_p',  label:'Tekst', type:'textarea'} ]}
     ]
   },
   {
     id: 'experiences',
     label: 'Bijzondere ervaringen',
-    intro: 'De 3 grote kaarten met de "als je geluk hebt" ervaringen.',
+    intro: 'De 3 grote kaarten. Sleep om de volgorde te wijzigen.',
+    sortable: true,
     cards: [
-      { title: 'Pluk je eigen fruit', fields:[
+      { slot:'olive',   title: 'Pluk je eigen fruit', fields:[
         {key:'exp_olive_ey', label:'Kopje boven de titel (eyebrow)'},
         {key:'exp_olive_h',  label:'Titel', help:'Gebruik <em>…</em> voor accent, <br> voor regelafbreking.'},
         {key:'exp_olive_p',  label:'Tekst', type:'textarea'}
       ]},
-      { title: 'Wijnproeverij', fields:[
+      { slot:'tasting', title: 'Wijnproeverij', fields:[
         {key:'exp_tasting_ey', label:'Eyebrow'},
         {key:'exp_tasting_h',  label:'Titel'},
         {key:'exp_tasting_p',  label:'Tekst', type:'textarea'}
       ]},
-      { title: 'Sterrenhemel', fields:[
+      { slot:'wine',    title: 'Sterrenhemel', fields:[
         {key:'exp_wine_ey', label:'Eyebrow'},
         {key:'exp_wine_h',  label:'Titel'},
         {key:'exp_wine_p',  label:'Tekst', type:'textarea'}
@@ -647,16 +749,38 @@ const SECTIONS = [
   {
     id: 'facilities',
     label: 'Op de camping',
-    intro: 'Alle voorzieningen: terras, zwembad, speeltuin etc.',
+    intro: 'Alle voorzieningen. Sleep om te herordenen; klik "Toevoegen" voor een nieuwe voorziening.',
+    sortable: true, canAdd: true, canRemove: true,
+    addLabel: 'Voeg een voorziening toe',
+    addFn: () => {
+      const n = getNextFacilityNumber();
+      const slot = 'fac_new' + n;
+      const nameKey = slot + '_name';
+      const descKey = slot + '_desc';
+      return {
+        slot,
+        title: 'Nieuwe voorziening',
+        titleKey: nameKey,
+        removable: true,
+        fields: [
+          { key: nameKey, label:'Naam van de voorziening' },
+          { key: descKey, label:'Omschrijving', type:'textarea' }
+        ],
+        defaults: {
+          [nameKey]: { nl:'Nieuwe voorziening', en:'New amenity' },
+          [descKey]: { nl:'Omschrijving…', en:'Description…' }
+        }
+      };
+    },
     cards: [
-      { title: 'Terras & Bar',       fields:[{key:'fac_terrace_desc', type:'textarea'}] },
-      { title: 'Zwembad',            fields:[{key:'fac_pool_v',       type:'textarea'}] },
-      { title: 'Speeltuin',          fields:[{key:'fac_kids_v'}] },
-      { title: 'Biologische wijn',   fields:[{key:'fac_wine_v'}] },
-      { title: 'Wifi',               fields:[{key:'fac_wifi_v'}] },
-      { title: 'Olijf- & kruiden­tuin', fields:[{key:'fac_olive_v'}] },
-      { title: 'Lokaal advies',      fields:[{key:'fac_advice_v', type:'textarea'}] },
-      { title: 'Wasserij & baby-benodigdheden', fields:[{key:'fac_laundry_v'}] }
+      { slot:'terrace', title: 'Terras & Bar',           fields:[{key:'fac_terrace_desc', type:'textarea'}] },
+      { slot:'pool',    title: 'Zwembad',                fields:[{key:'fac_pool_v',       type:'textarea'}] },
+      { slot:'kids',    title: 'Speeltuin',              fields:[{key:'fac_kids_v'}] },
+      { slot:'wine',    title: 'Biologische wijn',       fields:[{key:'fac_wine_v'}] },
+      { slot:'wifi',    title: 'Wifi',                   fields:[{key:'fac_wifi_v'}] },
+      { slot:'olive',   title: 'Olijf- & kruidentuin',   fields:[{key:'fac_olive_v'}] },
+      { slot:'advice',  title: 'Lokaal advies',          fields:[{key:'fac_advice_v', type:'textarea'}] },
+      { slot:'laundry', title: 'Wasserij & baby-benodigdheden', fields:[{key:'fac_laundry_v'}] }
     ]
   },
   {
@@ -674,12 +798,36 @@ const SECTIONS = [
   {
     id: 'testimonials',
     label: 'Gastenreviews',
-    intro: 'De twee reviews naast de Google-samenvatting.',
+    intro: 'De reviews naast de Google-samenvatting. Sleep om te herordenen; klik "Toevoegen" voor een nieuwe review.',
+    sortable: true, canAdd: true, canRemove: true,
+    addLabel: 'Voeg een review toe',
+    addFn: () => {
+      const n = getNextTestimonialNumber();
+      const slot = 't' + n;
+      const qKey = 'test_q' + n;
+      const authorKey = 'test_author' + n;
+      const countryKey = 'test_country' + n;
+      return {
+        slot,
+        title: 'Nieuwe review',
+        removable: true,
+        fields: [
+          { key: qKey, label:'Reviewtekst', type:'textarea' },
+          { key: authorKey, label:'Naam van de gast', shared:true },
+          { key: countryKey, label:'Land', shared:true, help:'Bijv. Nederland, Duitsland, België, Verenigd Koninkrijk.' }
+        ],
+        defaults: {
+          [qKey]:       { nl:'Fantastische plek…', en:'A wonderful place…' },
+          [authorKey]:  { nl:'', en:'' },
+          [countryKey]: { nl:'Nederland', en:'Netherlands' }
+        }
+      };
+    },
     cards: [
-      { title: 'Review 1', fields:[{key:'test_q1', type:'textarea'}] },
-      { title: 'Review 2', fields:[{key:'test_q2', type:'textarea'}] },
-      { title: 'Google-cijfer',
-        sub:'Wat er in de kaart in het midden staat.',
+      { slot:'q1', title: 'Review — Mevr. Elbers', removable:true, fields:[{key:'test_q1', label:'Reviewtekst', type:'textarea'}] },
+      { slot:'q2', title: 'Review — Gijs',         removable:true, fields:[{key:'test_q2', label:'Reviewtekst', type:'textarea'}] },
+      { slot:'rating', title: 'Google-cijfer', pinned: true,
+        sub:'Deze kaart blijft altijd in het midden. Wel bewerkbaar, niet te verwijderen.',
         fields: [
           { key:'test_rating_score', label:'Score (bijv. 4,9)', shared:true },
           { key:'test_rating_count', label:'Aantal reviews', shared:true }
@@ -689,14 +837,35 @@ const SECTIONS = [
   {
     id: 'faq',
     label: 'Goed om te weten (FAQ)',
-    intro: 'De veelgestelde vragen onderaan de site.',
+    intro: 'De veelgestelde vragen onderaan de site. Sleep om te herordenen; klik "Toevoegen" voor een nieuwe vraag.',
+    sortable: true, canAdd: true, canRemove: true,
+    addLabel: 'Voeg een vraag toe',
+    addFn: () => {
+      const n = getNextFaqNumber();
+      const slot = String(n);
+      const qKey = 'faq_q' + n;
+      const aKey = 'faq_a' + n;
+      return {
+        slot,
+        title: 'Vraag ' + n,
+        removable: true,
+        fields: [
+          { key: qKey, label:'Vraag' },
+          { key: aKey, label:'Antwoord', type:'textarea' }
+        ],
+        defaults: {
+          [qKey]: { nl:'Nieuwe vraag', en:'New question' },
+          [aKey]: { nl:'Antwoord…', en:'Answer…' }
+        }
+      };
+    },
     cards: [
-      { title:'Vraag 1', fields:[{key:'faq_q1', label:'Vraag'},{key:'faq_a1', label:'Antwoord', type:'textarea'}] },
-      { title:'Vraag 2', fields:[{key:'faq_q2', label:'Vraag'},{key:'faq_a2', label:'Antwoord', type:'textarea'}] },
-      { title:'Vraag 3', fields:[{key:'faq_q3', label:'Vraag'},{key:'faq_a3', label:'Antwoord', type:'textarea'}] },
-      { title:'Vraag 4', fields:[{key:'faq_q4', label:'Vraag'},{key:'faq_a4', label:'Antwoord', type:'textarea'}] },
-      { title:'Vraag 5', fields:[{key:'faq_q5', label:'Vraag'},{key:'faq_a5', label:'Antwoord', type:'textarea'}] },
-      { title:'Vraag 6', fields:[{key:'faq_q6', label:'Vraag'},{key:'faq_a6', label:'Antwoord', type:'textarea'}] }
+      { slot:'1', title:'Vraag 1', removable:true, fields:[{key:'faq_q1', label:'Vraag'},{key:'faq_a1', label:'Antwoord', type:'textarea'}] },
+      { slot:'2', title:'Vraag 2', removable:true, fields:[{key:'faq_q2', label:'Vraag'},{key:'faq_a2', label:'Antwoord', type:'textarea'}] },
+      { slot:'3', title:'Vraag 3', removable:true, fields:[{key:'faq_q3', label:'Vraag'},{key:'faq_a3', label:'Antwoord', type:'textarea'}] },
+      { slot:'4', title:'Vraag 4', removable:true, fields:[{key:'faq_q4', label:'Vraag'},{key:'faq_a4', label:'Antwoord', type:'textarea'}] },
+      { slot:'5', title:'Vraag 5', removable:true, fields:[{key:'faq_q5', label:'Vraag'},{key:'faq_a5', label:'Antwoord', type:'textarea'}] },
+      { slot:'6', title:'Vraag 6', removable:true, fields:[{key:'faq_q6', label:'Vraag'},{key:'faq_a6', label:'Antwoord', type:'textarea'}] }
     ]
   },
   {
@@ -722,13 +891,65 @@ const SECTIONS = [
    3) STATE
 ============================================================ */
 const PW = 'Klotenklapperuit93'; // simple gate — brother-level, not security
+const SITE_URL = 'https://paulvdhaar-cpu.github.io/italiaansdroompie/';
+const SECTION_ANCHOR = {
+  hero:'', about:'about', story:'about', stays:'stay', prices:'faq',
+  activities:'activities', experiences:'experiences', facilities:'facilities',
+  surroundings:'surroundings', testimonials:'faq', faq:'faq',
+  contact:'contact', footer:''
+};
 const STORAGE_KEY = 'sanproc-editor-draft-v1';
 const AUTH_KEY = 'sanproc-editor-auth';
 
-let DRAFT = null;      // { [key]: {nl, en}, __prices: {...} }
+let DRAFT = null;         // { [key]: {nl, en} }
 let PRICE_DRAFT = null;
+let INITIAL_ORDER = {};   // { secId: [slot,...] } — original from SECTIONS
+let ORDER = {};           // { secId: [slot,...] } — current effective order
+let ADDED = {};           // { secId: [ cardConfig, ... ] } — new cards
+let REMOVED = {};         // { secId: [ slot, ... ] } — removed slots
 let currentSection = null;
 let saveTimer = null;
+
+/* Compute initial order from SECTIONS config (only for sortable) */
+function computeInitialOrder() {
+  INITIAL_ORDER = {};
+  SECTIONS.forEach(sec => {
+    if (!sec.sortable) return;
+    INITIAL_ORDER[sec.id] = sec.cards.filter(c => !c.pinned).map(c => c.slot);
+  });
+}
+
+/* Helpers for generating new slot IDs */
+function collectSlots(secId) {
+  const sec = SECTIONS.find(s => s.id === secId);
+  const original = sec.cards.map(c => c.slot);
+  const added = (ADDED[secId] || []).map(c => c.slot);
+  return [...original, ...added];
+}
+function getNextFaqNumber() {
+  const slots = collectSlots('faq');
+  const nums = slots.map(s => parseInt(s)).filter(n => !isNaN(n));
+  return Math.max(0, ...nums) + 1;
+}
+function getNextTestimonialNumber() {
+  const slots = collectSlots('testimonials').filter(s => s !== 'rating');
+  const nums = slots.map(s => parseInt(String(s).replace(/^\D+/,''))).filter(n => !isNaN(n));
+  return Math.max(0, ...nums) + 1;
+}
+function getNextFacilityNumber() {
+  const added = (ADDED.facilities || []).map(c => c.slot);
+  const nums = added.map(s => parseInt(String(s).replace(/^\D+/,''))).filter(n => !isNaN(n));
+  return Math.max(0, ...nums) + 1;
+}
+
+/* Find a card config by slot (looks in SECTIONS + ADDED) */
+function findCard(secId, slot) {
+  const sec = SECTIONS.find(s => s.id === secId);
+  const orig = sec.cards.find(c => c.slot === slot);
+  if (orig) return orig;
+  const added = (ADDED[secId] || []).find(c => c.slot === slot);
+  return added || null;
+}
 
 function deepCopy(x) { return JSON.parse(JSON.stringify(x)); }
 function el(sel){ return document.querySelector(sel); }
@@ -741,15 +962,37 @@ function loadDraft() {
       const p = JSON.parse(s);
       DRAFT = p.content || deepCopy(BASELINE);
       PRICE_DRAFT = p.prices || deepCopy(PRICES);
+      ORDER = p.order || {};
+      ADDED = p.added || {};
+      REMOVED = p.removed || {};
+      // Fill in defaults for any missing sortable section
+      Object.keys(INITIAL_ORDER).forEach(sid => {
+        if (!ORDER[sid]) ORDER[sid] = [...INITIAL_ORDER[sid]];
+        if (!ADDED[sid]) ADDED[sid] = [];
+        if (!REMOVED[sid]) REMOVED[sid] = [];
+      });
+      // Rehydrate added-cards' addFn-derived structure (functions can't be JSON'd,
+      // so we stored the raw slot+fields+defaults+title only)
       return;
     }
   } catch(e){}
   DRAFT = deepCopy(BASELINE);
   PRICE_DRAFT = deepCopy(PRICES);
+  ORDER = {};
+  ADDED = {};
+  REMOVED = {};
+  Object.keys(INITIAL_ORDER).forEach(sid => {
+    ORDER[sid] = [...INITIAL_ORDER[sid]];
+    ADDED[sid] = [];
+    REMOVED[sid] = [];
+  });
 }
 function saveDraft() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({content:DRAFT, prices:PRICE_DRAFT}));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      content: DRAFT, prices: PRICE_DRAFT,
+      order: ORDER, added: ADDED, removed: REMOVED
+    }));
     showSaveHint();
   } catch(e){}
 }
@@ -765,19 +1008,64 @@ function showSaveHint(){
 ============================================================ */
 function computeChanges() {
   const changes = [];
+  // Updates on BASELINE keys — only if the slot they belong to is NOT removed
   Object.keys(BASELINE).forEach(k => {
+    if (isKeyInRemovedSlot(k)) return; // that field no longer exists in the site
     const base = BASELINE[k];
     const cur  = DRAFT[k] || base;
     if (base.nl !== cur.nl) changes.push({ op:'update', path:k, lang:'nl', old:base.nl, new:cur.nl });
     if (base.en !== cur.en) changes.push({ op:'update', path:k, lang:'en', old:base.en, new:cur.en });
   });
+  // Prices
   Object.keys(PRICES).forEach(id => {
     const base = PRICES[id];
     const cur  = PRICE_DRAFT[id] || base;
     if (base.low  !== cur.low)  changes.push({ op:'update', path:'price.'+id+'.low',  old:base.low,  new:cur.low });
     if (base.high !== cur.high) changes.push({ op:'update', path:'price.'+id+'.high', old:base.high, new:cur.high });
   });
+  // Adds — new cards not in BASELINE
+  Object.keys(ADDED).forEach(secId => {
+    (ADDED[secId] || []).forEach(card => {
+      const values = {};
+      (card.fields || []).forEach(f => {
+        values[f.key] = DRAFT[f.key] || (card.defaults && card.defaults[f.key]) || {nl:'',en:''};
+      });
+      changes.push({ op:'add', section: secId, slot: card.slot, title: card.title, values });
+    });
+  });
+  // Removes — baseline cards marked as removed
+  Object.keys(REMOVED).forEach(secId => {
+    (REMOVED[secId] || []).forEach(slot => {
+      const sec = SECTIONS.find(s => s.id === secId);
+      const card = sec && sec.cards.find(c => c.slot === slot);
+      const keys = card ? card.fields.map(f => f.key) : [];
+      changes.push({ op:'remove', section: secId, slot, keys });
+    });
+  });
+  // Reorder — if effective order differs from initial (removing removed slots + appending added)
+  Object.keys(INITIAL_ORDER).forEach(secId => {
+    const initial = INITIAL_ORDER[secId].filter(s => !(REMOVED[secId]||[]).includes(s));
+    const current = (ORDER[secId] || []).filter(s => !(REMOVED[secId]||[]).includes(s));
+    // Compare only the parts present in both (added slots don't count as "reorder")
+    const both = current.filter(s => initial.includes(s));
+    const initBoth = initial.filter(s => both.includes(s));
+    if (JSON.stringify(both) !== JSON.stringify(initBoth)) {
+      changes.push({ op:'reorder', section: secId, from: initBoth, to: both });
+    }
+  });
   return changes;
+}
+
+function isKeyInRemovedSlot(key) {
+  for (const secId of Object.keys(REMOVED)) {
+    const sec = SECTIONS.find(s => s.id === secId);
+    if (!sec) continue;
+    for (const slot of (REMOVED[secId] || [])) {
+      const card = sec.cards.find(c => c.slot === slot);
+      if (card && card.fields.some(f => f.key === key)) return true;
+    }
+  }
+  return false;
 }
 
 function updateChangeCount() {
@@ -787,7 +1075,11 @@ function updateChangeCount() {
     : 'Geen wijzigingen';
   document.querySelectorAll('.sec-btn').forEach(b => {
     const sid = b.dataset.section;
-    const hasChg = c.some(x => keyToSection(x.path) === sid);
+    const hasChg = c.some(x => {
+      if (x.section) return x.section === sid;
+      if (x.path)    return keyToSection(x.path) === sid;
+      return false;
+    });
     b.classList.toggle('dirty', hasChg);
   });
   el('#btnFinalize').disabled = c.length === 0;
@@ -800,6 +1092,12 @@ function keyToSection(path) {
     if (!sec.cards) continue;
     for (const card of sec.cards) {
       if (card.fields.some(f => f.key === path)) return sec.id;
+    }
+  }
+  // Also check added cards
+  for (const secId of Object.keys(ADDED)) {
+    for (const card of (ADDED[secId] || [])) {
+      if (card.fields.some(f => f.key === path)) return secId;
     }
   }
   return null;
@@ -839,18 +1137,92 @@ function renderSection(id) {
   const h1  = ce('h1','sec-h1'); h1.innerHTML = sec.label; body.appendChild(h1);
   const p   = ce('p','sec-intro'); p.textContent = sec.intro; body.appendChild(p);
 
+  // "Bekijk op site" link
+  const anchor = SECTION_ANCHOR[sec.id];
+  if (anchor !== undefined) {
+    const viewLink = document.createElement('a');
+    viewLink.className = 'view-link';
+    viewLink.href = SITE_URL + (anchor ? '#' + anchor : '');
+    viewLink.target = '_blank';
+    viewLink.rel = 'noopener';
+    viewLink.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>Bekijk deze sectie op de site</span>';
+    body.appendChild(viewLink);
+  }
+
   if (sec.priceEditor) {
     body.appendChild(renderPriceEditor());
     return;
   }
 
-  sec.cards.forEach(card => body.appendChild(renderCard(card)));
+  if (sec.sortable) {
+    // Render pinned cards first (they stay in place)
+    const pinned = sec.cards.filter(c => c.pinned);
+    // Render sortable cards in ORDER (skip removed)
+    const orderedSlots = (ORDER[sec.id] || []).filter(s => !(REMOVED[sec.id]||[]).includes(s));
+    orderedSlots.forEach(slot => {
+      const card = findCard(sec.id, slot);
+      if (card) body.appendChild(renderCard(card, sec));
+    });
+    pinned.forEach(card => body.appendChild(renderCard(card, sec)));
+    // Add "+ Toevoegen" button if canAdd
+    if (sec.canAdd) {
+      const btn = ce('button','add-btn');
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>'+(sec.addLabel || 'Voeg toe')+'</span>';
+      btn.onclick = () => addItem(sec.id);
+      body.appendChild(btn);
+    }
+    return;
+  }
+
+  sec.cards.forEach(card => body.appendChild(renderCard(card, sec)));
 }
 
-function renderCard(card) {
+function isAdded(secId, slot) {
+  return (ADDED[secId] || []).some(c => c.slot === slot);
+}
+
+function renderCard(card, sec) {
   const el_ = ce('div','card');
-  if (card.title) { const t = ce('h2','card-title'); t.textContent = card.title; el_.appendChild(t); }
-  if (card.sub)   { const s = ce('p','card-sub');   s.textContent = card.sub;   el_.appendChild(s); }
+  if (sec && sec.sortable && card.slot) el_.dataset.slot = card.slot;
+  const isNew = sec && card.slot && isAdded(sec.id, card.slot);
+  if (isNew) el_.classList.add('is-new');
+  const canDrag   = sec && sec.sortable && !card.pinned;
+  const canRemove = sec && sec.canRemove && card.removable;
+  if (canDrag) {
+    el_.draggable = true;
+    el_.addEventListener('dragstart', onDragStart);
+    el_.addEventListener('dragover',  onDragOver);
+    el_.addEventListener('drop',      onDrop);
+    el_.addEventListener('dragend',   onDragEnd);
+  }
+  if (card.title || card.sub) {
+    const row = ce('div','card-title-row');
+    const wrap = ce('div');
+    if (card.title) { const t = ce('h2','card-title'); t.textContent = card.title; wrap.appendChild(t); }
+    if (card.sub)   { const s = ce('p','card-sub');   s.textContent = card.sub;   wrap.appendChild(s); }
+    row.appendChild(wrap);
+    el_.appendChild(row);
+    // Actions (drag handle + remove) in top-right
+    if (canDrag || canRemove) {
+      const acts = ce('div','card-actions');
+      if (canDrag) {
+        const h = ce('button','drag-handle');
+        h.title = 'Sleep om te herordenen';
+        h.type = 'button';
+        h.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg>';
+        acts.appendChild(h);
+      }
+      if (canRemove) {
+        const r = ce('button','btn-remove');
+        r.title = 'Verwijder deze kaart';
+        r.type = 'button';
+        r.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14"/></svg>';
+        r.onclick = (e) => { e.stopPropagation(); removeItem(sec.id, card.slot); };
+        acts.appendChild(r);
+      }
+      el_.appendChild(acts);
+    }
+  }
 
   card.fields.forEach(f => {
     const wrap = ce('div','field');
@@ -859,19 +1231,21 @@ function renderCard(card) {
       lbl.textContent = f.label;
       wrap.appendChild(lbl);
     }
+    // Effective baseline for this field: BASELINE first, then card.defaults (for added cards)
+    const baseline = BASELINE[f.key] || (card.defaults && card.defaults[f.key]) || {nl:'',en:''};
     if (f.shared) {
       // Single input (no NL/EN split)
-      const inp = makeInput(f, 'nl');
+      const inp = makeInput(f, 'nl', baseline);
       wrap.appendChild(inp);
       // mirror to EN
       inp.addEventListener('input', ()=>{
-        if (!DRAFT[f.key]) DRAFT[f.key] = deepCopy(BASELINE[f.key]);
+        if (!DRAFT[f.key]) DRAFT[f.key] = deepCopy(baseline);
         DRAFT[f.key].en = inp.value;
       });
     } else {
       const pair = ce('div','lang-pair');
-      pair.appendChild(makeLangCol(f, 'nl'));
-      pair.appendChild(makeLangCol(f, 'en'));
+      pair.appendChild(makeLangCol(f, 'nl', baseline));
+      pair.appendChild(makeLangCol(f, 'en', baseline));
       wrap.appendChild(pair);
     }
     if (f.help) {
@@ -884,30 +1258,80 @@ function renderCard(card) {
   return el_;
 }
 
-function makeLangCol(f, lang) {
+function makeLangCol(f, lang, baseline) {
   const col = ce('div','lang-col');
   const tag = ce('span', 'lang-tag'+(lang==='en'?' en':''));
   tag.textContent = lang.toUpperCase();
   col.appendChild(tag);
-  col.appendChild(makeInput(f, lang));
+  const inp = makeInput(f, lang, baseline);
+  col.appendChild(makeRtToolbar(inp));
+  col.appendChild(inp);
   return col;
 }
 
-function makeInput(f, lang) {
+/* Rich-text toolbar: em / br / link */
+function makeRtToolbar(inp) {
+  const bar = ce('div','rt-toolbar');
+  const mkBtn = (cls, label, title, action) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'rt-btn ' + cls;
+    b.title = title;
+    b.innerHTML = label;
+    // preventDefault on mousedown so we don't lose the input's selection
+    b.addEventListener('mousedown', (e) => { e.preventDefault(); });
+    b.addEventListener('click', (e) => { e.preventDefault(); action(inp); });
+    return b;
+  };
+  bar.appendChild(mkBtn('em',   'em',      'Accent (olijf-groen woord op de site) — wraps in <em>…</em>',   (i) => wrapSelection(i, '<em>', '</em>')));
+  bar.appendChild(mkBtn('br',   '↵',       'Regelafbreking — voegt <br> toe',                                (i) => insertAtCursor(i, '<br>')));
+  bar.appendChild(mkBtn('link', '🔗 Link', 'Link toevoegen — vraagt om URL en zet <a href="…">…</a>',        (i) => insertLink(i)));
+  return bar;
+}
+
+function wrapSelection(inp, before, after) {
+  inp.focus();
+  const s = inp.selectionStart || 0;
+  const e = inp.selectionEnd   || 0;
+  const val = inp.value;
+  const sel = val.slice(s, e);
+  const inner = sel || 'tekst';
+  const nv = val.slice(0, s) + before + inner + after + val.slice(e);
+  inp.value = nv;
+  const caretStart = s + before.length;
+  inp.setSelectionRange(caretStart, caretStart + inner.length);
+  inp.dispatchEvent(new Event('input'));
+}
+function insertAtCursor(inp, str) {
+  inp.focus();
+  const s = inp.selectionStart || 0;
+  const e = inp.selectionEnd   || 0;
+  const val = inp.value;
+  inp.value = val.slice(0, s) + str + val.slice(e);
+  const caret = s + str.length;
+  inp.setSelectionRange(caret, caret);
+  inp.dispatchEvent(new Event('input'));
+}
+function insertLink(inp) {
+  const url = window.prompt('URL voor de link (bijv. https://voorbeeld.nl)?', 'https://');
+  if (!url) return;
+  wrapSelection(inp, '<a href="' + url + '" target="_blank" rel="noopener">', '</a>');
+}
+
+function makeInput(f, lang, baseline) {
   const isTA = f.type === 'textarea';
   const tag = isTA ? 'textarea' : 'input';
   const inp = document.createElement(tag);
   if (!isTA) inp.type = 'text';
-  if (isTA && f.type === 'textarea' && BASELINE[f.key] && BASELINE[f.key][lang] && BASELINE[f.key][lang].length > 200) {
-    inp.classList.add('tall');
-  }
-  const cur = (DRAFT[f.key] && DRAFT[f.key][lang] != null) ? DRAFT[f.key][lang] : BASELINE[f.key][lang];
+  const baseVal = (baseline && baseline[lang] != null) ? baseline[lang] : '';
+  if (isTA && baseVal && baseVal.length > 200) inp.classList.add('tall');
+  const cur = (DRAFT[f.key] && DRAFT[f.key][lang] != null) ? DRAFT[f.key][lang] : baseVal;
   inp.value = cur;
-  if (cur !== BASELINE[f.key][lang]) inp.classList.add('changed');
+  if (cur !== baseVal) inp.classList.add('changed');
   inp.addEventListener('input', ()=>{
-    if (!DRAFT[f.key]) DRAFT[f.key] = deepCopy(BASELINE[f.key]);
+    if (!DRAFT[f.key]) DRAFT[f.key] = deepCopy(baseline || {nl:'',en:''});
     DRAFT[f.key][lang] = inp.value;
-    inp.classList.toggle('changed', inp.value !== BASELINE[f.key][lang]);
+    inp.classList.toggle('changed', inp.value !== baseVal);
     saveDraft();
     updateChangeCount();
   });
@@ -963,6 +1387,100 @@ function renderPriceEditor() {
 /* ============================================================
    6) FINALIZE
 ============================================================ */
+/* ============================================================
+   REORDER (drag & drop)
+============================================================ */
+let dragSrcSlot = null;
+function onDragStart(e) {
+  dragSrcSlot = e.currentTarget.dataset.slot;
+  e.currentTarget.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  try { e.dataTransfer.setData('text/plain', dragSrcSlot); } catch(_) {}
+}
+function onDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const tgt = e.currentTarget;
+  if (tgt.dataset.slot && tgt.dataset.slot !== dragSrcSlot) {
+    document.querySelectorAll('.card.drop-target').forEach(c => c.classList.remove('drop-target'));
+    tgt.classList.add('drop-target');
+  }
+}
+function onDrop(e) {
+  e.preventDefault();
+  const tgt = e.currentTarget;
+  const dstSlot = tgt.dataset.slot;
+  document.querySelectorAll('.card.drop-target').forEach(c => c.classList.remove('drop-target'));
+  if (!dragSrcSlot || !dstSlot || dragSrcSlot === dstSlot) return;
+  const secId = currentSection;
+  const order = ORDER[secId];
+  const from = order.indexOf(dragSrcSlot);
+  const to   = order.indexOf(dstSlot);
+  if (from < 0 || to < 0) return;
+  order.splice(from, 1);
+  order.splice(to, 0, dragSrcSlot);
+  saveDraft();
+  renderSection(secId);
+  updateChangeCount();
+}
+function onDragEnd(e) {
+  e.currentTarget.classList.remove('dragging');
+  document.querySelectorAll('.card.drop-target').forEach(c => c.classList.remove('drop-target'));
+  dragSrcSlot = null;
+}
+
+/* ============================================================
+   ADD / REMOVE
+============================================================ */
+function addItem(secId) {
+  const sec = SECTIONS.find(s => s.id === secId);
+  if (!sec.canAdd || !sec.addFn) return;
+  const card = sec.addFn();
+  if (!ADDED[secId]) ADDED[secId] = [];
+  ADDED[secId].push(card);
+  if (!ORDER[secId]) ORDER[secId] = [];
+  ORDER[secId].push(card.slot);
+  // Prime DRAFT with defaults
+  if (card.defaults) {
+    Object.keys(card.defaults).forEach(k => {
+      if (!DRAFT[k]) DRAFT[k] = deepCopy(card.defaults[k]);
+    });
+  }
+  saveDraft();
+  renderSection(secId);
+  updateChangeCount();
+  toast('Nieuwe kaart toegevoegd. Scroll naar beneden om te bewerken.');
+  // Scroll new card into view
+  setTimeout(() => {
+    const els = document.querySelectorAll('.card[data-slot="'+card.slot+'"]');
+    if (els.length) els[0].scrollIntoView({behavior:'smooth', block:'center'});
+  }, 100);
+}
+
+function removeItem(secId, slot) {
+  const sec = SECTIONS.find(s => s.id === secId);
+  const card = findCard(secId, slot);
+  const label = card && card.title ? card.title : 'deze kaart';
+  if (!confirm('Weet je zeker dat je "'+label+'" wilt verwijderen? Dit kan ongedaan gemaakt worden door "Alles ongedaan maken".')) return;
+  const wasAdded = isAdded(secId, slot);
+  if (wasAdded) {
+    // If it was added in this session, just drop it entirely
+    ADDED[secId] = (ADDED[secId] || []).filter(c => c.slot !== slot);
+    // Remove its DRAFT keys
+    if (card.defaults) Object.keys(card.defaults).forEach(k => delete DRAFT[k]);
+  } else {
+    // Existing baseline card: mark as removed
+    if (!REMOVED[secId]) REMOVED[secId] = [];
+    if (!REMOVED[secId].includes(slot)) REMOVED[secId].push(slot);
+  }
+  // Also remove from ORDER
+  ORDER[secId] = (ORDER[secId] || []).filter(s => s !== slot);
+  saveDraft();
+  renderSection(secId);
+  updateChangeCount();
+  toast('Kaart verwijderd.');
+}
+
 function openFinalize() {
   const changes = computeChanges();
   const body = el('#modalBody');
@@ -975,7 +1493,7 @@ function openFinalize() {
     // Group by section
     const bySec = {};
     changes.forEach(ch => {
-      const sid = keyToSection(ch.path) || 'other';
+      const sid = ch.section || keyToSection(ch.path) || 'other';
       bySec[sid] = (bySec[sid] || 0) + 1;
     });
     const h3 = ce('h3'); h3.textContent = 'Samenvatting per sectie'; body.appendChild(h3);
@@ -1014,7 +1532,7 @@ function downloadReport() {
     changes: changes
   };
   changes.forEach(ch => {
-    const sid = keyToSection(ch.path) || 'other';
+    const sid = ch.section || keyToSection(ch.path) || 'other';
     report.summary.bySection[sid] = (report.summary.bySection[sid]||0)+1;
   });
   const blob = new Blob([JSON.stringify(report,null,2)], {type:'application/json'});
@@ -1034,6 +1552,12 @@ function undoAll() {
   if (!confirm('Weet je zeker dat je alle wijzigingen wilt weggooien? Dit kan niet ongedaan gemaakt worden.')) return;
   DRAFT = deepCopy(BASELINE);
   PRICE_DRAFT = deepCopy(PRICES);
+  ORDER = {}; ADDED = {}; REMOVED = {};
+  Object.keys(INITIAL_ORDER).forEach(sid => {
+    ORDER[sid] = [...INITIAL_ORDER[sid]];
+    ADDED[sid] = [];
+    REMOVED[sid] = [];
+  });
   saveDraft();
   renderSection(currentSection);
   updateChangeCount();
@@ -1053,6 +1577,7 @@ function toast(msg) {
 function bootApp() {
   el('#login').style.display='none';
   el('#app').classList.add('on');
+  computeInitialOrder();
   loadDraft();
   renderNav();
   selectSection(SECTIONS[0].id);
