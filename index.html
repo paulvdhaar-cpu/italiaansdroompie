@@ -36,7 +36,7 @@
     "addressCountry": "IT"
   },
   "geo": { "@type": "GeoCoordinates", "latitude": 43.1, "longitude": 13.5 },
-  "priceRange": "€16 - €190",
+  "priceRange": "€30 - €185",
   "image": "https://paulvdhaar-cpu.github.io/italiaansdroompie/poster-header.jpg",
   "amenityFeature": [
     {"@type": "LocationFeatureSpecification", "name": "Swimming Pool", "value": true},
@@ -1474,20 +1474,6 @@ a:focus-visible, button:focus-visible {
 
 }
 
-/* ── AVAILABILITY CALENDAR ── */
-#availability { padding: 100px 48px; background: var(--bg2); }
-
-.avail-header { max-width: 1280px; margin: 0 auto 48px; }
-.avail-header .about-text { margin-top: 10px; font-size: 14px; }
-@media (max-width: 768px) {
-  #availability { padding: 64px 24px; }
-  .avail-howit { flex-direction: column; gap: 16px; max-width: 100%; }
-  .avail-howit-step { min-width: 0; padding-right: 0; }
-}
-
-@media (max-width: 375px) {
-  #availability { padding: 48px 12px; }
-}
 
 /* ═══════════════════════════════════════════════════════
    SECTION OVERRIDES — dark/photo sections need light text.
@@ -1595,323 +1581,7 @@ footer .footer-links a:hover   { color: var(--peach); }
 .story-img-overlay { background: linear-gradient(to right, transparent 50%, var(--bg)); }
 
 /* Persons picker CSS */
-.avail-persons-row {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 0 4px;
-}
-.avail-person-btn {
-  width: 30px; height: 30px; border-radius: 50%;
-  border: 1px solid var(--border);
-  background: transparent; color: var(--cream);
-  font-size: 16px; font-weight: 300; line-height: 1;
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-}
-.avail-person-btn:hover {
-  background: var(--gold); border-color: var(--gold);
-  color: oklch(96% 0.010 90);
-}
-.avail-persons-count {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.4rem; font-weight: 300;
-  color: var(--cream); min-width: 22px; text-align: center;
-}
-.avail-persons-lbl {
-  font-size: 11px; font-weight: 400;
-  color: var(--muted); letter-spacing: 0.04em;
-}
 
-/* ── HOW BOOKING WORKS ── */
-.avail-howit {
-  display: flex; gap: 0; flex-wrap: wrap;
-  margin-top: 28px; max-width: 680px;
-}
-.avail-howit-step {
-  display: flex; align-items: flex-start; gap: 14px;
-  font-size: 13px; font-weight: 300;
-  color: var(--muted); line-height: 1.65;
-  flex: 1; min-width: 160px; padding-right: 24px;
-}
-.avail-howit-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.6rem; font-weight: 300;
-  color: var(--gold); line-height: 1;
-  flex-shrink: 0; margin-top: -2px;
-}
-
-    /* ====================================================
-       CAMPING WIDGET — cw-widget styles
-       ==================================================== */
-
-    /* CSS custom properties scoped to the widget */
-    .cw-widget,
-    dialog#booking-modal {
-      --cream:       oklch(18% 0.020 80);
-      --cream-mid:   oklch(85% 0.032 67);
-      --cream-dark:  oklch(80% 0.034 66);
-      --sand:        oklch(74% 0.036 66);
-      --sage-dark:   oklch(46% 0.060 95);
-      --sage-mid:    oklch(57% 0.055 91);
-      --sage-light:  oklch(88% 0.045 100);
-      --sage-faint:  oklch(93% 0.028 95);
-      --terra:       oklch(55% 0.099 40);
-      --terra-light: oklch(89% 0.045 40);
-      --amber-light: oklch(93% 0.040 75);
-      --amber-text:  oklch(65% 0.051 91);
-      --ink:         oklch(18% 0.020 80);
-      --ink-mid:     oklch(36% 0.015 80);
-      --ink-light:   oklch(58% 0.012 80);
-      --white:       oklch(97% 0.012 78);
-      --red:         oklch(42% 0.130 25);
-      --red-light:   oklch(92% 0.040 25);
-      --radius:      2px;
-      --radius-sm:   2px;
-      --shadow:      none;
-      --shadow-lg:   0 8px 40px rgba(44,42,38,.18);
-    }
-
-    .cw-widget {
-      max-width: 880px;
-      margin: 0 auto;
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: none;
-      border: 1px solid oklch(44% 0.095 115 / 0.15);
-      overflow: hidden;
-      font-family: inherit;
-      color: var(--ink);
-    }
-
-    .cw-tabs {
-      display: flex;
-      border-bottom: 1px solid var(--cream-dark);
-      background: var(--cream-mid);
-    }
-    .cw-tab {
-      flex: 1;
-      padding: 15px 12px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: color .15s;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -1px;
-      font-family: inherit;
-    }
-    .cw-tab[aria-selected="true"] {
-      color: var(--ink);
-      border-bottom-color: var(--sage-dark);
-      background: var(--white);
-    }
-    .cw-tab:focus-visible { outline: 2px solid var(--sage-mid); outline-offset: -2px; }
-
-    .cw-panel { display: none; padding: 28px 24px; }
-    .cw-panel.is-active { display: block; }
-
-    .cw-search-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 520px) { .cw-search-form { grid-template-columns: 1fr; } }
-
-    .cw-field label {
-      display: block;
-      font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      color: oklch(40% 0.045 95 / 0.75); margin-bottom: 7px;
-    }
-    .cw-field input,
-    .cw-field select {
-      width: 100%; padding: 11px 14px;
-      border: 1px solid var(--cream-dark); border-radius: var(--radius-sm);
-      font-size: 1rem; color: var(--ink); background: var(--white);
-      transition: border-color .15s, box-shadow .15s;
-      -webkit-appearance: none; appearance: none; font-family: inherit;
-    }
-    .cw-field input:focus,
-    .cw-field select:focus {
-      outline: none; border-color: var(--sage-mid);
-      box-shadow: 0 0 0 3px rgba(99,125,90,.12);
-    }
-    .cw-field--full { grid-column: 1 / -1; }
-
-    .cw-select-wrap { position: relative; }
-    .cw-select-wrap::after {
-      content: ''; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      width: 0; height: 0;
-      border-left: 4px solid transparent; border-right: 4px solid transparent;
-      border-top: 5px solid var(--ink-light); pointer-events: none;
-    }
-
-    .cw-btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 28px; background: var(--terra); color: oklch(96% 0.015 78);
-      border: none; border-radius: var(--radius-sm);
-      font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-      cursor: pointer; transition: background .15s, transform .1s;
-      min-height: 48px; width: 100%; font-family: inherit;
-    }
-    .cw-btn:hover { background: oklch(48% 0.100 38); }
-    .cw-btn:active { transform: scale(.98); }
-    .cw-btn:disabled { background: var(--cream-mid); color: var(--ink-light); cursor: not-allowed; }
-    .cw-btn:focus-visible { outline: 2px solid var(--sage-dark); outline-offset: 2px; }
-
-    .cw-btn-outline {
-      background: transparent; color: var(--ink-mid);
-      border: 1px solid var(--cream-dark);
-    }
-    .cw-btn-outline:hover { background: var(--cream-mid); border-color: var(--sand); color: var(--ink); }
-
-    .cw-banner {
-      padding: 12px 16px; border-radius: var(--radius-sm);
-      font-size: .88rem; margin-top: 16px; display: none; line-height: 1.45;
-    }
-    .cw-banner.is-visible { display: block; }
-    .cw-banner--error  { background: var(--red-light);   color: var(--red); }
-    .cw-banner--info   { background: var(--sage-faint);  color: var(--sage-dark); }
-    .cw-banner--amber  { background: var(--amber-light); color: var(--amber-text); }
-
-    .cw-results { margin-top: 24px; }
-    .cw-results-title {
-      font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--ink-light); margin-bottom: 12px;
-    }
-    .cw-unit-card {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 16px 18px; border: 1px solid var(--cream-dark); border-radius: var(--radius-sm);
-      margin-bottom: 8px; cursor: pointer; transition: border-color .15s, background .15s;
-      background: var(--white);
-    }
-    .cw-unit-card:hover, .cw-unit-card:focus-visible {
-      border-color: var(--sage-mid); background: var(--sage-faint); outline: none;
-    }
-    .cw-unit-card__info { flex: 1; min-width: 0; }
-    .cw-unit-card__name { font-weight: 600; font-size: .97rem; color: var(--ink); }
-    .cw-unit-card__meta {
-      font-size: .82rem; color: var(--ink-mid); margin-top: 3px;
-      display: flex; flex-wrap: wrap; gap: 10px;
-    }
-    .cw-unit-card__price {
-      font-weight: 600; color: var(--ink); font-size: .97rem;
-      white-space: nowrap; text-align: right;
-    }
-    .cw-unit-card__price small {
-      display: block; font-weight: 400; font-size: .75rem; color: var(--ink-light);
-    }
-    .cw-unit-card__price .total-price {
-      display: block; font-size: .8rem; color: var(--sage-dark); font-weight: 600; margin-top: 2px;
-    }
-    .cw-badge {
-      display: inline-block; padding: 2px 8px; border-radius: 2px;
-      font-size: .75rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-    }
-    .cw-badge--pitch   { background: var(--cream-mid);   color: var(--ink-mid); }
-    .cw-badge--chalet  { background: var(--terra-light); color: oklch(35% 0.090 30); }
-    .cw-badge--safari  { background: var(--sage-faint);  color: var(--sage-dark); }
-    .cw-badge--tunnel  { background: oklch(91% 0.035 200); color: oklch(35% 0.070 200); }
-    .cw-badge--lodge   { background: oklch(91% 0.035 60);  color: oklch(35% 0.070 60); }
-
-    .cw-skeleton {
-      height: 68px;
-      background: linear-gradient(90deg, var(--cream-mid) 25%, var(--cream-dark) 50%, var(--cream-mid) 75%);
-      background-size: 200% 100%; animation: cw-shimmer 1.2s infinite;
-      border-radius: var(--radius-sm); margin-bottom: 8px;
-    }
-    @keyframes cw-shimmer { to { background-position: -200% 0; } }
-
-    dialog#booking-modal {
-      border: 1px solid oklch(80% 0.034 66); border-radius: 2px;
-      box-shadow: 0 8px 40px rgba(44,42,38,.18); padding: 0;
-      max-width: 460px; width: calc(100% - 32px); max-height: 90vh;
-      overflow-y: auto; background: oklch(97% 0.006 92);
-    }
-    dialog#booking-modal::backdrop { background: rgba(44,42,38,.45); backdrop-filter: blur(3px); }
-
-    .cw-modal-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 22px 22px 16px; border-bottom: 1px solid oklch(85% 0.032 67);
-    }
-    .cw-modal-header h2 {
-      font-size: 1rem; font-weight: 600; color: oklch(18% 0.020 80); letter-spacing: .01em;
-    }
-    .cw-modal-close {
-      width: 44px; height: 44px; border: none; background: none; font-size: 1.1rem;
-      cursor: pointer; color: oklch(58% 0.012 80);
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; flex-shrink: 0; font-family: inherit;
-    }
-    .cw-modal-close:hover { background: oklch(85% 0.032 67); color: oklch(18% 0.020 80); }
-    .cw-modal-body { padding: 20px 22px 24px; }
-
-    .cw-steps { display: flex; gap: 4px; margin-bottom: 18px; }
-    .cw-step { flex: 1; height: 3px; border-radius: 2px; background: var(--cream-mid); transition: background .3s; }
-    .cw-step.is-done   { background: var(--sage-light); }
-    .cw-step.is-active { background: var(--sage-dark); }
-    .cw-step-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--ink-light); margin-bottom: 14px;
-    }
-
-    .cw-modal-summary {
-      background: var(--cream-mid); border: 1px solid var(--cream-dark);
-      border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; font-size: .88rem;
-    }
-    .cw-modal-summary dt {
-      font-size: .7rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
-      color: var(--ink-light);
-    }
-    .cw-modal-summary dd { color: var(--ink); font-weight: 600; }
-    .cw-modal-price {
-      grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--cream-dark);
-      display: flex; justify-content: space-between; align-items: baseline;
-    }
-    .cw-modal-price .label { font-size: .8rem; color: var(--ink-mid); }
-    .cw-modal-price .total { font-size: 1.25rem; font-weight: 700; color: var(--ink); }
-
-    .cw-form-row { margin-bottom: 14px; }
-    .cw-form-row label {
-      display: block; font-size: .75rem; font-weight: 600; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--ink-mid); margin-bottom: 6px;
-    }
-    .cw-form-row input,
-    .cw-form-row textarea {
-      width: 100%; padding: 11px 13px; border: 1px solid var(--cream-dark);
-      border-radius: var(--radius-sm); font-size: 1rem; color: var(--ink);
-      background: var(--white); transition: border-color .15s, box-shadow .15s; font-family: inherit;
-    }
-    .cw-form-row textarea { resize: vertical; min-height: 70px; }
-    .cw-form-row input:focus,
-    .cw-form-row textarea:focus {
-      outline: none; border-color: var(--sage-mid); box-shadow: 0 0 0 3px rgba(99,125,90,.12);
-    }
-    .cw-form-row input.is-invalid { border-color: var(--red); }
-    .cw-field-error { font-size: .78rem; color: var(--red); margin-top: 4px; }
-
-    .cw-modal-actions { display: flex; gap: 8px; margin-top: 20px; }
-    .cw-modal-actions .cw-btn { flex: 1; }
-
-    .cw-confirm-screen { text-align: center; padding: 16px 0 8px; }
-    .cw-confirm-icon {
-      width: 56px; height: 56px; border-radius: 50%;
-      background: var(--sage-faint); border: 1px solid var(--sage-light);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 16px; color: var(--sage-dark); font-size: 1.4rem; font-weight: 300;
-    }
-    .cw-confirm-screen h3 { color: var(--ink); font-size: 1.05rem; margin-bottom: 8px; font-weight: 600; }
-    .cw-confirm-screen p { color: var(--ink-mid); font-size: .88rem; line-height: 1.6; }
-
-    .cw-widget input[type="date"] { cursor: pointer; color-scheme: light; }
-    .cw-widget input[type="date"]::-webkit-calendar-picker-indicator { opacity: 0.5; cursor: pointer; }
-
-    @media (max-width: 480px) {
-      .cw-panel { padding: 18px 14px; }
-      .cw-unit-card { flex-direction: column; align-items: flex-start; }
-      .cw-unit-card__price { text-align: left; }
-      .cw-modal-summary { grid-template-columns: 1fr; }
-      .cw-modal-price { flex-direction: column; gap: 4px; }
-    }
 
     /* Mobile menu language switcher */
     .mobile-lang--menu {
@@ -1935,7 +1605,6 @@ footer .footer-links a:hover   { color: var(--peach); }
       .story-panel-title .rw-word > span { transform:none; transition:none; }
     }
 
-    .cw-tabs { display: none; }
 
     /* FAQ */
     #faq { padding: 100px 48px; background: var(--bg); }
@@ -2087,7 +1756,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <a href="#surroundings" class="mobile-menu-link" data-i18n="nav_area">De Omgeving</a>
   <a href="#faq" class="mobile-menu-link" data-i18n="nav_faq">Goed om te weten</a>
   <div class="mobile-menu-divider"></div>
-  <a href="#availability" class="mobile-menu-book" data-i18n="nav_book_stay">Boek nu</a>
+  <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="mobile-menu-book" data-i18n="nav_book_stay">Boek nu</a>
   <div class="mobile-lang mobile-lang--menu">
     <a href="#" onclick="window.location.href='/italiaansdroompie/';return false;" data-lang="nl" class="active">NL</a>
     <a href="#" onclick="window.location.href='/italiaansdroompie/en/';return false;" data-lang="en">EN</a>
@@ -2113,7 +1782,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <a data-lang="de" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">DE</a>
       <a data-lang="it" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">IT</a>
     </div>
-    <a href="#availability" class="btn-nav" data-i18n="nav_book_now">Boek nu</a>
+    <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-nav" data-i18n="nav_book_now">Boek nu</a>
   </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -2130,7 +1799,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     <p class="hero-slogan">Il dolce far niente</p>
     <p class="hero-sub" data-i18n="hero_sub">Een kleine familiecamping tussen de bergen en de zee. Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.</p>
     <div class="hero-cta">
-      <a href="#availability" class="btn-primary" data-i18n="nav_book_stay">Boek nu</a>
+      <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-primary" data-i18n="nav_book_stay">Boek nu</a>
       <a href="#about" class="btn-outline" data-i18n="hero_btn_story">Ons Verhaal</a>
     </div>
     <p class="hero-urgency" data-i18n="hero_urgency">Open 22 mei tot 2 oktober — juli en augustus lopen snel vol</p>
@@ -2215,7 +1884,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">De camping verwelkomt gasten sinds 2007, op een plek die al met zorg was aangelegd, op een van de mooiste plekjes van de vallei. Vanaf eind 2026 hebben we het stokje overgenomen en met z'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. We houden het bewust klein en persoonlijk. Achttien plaatsen, waarvan een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van ons in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.</p>
       <h3 class="about-subheading reveal reveal-delay-3" data-i18n="about_sub">Een echte camping, geen resort</h3>
       <p class="about-text reveal reveal-delay-3" data-i18n="about_p3">Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was.</p>
-      <a href="#availability" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Bekijk beschikbaarheid →</a>
+      <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Bekijk beschikbaarheid →</a>
     </div>
   </div>
 </section>
@@ -2297,7 +1966,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="section-eyebrow reveal" data-i18n="stay_eyebrow">Glampen in Le Marche</div>
       <h2 class="section-title reveal reveal-delay-1" data-i18n="stay_title">Vind jouw<br><em>hoekje van Italië</em></h2>
     </div>
-    <a href="#availability" class="btn-outline reveal" data-i18n="stay_check">Bekijk beschikbaarheid →</a>
+    <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-outline reveal" data-i18n="stay_check">Bekijk beschikbaarheid →</a>
   </div>
   <div class="stay-cards">
 
@@ -2322,8 +1991,8 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="stay-card-cap"><svg viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M23 20v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span data-i18n="cap_4">Tot 4 personen</span></div>
         <p class="stay-card-desc" data-i18n="stay_glamp_p">De beste plek van de camping! Zo naar binnen: bedden opgemaakt, linnen inbegrepen, een eigen badkamer en hetzelfde valleizicht vanaf je veranda.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-value">€140 – €190 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
+          <div class="stay-price"><span class="stay-price-value">€135 – €185 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2345,8 +2014,8 @@ footer .footer-links a:hover   { color: var(--peach); }
         <h3 class="stay-card-title" data-i18n="stay_tent_h">Tentplek</h3>
         <p class="stay-card-desc" data-i18n="stay_tent_p">Ruime terrasplekken met valleizicht, alleen voor tenten. Elektra inbegrepen. Rustig gelegen aan de rand van de camping.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-value">€16 – €19 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
+          <div class="stay-price"><span class="stay-price-value">€30 – €46 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2367,8 +2036,8 @@ footer .footer-links a:hover   { color: var(--peach); }
         <h3 class="stay-card-title" data-i18n="stay_camper_h">Vouwwagen, caravan of camperplek</h3>
         <p class="stay-card-desc" data-i18n="stay_camper_p">Terrasplekken die met vouwwagen, kleine caravan of kleine camper bereikbaar zijn. Elektra en aansluitingen inbegrepen. Het laatste stuk van de toegangsweg is steil, houd hier rekening mee.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-value">€16 – €19 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
+          <div class="stay-price"><span class="stay-price-value">€30 – €46 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2391,7 +2060,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_bell_p">Een klassieke canvas bell tent op een eigen plek. Echte bedden, linnen inbegrepen en die iconische ronde vorm. Gezellig voor twee.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">€60 – €85 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
+          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2413,8 +2082,8 @@ footer .footer-links a:hover   { color: var(--peach); }
         <div class="stay-card-cap"><svg viewbox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M23 20v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span data-i18n="cap_4">Tot 4 personen</span></div>
         <p class="stay-card-desc" data-i18n="stay_safari_p">Een ruime safaritent voor vier personen. Bedden opgemaakt, linnen inbegrepen. Gebruikt ons gezamenlijke sanitairgebouw.</p>
         <div class="stay-card-footer">
-          <div class="stay-price"><span class="stay-price-value">€108 – €138 <span data-i18n="per_night_slash">/ nacht</span></span></div>
-          <a href="#availability" class="btn-small" data-i18n="book_btn">Boek nu</a>
+          <div class="stay-price"><span class="stay-price-value">€98 – €128 <span data-i18n="per_night_slash">/ nacht</span></span></div>
+          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Boek nu</a>
         </div>
       </div>
     </div>
@@ -2508,127 +2177,6 @@ footer .footer-links a:hover   { color: var(--peach); }
   </div>
 </section>
 
-<!-- AVAILABILITY -->
-<section id="availability">
-  <div class="avail-header">
-    <div class="section-eyebrow reveal" data-i18n="avail_eyebrow">Plan je Verblijf</div>
-    <h2 class="section-title reveal reveal-delay-1" data-i18n="avail_title">Wanneer wil je<br><em>komen?</em></h2>
-    <p class="about-text reveal reveal-delay-2" style="margin-top:10px;font-size:14px;"><span data-i18n="avail_intro">Het seizoen loopt van 22 mei tot 2 oktober 2026. Bekijk hieronder de actuele beschikbaarheid en boek je verblijf online — Lisette bevestigt elke reservering persoonlijk.</span></p>
-  <div class="avail-howit reveal reveal-delay-3">
-    <div class="avail-howit-step"><span class="avail-howit-num">1</span><span data-i18n="avail_step1">Kies je accommodatie en selecteer je aankomst- en vertrekdatum</span></div>
-    <div class="avail-howit-step"><span class="avail-howit-num">2</span><span data-i18n="avail_step2">Kies je data en vraag je boeking in een paar klikken aan</span></div>
-    <div class="avail-howit-step"><span class="avail-howit-num">3</span><span data-i18n="avail_step3">Lisette bevestigt je reservering en stuurt de betaalgegevens</span></div>
-  </div>
-  </div>
-
-  <div class="cw-widget" role="region" aria-label="Reserveringswidget" data-i18n-aria-label="cw_widget_aria">
-
-  <!-- Tabs -->
-  <div class="cw-tabs" role="tablist" aria-label="Choose view">
-    <button class="cw-tab" role="tab" id="tab-search" aria-controls="panel-search" aria-selected="true">
-      <span data-i18n="cw_tab_search">Beschikbaarheid zoeken</span>
-    </button>
-  </div>
-
-  <!-- Search panel -->
-  <div class="cw-panel is-active" role="tabpanel" id="panel-search" aria-labelledby="tab-search">
-    <form class="cw-search-form" id="search-form" novalidate>
-      <div class="cw-field">
-        <label for="s-checkin" data-i18n="cw_arrival">Aankomst</label>
-        <input type="date" id="s-checkin" aria-required="true">
-      </div>
-      <div class="cw-field">
-        <label for="s-checkout" data-i18n="cw_departure">Vertrek</label>
-        <input type="date" id="s-checkout" aria-required="true">
-      </div>
-      <div class="cw-field">
-        <label for="s-type" data-i18n="cw_accom_type">Accommodatietype</label>
-        <div class="cw-select-wrap">
-          <select id="s-type" aria-label="Accommodatietype" data-i18n-aria-label="cw_accom_type">
-            <option value="" data-i18n="cw_all_types">Alle types</option>
-            <option value="tent" data-i18n="cw_tent">Tentplek</option>
-            <option value="camper" data-i18n="cw_camper">Plek voor caravan/camper</option>
-            <option value="bell">Bell tent</option>
-            <option value="safari">Safari tent</option>
-            <option value="glamping">Glampingtent</option>
-          </select>
-        </div>
-      </div>
-      <div class="cw-field">
-        <label for="s-guests" data-i18n="cw_persons">Aantal personen</label>
-        <input type="number" id="s-guests" min="1" max="12" value="2" aria-label="Aantal personen" data-i18n-aria-label="cw_persons" autocomplete="off">
-      </div>
-      <div class="cw-field cw-field--full">
-        <button type="submit" class="cw-btn" id="search-btn" aria-label="Beschikbaarheid controleren" data-i18n-aria-label="cw_check_avail">
-          <span data-i18n="cw_check_avail">Beschikbaarheid controleren</span>
-        </button>
-      </div>
-    </form>
-    <div class="cw-banner" id="search-error" role="alert" aria-live="assertive" tabindex="-1"></div>
-    <div id="search-results" class="cw-results" aria-live="polite" aria-label="Zoekresultaten" data-i18n-aria-label="cw_results_aria"></div>
-  </div>
-
-</div><!-- /.cw-widget -->
-
-<!-- Booking Modal -->
-<dialog id="booking-modal" aria-modal="true" aria-labelledby="modal-title">
-  <div class="cw-modal-header">
-    <h2 id="modal-title" data-i18n="cw_modal_title">Boeking aanvragen</h2>
-    <button class="cw-modal-close" id="modal-close" aria-label="Sluiten" data-i18n-aria-label="cw_close">✕</button>
-  </div>
-  <div class="cw-modal-body">
-    <div class="cw-steps" aria-hidden="true">
-      <div class="cw-step is-active" id="step-bar-1"></div>
-      <div class="cw-step" id="step-bar-2"></div>
-    </div>
-    <div id="modal-step-1">
-      <p class="cw-step-label" data-i18n="cw_step1">Stap 1 van 2 — Controleer uw keuze</p>
-      <dl class="cw-modal-summary" id="modal-summary"></dl>
-      <div class="cw-modal-actions">
-        <button class="cw-btn cw-btn-outline" id="modal-cancel-step1" data-i18n="cw_cancel">Annuleren</button>
-        <button class="cw-btn" id="modal-next" data-i18n="cw_continue">Doorgaan</button>
-      </div>
-    </div>
-    <div id="modal-step-2" style="display:none">
-      <p class="cw-step-label" data-i18n="cw_step2">Stap 2 van 2 — Uw gegevens</p>
-      <form id="booking-form" novalidate>
-        <div class="cw-form-row">
-          <label for="f-name"><span data-i18n="cw_f_name">Naam</span> <span aria-hidden="true">*</span></label>
-          <input type="text" id="f-name" autocomplete="name" aria-required="true" placeholder="Voor- en achternaam" data-i18n-placeholder="cw_ph_name">
-          <p class="cw-field-error" id="e-name" role="alert" aria-live="polite"></p>
-        </div>
-        <div class="cw-form-row">
-          <label for="f-email"><span data-i18n="cw_f_email">E-mailadres</span> <span aria-hidden="true">*</span></label>
-          <input type="email" id="f-email" autocomplete="email" aria-required="true" placeholder="naam@voorbeeld.nl" data-i18n-placeholder="cw_ph_email">
-          <p class="cw-field-error" id="e-email" role="alert" aria-live="polite"></p>
-        </div>
-        <div class="cw-form-row">
-          <label for="f-phone" data-i18n="cw_f_phone">Telefoonnummer</label>
-          <input type="tel" id="f-phone" autocomplete="tel" placeholder="+31 6 12345678">
-        </div>
-        <div class="cw-form-row">
-          <label for="f-notes" data-i18n="cw_f_notes">Opmerkingen</label>
-          <textarea id="f-notes" placeholder="Bijv. aankomsttijd, bijzondere wensen…" data-i18n-placeholder="cw_ph_notes"></textarea>
-        </div>
-        <div class="cw-modal-actions">
-          <button type="button" class="cw-btn cw-btn-outline" id="modal-back" data-i18n="cw_back">Terug</button>
-          <button type="submit" class="cw-btn" id="modal-submit" data-i18n="cw_submit">Boeking aanvragen</button>
-        </div>
-      </form>
-    </div>
-    <div id="modal-step-3" style="display:none">
-      <div class="cw-confirm-screen">
-        <div class="cw-confirm-icon" aria-hidden="true">✓</div>
-        <h3 data-i18n="cw_confirm_title">Boekingsaanvraag ontvangen</h3>
-        <p id="confirm-text"></p>
-        <div class="cw-modal-actions" style="margin-top:24px">
-          <button class="cw-btn" id="modal-done" data-i18n="cw_done_btn">Sluiten</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</dialog>
-</section>
 
 <!-- SURROUNDINGS -->
 <section id="surroundings">
@@ -2721,14 +2269,15 @@ footer .footer-links a:hover   { color: var(--peach); }
             <div class="rates-season"><span class="rates-season-name" data-i18n="rates_high">Hoog seizoen</span><span class="rates-season-dates">10/07–04/09</span></div>
           </div>
           <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_stays">Verblijven</span><span class="rates-rule"></span></div>
-          <div class="rates-row"><span class="rates-name" data-i18n="rates_glamp">Glampingtent</span><span class="rates-price">€ 140,00</span><span class="rates-price">€ 190,00</span></div>
-          <div class="rates-row"><span class="rates-name" data-i18n="rates_safari">Safaritent</span><span class="rates-price">€ 108,00</span><span class="rates-price">€ 138,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_glamp">Glampingtent</span><span class="rates-price">€ 135,00</span><span class="rates-price">€ 185,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_safari">Safaritent</span><span class="rates-price">€ 98,00</span><span class="rates-price">€ 128,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_bell">Bell tent</span><span class="rates-price">€ 60,00</span><span class="rates-price">€ 85,00</span></div>
           <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_camping">Kamperen</span><span class="rates-rule"></span></div>
-          <div class="rates-row"><span class="rates-name" data-i18n="rates_tent">Tentplek</span><span class="rates-price">€ 16,00</span><span class="rates-price">€ 19,00</span></div>
-          <div class="rates-row"><span class="rates-name" data-i18n="rates_camper">Vouwwagen, caravan of camperplek</span><span class="rates-price">€ 16,00</span><span class="rates-price">€ 19,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_tent">Tentplek (incl. 2 pers.)</span><span class="rates-price">€ 30,00</span><span class="rates-price">€ 46,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_camper">Vouwwagen, caravan of camperplek (incl. 2 pers.)</span><span class="rates-price">€ 30,00</span><span class="rates-price">€ 46,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_adult">Volwassen</span><span class="rates-price">€ 12,00</span><span class="rates-price">€ 13,50</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_child">Kind tot 12 jaar</span><span class="rates-price">€ 10,00</span><span class="rates-price">€ 11,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_baby">Kind tot 2 jaar</span><span class="rates-price" data-i18n="rates_free">gratis</span><span class="rates-price" data-i18n="rates_free">gratis</span></div>
           <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_extras">Extra's</span><span class="rates-rule"></span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_fridge">Koelkast</span><span class="rates-price">€ 5,00</span><span class="rates-price">€ 5,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_highchair">Kinderstoel</span><span class="rates-price">€ 2,00</span><span class="rates-price">€ 2,00</span></div>
@@ -2843,7 +2392,7 @@ footer .footer-links a:hover   { color: var(--peach); }
           </a>
         </li>
         <li><a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a></li>
-        <li><a href="#availability" data-i18n="footer_book">Bekijk beschikbaarheid</a></li>
+        <li><a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" data-i18n="footer_book">Bekijk beschikbaarheid</a></li>
       </ul>
     </div>
   </div>
@@ -3030,12 +2579,10 @@ const TRANSLATIONS = {
     rates_low:'Low season', rates_high:'High season',
     rates_g_stays:'Stays', rates_g_camping:'Camping', rates_g_extras:'Extras',
     rates_glamp:'Glamping tent', rates_safari:'Safari tent', rates_bell:'Bell tent',
-    rates_tent:'Tent pitch', rates_camper:'Caravan / camper pitch', rates_adult:'Adult', rates_child:'Child up to 12',
+    rates_tent:'Tent pitch (incl. 2 pers.)', rates_camper:'Caravan / camper pitch (incl. 2 pers.)', rates_adult:'Adult', rates_child:'Child up to 12',
+    rates_baby:'Child up to 2', rates_free:'free',
     rates_fridge:'Fridge', rates_highchair:'High chair', rates_cot:'Travel cot with mattress',
     from_label:'From', book_btn:'Book now',
-    avail_pitch_price:'From €18 / night', avail_safari_price:'From €90 / night',
-    avail_tunnel_price:'From €70 / night', avail_glamp_price:'From €100 / night',
-    avail_chalet_price:'From €95 / night',
     // Experiences
     exp_eyebrow:'Only Here',
     exp_title:'Three things you<br><em>won\'t find anywhere else</em>',
@@ -3056,24 +2603,6 @@ const TRANSLATIONS = {
     test_google_link:'Read them on Google →',
     test_title:'What families<br><em>say about us</em>',
     // Availability
-    avail_eyebrow:'Plan Your Stay',
-    avail_title:'When would you like<br><em>to come?</em>',
-    avail_intro:'Season runs 22 May to 2 October 2026. Check live availability below and book your stay online — Lisette confirms every reservation personally.',
-    avail_step1:'Choose your accommodation and select arrival &amp; departure dates below',
-    avail_step2:'Pick your dates and request your booking in a couple of clicks',
-    avail_step3:'Lisette confirms your reservation and sends payment details',
-    avail_accom_label:'Accommodation',
-    avail_pitch_guests:'Your tent',
-    avail_safari_guests:'Sleeps up to 4 · 1 available',
-    avail_tunnel_guests:'Made for couples · 2 available',
-    avail_glamp_guests:'Our favourite · 2 available',
-    avail_chalet_guests:'Best views on site · 1 available',
-    avail_persons_label:'Number of persons', avail_persons_unit:'persons',
-    avail_hint:'Pick the night you arrive',
-    avail_sum_stay:'Stay', avail_sum_dates:'Dates', avail_sum_nights:'Nights', avail_sum_persons:'Persons',
-    avail_enquire_btn:'Write to Lisette &amp; David →',
-    avail_clear_btn:'Clear',
-    avail_note:'Total includes cleaning. You will receive confirmation by email.',
     // Surroundings
     surr_eyebrow:'The Region',
     surr_title:'Le Marche —<br><em>the part of Italy most people still miss</em>',
@@ -3098,31 +2627,6 @@ const TRANSLATIONS = {
     fac_olive_k:'Olive &amp; Herb Gardens',
     fac_olive_v:'Olive trees, lavender, oleander. The olives are harvested by hand in October.',
     // Availability widget
-    cw_tab_search:'Check Availability',
-    cw_arrival:'Arrival', cw_departure:'Departure',
-    cw_accom_type:'Accommodation type', cw_persons:'Number of guests',
-    cw_all_types:'All types', cw_pitch:'Camping pitch',
-    cw_check_avail:'Check availability', cw_accom_label:'Accommodation',
-    cw_modal_title:'Request your booking', cw_close:'Close',
-    cw_step1:'Step 1 of 2 — Review your choice', cw_step2:'Step 2 of 2 — Your details',
-    cw_cancel:'Cancel', cw_continue:'Continue', cw_back:'Back', cw_submit:'Request booking',
-    cw_f_name:'Name', cw_f_email:'Email address', cw_f_phone:'Phone number', cw_f_notes:'Notes',
-    cw_confirm_title:'Booking request received', cw_done_btn:'Close',
-    cw_err_dates:'Please select an arrival and departure date.',
-    cw_err_order:'The departure date must be after the arrival date.',
-    cw_err_guests:'Please enter a valid number of guests (1–12).',
-    cw_err_none:'No available accommodation found for this period. Try different dates or a different type.',
-    cw_err_capacity:'No accommodation available for {n} guests in this period.',
-    cw_err_minstay_type:'The minimum stay for this type is {n} nights.',
-    cw_err_minstay:'The selected period is too short. Please choose at least {n} nights.',
-    cw_results_title:'{n} accommodation{s} available for {nights} night{ns}',
-    cw_per_night:'per night', cw_total:'Total',
-    cw_np:'s', cw_persons_unit:'persons', cw_nights_unit:'nights',
-    cw_type:'Type', cw_num_nights:'Number of nights', cw_total_price:'Total price', cw_request:'request',
-    cw_busy:'Sending…', cw_confirm_body:'Thank you. Your booking request has been received. Lisette will confirm by email shortly.', cw_err_generic:'Something went wrong. Please try again.',
-    cw_err_name:'Name is required', cw_err_email_req:'A valid email is required',
-    cw_widget_aria:'Booking widget', cw_results_aria:'Search results',
-    cw_ph_name:'Full name', cw_ph_email:'name@example.com', cw_ph_notes:'E.g. arrival time, special requests…',
     per_night_slash:'/ night', open_maps:'Open in Maps →',
     cf_sending:'Sending…', cf_sent_btn:'Sent. Lisette will be in touch', cf_sent_status:'Thanks. You will hear from Lisette within a day.', cf_error:'Something went wrong. Please try again or email info@sanprocolo.com directly.', cf_thanks:'Thanks!',
     form_ac_tent:'Tent Pitch', form_ac_camper:'Caravan / Camper Pitch', form_ac_bell:'Bell Tent', form_ac_safari:'Safari Tent', form_ac_glamp:'Glamping Tent',
@@ -3251,12 +2755,10 @@ const TRANSLATIONS = {
     rates_low:'Laag seizoen', rates_high:'Hoog seizoen',
     rates_g_stays:'Verblijven', rates_g_camping:'Kamperen', rates_g_extras:'Extra\'s',
     rates_glamp:'Glampingtent', rates_safari:'Safaritent', rates_bell:'Bell tent',
-    rates_tent:'Tentplek', rates_camper:'Vouwwagen, caravan of camperplek', rates_adult:'Volwassen', rates_child:'Kind tot 12 jaar',
+    rates_tent:'Tentplek (incl. 2 pers.)', rates_camper:'Vouwwagen, caravan of camperplek (incl. 2 pers.)', rates_adult:'Volwassen', rates_child:'Kind tot 12 jaar',
+    rates_baby:'Kind tot 2 jaar', rates_free:'gratis',
     rates_fridge:'Koelkast', rates_highchair:'Kinderstoel', rates_cot:'Campingbedje mét matras',
     from_label:'Vanaf', book_btn:'Boek nu',
-    avail_pitch_price:'Vanaf €18 / nacht', avail_safari_price:'Vanaf €90 / nacht',
-    avail_tunnel_price:'Vanaf €70 / nacht', avail_glamp_price:'Vanaf €100 / nacht',
-    avail_chalet_price:'Vanaf €95 / nacht',
     // Experiences
     exp_eyebrow:'Alleen hier',
     exp_title:'Drie dingen die je<br><em>nergens anders meemaakt</em>',
@@ -3277,24 +2779,6 @@ const TRANSLATIONS = {
     test_google_link:'Lees ze op Google →',
     test_title:'Wat families<br><em>over ons zeggen</em>',
     // Availability
-    avail_eyebrow:'Plan je Verblijf',
-    avail_title:'Wanneer wil je<br><em>komen?</em>',
-    avail_intro:'Het seizoen loopt van 22 mei tot 2 oktober 2026. Bekijk hieronder de actuele beschikbaarheid en boek je verblijf online — Lisette bevestigt elke reservering persoonlijk.',
-    avail_step1:'Kies je accommodatie en selecteer je aankomst- en vertrekdatum',
-    avail_step2:'Kies je data en vraag je boeking in een paar klikken aan',
-    avail_step3:'Lisette bevestigt je reservering en stuurt de betaalgegevens',
-    avail_accom_label:'Accommodatie',
-    avail_pitch_guests:'Jouw tent',
-    avail_safari_guests:'Slaapt tot 4 personen · 1 beschikbaar',
-    avail_tunnel_guests:'Voor stellen · 2 beschikbaar',
-    avail_glamp_guests:'Onze favoriet · 2 beschikbaar',
-    avail_chalet_guests:'Beste uitzicht · 1 beschikbaar',
-    avail_persons_label:'Aantal personen', avail_persons_unit:'personen',
-    avail_hint:'Kies je aankomstdatum',
-    avail_sum_stay:'Verblijf', avail_sum_dates:'Datums', avail_sum_nights:'Nachten', avail_sum_persons:'Personen',
-    avail_enquire_btn:'Schrijf aan Lisette en David →',
-    avail_clear_btn:'Wis',
-    avail_note:'Totaalprijs is inclusief schoonmaak. Je ontvangt je bevestiging per e-mail.',
     // Surroundings
     surr_eyebrow:'De Omgeving',
     surr_title:'Le Marche —<br><em>het stuk Italië dat de meeste reizigers niet kennen</em>',
@@ -3357,31 +2841,6 @@ const TRANSLATIONS = {
     faq_q6:'Grijs water en chemisch toilet',
     faq_a6:'We hebben geen grijswater-afvoer en er is bij ons geen mogelijkheid om je chemisch toilet te legen of te reinigen. Houd hier rekening mee als je met een caravan of camper komt. In de buurt zijn er echter wel plekken waar je je grijswater kunt lozen en je chemisch toilet kunt legen.',
     // Availability widget
-    cw_tab_search:'Beschikbaarheid zoeken',
-    cw_arrival:'Aankomst', cw_departure:'Vertrek',
-    cw_accom_type:'Accommodatietype', cw_persons:'Aantal personen',
-    cw_all_types:'Alle types', cw_pitch:'Kampeerplaats',
-    cw_check_avail:'Beschikbaarheid controleren', cw_accom_label:'Accommodatie',
-    cw_modal_title:'Boeking aanvragen', cw_close:'Sluiten',
-    cw_step1:'Stap 1 van 2 — Controleer uw keuze', cw_step2:'Stap 2 van 2 — Uw gegevens',
-    cw_cancel:'Annuleren', cw_continue:'Doorgaan', cw_back:'Terug', cw_submit:'Boeking aanvragen',
-    cw_f_name:'Naam', cw_f_email:'E-mailadres', cw_f_phone:'Telefoonnummer', cw_f_notes:'Opmerkingen',
-    cw_confirm_title:'Boekingsaanvraag ontvangen', cw_done_btn:'Sluiten',
-    cw_err_dates:'Selecteer eerst een aankomst- en vertrekdatum.',
-    cw_err_order:'De vertrekdatum moet na de aankomstdatum liggen.',
-    cw_err_guests:'Vul een geldig aantal personen in (1–12).',
-    cw_err_none:'Geen beschikbare accommodaties gevonden voor deze periode.',
-    cw_err_capacity:'Geen accommodatie beschikbaar voor {n} personen in deze periode.',
-    cw_err_minstay_type:'De minimale verblijfsduur voor dit type is {n} nachten.',
-    cw_err_minstay:'De geselecteerde periode is te kort. Kies minimaal {n} nachten.',
-    cw_results_title:'{n} accommodatie{s} beschikbaar voor {nights} nacht{ns}',
-    cw_per_night:'per nacht', cw_total:'Totaal',
-    cw_np:'en', cw_persons_unit:'personen', cw_nights_unit:'nachten',
-    cw_type:'Type', cw_num_nights:'Aantal nachten', cw_total_price:'Totaalprijs', cw_request:'aanvragen',
-    cw_busy:'Bezig…', cw_confirm_body:'Bedankt. Je aanvraag is ontvangen. Lisette bevestigt binnenkort per e-mail.', cw_err_generic:'Er is iets misgegaan. Probeer het opnieuw.',
-    cw_err_name:'Naam is verplicht', cw_err_email_req:'Vul een geldig e-mailadres in',
-    cw_widget_aria:'Reserveringswidget', cw_results_aria:'Zoekresultaten',
-    cw_ph_name:'Voor- en achternaam', cw_ph_email:'naam@voorbeeld.nl', cw_ph_notes:'Bijv. aankomsttijd, bijzondere wensen…',
     per_night_slash:'/ nacht', open_maps:'Bekijk op de kaart →',
     cf_sending:'Bezig…', cf_sent_btn:'Verzonden. Lisette neemt contact op', cf_sent_status:'Bedankt. Je hoort binnen een dag van Lisette.', cf_error:'Er ging iets mis. Probeer het opnieuw of mail rechtstreeks naar info@sanprocolo.com.', cf_thanks:'Bedankt!',
     form_ac_tent:'Tentplek', form_ac_camper:'Plek voor caravan/camper', form_ac_bell:'Bell tent', form_ac_safari:'Safaritent', form_ac_glamp:'Glampingtent',
@@ -3455,260 +2914,6 @@ document.addEventListener('DOMContentLoaded', () => { setLang(currentLang); });
 // ────────────────────────────────────────────────────────────────────────────
 </script>
 
-<script>
-// ── Camping Widget ─────────────────────────────────────────────────────────────
-
-const CW_UNITS = [
-  { id: 'u1',  type: 'pitch',  name: 'Pitch 1',       capacity: 4, pricePerNight: 18,  minStay: 1 },
-  { id: 'u2',  type: 'pitch',  name: 'Pitch 2',       capacity: 6, pricePerNight: 22,  minStay: 1 },
-  { id: 'u3',  type: 'pitch',  name: 'Pitch 3',       capacity: 4, pricePerNight: 18,  minStay: 1 },
-  { id: 'u4',  type: 'pitch',  name: 'Pitch 4',       capacity: 5, pricePerNight: 20,  minStay: 1 },
-  { id: 'u5',  type: 'chalet', name: 'Chalet A',      capacity: 6, pricePerNight: 95,  minStay: 3 },
-  { id: 'u6',  type: 'chalet', name: 'Chalet B',      capacity: 4, pricePerNight: 99,  minStay: 3 },
-  { id: 'u7',  type: 'chalet', name: 'Chalet C',      capacity: 8, pricePerNight: 110, minStay: 3 },
-  { id: 'u8',  type: 'safari', name: 'Safari 1',      capacity: 4, pricePerNight: 70,  minStay: 2 },
-  { id: 'u9',  type: 'safari', name: 'Safari 2',      capacity: 4, pricePerNight: 70,  minStay: 2 },
-  { id: 'u10', type: 'safari', name: 'Safari 3',      capacity: 4, pricePerNight: 80,  minStay: 2 },
-  { id: 'u11', type: 'tunnel', name: 'Tunnel Tent 1', capacity: 2, pricePerNight: 75,  minStay: 2 },
-  { id: 'u12', type: 'tunnel', name: 'Tunnel Tent 2', capacity: 2, pricePerNight: 75,  minStay: 2 },
-  { id: 'u13', type: 'glamp',  name: 'Glamping Tent', capacity: 4, pricePerNight: 100, minStay: 3 },
-];
-
-const CW_SEED = [
-  { id: 'b1',  unitId: 'u1',  checkIn: '2026-07-01', checkOut: '2026-07-05', status: 'confirmed' },
-  { id: 'b2',  unitId: 'u1',  checkIn: '2026-07-10', checkOut: '2026-07-17', status: 'confirmed' },
-  { id: 'b3',  unitId: 'u2',  checkIn: '2026-07-03', checkOut: '2026-07-08', status: 'confirmed' },
-  { id: 'b4',  unitId: 'u2',  checkIn: '2026-07-15', checkOut: '2026-07-22', status: 'confirmed' },
-  { id: 'b5',  unitId: 'u3',  checkIn: '2026-07-05', checkOut: '2026-07-12', status: 'confirmed' },
-  { id: 'b6',  unitId: 'u4',  checkIn: '2026-07-01', checkOut: '2026-07-15', status: 'confirmed' },
-  { id: 'b7',  unitId: 'u5',  checkIn: '2026-07-01', checkOut: '2026-07-08', status: 'confirmed' },
-  { id: 'b8',  unitId: 'u5',  checkIn: '2026-07-12', checkOut: '2026-07-19', status: 'confirmed' },
-  { id: 'b9',  unitId: 'u6',  checkIn: '2026-07-04', checkOut: '2026-07-11', status: 'confirmed' },
-  { id: 'b10', unitId: 'u7',  checkIn: '2026-07-01', checkOut: '2026-07-22', status: 'confirmed' },
-  { id: 'b11', unitId: 'u8',  checkIn: '2026-07-02', checkOut: '2026-07-06', status: 'confirmed' },
-  { id: 'b12', unitId: 'u8',  checkIn: '2026-07-09', checkOut: '2026-07-14', status: 'confirmed' },
-  { id: 'b13', unitId: 'u9',  checkIn: '2026-07-05', checkOut: '2026-07-10', status: 'confirmed' },
-  { id: 'b14', unitId: 'u10', checkIn: '2026-07-01', checkOut: '2026-07-08', status: 'confirmed' },
-  { id: 'b15', unitId: 'u10', checkIn: '2026-07-15', checkOut: '2026-07-20', status: 'confirmed' },
-  { id: 'b16', unitId: 'u1',  checkIn: '2026-08-01', checkOut: '2026-08-08', status: 'confirmed' },
-  { id: 'b17', unitId: 'u2',  checkIn: '2026-08-05', checkOut: '2026-08-12', status: 'confirmed' },
-  { id: 'b18', unitId: 'u5',  checkIn: '2026-08-01', checkOut: '2026-08-15', status: 'confirmed' },
-  { id: 'b19', unitId: 'u6',  checkIn: '2026-08-08', checkOut: '2026-08-15', status: 'confirmed' },
-  { id: 'b20', unitId: 'u8',  checkIn: '2026-08-03', checkOut: '2026-08-10', status: 'confirmed' },
-];
-const _cwBookings = [...CW_SEED];
-
-function _cwOvlp(b, ci, co) { return b.checkIn < co && b.checkOut > ci; }
-function cwGetUnits(type) { return type ? CW_UNITS.filter(u => u.type === type) : [...CW_UNITS]; }
-function cwGetAvail(ci, co, type) {
-  const busy = new Set(_cwBookings.filter(b => b.status === 'confirmed' && _cwOvlp(b, ci, co)).map(b => b.unitId));
-  return CW_UNITS.filter(u => !busy.has(u.id) && (!type || u.type === type));
-}
-
-function cwT(k, vars) {
-  const t = (TRANSLATIONS[currentLang] || TRANSLATIONS.en);
-  let s = t[k] || TRANSLATIONS.en[k] || k;
-  if (vars) Object.keys(vars).forEach(v => { s = s.replace('{'+v+'}', vars[v]); });
-  return s;
-}
-function cwEsc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
-function cwPrice(n) { const s = Number(n).toFixed(2); return currentLang === 'nl' ? s.replace('.', ',') : s; }
-function cwRefreshLang(lang) {
-  // Update select option text
-  const selects = ['s-type'];
-  selects.forEach(id => {
-    const sel = document.getElementById(id);
-    if (!sel) return;
-    sel.querySelectorAll('option[data-i18n]').forEach(opt => {
-      const v = (TRANSLATIONS[lang]||TRANSLATIONS.en)[opt.getAttribute('data-i18n')];
-      if (v) opt.textContent = v;
-    });
-  });
-}
-
-const cwSt = {
-  bk: { unitId: null, unitName: null, unitType: null, checkIn: null, checkOut: null,
-        nights: 0, pricePerNight: 0, total: 0, minStay: 1 },
-};
-const $cw = id => document.getElementById(id);
-
-function cwDays(a, b) { return Math.round((new Date(b) - new Date(a)) / 86400000); }
-function cwFmt(iso) { if (!iso) return '\u2014'; const [y,m,d] = iso.split('-'); return d+'-'+m+'-'+y; }
-function cwISO(d) { return d.toISOString().slice(0,10); }
-function cwTypeName(t) {
-  const m={pitch:'cw_pitch',chalet:'Chalet',safari:'Safari tent',tunnel:'Tunnel tent',glamp:'Glamping tent'};
-  const k=m[t]; return k&&k.startsWith('cw_')?cwT(k):k||t;
-}
-
-// Tabs
-document.querySelectorAll('.cw-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.cw-tab').forEach(t => t.setAttribute('aria-selected','false'));
-    document.querySelectorAll('.cw-panel').forEach(p => p.classList.remove('is-active'));
-    tab.setAttribute('aria-selected','true');
-    document.getElementById(tab.getAttribute('aria-controls')).classList.add('is-active');
-  });
-});
-
-// Date inputs
-const cwTodayISO = cwISO(new Date());
-$cw('s-checkin').min = cwTodayISO;
-$cw('s-checkout').min = cwTodayISO;
-$cw('s-checkin').addEventListener('change', () => {
-  const ci = $cw('s-checkin').value;
-  if (!ci) return;
-  const type = $cw('s-type').value;
-  const minStay = type ? (cwGetUnits(type)[0]?.minStay || 1) : 1;
-  const minOut = new Date(ci);
-  minOut.setDate(minOut.getDate() + minStay);
-  $cw('s-checkout').min = cwISO(minOut);
-  if ($cw('s-checkout').value && $cw('s-checkout').value <= ci) $cw('s-checkout').value = '';
-});
-
-// Search
-$cw('search-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const ci = $cw('s-checkin').value, co = $cw('s-checkout').value;
-  const type = $cw('s-type').value, guests = parseInt($cw('s-guests').value);
-  const errEl = $cw('search-error');
-  errEl.className = 'cw-banner'; errEl.textContent = '';
-  $cw('search-results').innerHTML = '';
-
-  if (!ci || !co)             { cwBanner(errEl,cwT('cw_err_dates'),'error'); return; }
-  if (co <= ci)               { cwBanner(errEl,cwT('cw_err_order'),'error'); return; }
-  if (!guests||guests<1||guests>12) { cwBanner(errEl,cwT('cw_err_guests'),'error'); return; }
-
-  const nights = cwDays(ci, co);
-  $cw('search-results').innerHTML = [1,2,3].map(() => '<div class="cw-skeleton"></div>').join('');
-  await new Promise(r => setTimeout(r, 400));
-
-  const all = cwGetAvail(ci, co, type || undefined);
-  const fit = all.filter(u => u.capacity >= guests);
-  const ok  = fit.filter(u => u.minStay <= nights);
-  $cw('search-results').innerHTML = '';
-
-  if (!all.length) { cwBanner(errEl,cwT('cw_err_none'),'amber'); return; }
-  if (!fit.length) { cwBanner(errEl,cwT('cw_err_capacity',{n:guests}),'amber'); return; }
-  if (!ok.length) {
-    const mn = Math.min(...fit.map(u => u.minStay));
-    cwBanner(errEl,(type?cwT('cw_err_minstay_type',{n:mn}):cwT('cw_err_minstay',{n:mn})),'amber');
-    return;
-  }
-  cwRenderResults(ok, ci, co, nights);
-});
-
-function cwBanner(el, msg, type) { el.textContent = msg; el.className = 'cw-banner cw-banner--'+type+' is-visible'; }
-
-function cwRenderResults(units, ci, co, nights) {
-  const res = $cw('search-results');
-  res.innerHTML = '<p class="cw-results-title">'+cwT('cw_results_title',{n:units.length,s:units.length>1?'s':'',nights:nights,ns:nights>1?cwT('cw_np'):''})+'</p>';
-  units.forEach(unit => {
-    const card = document.createElement('div');
-    card.className = 'cw-unit-card'; card.tabIndex = 0;
-    card.setAttribute('role','button');
-    card.setAttribute('aria-label', unit.name+' '+cwT('cw_request')+', \u20ac'+cwEsc(unit.pricePerNight)+' '+cwT('cw_per_night'));
-    card.innerHTML =
-      '<div class="cw-unit-card__info">'+
-        '<div class="cw-unit-card__name">'+cwEsc(unit.name)+'</div>'+
-        '<div class="cw-unit-card__meta">'+
-          '<span class="cw-badge cw-badge--'+unit.type+'">'+cwEsc(cwTypeName(unit.type))+'</span>'+
-          '<span>max. '+cwEsc(unit.capacity)+' '+cwT('cw_persons_unit')+'</span>'+
-          (unit.minStay > 1 ? '<span>min. '+unit.minStay+' '+cwT('cw_nights_unit')+'</span>' : '')+
-        '</div>'+
-      '</div>'+
-      '<div class="cw-unit-card__price">\u20ac'+unit.pricePerNight+
-        '<small>'+cwT('cw_per_night')+'</small>'+
-        '<span class="total-price">'+cwT('cw_total')+' \u20ac'+cwPrice(nights*unit.pricePerNight)+'</span>'+
-      '</div>';
-    card.addEventListener('click', () => cwOpenModal(unit, ci, co, nights));
-    card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); cwOpenModal(unit,ci,co,nights); } });
-    res.appendChild(card);
-  });
-}
-
-// Modal
-const cwModal = $cw('booking-modal');
-
-function cwOpenModal(unit, ci, co, nights) {
-  cwSt.bk = {unitId:unit.id,unitName:unit.name,unitType:unit.type,checkIn:ci,checkOut:co,nights,pricePerNight:unit.pricePerNight,total:nights*unit.pricePerNight,minStay:unit.minStay};
-  $cw('modal-summary').innerHTML =
-    '<dt>'+cwT('cw_accom_label')+'</dt><dd>'+cwEsc(unit.name)+'</dd>'+
-    '<dt>'+cwT('cw_type')+'</dt><dd>'+cwEsc(cwTypeName(unit.type))+'</dd>'+
-    '<dt>'+cwT('cw_arrival')+'</dt><dd>'+cwFmt(ci)+'</dd>'+
-    '<dt>'+cwT('cw_departure')+'</dt><dd>'+cwFmt(co)+'</dd>'+
-    '<dt>'+cwT('cw_num_nights')+'</dt><dd>'+nights+'</dd>'+
-    '<div class="cw-modal-price"><span class="label">'+cwT('cw_total_price')+'</span><span class="total">\u20ac '+cwPrice(nights*unit.pricePerNight)+'</span></div>';
-  cwStep(1); cwModal.showModal(); $cw('modal-close').focus();
-}
-
-function cwStep(n) {
-  $cw('modal-step-1').style.display = n===1?'':'none';
-  $cw('modal-step-2').style.display = n===2?'':'none';
-  $cw('modal-step-3').style.display = n===3?'':'none';
-  $cw('step-bar-1').className = 'cw-step '+(n>=1?(n>1?'is-done':'is-active'):'');
-  $cw('step-bar-2').className = 'cw-step '+(n>=2?(n>2?'is-done':'is-active'):'');
-}
-function cwCloseModal() { cwModal.close(); cwResetForm(); }
-function cwResetForm() {
-  $cw('booking-form').reset();
-  ['e-name','e-email'].forEach(id => $cw(id).textContent='');
-  ['f-name','f-email'].forEach(id => $cw(id).classList.remove('is-invalid'));
-}
-
-$cw('modal-close').addEventListener('click', cwCloseModal);
-$cw('modal-cancel-step1').addEventListener('click', cwCloseModal);
-$cw('modal-back').addEventListener('click', () => cwStep(1));
-$cw('modal-next').addEventListener('click', () => { cwStep(2); $cw('f-name').focus(); });
-$cw('modal-done').addEventListener('click', cwCloseModal);
-cwModal.addEventListener('click', e => { if (e.target===cwModal) cwCloseModal(); });
-cwModal.addEventListener('cancel', e => { e.preventDefault(); cwCloseModal(); });
-
-$cw('booking-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  if (!cwValidate()) return;
-  const btn = $cw('modal-submit');
-  btn.disabled = true; btn.textContent = cwT('cw_busy');
-  await new Promise(r => setTimeout(r, 400));
-  try {
-    const payload = {
-      type: 'enquiry',
-      unitId: cwSt.bk.unitId, unitName: cwSt.bk.unitName, unitType: cwSt.bk.unitType,
-      checkIn: cwSt.bk.checkIn, checkOut: cwSt.bk.checkOut,
-      nights: cwSt.bk.nights, totalPrice: cwSt.bk.total,
-      guestName:  $cw('f-name').value.trim(),
-      guestEmail: $cw('f-email').value.trim(),
-      guestPhone: $cw('f-phone').value.trim(),
-      notes:      $cw('f-notes').value.trim(),
-    };
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    $cw('confirm-text').innerHTML = cwT('cw_confirm_body');
-    cwStep(3);
-  } catch (err) {
-    cwBanner($cw('search-error'), cwT('cw_err_generic'), 'error');
-    cwCloseModal(); $cw('search-btn').focus();
-  } finally {
-    btn.disabled = false; btn.textContent = cwT('cw_submit');
-  }
-});
-
-function cwValidate() {
-  let ok = true;
-  const name = $cw('f-name').value.trim(), email = $cw('f-email').value.trim();
-  if (!name) { $cw('e-name').textContent=cwT('cw_err_name'); $cw('f-name').classList.add('is-invalid'); ok=false; }
-  else { $cw('e-name').textContent=''; $cw('f-name').classList.remove('is-invalid'); }
-  if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    $cw('e-email').textContent=cwT('cw_err_email_req'); $cw('f-email').classList.add('is-invalid'); ok=false;
-  } else { $cw('e-email').textContent=''; $cw('f-email').classList.remove('is-invalid'); }
-  if (!ok) $cw('f-name').focus();
-  return ok;
-}
-</script>
 
 <script>
 // ── Story heading word-rise reveal ─────────────────────────────────────────────
@@ -3922,10 +3127,6 @@ setTimeout(function(){
     var l = (typeof currentLang !== 'undefined' && currentLang) ? currentLang : 'nl';
     window.open(BOOKING_URL + '?lang=' + l, '_blank', 'noopener');
   }
-  document.querySelectorAll('a[href="#availability"]').forEach(function(a){
-    a.addEventListener('click', openBooking);
-  });
-
   // ── Floating "Check availability" button visibility ────────────────────────
   var fab=document.getElementById('fab'), cta=document.getElementById('fab-cta');
   if(!fab||!cta) return;
