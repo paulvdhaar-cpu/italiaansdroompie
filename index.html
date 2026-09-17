@@ -1677,9 +1677,54 @@ footer .footer-links a:hover   { color: var(--peach); }
       border: 1px solid var(--border2);
       border-radius: 2px;
       box-shadow: none;
+      overflow: hidden;
     }
     .t3-widget-root .t3-card:hover {
       border-color: var(--gold);
+    }
+
+    /* Photo framing — force 4:3 landscape aspect on each slide so portrait
+       source photos crop nicely (matches the stay-card treatment on the main page) */
+    .t3-widget-root .t3-slider,
+    .t3-widget-root .t3-slide {
+      position: relative;
+    }
+    .t3-widget-root .t3-slide {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .t3-widget-root .t3-slide picture,
+    .t3-widget-root .t3-slide picture img,
+    .t3-widget-root .t3-slide img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
+      display: block !important;
+    }
+    /* Nudge slider nav arrows into the beige/peach palette */
+    .t3-widget-root .t3-slider-nav button,
+    .t3-widget-root .t3-slider-prev,
+    .t3-widget-root .t3-slider-next {
+      background: rgba(255, 255, 255, 0.85) !important;
+      color: var(--ink) !important;
+      border: 0;
+    }
+    .t3-widget-root .t3-slider-dots button.is-active,
+    .t3-widget-root .t3-slider-dots .is-active {
+      background: var(--peach) !important;
+    }
+
+    /* Widget container — sit the searchpage inside a subtle kader */
+    #reserveren .tomm-widget-wrap {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 32px 28px;
+      margin-top: 40px;
+    }
+    @media (max-width: 640px) {
+      #reserveren .tomm-widget-wrap { padding: 20px 14px; }
     }
 
     /* Datepicker + counter accents in olive/peach */
@@ -2251,7 +2296,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     <h2 class="section-title reveal reveal-delay-1" data-i18n="res_title">Boek jouw <em>plek</em></h2>
     <p class="about-text reveal reveal-delay-2" data-i18n="res_intro">Kies datum en accommodatie hieronder. Lisette bevestigt elke reservering persoonlijk.</p>
     <div class="tomm-widget-wrap reveal reveal-delay-3">
-      <div data-tommy-widget="searchpage" data-token="6989-6487fe1a50ce4d16917b01fce0a814343c091bae9607df247d2eec4fbaca757cab1d49f502eb3efba0ae3ef55ec5eab013ea3b316960bd0c7da83168fdf719e4" data-language="nl" data-sales-channel-id="57977" data-host="https://public.tommbookingsupport.nl" data-accommodation-group-filter="0" data-amenity-filter="0" data-format-information-link="0" data-show-available-count="0" data-minimum-date="2026-05-22" data-maximum-date="2026-10-02" data-reservation-page-url="https://paulvdhaar-cpu.github.io/italiaansdroompie/reserveren.html"></div>
+      <div data-tommy-widget="searchpage" data-token="6989-6487fe1a50ce4d16917b01fce0a814343c091bae9607df247d2eec4fbaca757cab1d49f502eb3efba0ae3ef55ec5eab013ea3b316960bd0c7da83168fdf719e4" data-language="nl" data-sales-channel-id="57977" data-host="https://public.tommbookingsupport.nl" data-accommodation-group-filter="1" data-amenity-filter="1" data-format-information-link="1" data-show-available-count="1" data-minimum-date="2027-05-22" data-reservation-page-url="https://paulvdhaar-cpu.github.io/italiaansdroompie/reserveren.html"></div>
     </div>
   </div>
 </section>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Security headers (also configure at server/CDN level for full protection) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src https://script.google.com https://script.googleusercontent.com https://docs.google.com; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://public.tommbookingsupport.nl https://*.googletagmanager.com https://region1.analytics.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://public.tommbookingsupport.nl; font-src https://fonts.gstatic.com https://fonts.googleapis.com https://public.tommbookingsupport.nl; img-src 'self' data: https:; connect-src https://script.google.com https://script.googleusercontent.com https://docs.google.com https://public.tommbookingsupport.nl https://api.tommbookingsupport.nl https://region1.analytics.google.com https://*.google-analytics.com; frame-ancestors 'none';">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Camping San Procolo — a family-run campsite on a hilltop in Le Marche, Italy. Glamping tents, bell tents, pool, ancient olive trees and the Adriatic Sea 20 minutes away. Open 22 May – 2 October.">
@@ -56,6 +56,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Spectral:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://public.tommbookingsupport.nl/assets/widgets.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1627,6 +1628,116 @@ footer .footer-links a:hover   { color: var(--peach); }
       .faq-q { font-size: 1.05rem; padding-right: 32px; }
     }
 
+    /* ────────────────────────────────────────────────────
+       RESERVEREN — section + Tomm widget branding overrides
+       widget classes are all `.t3-*` (from public.tommbookingsupport.nl)
+       ──────────────────────────────────────────────────── */
+    #reserveren {
+      padding: 100px 48px;
+      background: var(--bg2);
+    }
+    .reserveren-inner { max-width: 1280px; margin: 0 auto; }
+    #reserveren .about-text { margin-top: 10px; font-size: 14px; max-width: 68ch; }
+    .tomm-widget-wrap { margin-top: 40px; }
+    @media (max-width: 768px) { #reserveren { padding: 64px 24px; } }
+    @media (max-width: 375px) { #reserveren { padding: 48px 12px; } }
+
+    /* Widget typography — replace Outfit with DM Sans, headings in DM Serif Display */
+    .t3-widget-root, .t3-widget-root * {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif !important;
+    }
+    .t3-widget-root .t3-heading,
+    .t3-widget-root h1, .t3-widget-root h2, .t3-widget-root h3, .t3-widget-root h4, .t3-widget-root h5 {
+      font-family: 'DM Serif Display', Georgia, serif !important;
+      font-weight: 300;
+      letter-spacing: -0.005em;
+    }
+
+    /* Widget colors — peach primaries, olive accents */
+    .t3-widget-root .t3-btn,
+    .t3-widget-root button[type="submit"],
+    .t3-widget-root .t3-btn-primary {
+      background: var(--peach) !important;
+      border-color: var(--peach) !important;
+      color: #fff !important;
+      border-radius: 0 !important;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+    .t3-widget-root .t3-btn:hover,
+    .t3-widget-root .t3-btn-primary:hover {
+      background: var(--peach-h) !important;
+      border-color: var(--peach-h) !important;
+    }
+
+    /* Card / result styling — softer look, no aggressive shadow */
+    .t3-widget-root .t3-card {
+      background: #fff;
+      border: 1px solid var(--border2);
+      border-radius: 2px;
+      box-shadow: none;
+      overflow: hidden;
+    }
+    .t3-widget-root .t3-card:hover {
+      border-color: var(--gold);
+    }
+
+    /* Photo framing — force 4:3 landscape aspect on each slide so portrait
+       source photos crop nicely (matches the stay-card treatment on the main page) */
+    .t3-widget-root .t3-slider,
+    .t3-widget-root .t3-slide {
+      position: relative;
+    }
+    .t3-widget-root .t3-slide {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .t3-widget-root .t3-slide picture,
+    .t3-widget-root .t3-slide picture img,
+    .t3-widget-root .t3-slide img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
+      display: block !important;
+    }
+    /* Nudge slider nav arrows into the beige/peach palette */
+    .t3-widget-root .t3-slider-nav button,
+    .t3-widget-root .t3-slider-prev,
+    .t3-widget-root .t3-slider-next {
+      background: rgba(255, 255, 255, 0.85) !important;
+      color: var(--ink) !important;
+      border: 0;
+    }
+    .t3-widget-root .t3-slider-dots button.is-active,
+    .t3-widget-root .t3-slider-dots .is-active {
+      background: var(--peach) !important;
+    }
+
+    /* Widget container — sit the searchpage inside a subtle kader */
+    #reserveren .tomm-widget-wrap {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 32px 28px;
+      margin-top: 40px;
+    }
+    @media (max-width: 640px) {
+      #reserveren .tomm-widget-wrap { padding: 20px 14px; }
+    }
+
+    /* Datepicker + counter accents in olive/peach */
+    .t3-widget-root {
+      --dp-primary-color: var(--peach);
+      --dp-success-color: var(--gold);
+      --dp-hover-color: rgba(163, 93, 68, 0.08);
+    }
+
+    /* Focus / active states away from Tomm blue */
+    .t3-widget-root a { color: var(--peach); }
+    .t3-widget-root a:hover { color: var(--peach-h); }
+
     /* Brand: no italics (DM fonts ship no italic — prevents faux-slant) */
     .mobile-menu a, .editorial-pause-text, .footer-note,
     em, i { font-style: normal; }
@@ -1756,7 +1867,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <a href="#surroundings" class="mobile-menu-link" data-i18n="nav_area">The Area</a>
   <a href="#faq" class="mobile-menu-link" data-i18n="nav_faq">Good to Know</a>
   <div class="mobile-menu-divider"></div>
-  <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="mobile-menu-book" data-i18n="nav_book_stay">Book Your Stay</a>
+  <a href="#reserveren" class="mobile-menu-book" data-i18n="nav_book_stay">Book Your Stay</a>
   <div class="mobile-lang mobile-lang--menu">
     <a href="#" onclick="window.location.href='/italiaansdroompie/';return false;" data-lang="nl" class="active">NL</a>
     <a href="#" onclick="window.location.href='/italiaansdroompie/en/';return false;" data-lang="en">EN</a>
@@ -1782,7 +1893,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <a data-lang="de" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">DE</a>
       <a data-lang="it" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">IT</a>
     </div>
-    <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-nav" data-i18n="nav_book_now">Book Now</a>
+    <a href="#reserveren" class="btn-nav" data-i18n="nav_book_now">Book Now</a>
   </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1799,7 +1910,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     <p class="hero-slogan">Il dolce far niente</p>
     <p class="hero-sub" data-i18n="hero_sub">A small family campsite between the mountains and the sea. Eighteen pitches, a few of them glamping tents, a pool with a view across the valley. Twenty minutes from the Adriatic, an hour from the snowy peaks of the Sibillini.</p>
     <div class="hero-cta">
-      <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-primary" data-i18n="nav_book_stay">Book Your Stay</a>
+      <a href="#reserveren" class="btn-primary" data-i18n="nav_book_stay">Book Your Stay</a>
       <a href="#about" class="btn-outline" data-i18n="hero_btn_story">Read Our Story</a>
     </div>
     <p class="hero-urgency" data-i18n="hero_urgency">Open 22 May to 2 October — July and August fill up early</p>
@@ -1884,7 +1995,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">The campsite has welcomed guests since 2007, on a plot already laid out with care, on one of the loveliest spots in the valley. We took over at the end of 2026, and between the two of us there is always something on the go — a small improvement this week, a bigger idea for next winter. We keep it small and personal on purpose. Eighteen pitches, a handful of them glamping tents, a pool, a terrace, an olive grove, and usually one of us nearby, likely to pour you a glass of wine before you have made it back to your tent.</p>
       <h3 class="about-subheading reveal reveal-delay-3" data-i18n="about_sub">A proper campsite, not a resort</h3>
       <p class="about-text reveal reveal-delay-3" data-i18n="about_p3">Kids run around barefoot. You can actually relax. Mornings start with fresh bread on the terrace and evenings tend to last longer than you planned.</p>
-      <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Check Availability →</a>
+      <a href="#reserveren" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Check Availability →</a>
     </div>
   </div>
 </section>
@@ -1966,7 +2077,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <div class="section-eyebrow reveal" data-i18n="stay_eyebrow">Glamping in Le Marche</div>
       <h2 class="section-title reveal reveal-delay-1" data-i18n="stay_title">Find your<br><em>corner of Italy</em></h2>
     </div>
-    <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-outline reveal" data-i18n="stay_check">Check Availability →</a>
+    <a href="#reserveren" class="btn-outline reveal" data-i18n="stay_check">Check Availability →</a>
   </div>
   <div class="stay-cards">
 
@@ -1992,7 +2103,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_glamp_p">The best spot of the campsite! Ready to walk into: beds made, linen included, your own terrace and bathroom and the same valley view from your bed.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">&euro;135 &ndash; &euro;185 <span data-i18n="per_night_slash">/ night</span></span></div>
-          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Book</a>
+          <a href="#reserveren" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
     </div>
@@ -2015,7 +2126,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_tent_p">Spacious terraced pitches with valley views, for tents only. Electricity included. Quiet, at the edge of the campsite.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">&euro;30 &ndash; &euro;46 <span data-i18n="per_night_slash">/ night</span></span></div>
-          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Book</a>
+          <a href="#reserveren" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
     </div>
@@ -2037,7 +2148,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_camper_p">Terraced pitches accessible for folding trailers, small caravans and small campers. Electricity and hook-ups included. The last part of the access road is rather steep, please take this into account.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">&euro;30 &ndash; &euro;46 <span data-i18n="per_night_slash">/ night</span></span></div>
-          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Book</a>
+          <a href="#reserveren" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
     </div>
@@ -2060,7 +2171,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_bell_p">A classic canvas bell tent on its own pitch — real beds, linen included, and the iconic round shape. Cosy for two.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">&euro;60 &ndash; &euro;85 <span data-i18n="per_night_slash">/ night</span></span></div>
-          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Book</a>
+          <a href="#reserveren" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
     </div>
@@ -2083,7 +2194,7 @@ footer .footer-links a:hover   { color: var(--peach); }
         <p class="stay-card-desc" data-i18n="stay_safari_p">A roomy safari tent that sleeps four. Beds made, linen included. Uses our shared sanitary block.</p>
         <div class="stay-card-footer">
           <div class="stay-price"><span class="stay-price-value">&euro;98 &ndash; &euro;128 <span data-i18n="per_night_slash">/ night</span></span></div>
-          <a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" class="btn-small" data-i18n="book_btn">Book</a>
+          <a href="#reserveren" class="btn-small" data-i18n="book_btn">Book</a>
         </div>
       </div>
     </div>
@@ -2173,6 +2284,29 @@ footer .footer-links a:hover   { color: var(--peach); }
           <div class="testimonial-stars">★★★★★</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- RESERVEREN -->
+<section id="reserveren">
+  <div class="reserveren-inner">
+    <div class="section-eyebrow reveal" data-i18n="res_eyebrow">Plan je verblijf</div>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="res_title">Boek jouw <em>plek</em></h2>
+    <p class="about-text reveal reveal-delay-2" data-i18n="res_intro">Kies datum en accommodatie hieronder. Lisette bevestigt elke reservering persoonlijk.</p>
+    <div class="tomm-widget-wrap reveal reveal-delay-3">
+      <div data-tommy-widget="searchpage"
+           data-token="6989-6487fe1a50ce4d16917b01fce0a814343c091bae9607df247d2eec4fbaca757cab1d49f502eb3efba0ae3ef55ec5eab013ea3b316960bd0c7da83168fdf719e4"
+           data-language="en"
+           data-sales-channel-id="57977"
+           data-host="https://public.tommbookingsupport.nl"
+           data-accommodation-group-filter="1"
+           data-amenity-filter="1"
+           data-format-information-link="1"
+           data-show-available-count="1"
+           data-minimum-date="2027-05-22"
+           data-reservation-page-url="https://paulvdhaar-cpu.github.io/italiaansdroompie/en/reserveren.html"></div>
     </div>
   </div>
 </section>
@@ -2392,7 +2526,7 @@ footer .footer-links a:hover   { color: var(--peach); }
           </a>
         </li>
         <li><a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a></li>
-        <li><a href="https://booking.camping.care/camping-san-procolo" target="_blank" rel="noopener" data-i18n="footer_book">Book a Stay</a></li>
+        <li><a href="#reserveren" data-i18n="footer_book">Book a Stay</a></li>
       </ul>
     </div>
   </div>
@@ -2603,6 +2737,10 @@ const TRANSLATIONS = {
     test_google_link:'Read them on Google →',
     test_title:'What families<br><em>say about us</em>',
     // Availability
+    // Reserveren
+    res_eyebrow:'Plan Your Stay',
+    res_title:'Book your <em>spot</em>',
+    res_intro:'Pick your dates and accommodation below. Lisette confirms every reservation personally.',
     // Surroundings
     surr_eyebrow:'The Region',
     surr_title:'Le Marche —<br><em>the part of Italy most people still miss</em>',
@@ -2779,6 +2917,10 @@ const TRANSLATIONS = {
     test_google_link:'Lees ze op Google →',
     test_title:'Wat families<br><em>over ons zeggen</em>',
     // Availability
+    // Reserveren
+    res_eyebrow:'Plan je verblijf',
+    res_title:'Boek jouw <em>plek</em>',
+    res_intro:'Kies datum en accommodatie hieronder. Lisette bevestigt elke reservering persoonlijk.',
     // Surroundings
     surr_eyebrow:'De Omgeving',
     surr_title:'Le Marche —<br><em>het stuk Italië dat de meeste reizigers niet kennen</em>',
@@ -3118,15 +3260,6 @@ setTimeout(function(){
 </div>
 <script>
 (function(){
-  // ── Booking redirect ──────────────────────────────────────
-  // All booking CTAs (nav, hero, stay cards, the floating button) open the
-  // CampingCare booking engine. It points at the real San Procolo booking page.
-  var BOOKING_URL = 'https://booking.camping.care/camping-san-procolo';
-  function openBooking(e){
-    if(e){ e.preventDefault(); }
-    var l = (typeof currentLang !== 'undefined' && currentLang) ? currentLang : 'nl';
-    window.open(BOOKING_URL + '?lang=' + l, '_blank', 'noopener');
-  }
   // ── Floating "Check availability" button visibility ────────────────────────
   var fab=document.getElementById('fab'), cta=document.getElementById('fab-cta');
   if(!fab||!cta) return;
@@ -3138,8 +3271,13 @@ setTimeout(function(){
   window.addEventListener('scroll',update,{passive:true});
   window.addEventListener('resize',update);
   update();
-  cta.addEventListener('click', openBooking);
+  cta.addEventListener('click', function(e){
+    e.preventDefault();
+    var el = document.getElementById('reserveren');
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
 })();
 </script>
+<script type="text/javascript" src="https://public.tommbookingsupport.nl/searchpage.js"></script>
 </body>
 </html>
