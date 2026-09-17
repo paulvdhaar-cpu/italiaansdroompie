@@ -149,9 +149,284 @@
     --dp-success-color: var(--gold);
   }
 
+  /* Wave 3 — reservation-widget polish */
+  /* Step-nav (Verblijf → Extra's → Uw gegevens → Samenvatting) — brand colours.
+     TOMM defaults to blue for the active step pill. Owner accepts risk that
+     future TOMM releases may rename these classes. */
+  .t3-widget-root .t3-step-active,
+  .t3-widget-root li.t3-step-active {
+    background: var(--peach) !important;
+    color: #fff !important;
+    border-color: var(--peach) !important;
+  }
+  .t3-widget-root .t3-step-active *,
+  .t3-widget-root .t3-step-active svg,
+  .t3-widget-root .t3-step-active i {
+    color: #fff !important;
+    fill: #fff !important;
+    stroke: #fff !important;
+  }
+  /* Completed steps in olive */
+  .t3-widget-root .t3-step-completed,
+  .t3-widget-root .t3-step-done,
+  .t3-widget-root .t3-step-visited {
+    color: var(--gold) !important;
+  }
+  .t3-widget-root .t3-step-completed svg,
+  .t3-widget-root .t3-step-done svg,
+  .t3-widget-root .t3-step-visited svg { fill: var(--gold) !important; stroke: var(--gold) !important; }
+  /* Inactive steps: subtle muted */
+  .t3-widget-root [class*="t3-step"]:not(.t3-step-active):not(.t3-step-completed):not(.t3-step-done):not(.t3-step-visited) {
+    color: var(--muted) !important;
+  }
+  /* Connecting lines between steps — subtle border */
+  .t3-widget-root [class*="step-line"],
+  .t3-widget-root [class*="step-separator"],
+  .t3-widget-root [class*="step-bar"] {
+    background: var(--border) !important;
+  }
+  /* Fallback for legacy tab-based renderers */
+  .t3-widget-root .t3-tab.is-active,
+  .t3-widget-root .t3-tab.active,
+  .t3-widget-root [class*="tab"][class*="active"] {
+    color: var(--peach) !important;
+    border-bottom-color: var(--peach) !important;
+  }
+  /* Form controls into the design system */
+  .t3-widget-root input[type="text"],
+  .t3-widget-root input[type="email"],
+  .t3-widget-root input[type="tel"],
+  .t3-widget-root input[type="number"],
+  .t3-widget-root select,
+  .t3-widget-root textarea {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 0 !important;
+    color: var(--ink);
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    transition: border-color .15s;
+  }
+  .t3-widget-root input:focus,
+  .t3-widget-root select:focus,
+  .t3-widget-root textarea:focus,
+  .t3-widget-root button:focus-visible {
+    outline: 2px solid var(--peach) !important;
+    outline-offset: 2px !important;
+    border-color: var(--peach) !important;
+  }
+  /* Extras: quantity counters with visible unit price */
+  /* When Tomm renders an extras row, we surface any hidden price via ::after
+     using [data-price] if it exists. If not, we make the price text more prominent. */
+  .t3-widget-root .t3-counter,
+  .t3-widget-root [class*="counter"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .t3-widget-root .t3-counter button,
+  .t3-widget-root [class*="counter"] button {
+    background: #fff !important;
+    border: 1px solid var(--border) !important;
+    color: var(--ink) !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 0 !important;
+  }
+  .t3-widget-root .t3-counter button:hover { border-color: var(--peach) !important; color: var(--peach) !important; }
+  /* Extras row: show name + price prominently, whichever DOM Tomm uses.
+     We select typical Tomm/booking-widget wrappers by pattern. */
+  .t3-widget-root [class*="article"],
+  .t3-widget-root [class*="extra"],
+  .t3-widget-root [class*="addon"] {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border2);
+  }
+  .t3-widget-root [class*="article"] [class*="price"],
+  .t3-widget-root [class*="extra"] [class*="price"],
+  .t3-widget-root [class*="addon"] [class*="price"] {
+    color: var(--ink) !important;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     Reservation-widget — bring headings, labels, buttons and sub-blocks
+     into the San Procolo design language.
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Blok A — Typografie herschalen (matcht site-schaal, was 24/18/16) */
+  .t3-widget-root h1,
+  .t3-widget-root h2 {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 1.4rem !important;
+    font-weight: 300 !important;
+    color: var(--ink) !important;
+    line-height: 1.2 !important;
+    margin: 0 0 14px !important;
+  }
+  .t3-widget-root h3,
+  .t3-widget-root h4,
+  .t3-widget-root .t3-heading {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 300 !important;
+    color: var(--ink) !important;
+    line-height: 1.25 !important;
+    margin: 0 0 12px !important;
+    letter-spacing: -0.005em !important;
+  }
+  /* Body / paragraph text inside widget */
+  .t3-widget-root p,
+  .t3-widget-root span,
+  .t3-widget-root td,
+  .t3-widget-root li,
+  .t3-widget-root div:not(.t3-btn):not([class*="button"]) {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  /* Form labels — eyebrow style (uppercase, letter-spaced, muted) */
+  .t3-widget-root label,
+  .t3-widget-root .t3-label,
+  .t3-widget-root [class*="field-label"] {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    color: var(--muted) !important;
+    margin-bottom: 6px !important;
+    display: block !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Blok B — Blauw eruit (icon-circles + link colours) */
+  .t3-widget-root .t3-step i,
+  .t3-widget-root [class*="t3-step"] i,
+  .t3-widget-root .t3-step-active i,
+  .t3-widget-root .t3-step-active [class*="icon"] {
+    background: transparent !important;
+    border-color: currentColor !important;
+    box-shadow: none !important;
+  }
+  .t3-widget-root .t3-step-active i { color: #fff !important; }
+  /* Overall blue-hex knock-out for any element carrying Tomm's default 24,59,104 */
+  .t3-widget-root [style*="rgb(36, 59, 104)"],
+  .t3-widget-root [style*="#243b68"],
+  .t3-widget-root [style*="#1976d2"],
+  .t3-widget-root [style*="#1976D2"] {
+    background-color: var(--peach) !important;
+    border-color: var(--peach) !important;
+    color: #fff !important;
+  }
+
+  /* Blok C — Sub-block backgrounds gelijktrekken met beige palet */
+  .t3-widget-root .t3-step-holder,
+  .t3-widget-root .t3-step-content,
+  .t3-widget-root .t3-panel,
+  .t3-widget-root [class*="panel"],
+  .t3-widget-root [class*="wrapper"] {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  /* Summary tables / detail boxes → subtle beige card */
+  .t3-widget-root .t3-table,
+  .t3-widget-root .t3-modal-summary,
+  .t3-widget-root [class*="summary"],
+  .t3-widget-root [class*="specification"] {
+    background: var(--bg2) !important;
+    border: 1px solid var(--border2) !important;
+    border-radius: 2px !important;
+    padding: 22px !important;
+  }
+  .t3-widget-root .t3-table td,
+  .t3-widget-root .t3-table th {
+    border-bottom: 1px solid var(--border2) !important;
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+    color: var(--ink) !important;
+  }
+  .t3-widget-root .t3-table th {
+    font-weight: 500 !important;
+    color: var(--muted) !important;
+  }
+
+  /* Blok D — Volgende stap / Terug / Submit buttons match .btn-primary */
+  .t3-widget-root .t3-nextprev-holder button,
+  .t3-widget-root .t3-nextprev-holder .t3-btn,
+  .t3-widget-root [class*="next-step"],
+  .t3-widget-root [class*="prev-step"],
+  .t3-widget-root button.t3-btn,
+  .t3-widget-root button[type="submit"] {
+    background: var(--peach) !important;
+    color: #fff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 14px 32px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+    transition: background 0.2s !important;
+  }
+  .t3-widget-root .t3-nextprev-holder button:hover,
+  .t3-widget-root button.t3-btn:hover,
+  .t3-widget-root button[type="submit"]:hover {
+    background: var(--peach-h) !important;
+  }
+  /* Secondary/back button variant — outline instead of fill */
+  .t3-widget-root .t3-btn-secondary,
+  .t3-widget-root .t3-btn-outline,
+  .t3-widget-root [class*="prev-step"] {
+    background: transparent !important;
+    color: var(--ink) !important;
+    border: 1px solid var(--border) !important;
+  }
+  .t3-widget-root .t3-btn-secondary:hover,
+  .t3-widget-root .t3-btn-outline:hover,
+  .t3-widget-root [class*="prev-step"]:hover {
+    border-color: var(--peach) !important;
+    color: var(--peach) !important;
+  }
+
+  /* Blok E — Section hierarchy: separator lines between steps */
+  .t3-widget-root .t3-step-content,
+  .t3-widget-root [class*="step-block"] {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+    border-bottom: 1px solid var(--border2);
+  }
+  .t3-widget-root .t3-step-content:last-child,
+  .t3-widget-root [class*="step-block"]:last-child {
+    border-bottom: 0;
+  }
+
+  /* Trust regel + fallback contact */
+  .booking-trust {
+    max-width: 68ch;
+    margin: 40px auto 0;
+    padding: 20px 24px;
+    background: var(--bg2);
+    border-radius: 2px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+    text-align: center;
+  }
+  .booking-trust strong { color: var(--ink); font-weight: 500; }
+  .booking-trust a { color: var(--peach); text-decoration: none; }
+  .booking-trust a:hover { color: var(--peach-h); }
+
   @media (max-width: 640px) {
     .site-header { padding: 16px 20px; }
     main { padding: 30px 20px 60px; }
+    .booking-trust { padding: 16px 18px; margin-top: 28px; }
+    /* Larger touch targets on mobile inputs */
+    .t3-widget-root input, .t3-widget-root select, .t3-widget-root button { min-height: 44px; }
   }
 </style>
 </head>
@@ -175,7 +450,8 @@
          data-language="nl"
          data-sales-channel-id="57977"
          data-host="https://public.tommbookingsupport.nl"
-         data-language-switching-enabled="1"
+         data-minimum-date="2027-05-22"
+         data-language-switching-enabled="0"
          data-show-item-groups="0"
          data-location-preference="0"
          data-map-auto-zoom="1"
@@ -188,6 +464,10 @@
          data-legend-available-color="#a35d44"
          data-legend-unavailable-color="#e0e0e0"
          data-selection-color="#71603d"></div>
+  </div>
+
+  <div class="booking-trust">
+    <strong>Bevestiging binnen 24 uur van Lisette persoonlijk.</strong><br>Vragen tijdens het boeken? Mail <a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a> of bel via <a href="https://wa.me/31638073908">WhatsApp</a>.
   </div>
 </main>
 
