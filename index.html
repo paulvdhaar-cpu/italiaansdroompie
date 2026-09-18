@@ -858,9 +858,12 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 
 .experiences-header { max-width: 1280px; margin: 0 auto 52px; }
 
+/* Editorial spread (not a grid-of-three).
+   Row 1: fruit opens small on the left, winegrower dominates in an
+   asymmetric 4:8 split. Row 2: stars closes wide and quiet. */
 .experiences-grid {
   max-width: 1280px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(12, 1fr);
   gap: 12px;
 }
 
@@ -868,6 +871,17 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   position: relative; border-radius: 2px; overflow: hidden;
   aspect-ratio: 3/4;
 }
+
+.exp-fruit { grid-column: span 4; aspect-ratio: 3/4; }
+.exp-wine  { grid-column: span 8; aspect-ratio: 16/11; }
+.exp-stars { grid-column: 1 / -1; aspect-ratio: 3/1; margin-top: 8px; }
+.exp-wine .exp-card-content { padding: 44px 40px; max-width: 540px; }
+.exp-wine .exp-title { font-size: 2.3rem; line-height: 1.05; }
+.exp-stars .exp-card-content { padding: 44px 40px; max-width: 60ch; }
+.exp-stars .exp-card-overlay {
+  background: linear-gradient(to right, rgba(12,6,2,0.86) 0%, rgba(12,6,2,0.55) 50%, rgba(12,6,2,0.15) 100%);
+}
+.exp-stars .exp-title { font-size: 2rem; }
 
 .exp-card-bg {
   position: absolute; inset: 0;
@@ -1422,6 +1436,12 @@ a:focus-visible, button:focus-visible {
 
   #experiences { padding: 64px 24px; }
   .experiences-grid { grid-template-columns: 1fr; gap: 10px; }
+  .exp-fruit, .exp-wine, .exp-stars { grid-column: 1 / -1; }
+  .exp-fruit { aspect-ratio: 4/5; }
+  .exp-wine { aspect-ratio: 4/5; }
+  .exp-stars { aspect-ratio: 5/4; margin-top: 0; }
+  .exp-wine .exp-card-content, .exp-stars .exp-card-content { padding: 28px 24px; max-width: 100%; }
+  .exp-wine .exp-title, .exp-stars .exp-title { font-size: 1.6rem; }
   .exp-card { aspect-ratio: 1/1; }
   .exp-card-content { top: 20%; bottom: 0; padding: 16px 24px 24px; justify-content: flex-start; gap: 6px; }
 
@@ -1913,6 +1933,17 @@ footer .footer-links a:hover   { color: var(--peach); }
       font-weight: 300 !important;
       color: var(--cream) !important;
     }
+    /* Injected factual line — olive eyebrow above the atmospheric description.
+       "2 personen · echte bedden & linnen · gedeeld sanitair" */
+    .t3-widget-root .injected-facts {
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.3px !important;
+      color: var(--gold) !important;
+      margin: -2px 0 8px !important;
+      line-height: 1.4 !important;
+    }
     .t3-widget-root .injected-price {
       font-family: 'DM Serif Display', serif !important;
       font-size: 0.9rem !important;
@@ -2109,7 +2140,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   <a href="#surroundings" class="mobile-menu-link" data-i18n="nav_area">De Omgeving</a>
   <a href="#faq" class="mobile-menu-link" data-i18n="nav_faq">Goed om te weten</a>
   <div class="mobile-menu-divider"></div>
-  <a href="#stay" class="mobile-menu-book" data-i18n="nav_book_stay">Boek nu</a>
+  <a href="#stay" class="mobile-menu-book" data-i18n="nav_book_stay">Reserveren</a>
   <div class="mobile-lang mobile-lang--menu">
     <a href="#" onclick="window.location.href='/italiaansdroompie/';return false;" data-lang="nl" class="active">NL</a>
     <a href="#" onclick="window.location.href='/italiaansdroompie/en/';return false;" data-lang="en">EN</a>
@@ -2135,7 +2166,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       <a data-lang="de" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">DE</a>
       <a data-lang="it" style="opacity:0.35;cursor:default;pointer-events:none;" tabindex="-1" aria-disabled="true" title="Coming soon">IT</a>
     </div>
-    <a href="#stay" class="btn-nav" data-i18n="nav_book_now">Boek nu</a>
+    <a href="#stay" class="btn-nav" data-i18n="nav_book_now">Reserveren</a>
   </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -2152,10 +2183,10 @@ footer .footer-links a:hover   { color: var(--peach); }
     <p class="hero-slogan">Il dolce far niente</p>
     <p class="hero-sub" data-i18n="hero_sub">Een kleine familiecamping tussen de bergen en de zee. Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.</p>
     <div class="hero-cta">
-      <a href="#stay" class="btn-primary" data-i18n="nav_book_stay">Boek nu</a>
+      <a href="#stay" class="btn-primary" data-i18n="nav_book_stay">Reserveren</a>
       <a href="#about" class="btn-outline" data-i18n="hero_btn_story">Ons Verhaal</a>
     </div>
-    <p class="hero-urgency" data-i18n="hero_urgency">Open 22 mei tot 2 oktober — juli en augustus lopen snel vol</p>
+    <p class="hero-urgency" data-i18n="hero_urgency">Open 22 mei tot 2 oktober</p>
   </div>
   <div class="scroll-indicator">
     <div class="scroll-line"></div>
@@ -2241,6 +2272,29 @@ footer .footer-links a:hover   { color: var(--peach); }
   </div>
 </section>
 
+<!-- STAY -->
+<section id="stay">
+  <div class="stay-header">
+    <div>
+      <div class="section-eyebrow reveal" data-i18n="stay_eyebrow">Glampen in Le Marche</div>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="stay_title">Vind jouw<br><em>hoekje van Italië</em></h2>
+      <p class="about-text reveal reveal-delay-2" data-i18n="res_intro" style="margin-top:14px;max-width:60ch;">Kies datum en accommodatie hieronder. Lisette bevestigt elke reservering persoonlijk.</p>
+    </div>
+  </div>
+  <div class="tomm-widget-wrap reveal reveal-delay-3">
+    <div data-tommy-widget="searchpage" data-token="6989-6487fe1a50ce4d16917b01fce0a814343c091bae9607df247d2eec4fbaca757cab1d49f502eb3efba0ae3ef55ec5eab013ea3b316960bd0c7da83168fdf719e4" data-language="nl" data-sales-channel-id="57977" data-host="https://public.tommbookingsupport.nl" data-accommodation-group-filter="1" data-amenity-filter="0" data-format-information-link="1" data-show-available-count="1" data-minimum-date="2027-05-22" data-reservation-page-url="https://paulvdhaar-cpu.github.io/italiaansdroompie/reserveren.html"></div>
+  </div>
+    <!-- PLATTEGROND -->
+  <div class="plattegrond-wrap reveal">
+    <div class="section-eyebrow" data-i18n="map_eyebrow">De camping</div>
+    <h3 class="plattegrond-title" data-i18n="map_title">Plattegrond</h3>
+    <button type="button" class="plattegrond-btn" id="map-open" data-i18n-aria-label="map_zoom" aria-label="Vergroot de plattegrond">
+      <img src="plattegrond.png" alt="Camping San Procolo" loading="lazy">
+      <span class="plattegrond-hint" data-i18n="map_hint">Tik om te vergroten</span>
+    </button>
+  </div>
+</section>
+
 <!-- ACTIVITIES -->
 <section id="activities">
   <div class="activities-header">
@@ -2311,29 +2365,6 @@ footer .footer-links a:hover   { color: var(--peach); }
   </div>
 </section>
 
-<!-- STAY -->
-<section id="stay">
-  <div class="stay-header">
-    <div>
-      <div class="section-eyebrow reveal" data-i18n="stay_eyebrow">Glampen in Le Marche</div>
-      <h2 class="section-title reveal reveal-delay-1" data-i18n="stay_title">Vind jouw<br><em>hoekje van Italië</em></h2>
-      <p class="about-text reveal reveal-delay-2" data-i18n="res_intro" style="margin-top:14px;max-width:60ch;">Kies datum en accommodatie hieronder. Lisette bevestigt elke reservering persoonlijk.</p>
-    </div>
-  </div>
-  <div class="tomm-widget-wrap reveal reveal-delay-3">
-    <div data-tommy-widget="searchpage" data-token="6989-6487fe1a50ce4d16917b01fce0a814343c091bae9607df247d2eec4fbaca757cab1d49f502eb3efba0ae3ef55ec5eab013ea3b316960bd0c7da83168fdf719e4" data-language="nl" data-sales-channel-id="57977" data-host="https://public.tommbookingsupport.nl" data-accommodation-group-filter="1" data-amenity-filter="0" data-format-information-link="1" data-show-available-count="1" data-minimum-date="2027-05-22" data-reservation-page-url="https://paulvdhaar-cpu.github.io/italiaansdroompie/reserveren.html"></div>
-  </div>
-    <!-- PLATTEGROND -->
-  <div class="plattegrond-wrap reveal">
-    <div class="section-eyebrow" data-i18n="map_eyebrow">De camping</div>
-    <h3 class="plattegrond-title" data-i18n="map_title">Plattegrond</h3>
-    <button type="button" class="plattegrond-btn" id="map-open" data-i18n-aria-label="map_zoom" aria-label="Vergroot de plattegrond">
-      <img src="plattegrond.png" alt="Camping San Procolo" loading="lazy">
-      <span class="plattegrond-hint" data-i18n="map_hint">Tik om te vergroten</span>
-    </button>
-  </div>
-</section>
-
 
 <!-- EXPERIENCES -->
 <section id="experiences">
@@ -2343,7 +2374,7 @@ footer .footer-links a:hover   { color: var(--peach); }
   </div>
   <div class="experiences-grid">
 
-    <div class="exp-card reveal">
+    <div class="exp-card exp-fruit reveal">
       <div class="exp-card-bg" style="background-image: url('kiwi.jpg');"></div>
       <div class="exp-card-overlay"></div>
       <div class="exp-card-content">
@@ -2353,7 +2384,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
     </div>
 
-    <div class="exp-card reveal reveal-delay-1">
+    <div class="exp-card exp-wine reveal reveal-delay-1">
       <div class="exp-card-bg" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5d1b12a8c352fe000114d399/cd3d218b-8e60-451f-823a-ad7d3e5b6ab1/Wine+tasting+Sicily+-+alcamo');"></div>
       <div class="exp-card-overlay"></div>
       <div class="exp-card-content">
@@ -2363,7 +2394,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       </div>
     </div>
 
-    <div class="exp-card reveal reveal-delay-2">
+    <div class="exp-card exp-stars reveal reveal-delay-2">
       <div class="exp-card-bg" style="background-image: url('stargazing.jpg');"></div>
       <div class="exp-card-overlay"></div>
       <div class="exp-card-content">
@@ -2733,7 +2764,7 @@ const TRANSLATIONS = {
     // Nav
     nav_story:'Our Story', nav_stay:'Where to Stay', nav_things:'Things to Do',
     nav_area:'The Area', nav_facilities:'Facilities', nav_faq:'Good to Know',
-    nav_book_now:'Book now', nav_book_stay:'Book now',
+    nav_book_now:'Reserve', nav_book_stay:'Reserve',
     fab_cta:'Check availability', fab_aria:'Go to availability',
     // Hero
     h1_seo:' Camping San Procolo, family glamping and camping in Le Marche, Italy',
@@ -2742,7 +2773,7 @@ const TRANSLATIONS = {
     hero_meaning:'the sweetness of doing nothing',
     hero_sub:'A small family campsite between the mountains and the sea. Eighteen pitches, a few of them glamping tents, a pool with a view across the valley. Twenty minutes from the Adriatic, an hour from the snowy peaks of the Sibillini.',
     hero_btn_story:'Read Our Story',
-    hero_urgency:'Open 22 May to 2 October — July and August fill up early',
+    hero_urgency:'Open 22 May to 2 October',
     stat_sea:'Above Sea Level', stat_beach:'To the Beach', stat_est:'Open Since',
     // Editorial
     editorial_text:'A campsite in the Italian hills where slow living is not a concept — it is simply how things are.',
@@ -2914,7 +2945,7 @@ const TRANSLATIONS = {
     // Nav
     nav_story:'Ons Verhaal', nav_stay:'Verblijf', nav_things:'Activiteiten',
     nav_area:'De Omgeving', nav_facilities:'Faciliteiten', nav_faq:'Goed om te weten',
-    nav_book_now:'Boek nu', nav_book_stay:'Boek nu',
+    nav_book_now:'Reserveren', nav_book_stay:'Reserveren',
     fab_cta:'Bekijk beschikbaarheid', fab_aria:'Ga naar beschikbaarheid',
     // Hero
     h1_seo:' Camping San Procolo, familiecamping en glamping in Le Marche, Italië',
@@ -2922,7 +2953,7 @@ const TRANSLATIONS = {
     hero_meaning:'de zoetheid van het niksdoen',
     hero_sub:'Een kleine familiecamping tussen de bergen en de zee. Achttien plaatsen, waarvan een paar glamping-tenten, een zwembad met uitzicht over de vallei. Twintig minuten naar de Adriatische kust, een uur naar de besneeuwde toppen van de Sibillini.',
     hero_btn_story:'Ons Verhaal',
-    hero_urgency:'Open 22 mei tot 2 oktober — juli en augustus lopen snel vol',
+    hero_urgency:'Open 22 mei tot 2 oktober',
     stat_sea:'Boven Zeeniveau', stat_beach:'Naar het Strand', stat_est:'Open sinds',
     // Editorial
     editorial_text:'Een camping in de Italiaanse heuvels waar de dagen vanzelf trager gaan.',
@@ -3383,6 +3414,7 @@ setTimeout(function(){
 // Uses accommodation name as lookup key. Removes itself when TOMM renders a
 // real price (after user picks dates).
 (function(){
+  var isEN = document.documentElement.lang === 'en';
   var PRICES = {
     'Glampingtent':        '€135 – €185',
     'Safaritent':          '€98 – €128',
@@ -3393,15 +3425,39 @@ setTimeout(function(){
     'Kampeerplaats Vouwwagen/Caravan/Camper': '€30 – €46',
     'Caravan / camper pitch': '€30 – €46'
   };
-  var unit = (document.documentElement.lang === 'en') ? '/ night' : '/ nacht';
+  // Compact factual line above the atmospheric description — clarity + soul.
+  var FACTS = {
+    'Glampingtent':        isEN ? '4 guests · beds made · private bathroom' : '4 personen · bedden opgemaakt · eigen badkamer',
+    'Safaritent':          isEN ? '4 guests · beds made · shared facilities' : '4 personen · bedden opgemaakt · gedeeld sanitair',
+    'Belltent':            isEN ? '2 guests · real beds & linen · shared facilities' : '2 personen · echte bedden & linnen · gedeeld sanitair',
+    'Bell tent':           isEN ? '2 guests · real beds & linen · shared facilities' : '2 personen · echte bedden & linnen · gedeeld sanitair',
+    'Kampeerplaats tent':  isEN ? 'Your own tent · electricity · shared facilities' : 'Eigen tent · elektra · gedeeld sanitair',
+    'Tent pitch':          isEN ? 'Your own tent · electricity · shared facilities' : 'Eigen tent · elektra · gedeeld sanitair',
+    'Kampeerplaats Vouwwagen/Caravan/Camper': isEN ? 'Caravan or camper · electricity & hookups · shared facilities' : 'Caravan of camper · elektra & aansluitingen · gedeeld sanitair',
+    'Caravan / camper pitch': isEN ? 'Caravan or camper · electricity & hookups · shared facilities' : 'Caravan of camper · elektra & aansluitingen · gedeeld sanitair'
+  };
+  var unit = isEN ? '/ night' : '/ nacht';
 
   function sync(){
     document.querySelectorAll('#stay .t3-card').forEach(function(card){
       var titleEl = card.querySelector('.t3-heading, h3');
       var footer  = card.querySelector('.t3-card-footer');
+      var content = card.querySelector('.t3-card-content');
       if (!titleEl || !footer) return;
       var name = titleEl.textContent.trim();
       var vanaf = PRICES[name];
+      var facts = FACTS[name];
+
+      // Facts-line: sits between the title and the description
+      if (facts && content && !card.querySelector('.injected-facts')) {
+        var descEl = content.querySelector('.t3-card-desc');
+        var factsEl = document.createElement('div');
+        factsEl.className = 'injected-facts';
+        factsEl.textContent = facts;
+        if (descEl) descEl.parentNode.insertBefore(factsEl, descEl);
+        else titleEl.parentNode.insertBefore(factsEl, titleEl.nextSibling);
+      }
+
       // Detect a real TOMM-rendered price (contains € somewhere in the price cell)
       var priceCell = card.querySelector('.t3-card-price');
       var hasRealPrice = priceCell && /€\s*\d/.test(priceCell.textContent);
@@ -3426,6 +3482,97 @@ setTimeout(function(){
   var mo = new MutationObserver(function(){ sync(); });
   var target = document.getElementById('stay');
   if (target) mo.observe(target, {childList: true, subtree: true});
+})();
+</script>
+
+<!-- Widget photo lightbox — click any accommodation photo in #stay to open
+     a fullscreen view with prev/next through that accommodation's photos. -->
+<div class="lightbox" id="widget-lightbox" hidden aria-hidden="true" role="dialog" aria-label="Photo viewer">
+  <button type="button" class="lightbox-nav lightbox-prev" id="widget-lb-prev" aria-label="Previous photo">‹</button>
+  <img id="widget-lb-img" src="" alt="">
+  <button type="button" class="lightbox-nav lightbox-next" id="widget-lb-next" aria-label="Next photo">›</button>
+  <button type="button" class="lightbox-nav" id="widget-lb-close" aria-label="Close" style="position:fixed;top:20px;right:20px;left:auto;transform:none;font-size:24px">×</button>
+</div>
+<script>
+(function(){
+  var lb = document.getElementById('widget-lightbox');
+  var img = document.getElementById('widget-lb-img');
+  var btnPrev = document.getElementById('widget-lb-prev');
+  var btnNext = document.getElementById('widget-lb-next');
+  var btnClose = document.getElementById('widget-lb-close');
+  var stay = document.getElementById('stay');
+  if (!lb || !stay) return;
+
+  var currentSrcs = [];
+  var currentIdx = 0;
+
+  function open(srcs, startIdx){
+    if (!srcs.length) return;
+    currentSrcs = srcs;
+    currentIdx = startIdx || 0;
+    render();
+    lb.hidden = false;
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close(){
+    lb.hidden = true;
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function render(){
+    img.src = currentSrcs[currentIdx];
+    var multi = currentSrcs.length > 1;
+    btnPrev.style.display = multi ? '' : 'none';
+    btnNext.style.display = multi ? '' : 'none';
+  }
+  function next(){ currentIdx = (currentIdx + 1) % currentSrcs.length; render(); }
+  function prev(){ currentIdx = (currentIdx - 1 + currentSrcs.length) % currentSrcs.length; render(); }
+
+  btnClose.addEventListener('click', close);
+  btnNext.addEventListener('click', next);
+  btnPrev.addEventListener('click', prev);
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') next();
+    else if (e.key === 'ArrowLeft') prev();
+  });
+
+  // Event delegation: click on any picture/img in a widget card opens the LB
+  // with all photos of that specific accommodation.
+  stay.addEventListener('click', function(e){
+    var pic = e.target.closest('.t3-card picture, .t3-card .t3-slide img, .t3-card .t3-slider img');
+    if (!pic) return;
+    var card = pic.closest('.t3-card');
+    if (!card) return;
+    var slides = card.querySelectorAll('.t3-slide');
+    var srcs = [];
+    slides.forEach(function(s){
+      var i = s.querySelector('img');
+      if (i && i.src) srcs.push(i.src);
+    });
+    // Fallback: if no slides found, use the clicked image
+    if (!srcs.length) {
+      var directImg = pic.tagName === 'IMG' ? pic : pic.querySelector('img');
+      if (directImg && directImg.src) srcs = [directImg.src];
+    }
+    // Determine start index — which slide is the active one?
+    var activeSlide = card.querySelector('.t3-slide.t3-slide-active');
+    var start = 0;
+    if (activeSlide) {
+      var allSlides = [].slice.call(slides);
+      start = Math.max(0, allSlides.indexOf(activeSlide));
+    }
+    e.preventDefault();
+    open(srcs, start);
+  });
+
+  // Make photos feel clickable
+  var css = document.createElement('style');
+  css.textContent = '#stay .t3-card picture{cursor:zoom-in}#stay .t3-card .t3-slide img{cursor:zoom-in}';
+  document.head.appendChild(css);
 })();
 </script>
 </body>

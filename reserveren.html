@@ -80,8 +80,18 @@
     max-width: 60ch;
   }
 
+  /* Off-white tonal zone — the widget lives in a softer, slightly lighter
+     field than the beige body. Subtle enough not to be a card, distinct
+     enough to give the eye a resting place. */
   .tomm-widget-wrap {
-    background: transparent;
+    background: oklch(95% 0.012 78);
+    padding: 40px 44px;
+    margin: 0 -20px;
+    border-radius: 2px;
+    position: relative;
+  }
+  @media (max-width: 640px) {
+    .tomm-widget-wrap { padding: 24px 18px; margin: 0 -8px; }
   }
 
   .site-footer {
@@ -150,18 +160,25 @@
   }
 
   /* Wave 3 — reservation-widget polish */
-  /* Step-nav (Verblijf → Extra's → Uw gegevens → Samenvatting) — brand colours.
-     TOMM defaults to blue for the active step pill. Owner accepts risk that
-     future TOMM releases may rename these classes. */
+  /* Step-nav — active step: no peach box behind, just bold peach text
+     next to a peach circle icon. */
   .t3-widget-root .t3-step-active,
   .t3-widget-root li.t3-step-active {
-    background: var(--peach) !important;
-    color: #fff !important;
-    border-color: var(--peach) !important;
+    background: transparent !important;
+    color: var(--peach) !important;
+    border: 0 !important;
+    padding: 0 !important;
   }
-  .t3-widget-root .t3-step-active *,
-  .t3-widget-root .t3-step-active svg,
-  .t3-widget-root .t3-step-active i {
+  .t3-widget-root .t3-step-active span,
+  .t3-widget-root .t3-step-active > span:not(:has(i)) {
+    color: var(--peach) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+  }
+  /* Icon circle inside active step stays peach fill + white icon */
+  .t3-widget-root .t3-step-active i,
+  .t3-widget-root .t3-step-active [class*="icon"] {
+    background: var(--peach) !important;
     color: #fff !important;
     fill: #fff !important;
     stroke: #fff !important;
@@ -459,8 +476,8 @@
     flex-direction: row !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 24px !important;
-    padding: 14px 0 !important;
+    gap: 20px !important;
+    padding: 8px 0 !important;
     border-bottom: 1px solid var(--border2) !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -481,25 +498,25 @@
     line-height: 1.35 !important;
     white-space: normal !important;
   }
-  /* Counter as one pill unit (was 3 separated blocks) */
+  /* Counter as one compact pill (was oversized) */
   .t3-widget-root .t3-counter .counters {
     display: inline-flex !important;
     align-items: stretch !important;
     gap: 0 !important;
     flex: 0 0 auto !important;
     border: 1px solid var(--border) !important;
-    border-radius: 22px !important;
+    border-radius: 18px !important;
     overflow: hidden !important;
     background: #fff !important;
-    height: 40px !important;
+    height: 32px !important;
   }
   .t3-widget-root .t3-counter .counter-btn {
     background: var(--peach) !important;
     color: #fff !important;
     border: 0 !important;
     border-radius: 0 !important;
-    width: 40px !important;
-    height: 40px !important;
+    width: 32px !important;
+    height: 32px !important;
     padding: 0 !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -516,16 +533,16 @@
   .t3-widget-root .t3-counter .counter-btn i {
     background: transparent !important;
     color: currentColor !important;
-    font-size: 14px;
+    font-size: 13px;
   }
   .t3-widget-root .t3-counter .result {
-    min-width: 44px !important;
+    min-width: 34px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     background: #fff !important;
     color: var(--ink) !important;
-    font-size: 15px !important;
+    font-size: 14px !important;
     font-weight: 500 !important;
     padding: 0 4px !important;
   }
@@ -616,20 +633,48 @@
     border: 0 !important;
     box-shadow: none !important;
   }
+  /* Overview card image container — TOMM ships this as a flex-row (120px
+     picture + details column). We flip it to column so the photo goes on
+     top full-width and the details overlay lives below.
+     Container has no fixed aspect — the picture inside owns the aspect. */
   .t3-widget-root .overview-card .t3-card-image.detailed,
   .t3-widget-root .overview-card .t3-card-image {
-    aspect-ratio: 4 / 3 !important;
-    max-height: 220px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    aspect-ratio: auto !important;
+    max-height: none !important;
+    height: auto !important;
+    width: 100% !important;
     border-radius: 2px !important;
     overflow: hidden !important;
     margin-bottom: 16px !important;
+    background: var(--bg2) !important;
   }
-  /* Zoom photo out — was center-crop showing only the tent roof.
-     Move focal point lower so more of the scene comes into view. */
-  .t3-widget-root .overview-card .t3-card-image img,
-  .t3-widget-root .overview-card picture img,
-  .t3-widget-root .overview-card .t3-slide img {
-    object-position: center 68% !important;
+  /* Picture: full-width, 4:3 aspect on top, cover with lower focal point. */
+  .t3-widget-root .overview-card .t3-card-image picture {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+    height: auto !important;
+    overflow: hidden !important;
+    display: block !important;
+  }
+  .t3-widget-root .overview-card .t3-card-image picture img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 62% !important;
+    display: block !important;
+    max-width: 100% !important;
+  }
+  /* Details overlay: sits below the photo, transparent, no fixed width */
+  .t3-widget-root .overview-card .t3-card-image .details {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: transparent !important;
+    padding: 12px 0 0 !important;
   }
   .t3-widget-root .overview-card .t3-card-content {
     padding: 12px 0 !important;
@@ -777,43 +822,72 @@
   @media (max-width: 640px) {
     .t3-widget-root .t3-counter { padding: 12px 0 !important; gap: 12px !important; }
     .t3-widget-root .t3-counter__content__title { font-size: 13px !important; }
-    .t3-widget-root .overview-card .t3-card-image.detailed,
-    .t3-widget-root .overview-card .t3-card-image {
-      max-height: 180px !important;
-      aspect-ratio: 3 / 2 !important;
+    /* Overview picture — flatter aspect on mobile so it doesn't dominate */
+    .t3-widget-root .overview-card .t3-card-image picture {
+      aspect-ratio: 5 / 3 !important;
     }
-    /* Buttons full-width on mobile so they're easy to hit */
+    /* Buttons — compact row so Volgende + Vorige don't take up half the screen */
     .t3-widget-root .t3-nextprev-holder {
       display: flex !important;
-      flex-direction: column-reverse !important;
-      gap: 10px !important;
+      flex-direction: row !important;
+      flex-wrap: wrap !important;
+      gap: 8px !important;
+      justify-content: flex-end;
     }
-    .t3-widget-root .t3-nextprev-holder button { width: 100% !important; }
+    .t3-widget-root .t3-nextprev-holder .t3-btn,
+    .t3-widget-root .t3-nextprev-holder a,
+    .t3-widget-root .t3-nextprev-holder button {
+      padding: 10px 18px !important;
+      font-size: 10px !important;
+      letter-spacing: 1px !important;
+      width: auto !important;
+      flex: 0 0 auto !important;
+    }
+    /* Kill the duplicate price in the overview overlay — sticky bar has it */
+    .t3-widget-root .overview-card .detail-price {
+      display: none !important;
+    }
+    /* Card-footer total in overview is redundant with sticky bar too */
+    .t3-widget-root .overview-card .t3-card-footer {
+      display: none !important;
+    }
+  }
+  /* Sticky mobile bar hides on the summary step — total is already prominent
+     in the review pane, no need to duplicate below the fold. */
+  body[data-active-step="samenvatting"] .mobile-total-bar {
+    display: none !important;
   }
 
-  /* Trust regel + fallback contact — with olive checkmark icon */
+  /* Personal reassurance — editorial, not e-commerce.
+     No box, no icon, just an eyebrow + hospitable copy. */
   .booking-trust {
-    max-width: 68ch;
-    margin: 40px auto 0;
-    padding: 22px 28px;
-    background: var(--bg2);
-    border-left: 3px solid var(--gold);
-    border-radius: 2px;
-    font-size: 13px;
+    max-width: 62ch;
+    margin: 48px auto 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    font-size: 14px;
     color: var(--muted);
-    line-height: 1.6;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
+    line-height: 1.65;
   }
-  .booking-trust svg {
-    flex: 0 0 auto;
-    width: 22px; height: 22px;
+  .booking-trust-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     color: var(--gold);
-    margin-top: 2px;
+    margin-bottom: 10px;
   }
   .booking-trust-body { flex: 1; }
-  .booking-trust strong { color: var(--ink); font-weight: 500; }
+  .booking-trust strong {
+    color: var(--ink);
+    font-weight: 500;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    display: block;
+    margin-bottom: 6px;
+  }
   .booking-trust a { color: var(--peach); text-decoration: none; font-weight: 500; }
   .booking-trust a:hover { color: var(--peach-h); }
 
@@ -883,10 +957,31 @@
 </header>
 
 <main>
-  <div class="page-intro">
-    <div class="page-eyebrow">Reserveren</div>
-    <h1 class="page-title">Rond je <em>boeking</em> af</h1>
-    <p class="page-lead">Nog een paar stappen. Lisette bevestigt je reservering persoonlijk per e-mail.</p>
+  <div class="page-intro" id="story-intro">
+    <!-- Step 1 — Verblijf -->
+    <div class="story-block" data-story-step="verblijf">
+      <div class="page-eyebrow">01 — Je verblijf</div>
+      <h1 class="page-title">Kies je plek in de <em>heuvels</em></h1>
+      <p class="page-lead">Van een eenvoudige kampeerplek tot een tent die al voor je klaarstaat. Het uitzicht krijg je er sowieso bij.</p>
+    </div>
+    <!-- Step 2 — Extra's -->
+    <div class="story-block" data-story-step="extra" hidden>
+      <div class="page-eyebrow">02 — Maak het je gemakkelijk</div>
+      <h1 class="page-title">De <em>kleine dingen</em> voor straks</h1>
+      <p class="page-lead">Een koelkast, kinderstoel of wat je verder nodig hebt. Kies alleen wat bij jullie verblijf past.</p>
+    </div>
+    <!-- Step 3 — Uw gegevens -->
+    <div class="story-block" data-story-step="gegeven" hidden>
+      <div class="page-eyebrow">03 — Bijna klaar</div>
+      <h1 class="page-title">Wie mogen we straks <em>verwelkomen</em>?</h1>
+      <p class="page-lead">Laat je gegevens achter. Lisette bekijkt iedere reservering zelf en bevestigt hem persoonlijk.</p>
+    </div>
+    <!-- Step 4 — Samenvatting -->
+    <div class="story-block" data-story-step="samenvatting" hidden>
+      <div class="page-eyebrow">04 — Tot snel in Le Marche</div>
+      <h1 class="page-title">Dit wordt <em>jullie verblijf</em></h1>
+      <p class="page-lead">Nog één keer alles op een rij. Daarna begint eigenlijk alleen nog het wachten.</p>
+    </div>
   </div>
 
   <div class="tomm-widget-wrap">
@@ -912,12 +1007,9 @@
   </div>
 
   <div class="booking-trust">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-      <polyline points="22 4 12 14.01 9 11.01"/>
-    </svg>
     <div class="booking-trust-body">
-      <strong>Bevestiging binnen 24 uur van Lisette persoonlijk.</strong><br>Vragen tijdens het boeken? Mail <a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a> of bel via <a href="https://wa.me/31638073908">WhatsApp</a>.
+      <div class="booking-trust-eyebrow">Nog een vraag?</div>
+      <strong>Je boekt rechtstreeks bij ons.</strong> Lisette bekijkt iedere reservering zelf. Als er iets niet duidelijk is, stuur ons gerust een berichtje — <a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a> of via <a href="https://wa.me/31638073908">WhatsApp</a>.
     </div>
   </div>
 </main>
@@ -938,6 +1030,44 @@
 </div>
 
 <script type="text/javascript" src="https://public.tommbookingsupport.nl/reservation.js"></script>
+
+<script>
+// Dynamic story per step — swap the intro block above the widget when
+// TOMM's active step changes. Story blocks live OUTSIDE .t3-widget-root
+// so Vue re-renders never touch them.
+(function(){
+  var blocks = document.querySelectorAll('.story-block');
+  if (!blocks.length) return;
+
+  var lastStep = '';
+  function detectActiveStep(){
+    var active = document.querySelector('.t3-widget-root .t3-step-active');
+    if (!active) return '';
+    var txt = active.textContent.trim().toLowerCase();
+    if (txt.indexOf('verblijf') !== -1 || txt.indexOf('stay') !== -1) return 'verblijf';
+    if (txt.indexOf('extra') !== -1) return 'extra';
+    if (txt.indexOf('gegeven') !== -1 || txt.indexOf('detail') !== -1) return 'gegeven';
+    if (txt.indexOf('samenvatting') !== -1 || txt.indexOf('summary') !== -1) return 'samenvatting';
+    return '';
+  }
+
+  function updateStory(){
+    var step = detectActiveStep();
+    if (!step || step === lastStep) return;
+    lastStep = step;
+    blocks.forEach(function(b){
+      b.hidden = b.getAttribute('data-story-step') !== step;
+    });
+    document.body.setAttribute('data-active-step', step);
+  }
+
+  // Poll every 500ms (cheap, safe, cannot loop on itself since we mutate
+  // OUR own DOM outside the widget).
+  setInterval(updateStory, 500);
+  // First pass shortly after mount
+  setTimeout(updateStory, 1500);
+})();
+</script>
 
 <script>
 // Sticky mobile total bar — polls the widget's .t3-subtotal periodically
