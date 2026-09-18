@@ -1723,17 +1723,17 @@ footer .footer-links a:hover   { color: var(--peach); }
        and marked so a quick grep finds them.
        ═══════════════════════════════════════════════════════════════ */
 
-    /* Grid layout — same rhythm as .stay-cards (3-col desktop, gap 16px) */
+    /* Grid layout — compact, hold 3-col almost everywhere, single column mobile */
     .t3-widget-root .t3-col-12:has(> .t3-card) {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 10px;
       padding: 0 !important;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 720px) {
       .t3-widget-root .t3-col-12:has(> .t3-card) { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 520px) {
       .t3-widget-root .t3-col-12:has(> .t3-card) { grid-template-columns: 1fr; }
     }
 
@@ -1771,18 +1771,17 @@ footer .footer-links a:hover   { color: var(--peach); }
     }
     .t3-widget-root .t3-card .t3-col-7 { flex: 1 1 auto !important; display: flex; flex-direction: column; }
 
-    /* Photo container: 3:2 aspect (matches .stay-card-image) with soft
-       bottom gradient fade into the card body — using a wrapper ::after
-       via the card-image element. */
+    /* Photo container: 5:3 aspect (a touch flatter than the stay-card 3:2)
+       so the widget cards feel compact — think card, not hero. */
     .t3-widget-root .t3-card-image {
-      aspect-ratio: 3 / 2 !important;
+      aspect-ratio: 5 / 3 !important;
       position: relative !important;
       overflow: hidden !important;
     }
     .t3-widget-root .t3-card-image::after {
       content: '';
       position: absolute; bottom: 0; left: 0; right: 0;
-      height: 42%; pointer-events: none; z-index: 3;
+      height: 32%; pointer-events: none; z-index: 3;
       background: linear-gradient(to top, var(--bg2), transparent);
     }
     /* Slide fills, image covers, scale on card hover (like .stay-card-img) */
@@ -1865,68 +1864,64 @@ footer .footer-links a:hover   { color: var(--peach); }
       border-radius: 3px !important;
     }
 
-    /* Card body — mirror .stay-card-body */
+    /* Card body — M-size proportions (was XL). Descriptie 1 regel. */
     .t3-widget-root .t3-card-content {
-      padding: 22px 22px 20px !important;
+      padding: 12px 14px 12px !important;
       display: flex !important;
       flex-direction: column !important;
       flex: 1 !important;
       position: relative !important;
       z-index: 2 !important;
     }
-    /* Title — mirror .stay-card-title */
+    /* Title — 0.95rem (~15px) */
     .t3-widget-root .t3-card-content .t3-heading,
     .t3-widget-root .t3-card-content h3 {
       font-family: 'DM Serif Display', serif !important;
-      font-size: 1.2rem !important;
+      font-size: 0.95rem !important;
       font-weight: 300 !important;
       color: var(--cream) !important;
-      margin: 0 0 6px !important;
+      margin: 0 0 2px !important;
       line-height: 1.2 !important;
       letter-spacing: 0 !important;
     }
-    /* Description — mirror .stay-card-desc */
+    /* Description — 11.5px, flows freely (no line-clamp), price sits below */
     .t3-widget-root .t3-card-desc {
-      font-size: 12.5px !important;
+      font-size: 11.5px !important;
       font-weight: 300 !important;
       color: var(--muted) !important;
-      line-height: 1.6 !important;
-      margin: 0 0 16px !important;
-      display: -webkit-box !important;
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      line-height: 1.5 !important;
+      margin: 0 0 12px !important;
+      display: block !important;
+      overflow: visible !important;
     }
-    /* Footer — mirror .stay-card-footer */
+    /* Footer — very compact separator */
     .t3-widget-root .t3-card-footer {
       display: flex !important;
       align-items: center !important;
       justify-content: space-between !important;
-      gap: 12px !important;
-      padding-top: 12px !important;
+      gap: 8px !important;
+      padding-top: 8px !important;
       border-top: 1px solid var(--border2) !important;
       margin-top: auto !important;
       background: transparent !important;
     }
-    /* Price value styling — mirror .stay-price-value */
+    /* Price — small, whispered */
     .t3-widget-root .t3-card-price,
     .t3-widget-root .t3-card-price .t3-book {
       font-family: 'DM Serif Display', serif !important;
-      font-size: 1.2rem !important;
+      font-size: 0.9rem !important;
       font-weight: 300 !important;
       color: var(--cream) !important;
     }
-    /* Injected "vanaf" price (JS below writes this) — mirror .stay-price-value */
     .t3-widget-root .injected-price {
       font-family: 'DM Serif Display', serif !important;
-      font-size: 1.2rem !important;
+      font-size: 0.9rem !important;
       font-weight: 300 !important;
       color: var(--cream) !important;
       line-height: 1.2;
     }
     .t3-widget-root .injected-price-unit {
-      font-size: 12px !important;
+      font-size: 10px !important;
       font-family: 'DM Sans', sans-serif !important;
       color: var(--muted) !important;
     }
@@ -2242,7 +2237,6 @@ footer .footer-links a:hover   { color: var(--peach); }
       <p class="about-text reveal reveal-delay-2" data-i18n="about_p2">De camping verwelkomt gasten sinds 2007, op een plek die al met zorg was aangelegd, op een van de mooiste plekjes van de vallei. Vanaf eind 2026 hebben we het stokje overgenomen en met z'n tweeën is er altijd wel iets onderhanden, deze week een kleine verbetering en voor de komende winter een groter idee. We houden het bewust klein en persoonlijk. Achttien plaatsen, waarvan een handvol glamping-tenten, een zwembad, een terras en een olijfgaard, met meestal een van ons in de buurt om je een glas wijn in te schenken voordat je weer bij je tent bent.</p>
       <h3 class="about-subheading reveal reveal-delay-3" data-i18n="about_sub">Een echte camping, geen resort</h3>
       <p class="about-text reveal reveal-delay-3" data-i18n="about_p3">Ochtenden beginnen hier met vers brood op het terras. Middagen draaien om het zwembad, de hitte en het uitzicht. Avonden duren langer dan je van plan was.</p>
-      <a href="#stay" class="btn-primary reveal reveal-delay-3" style="align-self:flex-start; margin-top:8px;" data-i18n="about_cta">Bekijk beschikbaarheid →</a>
     </div>
   </div>
 </section>
@@ -2327,7 +2321,7 @@ footer .footer-links a:hover   { color: var(--peach); }
     </div>
   </div>
   <div class="tomm-widget-wrap reveal reveal-delay-3">
-    <div data-tommy-widget="searchpage" data-token="6989-6487fe1a50ce4d16917b01fce0a814343c091bae9607df247d2eec4fbaca757cab1d49f502eb3efba0ae3ef55ec5eab013ea3b316960bd0c7da83168fdf719e4" data-language="nl" data-sales-channel-id="57977" data-host="https://public.tommbookingsupport.nl" data-accommodation-group-filter="1" data-amenity-filter="1" data-format-information-link="1" data-show-available-count="1" data-minimum-date="2027-05-22" data-reservation-page-url="https://paulvdhaar-cpu.github.io/italiaansdroompie/reserveren.html"></div>
+    <div data-tommy-widget="searchpage" data-token="6989-6487fe1a50ce4d16917b01fce0a814343c091bae9607df247d2eec4fbaca757cab1d49f502eb3efba0ae3ef55ec5eab013ea3b316960bd0c7da83168fdf719e4" data-language="nl" data-sales-channel-id="57977" data-host="https://public.tommbookingsupport.nl" data-accommodation-group-filter="1" data-amenity-filter="0" data-format-information-link="1" data-show-available-count="1" data-minimum-date="2027-05-22" data-reservation-page-url="https://paulvdhaar-cpu.github.io/italiaansdroompie/reserveren.html"></div>
   </div>
     <!-- PLATTEGROND -->
   <div class="plattegrond-wrap reveal">

@@ -149,9 +149,729 @@
     --dp-success-color: var(--gold);
   }
 
+  /* Wave 3 — reservation-widget polish */
+  /* Step-nav (Verblijf → Extra's → Uw gegevens → Samenvatting) — brand colours.
+     TOMM defaults to blue for the active step pill. Owner accepts risk that
+     future TOMM releases may rename these classes. */
+  .t3-widget-root .t3-step-active,
+  .t3-widget-root li.t3-step-active {
+    background: var(--peach) !important;
+    color: #fff !important;
+    border-color: var(--peach) !important;
+  }
+  .t3-widget-root .t3-step-active *,
+  .t3-widget-root .t3-step-active svg,
+  .t3-widget-root .t3-step-active i {
+    color: #fff !important;
+    fill: #fff !important;
+    stroke: #fff !important;
+  }
+  /* Completed steps in olive */
+  .t3-widget-root .t3-step-completed,
+  .t3-widget-root .t3-step-done,
+  .t3-widget-root .t3-step-visited {
+    color: var(--gold) !important;
+  }
+  .t3-widget-root .t3-step-completed svg,
+  .t3-widget-root .t3-step-done svg,
+  .t3-widget-root .t3-step-visited svg { fill: var(--gold) !important; stroke: var(--gold) !important; }
+  /* Inactive steps: subtle muted */
+  .t3-widget-root [class*="t3-step"]:not(.t3-step-active):not(.t3-step-completed):not(.t3-step-done):not(.t3-step-visited) {
+    color: var(--muted) !important;
+  }
+  /* Connecting lines between steps — subtle border */
+  .t3-widget-root [class*="step-line"],
+  .t3-widget-root [class*="step-separator"],
+  .t3-widget-root [class*="step-bar"] {
+    background: var(--border) !important;
+  }
+  /* Fallback for legacy tab-based renderers */
+  .t3-widget-root .t3-tab.is-active,
+  .t3-widget-root .t3-tab.active,
+  .t3-widget-root [class*="tab"][class*="active"] {
+    color: var(--peach) !important;
+    border-bottom-color: var(--peach) !important;
+  }
+  /* Form controls into the design system */
+  .t3-widget-root input[type="text"],
+  .t3-widget-root input[type="email"],
+  .t3-widget-root input[type="tel"],
+  .t3-widget-root input[type="number"],
+  .t3-widget-root select,
+  .t3-widget-root textarea {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 0 !important;
+    color: var(--ink);
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    transition: border-color .15s;
+  }
+  .t3-widget-root input:focus,
+  .t3-widget-root select:focus,
+  .t3-widget-root textarea:focus,
+  .t3-widget-root button:focus-visible {
+    outline: 2px solid var(--peach) !important;
+    outline-offset: 2px !important;
+    border-color: var(--peach) !important;
+  }
+  /* Extras: quantity counters with visible unit price */
+  /* When Tomm renders an extras row, we surface any hidden price via ::after
+     using [data-price] if it exists. If not, we make the price text more prominent. */
+  .t3-widget-root .t3-counter,
+  .t3-widget-root [class*="counter"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .t3-widget-root .t3-counter button,
+  .t3-widget-root [class*="counter"] button {
+    background: #fff !important;
+    border: 1px solid var(--border) !important;
+    color: var(--ink) !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 0 !important;
+  }
+  .t3-widget-root .t3-counter button:hover { border-color: var(--peach) !important; color: var(--peach) !important; }
+  /* Extras row: show name + price prominently, whichever DOM Tomm uses.
+     We select typical Tomm/booking-widget wrappers by pattern. */
+  .t3-widget-root [class*="article"],
+  .t3-widget-root [class*="extra"],
+  .t3-widget-root [class*="addon"] {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border2);
+  }
+  .t3-widget-root [class*="article"] [class*="price"],
+  .t3-widget-root [class*="extra"] [class*="price"],
+  .t3-widget-root [class*="addon"] [class*="price"] {
+    color: var(--ink) !important;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     Reservation-widget — bring headings, labels, buttons and sub-blocks
+     into the San Procolo design language.
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Blok A — Typografie herschalen (matcht site-schaal, was 24/18/16) */
+  .t3-widget-root h1,
+  .t3-widget-root h2 {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 1.4rem !important;
+    font-weight: 300 !important;
+    color: var(--ink) !important;
+    line-height: 1.2 !important;
+    margin: 0 0 14px !important;
+  }
+  .t3-widget-root h3,
+  .t3-widget-root h4,
+  .t3-widget-root .t3-heading {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 300 !important;
+    color: var(--ink) !important;
+    line-height: 1.25 !important;
+    margin: 0 0 12px !important;
+    letter-spacing: -0.005em !important;
+  }
+  /* Body / paragraph text inside widget */
+  .t3-widget-root p,
+  .t3-widget-root span,
+  .t3-widget-root td,
+  .t3-widget-root li,
+  .t3-widget-root div:not(.t3-btn):not([class*="button"]) {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  /* Form labels — eyebrow style (uppercase, letter-spaced, muted) */
+  .t3-widget-root label,
+  .t3-widget-root .t3-label,
+  .t3-widget-root [class*="field-label"] {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    color: var(--muted) !important;
+    margin-bottom: 6px !important;
+    display: block !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Blok B — Blauw eruit (icon-circles + link colours).
+     Every step icon gets the olive fill + white icon (owner: "if I've done
+     it, blue → olive, no bar behind it"). The active step still gets its
+     peach pill from the parent LI. */
+  .t3-widget-root li i[class*="t3-icon"] {
+    background: var(--gold) !important;
+    color: #fff !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .t3-widget-root .t3-step-active i,
+  .t3-widget-root .t3-step-active [class*="icon"] {
+    background: transparent !important;
+    color: #fff !important;
+  }
+  /* Overall blue-hex knock-out for any element carrying Tomm's default 24,59,104 */
+  .t3-widget-root [style*="rgb(36, 59, 104)"],
+  .t3-widget-root [style*="#243b68"],
+  .t3-widget-root [style*="#1976d2"],
+  .t3-widget-root [style*="#1976D2"] {
+    background-color: var(--peach) !important;
+    border-color: var(--peach) !important;
+    color: #fff !important;
+  }
+
+  /* Blok C — Sub-block backgrounds gelijktrekken met beige palet */
+  .t3-widget-root .t3-step-holder,
+  .t3-widget-root .t3-step-content,
+  .t3-widget-root .t3-panel,
+  .t3-widget-root [class*="panel"],
+  .t3-widget-root [class*="wrapper"] {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  /* Summary tables / detail boxes → subtle beige card */
+  .t3-widget-root .t3-table,
+  .t3-widget-root .t3-modal-summary,
+  .t3-widget-root [class*="summary"],
+  .t3-widget-root [class*="specification"] {
+    background: var(--bg2) !important;
+    border: 1px solid var(--border2) !important;
+    border-radius: 2px !important;
+    padding: 14px 18px !important;
+  }
+  /* Period/date summary block — was inflated with 32/32 padding + centered. */
+  .t3-widget-root [class*="date-summary"],
+  .t3-widget-root [class*="date-selection"],
+  .t3-widget-root .t3-step-content .t3-table:not(.space-between-columns) {
+    padding: 12px 18px !important;
+  }
+  .t3-widget-root [class*="date-summary"] td,
+  .t3-widget-root [class*="date-selection"] td {
+    padding: 6px 8px !important;
+  }
+  .t3-widget-root .t3-table td,
+  .t3-widget-root .t3-table th {
+    border-bottom: 1px solid var(--border2) !important;
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+    color: var(--ink) !important;
+  }
+  .t3-widget-root .t3-table th {
+    font-weight: 500 !important;
+    color: var(--muted) !important;
+  }
+
+  /* Blok D — Volgende stap / Terug / Submit buttons match .btn-primary.
+     TOMM uses <a class="t3-btn t3-btn-secondary t3-btn-next"> for "next",
+     so both <a> and <button> variants must be covered. */
+  .t3-widget-root .t3-nextprev-holder button,
+  .t3-widget-root .t3-nextprev-holder a,
+  .t3-widget-root .t3-nextprev-holder .t3-btn,
+  .t3-widget-root a.t3-btn-next,
+  .t3-widget-root button.t3-btn-next,
+  .t3-widget-root a.t3-btn-prev,
+  .t3-widget-root button.t3-btn-prev,
+  .t3-widget-root button.t3-btn,
+  .t3-widget-root button[type="submit"] {
+    background: var(--peach) !important;
+    color: #fff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 14px 32px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+    transition: background 0.2s !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+  }
+  .t3-widget-root .t3-nextprev-holder .t3-btn:hover,
+  .t3-widget-root .t3-nextprev-holder a:hover,
+  .t3-widget-root .t3-nextprev-holder button:hover,
+  .t3-widget-root a.t3-btn-next:hover,
+  .t3-widget-root a.t3-btn-prev:hover,
+  .t3-widget-root button.t3-btn:hover,
+  .t3-widget-root button[type="submit"]:hover {
+    background: var(--peach-h) !important;
+  }
+  /* Back/prev variant — outline. Explicitly EXCLUDES .t3-btn-next so the
+     primary "Volgende stap" link keeps its peach fill. */
+  .t3-widget-root a.t3-btn-prev,
+  .t3-widget-root button.t3-btn-prev {
+    background: transparent !important;
+    color: var(--ink) !important;
+    border: 1px solid var(--border) !important;
+  }
+  .t3-widget-root a.t3-btn-prev:hover,
+  .t3-widget-root button.t3-btn-prev:hover {
+    border-color: var(--peach) !important;
+    color: var(--peach) !important;
+    background: transparent !important;
+  }
+  /* Disabled state — visually greyed but not hidden */
+  .t3-widget-root .t3-btn.disabled,
+  .t3-widget-root a.disabled,
+  .t3-widget-root button:disabled {
+    opacity: 0.4 !important;
+    pointer-events: none !important;
+  }
+
+  /* Blok E — Section hierarchy: separator lines between steps */
+  .t3-widget-root .t3-step-content,
+  .t3-widget-root [class*="step-block"] {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+    border-bottom: 1px solid var(--border2);
+  }
+  .t3-widget-root .t3-step-content:last-child,
+  .t3-widget-root [class*="step-block"]:last-child {
+    border-bottom: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     Blok F — Counter rows (Personen / Kinderen / Baby's): stack
+     vertically so labels ("Personen vanaf 12 jaar") have breathing
+     room. Was: inline-flex → cramped labels. */
+  .t3-widget-root section.t3-counter-holder,
+  .t3-widget-root .t3-counter-holder {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+  .t3-widget-root .t3-counter-holder .t3-heading {
+    text-align: left !important;
+    margin-bottom: 8px !important;
+  }
+  .t3-widget-root .t3-counter {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+    padding: 14px 0 !important;
+    border-bottom: 1px solid var(--border2) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+  .t3-widget-root .t3-counter:last-child { border-bottom: 0 !important; }
+  .t3-widget-root .t3-counter__content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+  .t3-widget-root .t3-counter__content__title {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: var(--ink) !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    line-height: 1.35 !important;
+    white-space: normal !important;
+  }
+  /* Counter as one pill unit (was 3 separated blocks) */
+  .t3-widget-root .t3-counter .counters {
+    display: inline-flex !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    flex: 0 0 auto !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    height: 40px !important;
+  }
+  .t3-widget-root .t3-counter .counter-btn {
+    background: var(--peach) !important;
+    color: #fff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: background 0.15s;
+  }
+  .t3-widget-root .t3-counter .counter-btn:hover { background: var(--peach-h) !important; }
+  .t3-widget-root .t3-counter .counter-btn.disabled {
+    background: var(--border) !important;
+    color: var(--muted) !important;
+    cursor: not-allowed !important;
+  }
+  .t3-widget-root .t3-counter .counter-btn i {
+    background: transparent !important;
+    color: currentColor !important;
+    font-size: 14px;
+  }
+  .t3-widget-root .t3-counter .result {
+    min-width: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fff !important;
+    color: var(--ink) !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    padding: 0 4px !important;
+  }
+
+  /* Modern toggle switch — pseudo-elements live on the wrapper label because
+     <input> is a void element and can't host ::before/::after. The input
+     itself is invisible on top of the label, so clicks still register. */
+  .t3-widget-root .switcher .t3-form-group {
+    position: relative !important;
+    display: inline-block !important;
+    width: 44px !important;
+    height: 24px !important;
+    cursor: pointer !important;
+    background: var(--border) !important;
+    border-radius: 12px !important;
+    transition: background 0.2s !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.06) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .t3-widget-root .switcher .t3-form-group::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 2px !important;
+    left: 2px !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: #fff !important;
+    border-radius: 50% !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.08) !important;
+    transition: transform 0.2s cubic-bezier(.4,0,.2,1) !important;
+    pointer-events: none;
+  }
+  .t3-widget-root .switcher input.t3-switch {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    z-index: 2 !important;
+  }
+  .t3-widget-root .switcher .t3-form-group:has(input:checked) {
+    background: var(--peach) !important;
+  }
+  .t3-widget-root .switcher .t3-form-group:has(input:checked)::after {
+    transform: translateX(20px) !important;
+  }
+  .t3-widget-root .switcher .t3-form-group:has(input:focus-visible) {
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.06), 0 0 0 3px rgba(163, 93, 68, 0.25) !important;
+  }
+  /* Switcher row layout — label left, toggle right */
+  .t3-widget-root .t3-switcher {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+    padding: 14px 0 !important;
+    border-bottom: 1px solid var(--border2) !important;
+  }
+  .t3-widget-root .t3-switcher__content__title {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: var(--ink) !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+  }
+  .t3-widget-root .t3-switcher .switcher,
+  .t3-widget-root .t3-switcher .t3-form-group {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: inline-block !important;
+  }
+
+  /* Blok G — Overview card (right column: photo + summary + totaal).
+     Photo shrinks to M, container loses the "kadertje" look and blends
+     with the beige page — no more grey box floating on beige. */
+  .t3-widget-root .t3-col-4 .overview-card,
+  .t3-widget-root article.overview-card {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .t3-widget-root .overview-card .t3-card-image.detailed,
+  .t3-widget-root .overview-card .t3-card-image {
+    aspect-ratio: 4 / 3 !important;
+    max-height: 220px !important;
+    border-radius: 2px !important;
+    overflow: hidden !important;
+    margin-bottom: 16px !important;
+  }
+  /* Zoom photo out — was center-crop showing only the tent roof.
+     Move focal point lower so more of the scene comes into view. */
+  .t3-widget-root .overview-card .t3-card-image img,
+  .t3-widget-root .overview-card picture img,
+  .t3-widget-root .overview-card .t3-slide img {
+    object-position: center 68% !important;
+  }
+  .t3-widget-root .overview-card .t3-card-content {
+    padding: 12px 0 !important;
+    background: transparent !important;
+  }
+  .t3-widget-root .overview-card .t3-card-content-holder {
+    background: transparent !important;
+    padding: 0 !important;
+  }
+  .t3-widget-root .overview-card .t3-card-footer {
+    background: transparent !important;
+    border-top: 1px solid var(--border) !important;
+    border-radius: 0 !important;
+    padding: 14px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  .t3-widget-root .overview-card .t3-card-footer h3 {
+    font-size: 12px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    color: var(--muted) !important;
+    margin: 0 !important;
+  }
+  .t3-widget-root .overview-card .t3-subtotal {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 1.4rem !important;
+    color: var(--ink) !important;
+  }
+  /* Detail-price toggle chevron subtle */
+  .t3-widget-root .overview-card .detail-price {
+    padding: 10px 0 !important;
+  }
+  /* Overview tables — no grey card, just clean rows */
+  .t3-widget-root .overview-card .t3-table {
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+  }
+  .t3-widget-root .overview-card .t3-table td {
+    padding: 6px 0 !important;
+    font-size: 13px !important;
+    color: var(--ink) !important;
+    border-bottom: 1px solid var(--border2) !important;
+  }
+  .t3-widget-root .overview-card .t3-table td:first-child {
+    color: var(--muted) !important;
+    font-weight: 400 !important;
+    padding-right: 16px !important;
+  }
+
+  /* Blok H — Extras: stack vertically, price visible next to toggle */
+  .t3-widget-root [class*="articles"],
+  .t3-widget-root [class*="extras"],
+  .t3-widget-root [class*="addons"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    width: 100% !important;
+  }
+  .t3-widget-root [class*="article"],
+  .t3-widget-root [class*="extra-item"],
+  .t3-widget-root [class*="addon-item"] {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    padding: 16px 0 !important;
+    border-bottom: 1px solid var(--border2) !important;
+    width: 100% !important;
+  }
+  /* Extra item price — peach chip next to the name so cost is unmistakable */
+  .t3-widget-root [class*="article"] [class*="price"],
+  .t3-widget-root [class*="extra"] [class*="price"],
+  .t3-widget-root [class*="addon"] [class*="price"] {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    background: var(--peach) !important;
+    padding: 4px 10px !important;
+    border-radius: 2px !important;
+    margin-right: 12px !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+  }
+  /* Toggle switch styling — replace blue Tomm accent with peach */
+  .t3-widget-root [class*="toggle"],
+  .t3-widget-root [class*="switch"] {
+    accent-color: var(--peach) !important;
+  }
+  .t3-widget-root [class*="toggle"] [class*="thumb"],
+  .t3-widget-root [class*="switch"] [class*="thumb"] {
+    background: #fff !important;
+  }
+
+  /* Blok I — Customer form checkboxes ("Hoe heb je ons gevonden?").
+     Tomm defaults labels to something huge and uppercase; normalise. */
+  .t3-widget-root input[type="checkbox"] + label,
+  .t3-widget-root input[type="radio"] + label,
+  .t3-widget-root [class*="checkbox"] label,
+  .t3-widget-root [class*="radio"] label,
+  .t3-widget-root .t3-checkbox label,
+  .t3-widget-root .t3-radio label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: var(--ink) !important;
+    line-height: 1.4 !important;
+    display: inline !important;
+    margin: 0 !important;
+  }
+  .t3-widget-root [class*="checkbox"],
+  .t3-widget-root [class*="radio"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 6px 0 !important;
+  }
+  /* Form field container spacing */
+  .t3-widget-root [class*="form-row"],
+  .t3-widget-root [class*="form-field"],
+  .t3-widget-root [class*="input-group"] {
+    margin-bottom: 14px !important;
+  }
+
+  /* Blok J — Mobile refinements */
+  @media (max-width: 900px) {
+    /* Stack the two columns (form left / overview right) */
+    .t3-widget-root .t3-row { flex-wrap: wrap !important; }
+    .t3-widget-root .t3-col-8,
+    .t3-widget-root .t3-col-4 {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+    .t3-widget-root .t3-col-4 { margin-top: 24px; }
+  }
+  @media (max-width: 640px) {
+    .t3-widget-root .t3-counter { padding: 12px 0 !important; gap: 12px !important; }
+    .t3-widget-root .t3-counter__content__title { font-size: 13px !important; }
+    .t3-widget-root .overview-card .t3-card-image.detailed,
+    .t3-widget-root .overview-card .t3-card-image {
+      max-height: 180px !important;
+      aspect-ratio: 3 / 2 !important;
+    }
+    /* Buttons full-width on mobile so they're easy to hit */
+    .t3-widget-root .t3-nextprev-holder {
+      display: flex !important;
+      flex-direction: column-reverse !important;
+      gap: 10px !important;
+    }
+    .t3-widget-root .t3-nextprev-holder button { width: 100% !important; }
+  }
+
+  /* Trust regel + fallback contact — with olive checkmark icon */
+  .booking-trust {
+    max-width: 68ch;
+    margin: 40px auto 0;
+    padding: 22px 28px;
+    background: var(--bg2);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .booking-trust svg {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+  .booking-trust-body { flex: 1; }
+  .booking-trust strong { color: var(--ink); font-weight: 500; }
+  .booking-trust a { color: var(--peach); text-decoration: none; font-weight: 500; }
+  .booking-trust a:hover { color: var(--peach-h); }
+
+  /* Sticky mobile totaal-bar (own-suggestion) — always shows current total
+     + a shortcut to the primary CTA so extras impact is immediately obvious. */
+  .mobile-total-bar {
+    display: none;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 90;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 -6px 22px rgba(0,0,0,.06);
+  }
+  .mobile-total-bar-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .mobile-total-bar-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .mobile-total-bar-cta {
+    background: var(--peach);
+    color: #fff;
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .mobile-total-bar-cta:hover { background: var(--peach-h); }
+  @media (max-width: 640px) {
+    .mobile-total-bar { display: flex; }
+    main { padding-bottom: 100px !important; }
+  }
+
   @media (max-width: 640px) {
     .site-header { padding: 16px 20px; }
     main { padding: 30px 20px 60px; }
+    .booking-trust { padding: 16px 18px; margin-top: 28px; }
+    /* Larger touch targets on mobile inputs */
+    .t3-widget-root input, .t3-widget-root select, .t3-widget-root button { min-height: 44px; }
   }
 </style>
 </head>
@@ -175,7 +895,8 @@
          data-language="en"
          data-sales-channel-id="57977"
          data-host="https://public.tommbookingsupport.nl"
-         data-language-switching-enabled="1"
+         data-minimum-date="2027-05-22"
+         data-language-switching-enabled="0"
          data-show-item-groups="0"
          data-location-preference="0"
          data-map-auto-zoom="1"
@@ -189,6 +910,16 @@
          data-legend-unavailable-color="#e0e0e0"
          data-selection-color="#71603d"></div>
   </div>
+
+  <div class="booking-trust">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+      <polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <div class="booking-trust-body">
+      <strong>Confirmation within 24 hours from Lisette personally.</strong><br>Questions along the way? Email <a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a> or reach us on <a href="https://wa.me/31638073908">WhatsApp</a>.
+    </div>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -196,7 +927,55 @@
   <a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a>
 </footer>
 
+<!-- Sticky totaal-bar (mobile only) — mirrors the widget's subtotal so the
+     user sees cost impact of every extras change without scrolling. -->
+<div class="mobile-total-bar" id="mobile-total-bar" hidden>
+  <div>
+    <div class="mobile-total-bar-label">Total</div>
+    <div class="mobile-total-bar-value" id="mobile-total-bar-value">€ —</div>
+  </div>
+  <button type="button" class="mobile-total-bar-cta" id="mobile-total-bar-cta">Next →</button>
+</div>
+
 <script type="text/javascript" src="https://public.tommbookingsupport.nl/reservation.js"></script>
+
+<script>
+// Sticky mobile total bar — polls the widget's .t3-subtotal periodically
+// and mirrors the newest value. Polling avoids the infinite-loop trap
+// that MutationObserver+childList would create when we write to our own bar.
+(function(){
+  var bar = document.getElementById('mobile-total-bar');
+  var val = document.getElementById('mobile-total-bar-value');
+  var cta = document.getElementById('mobile-total-bar-cta');
+  if (!bar || !val || !cta) return;
+
+  var lastText = '';
+  function sync(){
+    var subtotals = document.querySelectorAll('.t3-widget-root .t3-subtotal');
+    var text = '';
+    for (var i = subtotals.length - 1; i >= 0; i--) {
+      var t = subtotals[i].textContent.trim();
+      if (/€|\d/.test(t)) { text = t; break; }
+    }
+    if (text && text !== lastText) {
+      lastText = text;
+      val.textContent = text;
+      bar.hidden = false;
+    }
+  }
+
+  cta.addEventListener('click', function(){
+    var next = document.querySelector('.t3-widget-root a.t3-btn-next, .t3-widget-root .t3-nextprev-holder a, .t3-widget-root .t3-nextprev-holder button:last-child');
+    if (next) {
+      next.scrollIntoView({behavior:'smooth', block:'center'});
+      setTimeout(function(){ next.click(); }, 400);
+    }
+  });
+
+  // Poll instead of observe — cheap (1s) and cannot loop on itself.
+  setInterval(sync, 1000);
+})();
+</script>
 
 </body>
 </html>
