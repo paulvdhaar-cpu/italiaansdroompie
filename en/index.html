@@ -872,8 +872,10 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
   aspect-ratio: 3/4;
 }
 
+/* Fruit portrait 3/4 sets the row height; wine has no explicit aspect so
+   grid stretches it to match fruit exactly, no matter the viewport width. */
 .exp-fruit { grid-column: span 4; aspect-ratio: 3/4; }
-.exp-wine  { grid-column: span 8; aspect-ratio: 16/11; }
+.exp-wine  { grid-column: span 8; aspect-ratio: auto; }
 .exp-stars { grid-column: 1 / -1; aspect-ratio: 3/1; margin-top: 8px; }
 .exp-wine .exp-card-content { padding: 44px 40px; max-width: 540px; }
 .exp-wine .exp-title { font-size: 2.3rem; line-height: 1.05; }
@@ -1757,7 +1759,9 @@ footer .footer-links a:hover   { color: var(--peach); }
       .t3-widget-root .t3-col-12:has(> .t3-card) { grid-template-columns: 1fr; }
     }
 
-    /* Card shell — matches .stay-card exactly */
+    /* Card shell — matches .stay-card exactly.
+       Hover shadow uses a warm olive tint at low alpha so it lifts off the
+       beige page without leaving a dark grey band underneath the card. */
     .t3-widget-root .t3-card {
       background: var(--bg2) !important;
       border: 1px solid var(--border2) !important;
@@ -1766,13 +1770,13 @@ footer .footer-links a:hover   { color: var(--peach); }
       margin: 0 !important;
       display: flex !important;
       flex-direction: column !important;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease !important;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.25s ease !important;
       box-shadow: none !important;
     }
     .t3-widget-root .t3-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
       border-color: var(--border) !important;
-      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 18px 40px oklch(44% 0.095 115 / 0.15) !important;
     }
 
     /* Row + col reset to vertical */
@@ -1823,6 +1827,12 @@ footer .footer-links a:hover   { color: var(--peach); }
     }
     .t3-widget-root .t3-card:hover .t3-slide img { transform: scale(1.04); }
 
+    /* Carousel-nav container is a full-image absolute overlay by default —
+       kill its pointer-events so clicks on the empty space pass through to
+       the picture (opening the lightbox). Restore pointer-events on the
+       actual prev/next buttons inside. */
+    .t3-widget-root .t3-slider-nav { pointer-events: none !important; }
+
     /* Carousel arrows — mirror .carousel-arrow: hidden until card hover */
     .t3-widget-root .t3-slider-nav button,
     .t3-widget-root .t3-slider-prev,
@@ -1839,6 +1849,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       color: #fff !important;
       font-size: 20px !important;
       opacity: 0 !important;
+      pointer-events: auto !important;
       transition: opacity .25s ease, background .25s ease !important;
       box-shadow: none !important;
       display: flex !important;
@@ -1999,6 +2010,77 @@ footer .footer-links a:hover   { color: var(--peach); }
       --dp-primary-color: var(--peach);
       --dp-success-color: var(--gold);
       --dp-hover-color: rgba(163, 93, 68, 0.08);
+    }
+
+    /* Counter pill (Personen / Kinderen / Baby's dropdown on the searchpage
+       widget) — mirror the compact pill from the reservation page. Round pill
+       wrapping two peach circular ±-buttons around a white number cell. */
+    .t3-widget-root .t3-counter .counters {
+      display: inline-flex !important;
+      align-items: stretch !important;
+      gap: 0 !important;
+      flex: 0 0 auto !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 18px !important;
+      overflow: hidden !important;
+      background: #fff !important;
+      height: 32px !important;
+    }
+    .t3-widget-root .t3-counter .counter-btn {
+      background: var(--peach) !important;
+      color: #fff !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      width: 32px !important;
+      height: 32px !important;
+      padding: 0 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      transition: background 0.15s;
+    }
+    .t3-widget-root .t3-counter .counter-btn:hover { background: var(--peach-h) !important; }
+    .t3-widget-root .t3-counter .counter-btn.disabled {
+      background: var(--border) !important;
+      color: var(--muted) !important;
+      cursor: not-allowed !important;
+    }
+    .t3-widget-root .t3-counter .counter-btn i {
+      background: transparent !important;
+      color: currentColor !important;
+      font-size: 13px;
+    }
+    .t3-widget-root .t3-counter .result {
+      min-width: 34px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #fff !important;
+      color: var(--ink) !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      padding: 0 4px !important;
+    }
+    /* Counter row: label left, pill right, small vertical rhythm */
+    .t3-widget-root .t3-counter {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 20px !important;
+      padding: 8px 0 !important;
+      border-bottom: 1px solid var(--border2) !important;
+    }
+    .t3-widget-root .t3-counter:last-child { border-bottom: 0 !important; }
+    .t3-widget-root .t3-counter__content__title {
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      color: var(--ink) !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+      line-height: 1.35 !important;
     }
 
     /* Focus / active states away from Tomm blue */
@@ -2547,8 +2629,8 @@ footer .footer-links a:hover   { color: var(--peach); }
           <div class="rates-row"><span class="rates-name" data-i18n="rates_safari">Safari tent</span><span class="rates-price">&euro; 98,00</span><span class="rates-price">&euro; 128,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_bell">Bell tent</span><span class="rates-price">&euro; 60,00</span><span class="rates-price">&euro; 85,00</span></div>
           <div class="rates-group"><span class="rates-group-name" data-i18n="rates_g_camping">Camping</span><span class="rates-rule"></span></div>
-          <div class="rates-row"><span class="rates-name" data-i18n="rates_tent">Tent pitch (incl. 2 pers.)</span><span class="rates-price">&euro; 30,00</span><span class="rates-price">&euro; 46,00</span></div>
-          <div class="rates-row"><span class="rates-name" data-i18n="rates_camper">Caravan / camper pitch (incl. 2 pers.)</span><span class="rates-price">&euro; 30,00</span><span class="rates-price">&euro; 46,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_tent">Tent pitch (incl. 2 pers.)</span><span class="rates-price">&euro; 40,00</span><span class="rates-price">&euro; 46,00</span></div>
+          <div class="rates-row"><span class="rates-name" data-i18n="rates_camper">Caravan / camper pitch (incl. 2 pers.)</span><span class="rates-price">&euro; 40,00</span><span class="rates-price">&euro; 46,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_adult">Adult</span><span class="rates-price">&euro; 12,00</span><span class="rates-price">&euro; 13,50</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_child">Child up to 12</span><span class="rates-price">&euro; 10,00</span><span class="rates-price">&euro; 11,00</span></div>
           <div class="rates-row"><span class="rates-name" data-i18n="rates_baby">Child up to 2</span><span class="rates-price" data-i18n="rates_free">free</span><span class="rates-price" data-i18n="rates_free">free</span></div>
@@ -3430,10 +3512,10 @@ setTimeout(function(){
     'Safaritent':          '€98 – €128',
     'Belltent':            '€60 – €85',
     'Bell tent':           '€60 – €85',
-    'Kampeerplaats tent':  '€30 – €46',
-    'Tent pitch':          '€30 – €46',
-    'Kampeerplaats Vouwwagen/Caravan/Camper': '€30 – €46',
-    'Caravan / camper pitch': '€30 – €46'
+    'Kampeerplaats tent':  '€40 – €46',
+    'Tent pitch':          '€40 – €46',
+    'Kampeerplaats Vouwwagen/Caravan/Camper': '€40 – €46',
+    'Caravan / camper pitch': '€40 – €46'
   };
   // Compact factual line above the atmospheric description — clarity + soul.
   var FACTS = {
@@ -3550,12 +3632,16 @@ setTimeout(function(){
     else if (e.key === 'ArrowLeft') prev();
   });
 
-  // Event delegation: click on any picture/img in a widget card opens the LB
-  // with all photos of that specific accommodation.
+  // Event delegation: click anywhere on a card's photo (slide/picture/img)
+  // opens the fullscreen viewer with all photos of that accommodation.
+  // Deliberately EXCLUDE the slider nav (prev/next arrows + dots) so those
+  // keep advancing the carousel instead of opening the LB.
   stay.addEventListener('click', function(e){
-    var pic = e.target.closest('.t3-card picture, .t3-card .t3-slide img, .t3-card .t3-slider img');
-    if (!pic) return;
-    var card = pic.closest('.t3-card');
+    // Skip carousel nav clicks
+    if (e.target.closest('.t3-slider-nav, .t3-slider-prev, .t3-slider-next, .t3-slider-dots, .t3-slider-dot, .t3-book, a, button')) return;
+    var target = e.target.closest('.t3-card .t3-slide, .t3-card picture, .t3-card .t3-slide img, .t3-card .t3-slider img');
+    if (!target) return;
+    var card = target.closest('.t3-card');
     if (!card) return;
     var slides = card.querySelectorAll('.t3-slide');
     var srcs = [];
@@ -3563,12 +3649,13 @@ setTimeout(function(){
       var i = s.querySelector('img');
       if (i && i.src) srcs.push(i.src);
     });
-    // Fallback: if no slides found, use the clicked image
+    // Fallback: no slides — use the clicked image itself
     if (!srcs.length) {
-      var directImg = pic.tagName === 'IMG' ? pic : pic.querySelector('img');
+      var directImg = target.tagName === 'IMG' ? target : target.querySelector('img');
       if (directImg && directImg.src) srcs = [directImg.src];
     }
-    // Determine start index — which slide is the active one?
+    if (!srcs.length) return;
+    // Determine start index — which slide is currently active?
     var activeSlide = card.querySelector('.t3-slide.t3-slide-active');
     var start = 0;
     if (activeSlide) {
@@ -3579,9 +3666,18 @@ setTimeout(function(){
     open(srcs, start);
   });
 
-  // Make photos feel clickable
+  // Cursor cue + subtle zoom-in overlay so guests notice the photo is clickable
   var css = document.createElement('style');
-  css.textContent = '#stay .t3-card picture{cursor:zoom-in}#stay .t3-card .t3-slide img{cursor:zoom-in}';
+  css.textContent =
+    '#stay .t3-card .t3-slide,#stay .t3-card picture,#stay .t3-card .t3-slide img{cursor:zoom-in}' +
+    '#stay .t3-card .t3-card-image{position:relative}' +
+    '#stay .t3-card .t3-card-image::before{' +
+      'content:"";position:absolute;top:12px;right:12px;width:28px;height:28px;z-index:5;' +
+      'border-radius:50%;background:rgba(20,12,6,0.5) url("data:image/svg+xml;utf8,' +
+        '<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"white\\" stroke-width=\\"2\\">' +
+        '<circle cx=\\"11\\" cy=\\"11\\" r=\\"7\\"/><path d=\\"m20 20-3.5-3.5\\"/><path d=\\"M11 8v6M8 11h6\\"/></svg>") no-repeat center/16px;' +
+      'opacity:0;transition:opacity .2s;pointer-events:none}' +
+    '#stay .t3-card:hover .t3-card-image::before{opacity:0.9}';
   document.head.appendChild(css);
 })();
 </script>
