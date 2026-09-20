@@ -623,6 +623,25 @@
     padding: 0 !important;
     display: inline-block !important;
   }
+  /* Small price chip injected next to each extras toggle (Kinderstoel etc.)
+     via the switcher-price JS below. Peach type on a light peach tint so
+     the cost of switching a slider on is immediately visible.
+     margin-left:auto pushes it to the right so it sits directly next to the
+     toggle instead of drifting to the middle of the space-between row. */
+  .t3-widget-root .t3-switcher .switcher-price {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.6px !important;
+    color: var(--peach) !important;
+    background: rgba(163, 93, 68, 0.08) !important;
+    padding: 3px 8px !important;
+    border-radius: 2px !important;
+    white-space: nowrap !important;
+    margin-left: auto !important;
+    margin-right: 12px !important;
+    flex: 0 0 auto !important;
+  }
 
   /* Blok G — Overview card (right column: photo + summary + totaal).
      Photo shrinks to M, container loses the "kadertje" look and blends
@@ -808,6 +827,83 @@
     margin-bottom: 14px !important;
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     Blok I2 — Customer-form editorial layout (step 3, "Jullie gegevens").
+     Turns TOMM's stacked one-per-row form into a compact 12-column grid
+     so name + address feel like part of the site, not an admin form.
+
+     Field wrappers get tagged by JS with data-sp-field="..." based on
+     their label text. Any container that :has() a tagged field becomes
+     the grid parent. Untagged fields (checkboxes, "hoe heb je ons
+     gevonden?", etc.) still span full width so nothing breaks. */
+
+  /* Grid on any TOMM step-content that contains at least one tagged field.
+     :where() around the parent zeros its specificity so per-field overrides
+     below (grid-column: span N) always beat the full-width default. */
+  .t3-widget-root :where(.t3-step-content:has([data-sp-field]), section:has([data-sp-field]), form:has([data-sp-field])) {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    gap: 18px 14px !important;
+    max-width: 620px !important;
+    margin-left: 0 !important;
+  }
+  /* Every direct child of a customer-form grid defaults to full width. */
+  .t3-widget-root :where(.t3-step-content:has([data-sp-field]), section:has([data-sp-field]), form:has([data-sp-field])) > * {
+    grid-column: 1 / -1 !important;
+    margin-bottom: 0 !important;
+  }
+  /* Row layout: salutation full → firstname 7 + middlename 5 → lastname full
+     → email 6 + phone 6 → postcode 5 + housenumber 4 + addition 3 → street
+     full → city 6 + country 6 */
+  .t3-widget-root [data-sp-field="firstname"]   { grid-column: span 7 !important; }
+  .t3-widget-root [data-sp-field="middlename"]  { grid-column: span 5 !important; }
+  .t3-widget-root [data-sp-field="email"]       { grid-column: span 6 !important; }
+  .t3-widget-root [data-sp-field="phone"]       { grid-column: span 6 !important; }
+  .t3-widget-root [data-sp-field="postcode"]    { grid-column: span 5 !important; }
+  .t3-widget-root [data-sp-field="housenumber"] { grid-column: span 4 !important; }
+  .t3-widget-root [data-sp-field="addition"]    { grid-column: span 3 !important; }
+  .t3-widget-root [data-sp-field="city"]        { grid-column: span 6 !important; }
+  .t3-widget-root [data-sp-field="country"]     { grid-column: span 6 !important; }
+
+  /* Inputs on step 3: larger touch target (48–52px), thin border, no shadow. */
+  .t3-widget-root [data-sp-field] input[type="text"],
+  .t3-widget-root [data-sp-field] input[type="email"],
+  .t3-widget-root [data-sp-field] input[type="tel"],
+  .t3-widget-root [data-sp-field] input[type="number"],
+  .t3-widget-root [data-sp-field] select {
+    width: 100% !important;
+    min-height: 50px !important;
+    padding: 14px 14px !important;
+    background: #fff !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    color: var(--ink) !important;
+  }
+  /* Labels above field, olive uppercase eyebrow. */
+  .t3-widget-root [data-sp-field] > label,
+  .t3-widget-root [data-sp-field] .t3-form-label,
+  .t3-widget-root [data-sp-field] [class*="field-label"] {
+    display: block !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--gold) !important;
+    margin-bottom: 8px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Mobile: everything stacks full width again. */
+  @media (max-width: 700px) {
+    .t3-widget-root [data-sp-field] {
+      grid-column: 1 / -1 !important;
+    }
+  }
+
   /* Blok J — Mobile refinements */
   @media (max-width: 900px) {
     /* Stack the two columns (form left / overview right) */
@@ -826,22 +922,38 @@
     .t3-widget-root .overview-card .t3-card-image picture {
       aspect-ratio: 5 / 3 !important;
     }
-    /* Buttons — compact row so Volgende + Vorige don't take up half the screen */
+    /* Buttons — compact row so Volgende + Vorige don't take up half the screen.
+       Extra-tight on mobile: the sticky bar carries the primary CTA so these
+       are secondary. */
     .t3-widget-root .t3-nextprev-holder {
       display: flex !important;
       flex-direction: row !important;
       flex-wrap: wrap !important;
-      gap: 8px !important;
+      gap: 6px !important;
       justify-content: flex-end;
     }
     .t3-widget-root .t3-nextprev-holder .t3-btn,
     .t3-widget-root .t3-nextprev-holder a,
-    .t3-widget-root .t3-nextprev-holder button {
-      padding: 10px 18px !important;
-      font-size: 10px !important;
-      letter-spacing: 1px !important;
+    .t3-widget-root .t3-nextprev-holder button,
+    .t3-widget-root a.t3-btn-next,
+    .t3-widget-root a.t3-btn-prev,
+    .t3-widget-root button.t3-btn-next,
+    .t3-widget-root button.t3-btn-prev {
+      padding: 7px 12px !important;
+      font-size: 9px !important;
+      letter-spacing: 0.8px !important;
+      min-height: 34px !important;
       width: auto !important;
       flex: 0 0 auto !important;
+    }
+    /* Sticky-bar CTA can also be a touch tighter */
+    .mobile-total-bar-cta {
+      padding: 10px 14px !important;
+      font-size: 10px !important;
+      letter-spacing: 1px !important;
+    }
+    .mobile-total-bar {
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important;
     }
     /* Kill the duplicate price in the overview overlay — sticky bar has it */
     .t3-widget-root .overview-card .detail-price {
@@ -1104,6 +1216,145 @@
 
   // Poll instead of observe — cheap (1s) and cannot loop on itself.
   setInterval(sync, 1000);
+})();
+</script>
+
+<script>
+// Extras price chip — surface each toggle's cost right next to the switch so
+// flipping "Kinderstoel" or "Koelkast" instantly shows what it adds. Polls
+// because Vue re-renders the switcher rows on every step change.
+(function(){
+  var lang = document.documentElement.lang === 'en' ? 'en' : 'nl';
+  var unit = lang === 'en' ? '/night' : '/nacht';
+  // Keys are lowercase-fragment matches against the switcher label; prices
+  // come straight from the on-site rates table (per-night, flat all season).
+  var EXTRAS = [
+    { match: ['kinderstoel', 'high chair', 'highchair'], price: 2 },
+    { match: ['kinderbedje', 'travel cot', 'campingbedje', 'cot'], price: 5 },
+    { match: ['koelkast', 'fridge'], price: 5 }
+  ];
+
+  function chipText(price){ return '€ ' + price + ' ' + unit; }
+
+  function sync(){
+    var rows = document.querySelectorAll('.t3-widget-root .t3-switcher');
+    rows.forEach(function(row){
+      var titleEl = row.querySelector('.t3-switcher__content__title')
+        || row.querySelector('[class*="switcher__content"] [class*="title"]');
+      if (!titleEl) return;
+      var text = titleEl.textContent.toLowerCase();
+      var hit = null;
+      for (var i=0; i<EXTRAS.length && !hit; i++){
+        for (var j=0; j<EXTRAS[i].match.length; j++){
+          if (text.indexOf(EXTRAS[i].match[j]) !== -1) { hit = EXTRAS[i]; break; }
+        }
+      }
+      if (!hit) return;
+      var existing = row.querySelector('.switcher-price');
+      var wanted = chipText(hit.price);
+      if (existing) { if (existing.textContent !== wanted) existing.textContent = wanted; return; }
+      var chip = document.createElement('span');
+      chip.className = 'switcher-price';
+      chip.textContent = wanted;
+      // Insert BEFORE the toggle wrapper so layout stays: title … price + toggle.
+      var toggleWrap = row.querySelector('.switcher, .t3-form-group');
+      if (toggleWrap && toggleWrap.parentNode) {
+        toggleWrap.parentNode.insertBefore(chip, toggleWrap);
+      } else {
+        row.appendChild(chip);
+      }
+    });
+  }
+
+  setInterval(sync, 800);
+  setTimeout(sync, 1200);
+})();
+</script>
+
+<script>
+// Customer-form field tagger — turns TOMM's stacked one-per-row form on
+// step 3 ("Jullie gegevens") into a 12-column grid by tagging each field
+// wrapper with data-sp-field="…" based on its label text. CSS then places
+// each field on the correct column.
+(function(){
+  // Label patterns in order of specificity — longer matches first so
+  // "huisnummer toevoeging" hits "addition" before "housenumber".
+  var FIELDS = [
+    { key: 'addition',    tests: ['toevoeging', 'addition', 'extension', 'ext.', 'add.'] },
+    { key: 'housenumber', tests: ['huisnummer', 'huisnr', 'house number', 'housenumber', 'street number', 'streetnumber', 'nr\\.'] },
+    { key: 'postcode',    tests: ['postcode', 'postal code', 'postal', 'zip', 'zipcode'] },
+    { key: 'salutation',  tests: ['aanhef', 'salutation', 'title', 'gender', 'geslacht'] },
+    { key: 'firstname',   tests: ['voornaam', 'first name', 'firstname', 'first-name'] },
+    { key: 'middlename',  tests: ['tussenvoegsel', 'middle name', 'middlename', 'insertion', 'prefix'] },
+    { key: 'lastname',    tests: ['achternaam', 'last name', 'lastname', 'surname', 'family name'] },
+    { key: 'email',       tests: ['e-mail', 'email', 'e‑mail'] },
+    { key: 'phone',       tests: ['telefoonnummer', 'telefoon', 'phone number', 'phonenumber', 'phone', 'mobile', 'mobiel'] },
+    { key: 'street',      tests: ['straatnaam', 'straat', 'street', 'address line', 'adres'] },
+    { key: 'city',        tests: ['plaats', 'woonplaats', 'city', 'town'] },
+    { key: 'country',     tests: ['land', 'country'] }
+  ];
+
+  function normalise(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
+
+  function classifyLabel(text){
+    var t = normalise(text);
+    if (!t) return null;
+    for (var i=0; i<FIELDS.length; i++){
+      var f = FIELDS[i];
+      for (var j=0; j<f.tests.length; j++){
+        if (t.indexOf(f.tests[j]) !== -1) return f.key;
+      }
+    }
+    return null;
+  }
+
+  // Find the containing field wrapper for a given input. Walks up until it
+  // hits something that looks like a form-group / field / t3 wrapper. Falls
+  // back to the direct parent.
+  function findWrapper(input){
+    var el = input;
+    for (var depth=0; depth<6 && el && el.parentElement; depth++){
+      el = el.parentElement;
+      if (!el.className) continue;
+      var c = el.className.toString();
+      if (/t3-form-group|t3-input-group|t3-field|form-group|input-group|field-wrap|form-row|form-field/i.test(c)) {
+        return el;
+      }
+    }
+    return input.parentElement;
+  }
+
+  function tagFields(){
+    // Only run on the customer-details step to avoid touching other steps.
+    if (document.body.getAttribute('data-active-step') !== 'gegeven') return;
+    var root = document.querySelector('.t3-widget-root');
+    if (!root) return;
+    // Find every input/select that isn't a checkbox/radio/hidden.
+    var controls = root.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.t3-switch), select');
+    controls.forEach(function(ctrl){
+      // Find its label — either by "for" attribute, or nearest ancestor label,
+      // or a preceding sibling label.
+      var labelText = '';
+      if (ctrl.id){
+        var byFor = document.querySelector('label[for="' + ctrl.id + '"]');
+        if (byFor) labelText = byFor.textContent;
+      }
+      if (!labelText){
+        var w = findWrapper(ctrl);
+        var lab = w && w.querySelector('label, .t3-form-label, [class*="field-label"]');
+        if (lab) labelText = lab.textContent;
+      }
+      if (!labelText) return;
+      var key = classifyLabel(labelText);
+      if (!key) return;
+      var wrap = findWrapper(ctrl);
+      if (!wrap) return;
+      if (wrap.getAttribute('data-sp-field') !== key) wrap.setAttribute('data-sp-field', key);
+    });
+  }
+
+  setInterval(tagFields, 800);
+  setTimeout(tagFields, 1200);
 })();
 </script>
 
