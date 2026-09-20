@@ -796,29 +796,91 @@
   }
 
   /* Blok I — Customer form checkboxes ("Hoe heb je ons gevonden?").
-     Tomm defaults labels to something huge and uppercase; normalise. */
-  .t3-widget-root input[type="checkbox"] + label,
-  .t3-widget-root input[type="radio"] + label,
+     TOMM stacks each option vertically with the label BELOW the tick, styled
+     as an uppercase form-label. We do three things:
+       1. Whatever container holds 2+ checkboxes becomes a 2-column grid.
+       2. Each leaf checkbox row becomes a horizontal flex (tick, then label).
+       3. Any label inside a checkbox/radio drops TOMM's uppercase form-label
+          styling so it reads as body copy next to the tick.
+     :where() around the grid parent zeros its specificity so per-item
+     rules always win the cascade. */
+
+  /* 1 — Group into 2-column grid. The width:100% + min-width:0 ensures the
+     grid actually fills a flex-parent (TOMM wraps in a flex .t3-form-group);
+     without it the grid collapses to the width of its content. */
+  .t3-widget-root :where(fieldset, section, div):has(> [class*="checkbox"] + [class*="checkbox"]),
+  .t3-widget-root :where(fieldset, section, div):has(> [class*="radio"] + [class*="radio"]),
+  .t3-widget-root :where([class*="checkbox-group"], [class*="checkboxes"], [class*="radio-group"], [class*="radios"]) {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px 18px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* 2 — Each leaf checkbox/radio row (no nested checkbox → this IS the item).
+     width:100% stretches the item to fill its grid cell so tick + label align
+     to the left edge; without it flex sizing collapses to content width. */
+  .t3-widget-root [class*="checkbox"]:not(:has([class*="checkbox"])),
+  .t3-widget-root [class*="radio"]:not(:has([class*="radio"])) {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 4px 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .t3-widget-root [class*="checkbox"] input[type="checkbox"],
+  .t3-widget-root [class*="radio"]  input[type="radio"] {
+    flex: 0 0 auto !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    margin: 0 !important;
+    accent-color: var(--peach) !important;
+  }
+
+  /* 3 — Label reads as body copy, next to the tick, single line. Uses
+     inline-block + auto-width so labels don't demand a flex-basis that
+     collapses the row (flex blockifies inline-display children, so
+     inline-block gets the natural "shrink-to-content" behaviour we want). */
   .t3-widget-root [class*="checkbox"] label,
-  .t3-widget-root [class*="radio"] label,
-  .t3-widget-root .t3-checkbox label,
-  .t3-widget-root .t3-radio label {
+  .t3-widget-root [class*="checkbox"] .t3-form-label,
+  .t3-widget-root [class*="radio"]  label,
+  .t3-widget-root [class*="radio"]  .t3-form-label {
     font-family: 'DM Sans', sans-serif !important;
     font-size: 13px !important;
     font-weight: 400 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
     color: var(--ink) !important;
-    line-height: 1.4 !important;
-    display: inline !important;
+    line-height: 1.35 !important;
     margin: 0 !important;
+    padding: 0 !important;
+    display: inline-block !important;
+    width: auto !important;
+    min-width: 0 !important;
+    flex: 0 1 auto !important;
+    text-align: left !important;
+    white-space: nowrap !important;
   }
-  .t3-widget-root [class*="checkbox"],
-  .t3-widget-root [class*="radio"] {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    padding: 6px 0 !important;
+
+  /* Mobile: keep 2 columns since labels are short (Google, AI, ANWB…).
+     Fallback to 1 column only when the viewport is too narrow to fit both. */
+  @media (max-width: 400px) {
+    .t3-widget-root :where(fieldset, section, div):has(> [class*="checkbox"] + [class*="checkbox"]),
+    .t3-widget-root :where(fieldset, section, div):has(> [class*="radio"] + [class*="radio"]),
+    .t3-widget-root :where([class*="checkbox-group"], [class*="checkboxes"], [class*="radio-group"], [class*="radios"]) {
+      grid-template-columns: 1fr !important;
+    }
   }
   /* Form field container spacing */
   .t3-widget-root [class*="form-row"],
@@ -865,15 +927,18 @@
   .t3-widget-root [data-sp-field="city"]        { grid-column: span 6 !important; }
   .t3-widget-root [data-sp-field="country"]     { grid-column: span 6 !important; }
 
-  /* Inputs on step 3: larger touch target (48–52px), thin border, no shadow. */
+  /* Inputs on step 3: M-size fields (~40px hoog), thin border, no shadow.
+     Was XL (50px + 14px padding) which read as an admin form; the smaller
+     scale sits more editorial next to the labels. */
   .t3-widget-root [data-sp-field] input[type="text"],
   .t3-widget-root [data-sp-field] input[type="email"],
   .t3-widget-root [data-sp-field] input[type="tel"],
   .t3-widget-root [data-sp-field] input[type="number"],
   .t3-widget-root [data-sp-field] select {
     width: 100% !important;
-    min-height: 50px !important;
-    padding: 14px 14px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 8px 12px !important;
     background: #fff !important;
     border: 1px solid var(--border) !important;
     border-radius: 2px !important;
@@ -881,8 +946,10 @@
     font-family: 'DM Sans', sans-serif !important;
     font-size: 14px !important;
     color: var(--ink) !important;
+    box-sizing: border-box !important;
   }
-  /* Labels above field, olive uppercase eyebrow. */
+  /* Labels above field, olive uppercase eyebrow. Tighter gap so label + field
+     read as one unit rather than two floating rows. */
   .t3-widget-root [data-sp-field] > label,
   .t3-widget-root [data-sp-field] .t3-form-label,
   .t3-widget-root [data-sp-field] [class*="field-label"] {
@@ -893,7 +960,7 @@
     letter-spacing: 2px !important;
     text-transform: uppercase !important;
     color: var(--gold) !important;
-    margin-bottom: 8px !important;
+    margin: 0 0 5px 0 !important;
     line-height: 1.4 !important;
   }
 

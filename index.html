@@ -1792,6 +1792,7 @@ footer .footer-links a:hover   { color: var(--peach); }
       max-width: 100% !important;
       width: 100% !important;
       padding: 0 !important;
+      margin: 0 !important;
     }
     .t3-widget-root .t3-card .t3-col-7 { flex: 1 1 auto !important; display: flex; flex-direction: column; }
 
@@ -1925,15 +1926,17 @@ footer .footer-links a:hover   { color: var(--peach); }
       display: block !important;
       overflow: visible !important;
     }
-    /* Footer — very compact separator */
+    /* Footer — very compact separator.
+       margin: auto 0 0 kills TOMM's default 16px bottom margin so the price
+       sits flush against the card's inner bottom padding. */
     .t3-widget-root .t3-card-footer {
       display: flex !important;
       align-items: center !important;
       justify-content: space-between !important;
       gap: 8px !important;
-      padding-top: 8px !important;
+      padding: 8px 0 0 0 !important;
       border-top: 1px solid var(--border2) !important;
-      margin-top: auto !important;
+      margin: auto 0 0 0 !important;
       background: transparent !important;
     }
     /* Price — small, whispered */
