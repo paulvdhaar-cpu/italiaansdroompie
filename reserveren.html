@@ -343,6 +343,45 @@
     border-color: var(--peach) !important;
     color: #fff !important;
   }
+  /* TOMM's `.detail` chevron (in de rechter overview-kolom) is standaard
+     donkerblauw rgb(36,59,104). Knock naar olive zodat het bij de rest hoort. */
+  .t3-widget-root .detail,
+  .t3-widget-root .detail span,
+  .t3-widget-root .detail i,
+  .t3-widget-root .detail [class*="icon"] {
+    color: var(--gold) !important;
+    border-color: var(--gold) !important;
+  }
+  /* Vue3Toastify notificaties (TOMM gebruikt deze voor "Beschikbaarheid
+     gecontroleerd" e.d. toasts). Info-toasts zijn standaard blauw #3498db.
+     Herbrand naar peach/olive. Deze staan buiten .t3-widget-root want de
+     toast container mount aan document.body. */
+  .Toastify__toast,
+  .Toastify__toast-body,
+  [class*="Toastify__toast--info"],
+  [class*="Toastify__toast--success"],
+  [class*="Toastify__toast--default"] {
+    background: var(--bg2) !important;
+    background-color: var(--bg2) !important;
+    color: var(--ink) !important;
+    border-left: 3px solid var(--gold) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+  }
+  .Toastify__progress-bar,
+  [class*="Toastify__progress-bar"] {
+    background: var(--peach) !important;
+    background-color: var(--peach) !important;
+  }
+  .Toastify__toast-icon svg,
+  [class*="Toastify__toast-icon"] svg {
+    fill: var(--gold) !important;
+    color: var(--gold) !important;
+  }
+  .Toastify__close-button {
+    color: var(--muted) !important;
+    opacity: 0.6 !important;
+  }
   /* Kalender-summary labels "Aankomst" / "Vertrek" — TOMM zet ze in rgb(31,74,130).
      Klasse is stabiel in de Vue-DOM. */
   .t3-widget-root .t3-availability-calendar__summary-label,
@@ -1136,28 +1175,6 @@
       width: auto !important;
       flex: 0 0 auto !important;
     }
-    /* Sticky-bar CTA can also be a touch tighter */
-    .mobile-total-bar-cta {
-      padding: 10px 14px !important;
-      font-size: 10px !important;
-      letter-spacing: 1px !important;
-    }
-    .mobile-total-bar {
-      padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important;
-    }
-    /* Kill the duplicate price in the overview overlay — sticky bar has it */
-    .t3-widget-root .overview-card .detail-price {
-      display: none !important;
-    }
-    /* Card-footer total in overview is redundant with sticky bar too */
-    .t3-widget-root .overview-card .t3-card-footer {
-      display: none !important;
-    }
-  }
-  /* Sticky mobile bar hides on the summary step — total is already prominent
-     in the review pane, no need to duplicate below the fold. */
-  body[data-active-step="samenvatting"] .mobile-total-bar {
-    display: none !important;
   }
 
   /* Personal reassurance — editorial, not e-commerce.
@@ -1193,54 +1210,6 @@
   .booking-trust a { color: var(--peach); text-decoration: none; font-weight: 500; }
   .booking-trust a:hover { color: var(--peach-h); }
 
-  /* Sticky mobile totaal-bar (own-suggestion) — always shows current total
-     + a shortcut to the primary CTA so extras impact is immediately obvious. */
-  .mobile-total-bar {
-    display: none;
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    z-index: 90;
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-    padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 -6px 22px rgba(0,0,0,.06);
-  }
-  .mobile-total-bar-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .mobile-total-bar-value {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15rem;
-    color: var(--ink);
-    line-height: 1.1;
-  }
-  .mobile-total-bar-cta {
-    background: var(--peach);
-    color: #fff;
-    padding: 12px 20px;
-    border: 0;
-    border-radius: 0;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  .mobile-total-bar-cta:hover { background: var(--peach-h); }
-  @media (max-width: 640px) {
-    .mobile-total-bar { display: flex; }
-    main { padding-bottom: 100px !important; }
-  }
 
   @media (max-width: 640px) {
     .site-header { padding: 16px 20px; }
@@ -1312,15 +1281,39 @@
     background: oklch(46% 0.055 85) !important;
   }
 
-  /* K3 — Focus-ring: olive outline + peach halo (accessibility + polish) */
+  /* K3 — Focus-ring: olive outline + peach halo (accessibility + polish).
+     ANCHORS incluis (TOMM's Volgende/Vorige buttons zijn <a>, niet <button>) —
+     zonder deze regel toont de browser zijn eigen blauwe focus-ring. */
   .t3-widget-root input:focus,
   .t3-widget-root select:focus,
   .t3-widget-root textarea:focus,
-  .t3-widget-root button:focus-visible {
+  .t3-widget-root button:focus,
+  .t3-widget-root button:focus-visible,
+  .t3-widget-root button:active,
+  .t3-widget-root a:focus,
+  .t3-widget-root a:focus-visible,
+  .t3-widget-root a:active,
+  .t3-widget-root .t3-btn:focus,
+  .t3-widget-root .t3-btn:focus-visible,
+  .t3-widget-root .t3-btn:active {
     outline: 2px solid var(--gold) !important;
     outline-offset: 2px !important;
     box-shadow: 0 0 0 4px rgba(163, 93, 68, 0.15) !important;
     border-color: var(--gold) !important;
+  }
+  /* Peach-CTA (Volgende / Reserveer) heeft peach fill — daar past een
+     peach-tint halo beter dan een olive halo, en de outline blijft olive
+     voor accessibility contrast. */
+  .t3-widget-root .t3-btn-next:focus,
+  .t3-widget-root .t3-btn-next:focus-visible,
+  .t3-widget-root .t3-btn-next:active,
+  .t3-widget-root a.t3-btn-next:focus,
+  .t3-widget-root a.t3-btn-next:focus-visible,
+  .t3-widget-root a.t3-btn-next:active {
+    outline: 2px solid var(--gold) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(163, 93, 68, 0.25) !important;
+    background: var(--peach) !important;
   }
 
   /* K4 — Trust-reassurance ONDER de submit-knop op stap 4.
@@ -1358,28 +1351,9 @@
     line-height: 1.2 !important;
     padding: 14px 24px !important;
   }
-  /* Vermijd dat de peach-CTA op stap 4 op mobiel verborgen wordt door Blok K6 —
-     hier hebben we hem juist nodig. */
-  @media (max-width: 640px) {
-    body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder a.t3-btn-next,
-    body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder button.t3-btn-next {
-      display: inline-block !important;
-    }
-  }
 
-  /* K5 — Stap-4: sticky mobile bar hiding (was al goed geregeld — extra
-     safety: als het detect-active-step-script hier faalt, verbergt de
-     ::before-check al de duplicatie tussen bar en submit-knop.) */
-
-  /* K6 — Mobile: hide in-widget Volgende-knop, sticky bar carriert primary CTA.
-     Fallback: alleen verbergen zodra body[data-total-loaded="1"] gezet is
-     (door de sticky-bar-JS als het eerste totaal binnenkomt). */
-  @media (max-width: 640px) {
-    body[data-total-loaded="1"] .t3-widget-root .t3-nextprev-holder a.t3-btn-next,
-    body[data-total-loaded="1"] .t3-widget-root .t3-nextprev-holder button.t3-btn-next {
-      display: none !important;
-    }
-  }
+  /* K5/K6 — verwijderd. Sticky mobile totaal-bar is uit; de in-widget
+     Volgende-knop is de enige (en duidelijke) primaire CTA op elk device. */
 
   /* K7 — Progress-affordance: "van 4" achter de eyebrow */
   .page-eyebrow .eyebrow-total {
@@ -1395,33 +1369,22 @@
     .page-eyebrow { margin-bottom: 8px; }
   }
 
-  /* K9 — Field-hint onder verplichte identiteitsvraag. Subtiele olive
-     border-left + kleine info-icon geeft 'm de "reassurance"-lading die je
-     wil op een privacy-vraag, zonder een grote box te worden. */
+  /* K9 — Field-hint onder verplichte identiteitsvraag. Zachte olive-tint
+     achtergrond zonder border-strip aan de zijkant, geen icoon. */
   .sp-field-hint {
-    display: flex !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
+    display: block !important;
     font-size: 12px !important;
     color: var(--muted) !important;
     margin: 4px 0 10px 0 !important;
     padding: 8px 12px !important;
     background: rgba(88, 96, 64, 0.06) !important;
-    border-left: 2px solid var(--gold) !important;
+    border: 0 !important;
+    border-radius: 2px !important;
     line-height: 1.45 !important;
     font-family: 'DM Sans', sans-serif !important;
     font-weight: 400 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
-    border-radius: 2px !important;
-  }
-  .sp-field-hint::before {
-    content: "🔒";
-    font-size: 12px;
-    line-height: 1.45;
-    filter: grayscale(1);
-    opacity: 0.6;
-    flex: 0 0 auto;
   }
 
   /* K10 — Extras-price chip op stap 2: peach terugdringen naar olive.
@@ -1514,16 +1477,6 @@
   <a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a>
 </footer>
 
-<!-- Sticky totaal-bar (mobile only) — mirrors the widget's subtotal so the
-     user sees cost impact of every extras change without scrolling. -->
-<div class="mobile-total-bar" id="mobile-total-bar" hidden>
-  <div>
-    <div class="mobile-total-bar-label">Totaal</div>
-    <div class="mobile-total-bar-value" id="mobile-total-bar-value">€ —</div>
-  </div>
-  <button type="button" class="mobile-total-bar-cta" id="mobile-total-bar-cta">Volgende →</button>
-</div>
-
 <script type="text/javascript" src="https://public.tommbookingsupport.nl/reservation.js"></script>
 
 <script>
@@ -1561,47 +1514,6 @@
   setInterval(updateStory, 500);
   // First pass shortly after mount
   setTimeout(updateStory, 1500);
-})();
-</script>
-
-<script>
-// Sticky mobile total bar — polls the widget's .t3-subtotal periodically
-// and mirrors the newest value. Polling avoids the infinite-loop trap
-// that MutationObserver+childList would create when we write to our own bar.
-(function(){
-  var bar = document.getElementById('mobile-total-bar');
-  var val = document.getElementById('mobile-total-bar-value');
-  var cta = document.getElementById('mobile-total-bar-cta');
-  if (!bar || !val || !cta) return;
-
-  var lastText = '';
-  function sync(){
-    var subtotals = document.querySelectorAll('.t3-widget-root .t3-subtotal');
-    var text = '';
-    for (var i = subtotals.length - 1; i >= 0; i--) {
-      var t = subtotals[i].textContent.trim();
-      if (/€|\d/.test(t)) { text = t; break; }
-    }
-    if (text && text !== lastText) {
-      lastText = text;
-      val.textContent = text;
-      bar.hidden = false;
-      // Signaal aan CSS dat sticky bar de primaire CTA carriert — in-widget
-      // Volgende-knop wordt dan op mobiel verborgen (Blok K6).
-      document.body.setAttribute('data-total-loaded', '1');
-    }
-  }
-
-  cta.addEventListener('click', function(){
-    var next = document.querySelector('.t3-widget-root a.t3-btn-next, .t3-widget-root .t3-nextprev-holder a, .t3-widget-root .t3-nextprev-holder button:last-child');
-    if (next) {
-      next.scrollIntoView({behavior:'smooth', block:'center'});
-      setTimeout(function(){ next.click(); }, 400);
-    }
-  });
-
-  // Poll instead of observe — cheap (1s) and cannot loop on itself.
-  setInterval(sync, 1000);
 })();
 </script>
 
@@ -1711,9 +1623,47 @@
     return input.parentElement;
   }
 
+  // key → HTML5 autocomplete token (WHATWG spec). Browsers gebruiken deze
+  // om NAW-autofill aan te bieden. Sommige browsers (met name Safari) eisen
+  // OOK een `name` attribuut voordat ze de kaart 'AutoFill Contact' laten
+  // zien — dus we zetten allebei.
+  var AUTOCOMPLETE = {
+    salutation:  'honorific-prefix',
+    firstname:   'given-name',
+    middlename:  'additional-name',
+    lastname:    'family-name',
+    email:       'email',
+    phone:       'tel',
+    postcode:    'postal-code',
+    housenumber: 'address-line2',
+    addition:    'address-line3',
+    street:      'street-address',
+    city:        'address-level2',
+    country:     'country-name',
+    document:    'off'
+  };
+  var NAME_ATTR = {
+    salutation:  'honorific-prefix',
+    firstname:   'fname',
+    middlename:  'mname',
+    lastname:    'lname',
+    email:       'email',
+    phone:       'phone',
+    postcode:    'zip',
+    housenumber: 'address2',
+    addition:    'address3',
+    street:      'address',
+    city:        'city',
+    country:     'country'
+  };
+  // Optioneel: sommige input-types (email/tel) verdienen ook een expliciete
+  // `type` bump zodat mobiele keyboards het juiste layout tonen.
+  var INPUT_TYPE = { email: 'email', phone: 'tel', postcode: 'text' };
+
   function tagFields(){
-    // Only run on the customer-details step to avoid touching other steps.
-    if (document.body.getAttribute('data-active-step') !== 'gegeven') return;
+    // Was: alleen op stap 3. Nu: altijd — de tagger doet niks als er geen
+    // matchende labels zijn, en dit vermijdt de race conditie waarin het
+    // detect-step-script de body-attr nog niet gezet had.
     var root = document.querySelector('.t3-widget-root');
     if (!root) return;
     // Find every input/select that isn't a checkbox/radio/hidden.
@@ -1737,7 +1687,30 @@
       var wrap = findWrapper(ctrl);
       if (!wrap) return;
       if (wrap.getAttribute('data-sp-field') !== key) wrap.setAttribute('data-sp-field', key);
+      // Zet autocomplete-attribuut op de input zelf — dat is wat browsers lezen.
+      var ac = AUTOCOMPLETE[key];
+      if (ac && ctrl.getAttribute('autocomplete') !== ac) {
+        ctrl.setAttribute('autocomplete', ac);
+      }
+      // Safari + sommige Chromium-varianten eisen ook een name-attribute
+      // voordat de "AutoFill Contact"-kaart geboden wordt.
+      var nm = NAME_ATTR[key];
+      if (nm && !ctrl.getAttribute('name')) {
+        ctrl.setAttribute('name', nm);
+      }
+      // Bump input-type voor betere mobiele keyboards
+      var newType = INPUT_TYPE[key];
+      if (newType && ctrl.tagName === 'INPUT' && ctrl.type !== newType) {
+        try { ctrl.type = newType; } catch(e) {}
+      }
     });
+    // Zet ook een name-attribute op de omliggende form (indien aanwezig) zodat
+    // browsers het hele blok als "address form" herkennen. Autocomplete werkt
+    // ook zonder maar met form="on" is het robuuster.
+    var form = root.querySelector('form');
+    if (form && form.getAttribute('autocomplete') !== 'on') {
+      form.setAttribute('autocomplete', 'on');
+    }
   }
 
   setInterval(tagFields, 800);
@@ -1882,6 +1855,104 @@
   // maar goedkoop genoeg om de rest van de widget niet te storen.
   setInterval(paint, 400);
   setTimeout(paint, 800);
+})();
+</script>
+
+<script>
+// Confirmation-view swap — TOMM's post-submit view leest saai:
+//   "De boekingsaanvraag is gemaakt. Hartelijk dank voor uw boekingsaanvraag.
+//    Binnen 15 minuten ontvangt u de aanvraaggegevens op <email>."
+// We herschrijven kop + body naar warmere copy en behouden het dynamische
+// e-mailadres dat TOMM interpoleerde. Polling omdat Vue de view kan re-renderen.
+(function(){
+  var isEN = document.documentElement.lang === 'en';
+
+  var NEW_TITLE = isEN
+    ? 'Your Le Marche escape is nearly here…'
+    : 'Die vakantie in Le Marche komt er bijna aan…';
+
+  function buildBody(email){
+    if (isEN) {
+      return 'Thanks for your request! We’re holding your spot. Lisette reviews every request personally and will let you know as soon as everything’s confirmed.'
+        + '<br><br>Within 15 minutes you’ll receive the details of your request'
+        + (email ? ' at <strong>' + email + '</strong>' : '') + '.';
+    }
+    return 'Bedankt voor je aanvraag! We houden je plekje alvast voor je vrij. Lisette bekijkt je aanvraag persoonlijk en laat je zo snel mogelijk weten of alles definitief is.'
+      + '<br><br>Binnen 15 minuten ontvang je de gegevens van je aanvraag'
+      + (email ? ' op <strong>' + email + '</strong>' : '') + '.';
+  }
+
+  // Titel-match: alles wat TOMM als kop rendert op de bevestigingsview
+  function findTitle(){
+    var headings = document.querySelectorAll('.t3-widget-root h1, .t3-widget-root h2, .t3-widget-root h3, .t3-widget-root .t3-heading, .t3-widget-root [class*="heading"]');
+    for (var i = 0; i < headings.length; i++) {
+      var t = (headings[i].textContent || '').toLowerCase();
+      if (t.indexOf('boekingsaanvraag is gemaakt') !== -1
+       || t.indexOf('reservering is gemaakt') !== -1
+       || t.indexOf('booking request has been made') !== -1
+       || t.indexOf('reservation request has been made') !== -1
+       || t.indexOf('booking request received') !== -1) {
+        return headings[i];
+      }
+    }
+    return null;
+  }
+
+  // Vind body-paragraaf: zoek naar de originele "Hartelijk dank"/"Thank you"
+  // regel binnen dezelfde container als de titel, of in aangrenzende siblings.
+  function findBody(titleEl){
+    var scopes = [
+      titleEl.parentElement,
+      titleEl.parentElement && titleEl.parentElement.parentElement,
+      titleEl.closest('.t3-step-content'),
+      titleEl.closest('section')
+    ].filter(Boolean);
+    for (var s = 0; s < scopes.length; s++){
+      var ps = scopes[s].querySelectorAll('p, .t3-body, [class*="body"], [class*="text"], div');
+      for (var i = 0; i < ps.length; i++){
+        var t = (ps[i].textContent || '').toLowerCase();
+        if ((t.indexOf('hartelijk dank') !== -1 || t.indexOf('thank you') !== -1 || t.indexOf('binnen 15 minuten') !== -1 || t.indexOf('within 15 minutes') !== -1)
+          && ps[i].children.length < 5) {
+          return ps[i];
+        }
+      }
+    }
+    return null;
+  }
+
+  function extractEmail(text){
+    var m = (text || '').match(/[\w.+\-]+@[\w\-]+\.[\w.\-]+/);
+    return m ? m[0] : '';
+  }
+
+  function swap(){
+    var title = findTitle();
+    if (!title) return;
+    // Guard: alleen swappen als we 'm nog niet hebben aangeraakt
+    if (title.getAttribute('data-sp-swapped') !== '1') {
+      title.textContent = NEW_TITLE;
+      title.setAttribute('data-sp-swapped', '1');
+    } else {
+      // Vue re-rendered en heeft onze tekst overschreven — check nu:
+      if (title.textContent.trim() !== NEW_TITLE) {
+        title.textContent = NEW_TITLE;
+      }
+    }
+
+    // Body — probeer eerst de originele body-tekst te vinden en email eruit
+    var body = findBody(title);
+    if (!body) return;
+    if (body.getAttribute('data-sp-swapped') === '1' && body.innerHTML.indexOf('plekje') !== -1) return;
+
+    // Extract email uit de HUIDIGE body tekst (zowel origineel als mogelijk
+    // re-rendered), of laat leeg als niets gevonden.
+    var email = extractEmail(body.textContent);
+    body.innerHTML = buildBody(email);
+    body.setAttribute('data-sp-swapped', '1');
+  }
+
+  setInterval(swap, 500);
+  setTimeout(swap, 1200);
 })();
 </script>
 
