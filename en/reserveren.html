@@ -343,6 +343,16 @@
     border-color: var(--peach) !important;
     color: #fff !important;
   }
+  /* Kalender-summary labels "Aankomst" / "Vertrek" — TOMM zet ze in rgb(31,74,130).
+     Klasse is stabiel in de Vue-DOM. */
+  .t3-widget-root .t3-availability-calendar__summary-label,
+  .t3-widget-root [class*="calendar__summary-label"] {
+    color: var(--gold) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+  }
 
   /* Blok C — Sub-block backgrounds gelijktrekken met beige palet */
   .t3-widget-root .t3-step-holder,
@@ -363,15 +373,60 @@
     border-radius: 2px !important;
     padding: 14px 18px !important;
   }
-  /* Period/date summary block — was inflated with 32/32 padding + centered. */
+  /* Period/date summary block — TOMM's echte classes zijn
+     `.t3-availability-calendar__summary` (outer) en
+     `.t3-availability-calendar__summary-item` (elke rij Aankomst/Vertrek).
+     Beide erven van Blok C's [class*="summary"] 14/18 padding + kadertje;
+     hier krijgen ze compacte padding en single-row-layout. */
+  .t3-widget-root .t3-availability-calendar__summary {
+    padding: 8px 14px !important;
+    gap: 8px !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  .t3-widget-root .t3-availability-calendar__summary-item {
+    padding: 6px 10px !important;
+    gap: 8px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+  }
+  .t3-widget-root .t3-availability-calendar__summary-item > * {
+    line-height: 1.4 !important;
+  }
+  /* Label + value spans krijgen 14/18 padding van Blok C's [class*="summary"];
+     kill dat. De label wordt tegelijk kleiner + olive (was al in K1-fix).
+     Value krijgt DM Serif Display voor een editorial date-read. */
+  .t3-widget-root .t3-availability-calendar__summary-label,
+  .t3-widget-root .t3-availability-calendar__summary-value {
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    display: inline-block !important;
+  }
+  .t3-widget-root .t3-availability-calendar__summary-value {
+    font-family: 'DM Serif Display', serif !important;
+    font-weight: 400 !important;
+    color: var(--ink) !important;
+    font-size: 15px !important;
+    letter-spacing: 0 !important;
+  }
+  /* Oude generieke overrides — behouden voor evt. andere summary-varianten */
   .t3-widget-root [class*="date-summary"],
   .t3-widget-root [class*="date-selection"],
   .t3-widget-root .t3-step-content .t3-table:not(.space-between-columns) {
-    padding: 12px 18px !important;
+    padding: 10px 16px !important;
+    min-height: 0 !important;
+    height: auto !important;
   }
   .t3-widget-root [class*="date-summary"] td,
-  .t3-widget-root [class*="date-selection"] td {
-    padding: 6px 8px !important;
+  .t3-widget-root [class*="date-selection"] td,
+  .t3-widget-root [class*="date-summary"] tr,
+  .t3-widget-root [class*="date-selection"] tr {
+    padding: 4px 8px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    line-height: 1.4 !important;
   }
   .t3-widget-root .t3-table td,
   .t3-widget-root .t3-table th {
@@ -422,14 +477,19 @@
   .t3-widget-root button[type="submit"]:hover {
     background: var(--peach-h) !important;
   }
-  /* Back/prev variant — outline. Explicitly EXCLUDES .t3-btn-next so the
-     primary "Volgende stap" link keeps its peach fill. */
+  /* Back/prev variant — outline. Specificity bumped via .t3-nextprev-holder
+     so it beats the peach-fill on `.t3-nextprev-holder .t3-btn` (0,0,3,0)
+     that was previously winning over the plain `.t3-btn-prev` (0,0,2,1). */
+  .t3-widget-root .t3-nextprev-holder a.t3-btn-prev,
+  .t3-widget-root .t3-nextprev-holder button.t3-btn-prev,
   .t3-widget-root a.t3-btn-prev,
   .t3-widget-root button.t3-btn-prev {
     background: transparent !important;
     color: var(--ink) !important;
     border: 1px solid var(--border) !important;
   }
+  .t3-widget-root .t3-nextprev-holder a.t3-btn-prev:hover,
+  .t3-widget-root .t3-nextprev-holder button.t3-btn-prev:hover,
   .t3-widget-root a.t3-btn-prev:hover,
   .t3-widget-root button.t3-btn-prev:hover {
     border-color: var(--peach) !important;
@@ -442,6 +502,12 @@
   .t3-widget-root button:disabled {
     opacity: 0.4 !important;
     pointer-events: none !important;
+  }
+  /* Volgende-CTA rechts uitlijnen als er geen Vorige-buurman is (stap 1).
+     Vermijdt de "gecentreerde alinea-eind"-lezing. */
+  .t3-widget-root .t3-nextprev-holder:not(:has(.t3-btn-prev)) {
+    display: flex !important;
+    justify-content: flex-end !important;
   }
 
   /* Blok E — Section hierarchy: separator lines between steps */
@@ -477,13 +543,21 @@
     align-items: center !important;
     justify-content: space-between !important;
     gap: 20px !important;
-    padding: 8px 0 !important;
+    padding: 4px 0 !important;
+    margin: 0 !important;
     border-bottom: 1px solid var(--border2) !important;
     width: 100% !important;
     max-width: 100% !important;
     flex: 1 1 100% !important;
+    min-height: 0 !important;
   }
   .t3-widget-root .t3-counter:last-child { border-bottom: 0 !important; }
+  /* De outer counter-holder mag ook geen ballast tussen items zetten */
+  .t3-widget-root section.t3-counter-holder,
+  .t3-widget-root .t3-counter-holder {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
   .t3-widget-root .t3-counter__content {
     flex: 1 1 auto !important;
     min-width: 0 !important;
@@ -498,14 +572,15 @@
     line-height: 1.35 !important;
     white-space: normal !important;
   }
-  /* Counter as one compact pill (was oversized) */
+  /* Counter as one compact pill (was oversized). Pure pill radius (999px)
+     zodat de rondingen consistent zijn met de toggle switch. */
   .t3-widget-root .t3-counter .counters {
     display: inline-flex !important;
     align-items: stretch !important;
     gap: 0 !important;
     flex: 0 0 auto !important;
     border: 1px solid var(--border) !important;
-    border-radius: 18px !important;
+    border-radius: 999px !important;
     overflow: hidden !important;
     background: #fff !important;
     height: 32px !important;
@@ -549,7 +624,8 @@
 
   /* Modern toggle switch — pseudo-elements live on the wrapper label because
      <input> is a void element and can't host ::before/::after. The input
-     itself is invisible on top of the label, so clicks still register. */
+     itself is invisible on top of the label, so clicks still register.
+     Pure pill radius (999px) sluit aan bij de counter pill. */
   .t3-widget-root .switcher .t3-form-group {
     position: relative !important;
     display: inline-block !important;
@@ -557,7 +633,7 @@
     height: 24px !important;
     cursor: pointer !important;
     background: var(--border) !important;
-    border-radius: 12px !important;
+    border-radius: 999px !important;
     transition: background 0.2s !important;
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.06) !important;
     padding: 0 !important;
@@ -651,6 +727,37 @@
     background: transparent !important;
     border: 0 !important;
     box-shadow: none !important;
+  }
+  /* Verberg de rechterkolom tot er iets te tonen is (foto komt binnen zodra
+     de gast een accommodatie gekozen heeft). Vermijdt de "TOTAAL —" lege
+     shell die het widget kapot laat lijken bij eerste laden. */
+  .t3-widget-root .t3-col-4 .overview-card:not(:has(picture)) {
+    visibility: hidden !important;
+  }
+  /* Sticky overview op desktop: prijs + foto blijven meebewegen tijdens
+     lang formulier-invullen op stap 3. align-self:flex-start voorkomt dat
+     de flex-parent hem uitrekt en sticky zonder ruimte om te bewegen.
+     align-items:flex-start op de row zorgt dat linker-heading + rechter-foto
+     bovenin op dezelfde y-lijn beginnen. */
+  @media (min-width: 900px) {
+    .t3-widget-root > .t3-row,
+    .t3-widget-root .t3-widget-searchbook > .t3-row,
+    .t3-widget-root .t3-widget-booking > .t3-row {
+      align-items: flex-start !important;
+    }
+    .t3-widget-root .t3-col-4 {
+      align-self: flex-start !important;
+    }
+    .t3-widget-root .t3-col-4 .overview-card {
+      position: sticky !important;
+      top: 24px !important;
+    }
+    /* Beide kolommen: geen extra top-padding op de eerste step-content
+       zodat linker-heading gelijk begint met foto in overview-card. */
+    .t3-widget-root .t3-col-8 > .t3-step-content:first-of-type,
+    .t3-widget-root .t3-col-8 > *:first-child .t3-step-content:first-of-type {
+      padding-top: 0 !important;
+    }
   }
   /* Overview card image container — TOMM ships this as a flex-row (120px
      picture + details column). We flip it to column so the photo goes on
@@ -796,66 +903,39 @@
   }
 
   /* Blok I — Customer form checkboxes ("Hoe heb je ons gevonden?").
-     TOMM stacks each option vertically with the label BELOW the tick, styled
-     as an uppercase form-label. We do three things:
-       1. Whatever container holds 2+ checkboxes becomes a 2-column grid.
-       2. Each leaf checkbox row becomes a horizontal flex (tick, then label).
-       3. Any label inside a checkbox/radio drops TOMM's uppercase form-label
-          styling so it reads as body copy next to the tick.
-     :where() around the grid parent zeros its specificity so per-item
-     rules always win the cascade. */
+     TOMM's actual DOM (live-verified): `.t3-form-group > div > div > label.t3-form-label > input.t3-checkbox`.
+     De directe kinderen van de groepen-container zijn class-loze <div>s met een
+     LABEL erin, dus [class*="checkbox"] matcht daar niet op — we targeten
+     rechtstreeks de daadwerkelijke structuur via :has(). */
 
-  /* 1 — Group into 2-column grid. The width:100% + min-width:0 ensures the
-     grid actually fills a flex-parent (TOMM wraps in a flex .t3-form-group);
-     without it the grid collapses to the width of its content. */
-  .t3-widget-root :where(fieldset, section, div):has(> [class*="checkbox"] + [class*="checkbox"]),
-  .t3-widget-root :where(fieldset, section, div):has(> [class*="radio"] + [class*="radio"]),
-  .t3-widget-root :where([class*="checkbox-group"], [class*="checkboxes"], [class*="radio-group"], [class*="radios"]) {
+  /* 1 — Groepen-container = de tussen-div die label + opties splitst. Grid van 2. */
+  .t3-widget-root .t3-form-group > div:has(> div > label.t3-form-label > input.t3-checkbox),
+  .t3-widget-root .t3-form-group > div:has(> div > label.t3-form-label > input.t3-radio) {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 4px 18px !important;
-    padding: 0 !important;
-    border: 0 !important;
-    margin: 0 !important;
     width: 100% !important;
-    flex: 1 1 100% !important;
-    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
   }
 
-  /* 2 — Each leaf checkbox/radio row (no nested checkbox → this IS the item).
-     width:100% stretches the item to fill its grid cell so tick + label align
-     to the left edge; without it flex sizing collapses to content width. */
-  .t3-widget-root [class*="checkbox"]:not(:has([class*="checkbox"])),
-  .t3-widget-root [class*="radio"]:not(:has([class*="radio"])) {
+  /* 2 — Elke optie-cel = flex row: tick links, label rechts, bodycopy-styling.
+     Kill TOMM's uppercase form-label eyebrow-erfenis op ELKE label die een
+     checkbox of radio bevat (ook eenzame "Ik ga akkoord"-consent checkbox,
+     ongeacht welke container-DOM eromheen zit). */
+  .t3-widget-root .t3-form-group > div > div > label.t3-form-label:has(> input.t3-checkbox),
+  .t3-widget-root .t3-form-group > div > div > label.t3-form-label:has(> input.t3-radio),
+  .t3-widget-root label.t3-form-label:has(> input.t3-checkbox),
+  .t3-widget-root label.t3-form-label:has(> input.t3-radio),
+  .t3-widget-root label:has(> input.t3-checkbox),
+  .t3-widget-root label:has(> input.t3-radio) {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     gap: 8px !important;
     padding: 4px 0 !important;
     margin: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  .t3-widget-root [class*="checkbox"] input[type="checkbox"],
-  .t3-widget-root [class*="radio"]  input[type="radio"] {
-    flex: 0 0 auto !important;
-    width: 18px !important;
-    height: 18px !important;
-    min-height: 18px !important;
-    margin: 0 !important;
-    accent-color: var(--peach) !important;
-  }
-
-  /* 3 — Label reads as body copy, next to the tick, single line. Uses
-     inline-block + auto-width so labels don't demand a flex-basis that
-     collapses the row (flex blockifies inline-display children, so
-     inline-block gets the natural "shrink-to-content" behaviour we want). */
-  .t3-widget-root [class*="checkbox"] label,
-  .t3-widget-root [class*="checkbox"] .t3-form-label,
-  .t3-widget-root [class*="radio"]  label,
-  .t3-widget-root [class*="radio"]  .t3-form-label {
     font-family: 'DM Sans', sans-serif !important;
     font-size: 13px !important;
     font-weight: 400 !important;
@@ -863,22 +943,22 @@
     text-transform: none !important;
     color: var(--ink) !important;
     line-height: 1.35 !important;
+    cursor: pointer !important;
+  }
+  .t3-widget-root .t3-form-group input.t3-checkbox,
+  .t3-widget-root .t3-form-group input.t3-radio {
+    flex: 0 0 auto !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
     margin: 0 !important;
-    padding: 0 !important;
-    display: inline-block !important;
-    width: auto !important;
-    min-width: 0 !important;
-    flex: 0 1 auto !important;
-    text-align: left !important;
-    white-space: nowrap !important;
+    accent-color: var(--gold) !important;
   }
 
-  /* Mobile: keep 2 columns since labels are short (Google, AI, ANWB…).
-     Fallback to 1 column only when the viewport is too narrow to fit both. */
+  /* Mobile: 1 kolom onder 400px */
   @media (max-width: 400px) {
-    .t3-widget-root :where(fieldset, section, div):has(> [class*="checkbox"] + [class*="checkbox"]),
-    .t3-widget-root :where(fieldset, section, div):has(> [class*="radio"] + [class*="radio"]),
-    .t3-widget-root :where([class*="checkbox-group"], [class*="checkboxes"], [class*="radio-group"], [class*="radios"]) {
+    .t3-widget-root .t3-form-group > div:has(> div > label.t3-form-label > input.t3-checkbox),
+    .t3-widget-root .t3-form-group > div:has(> div > label.t3-form-label > input.t3-radio) {
       grid-template-columns: 1fr !important;
     }
   }
@@ -926,16 +1006,33 @@
   .t3-widget-root [data-sp-field="addition"]    { grid-column: span 3 !important; }
   .t3-widget-root [data-sp-field="city"]        { grid-column: span 6 !important; }
   .t3-widget-root [data-sp-field="country"]     { grid-column: span 6 !important; }
+  .t3-widget-root [data-sp-field="document"]    { grid-column: 1 / -1 !important; }
+  /* Document-veld interne layout: label boven, hint onder label, input onder.
+     Force TOMM's row-layout uit zodat het niet als narrow-label + wide-input
+     rendert. */
+  .t3-widget-root [data-sp-field="document"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  .t3-widget-root [data-sp-field="document"] > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+  }
 
   /* Inputs on step 3: M-size fields (~40px hoog), thin border, no shadow.
-     Was XL (50px + 14px padding) which read as an admin form; the smaller
-     scale sits more editorial next to the labels. */
+     max-width:100% overschrijft TOMM's widgets.css `max-width: 300px` op
+     inputs — anders blijven Achternaam, Straat, Plaats, Documentnummer
+     op 300px steken in een 620px kolom. */
   .t3-widget-root [data-sp-field] input[type="text"],
   .t3-widget-root [data-sp-field] input[type="email"],
   .t3-widget-root [data-sp-field] input[type="tel"],
   .t3-widget-root [data-sp-field] input[type="number"],
   .t3-widget-root [data-sp-field] select {
     width: 100% !important;
+    max-width: 100% !important;
     height: 40px !important;
     min-height: 40px !important;
     padding: 8px 12px !important;
@@ -948,20 +1045,46 @@
     color: var(--ink) !important;
     box-sizing: border-box !important;
   }
-  /* Labels above field, olive uppercase eyebrow. Tighter gap so label + field
-     read as one unit rather than two floating rows. */
+  /* Textarea (Opmerkingen) — 100px hoog zodat een echte notitie past. */
+  .t3-widget-root [data-sp-field] textarea,
+  .t3-widget-root textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100px !important;
+    padding: 10px 12px !important;
+    background: #fff !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: var(--ink) !important;
+    resize: vertical !important;
+    box-sizing: border-box !important;
+  }
+  /* Labels above field, olive uppercase eyebrow. 11px + 1.5px letter-spacing
+     leest scanbaarder dan 10px + 2px (dat werd bijna smaller-caps). */
   .t3-widget-root [data-sp-field] > label,
   .t3-widget-root [data-sp-field] .t3-form-label,
   .t3-widget-root [data-sp-field] [class*="field-label"] {
     display: block !important;
     font-family: 'DM Sans', sans-serif !important;
-    font-size: 10px !important;
+    font-size: 11px !important;
     font-weight: 600 !important;
-    letter-spacing: 2px !important;
+    letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
     color: var(--gold) !important;
-    margin: 0 0 5px 0 !important;
+    margin: 0 0 6px 0 !important;
     line-height: 1.4 !important;
+  }
+  /* Verplicht-asterisk in peach — nu erft hij olive-kleur van de label. */
+  .t3-widget-root [data-sp-field] .t3-input-mandatory,
+  .t3-widget-root .t3-form-label .t3-input-mandatory,
+  .t3-widget-root [data-sp-field] label > .t3-input-mandatory {
+    color: var(--peach) !important;
+    margin-left: 3px !important;
+    font-weight: 700 !important;
   }
 
   /* Mobile: everything stacks full width again. */
@@ -1126,6 +1249,199 @@
     /* Larger touch targets on mobile inputs */
     .t3-widget-root input, .t3-widget-root select, .t3-widget-root button { min-height: 44px; }
   }
+
+  /* ═══════════════════════════════════════════════════════════════
+     Blok K — Audit-implementaties (2026-09-21)
+     Peach-inflatie terugdringen (compromis: peach op submits + selected
+     states, olive op defaults), focus-ring polish, radius-systeem,
+     kalender rustiger maken, stap-4 reassurance, mobile progress cue.
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Radius-systeem (referentie — bestaande regels lezen door hun eigen waarden) */
+  :root {
+    --radius-flat: 0;
+    --radius-soft: 2px;
+    --radius-pill: 999px;
+  }
+
+  /* K1 — Kalender: Optie A
+     "Peach fill (beschikbaar) → peach ring (geselecteerd)"
+
+     Live-geverifieerde class-namen van TOMM:
+       - .t3-calendar-body-dates-cell-range-start   → Aankomst-dag
+       - .t3-calendar-body-dates-cell-range-end     → Vertrek-dag
+       - .t3-calendar-body-dates-cell-range-between → dagen ertussen
+     TOMM's default: alle drie krijgen de kleur van data-selection-color
+     als inline background. Onze !important override wint. */
+
+  /* Aankomst-dag (range-start). Duplicated class in the selector bumps
+     specificity naar (0, 0, 4, 0) zodat we TOMM's widgets.css (CORS-blocked,
+     zet olive fill) verslaan. */
+  .t3-widget-root .t3-availability-calendar .t3-calendar-body-dates-cell-range-start.t3-calendar-body-dates-cell-range-start,
+  .t3-widget-root .t3-availability-calendar .t3-calendar-body-dates-cell-range-end.t3-calendar-body-dates-cell-range-end {
+    background: #fff !important;
+    background-color: #fff !important;
+    color: var(--ink) !important;
+    border: 2px solid var(--peach) !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+  }
+
+  /* In-range dagen (range-between) — zachte peach tint strip tussen aankomst
+     en vertrek. */
+  .t3-widget-root .t3-availability-calendar .t3-calendar-body-dates-cell-range-between.t3-calendar-body-dates-cell-range-between {
+    background: rgba(163, 93, 68, 0.15) !important;
+    background-color: rgba(163, 93, 68, 0.15) !important;
+    color: var(--ink) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  /* Als een tussenliggende dag in TOMM's DOM ook -disabled is, houd het
+     peach-tint karakter zodat de strip niet visueel breekt. */
+  .t3-widget-root .t3-availability-calendar .t3-calendar-body-dates-cell-range-between.t3-calendar-body-dates-cell-inner-disabled {
+    background: rgba(163, 93, 68, 0.15) !important;
+    color: oklch(0.6 0.02 78) !important;
+    opacity: 0.6 !important;
+  }
+
+  /* K2 — Counter-plus/-minus buttons: peach → olive (default action, niet primair) */
+  .t3-widget-root .t3-counter .counter-btn {
+    background: var(--gold) !important;
+  }
+  .t3-widget-root .t3-counter .counter-btn:hover {
+    background: oklch(46% 0.055 85) !important;
+  }
+
+  /* K3 — Focus-ring: olive outline + peach halo (accessibility + polish) */
+  .t3-widget-root input:focus,
+  .t3-widget-root select:focus,
+  .t3-widget-root textarea:focus,
+  .t3-widget-root button:focus-visible {
+    outline: 2px solid var(--gold) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(163, 93, 68, 0.15) !important;
+    border-color: var(--gold) !important;
+  }
+
+  /* K4 — Trust-reassurance ONDER de submit-knop op stap 4.
+     ::after met flex-basis:100% wrapt naar een nieuwe rij onder de knoppen.
+     order:2 zorgt dat hij ná de buttons komt in flex-volgorde. */
+  body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder {
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+  body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder::after {
+    content: "Je bevestiging komt persoonlijk van David of Lisette — binnen 24 uur.";
+    display: block;
+    flex-basis: 100%;
+    width: 100%;
+    order: 2;
+    margin: 20px 0 0 0;
+    padding: 12px 14px;
+    background: var(--bg2);
+    border-left: 3px solid var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+    max-width: 46ch;
+    box-sizing: border-box;
+  }
+  html[lang="en"] body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder::after,
+  body[data-active-step="samenvatting"] .t3-widget-root[data-language="en"] .t3-nextprev-holder::after {
+    content: "Your confirmation comes personally from David or Lisette — within 24 hours.";
+  }
+  /* Buttons op stap 4: geen wrap, uniform padding, gelijke hoogte. */
+  body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder a.t3-btn,
+  body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder button.t3-btn {
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+    padding: 14px 24px !important;
+  }
+  /* Vermijd dat de peach-CTA op stap 4 op mobiel verborgen wordt door Blok K6 —
+     hier hebben we hem juist nodig. */
+  @media (max-width: 640px) {
+    body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder a.t3-btn-next,
+    body[data-active-step="samenvatting"] .t3-widget-root .t3-nextprev-holder button.t3-btn-next {
+      display: inline-block !important;
+    }
+  }
+
+  /* K5 — Stap-4: sticky mobile bar hiding (was al goed geregeld — extra
+     safety: als het detect-active-step-script hier faalt, verbergt de
+     ::before-check al de duplicatie tussen bar en submit-knop.) */
+
+  /* K6 — Mobile: hide in-widget Volgende-knop, sticky bar carriert primary CTA.
+     Fallback: alleen verbergen zodra body[data-total-loaded="1"] gezet is
+     (door de sticky-bar-JS als het eerste totaal binnenkomt). */
+  @media (max-width: 640px) {
+    body[data-total-loaded="1"] .t3-widget-root .t3-nextprev-holder a.t3-btn-next,
+    body[data-total-loaded="1"] .t3-widget-root .t3-nextprev-holder button.t3-btn-next {
+      display: none !important;
+    }
+  }
+
+  /* K7 — Progress-affordance: "van 4" achter de eyebrow */
+  .page-eyebrow .eyebrow-total {
+    margin-left: 10px;
+    opacity: 0.55;
+    font-weight: 400;
+  }
+
+  /* K8 — Story-block kleiner op mobiel zodat het widget in beeld valt */
+  @media (max-width: 640px) {
+    .page-title { font-size: 1.6rem !important; margin-bottom: 12px; }
+    .page-lead { font-size: 14px; }
+    .page-eyebrow { margin-bottom: 8px; }
+  }
+
+  /* K9 — Field-hint onder verplichte identiteitsvraag. Subtiele olive
+     border-left + kleine info-icon geeft 'm de "reassurance"-lading die je
+     wil op een privacy-vraag, zonder een grote box te worden. */
+  .sp-field-hint {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+    color: var(--muted) !important;
+    margin: 4px 0 10px 0 !important;
+    padding: 8px 12px !important;
+    background: rgba(88, 96, 64, 0.06) !important;
+    border-left: 2px solid var(--gold) !important;
+    line-height: 1.45 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    border-radius: 2px !important;
+  }
+  .sp-field-hint::before {
+    content: "🔒";
+    font-size: 12px;
+    line-height: 1.45;
+    filter: grayscale(1);
+    opacity: 0.6;
+    flex: 0 0 auto;
+  }
+
+  /* K10 — Extras-price chip op stap 2: peach terugdringen naar olive.
+     Compromis-regel: peach BLIJFT alleen op submits + selected. */
+  .t3-widget-root .t3-switcher .switcher-price {
+    color: var(--gold) !important;
+    background: rgba(88, 96, 64, 0.10) !important;
+  }
+  /* Wanneer de toggle AAN staat: peach = selected state (compromis-regel). */
+  .t3-widget-root .t3-switcher:has(input:checked) .switcher-price {
+    color: var(--peach) !important;
+    background: rgba(163, 93, 68, 0.10) !important;
+  }
+
+  /* K11 — Injected-facts op cards (index.html) niet aanraken; hier n.v.t. */
+
+  /* K12 — Accommodatie-dropdown label op stap 1 verbergen (dubbele "Accommodatie") */
+  .t3-widget-root section:has(> h2) > .t3-form-group:first-of-type > label.t3-form-label:only-of-type {
+    display: none !important;
+  }
 </style>
 </head>
 <body>
@@ -1139,27 +1455,27 @@
   <div class="page-intro" id="story-intro">
     <!-- Step 1 — Verblijf -->
     <div class="story-block" data-story-step="verblijf">
-      <div class="page-eyebrow">01 — Your stay</div>
+      <div class="page-eyebrow">01 — Your stay<span class="eyebrow-total">of 4</span></div>
       <h1 class="page-title">Choose your spot in the <em>hills</em></h1>
       <p class="page-lead">From a simple pitch to a tent already set up for you. The valley view comes with every choice.</p>
     </div>
     <!-- Step 2 — Extra's -->
     <div class="story-block" data-story-step="extra" hidden>
-      <div class="page-eyebrow">02 — Make it your own</div>
+      <div class="page-eyebrow">02 — Make it your own<span class="eyebrow-total">of 4</span></div>
       <h1 class="page-title">The <em>little things</em> for later</h1>
       <p class="page-lead">A fridge, high chair or whatever else you need. Pick only what fits your stay.</p>
     </div>
     <!-- Step 3 — Uw gegevens -->
     <div class="story-block" data-story-step="gegeven" hidden>
-      <div class="page-eyebrow">03 — Almost there</div>
+      <div class="page-eyebrow">03 — Almost there<span class="eyebrow-total">of 4</span></div>
       <h1 class="page-title">Who will we be <em>welcoming</em>?</h1>
       <p class="page-lead">Leave your details. Lisette reviews every reservation herself and confirms it personally.</p>
     </div>
     <!-- Step 4 — Samenvatting -->
     <div class="story-block" data-story-step="samenvatting" hidden>
-      <div class="page-eyebrow">04 — See you soon in Le Marche</div>
-      <h1 class="page-title">This will be <em>your stay</em></h1>
-      <p class="page-lead">One last look at everything. After that, only the waiting remains.</p>
+      <div class="page-eyebrow">04 — See you soon in Le Marche<span class="eyebrow-total">of 4</span></div>
+      <h1 class="page-title">Thank you, this is <em>your booking request</em></h1>
+      <p class="page-lead">One more look at everything. You'll hear from David or Lisette within 24 hours.</p>
     </div>
   </div>
 
@@ -1182,13 +1498,13 @@
          data-availability-calendar-legend-mode="simple"
          data-legend-available-color="#a35d44"
          data-legend-unavailable-color="#e0e0e0"
-         data-selection-color="#71603d"></div>
+         data-selection-color="#a35d44"></div>
   </div>
 
   <div class="booking-trust">
     <div class="booking-trust-body">
       <div class="booking-trust-eyebrow">One more question?</div>
-      <strong>You're booking directly with us.</strong> Lisette reviews every reservation herself. If anything is unclear, just send us a note — <a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a> or on <a href="https://wa.me/31638073908">WhatsApp</a>.
+      <strong>You're booking directly with us.</strong> David or Lisette reviews every reservation personally and confirms within 24 hours. Anything unclear? Send a note to <a href="mailto:info@sanprocolo.com">info@sanprocolo.com</a> — we usually reply within a day, often sooner.
     </div>
   </div>
 </main>
@@ -1270,6 +1586,9 @@
       lastText = text;
       val.textContent = text;
       bar.hidden = false;
+      // Signaal aan CSS dat sticky bar de primaire CTA carriert — in-widget
+      // Volgende-knop wordt dan op mobiel verborgen (Blok K6).
+      document.body.setAttribute('data-total-loaded', '1');
     }
   }
 
@@ -1358,7 +1677,8 @@
     { key: 'phone',       tests: ['telefoonnummer', 'telefoon', 'phone number', 'phonenumber', 'phone', 'mobile', 'mobiel'] },
     { key: 'street',      tests: ['straatnaam', 'straat', 'street', 'address line', 'adres'] },
     { key: 'city',        tests: ['plaats', 'woonplaats', 'city', 'town'] },
-    { key: 'country',     tests: ['land', 'country'] }
+    { key: 'country',     tests: ['land', 'country'] },
+    { key: 'document',    tests: ['documentnummer', 'document number', 'paspoort', 'passport', 'identiteitskaart', 'identity card', 'id card'] }
   ];
 
   function normalise(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
@@ -1422,6 +1742,146 @@
 
   setInterval(tagFields, 800);
   setTimeout(tagFields, 1200);
+})();
+</script>
+
+<script>
+// Documentnummer-hint injector — voegt één regel context toe onder de label
+// "Documentnummer paspoort of identiteitskaart" zodat de gast weet waarom
+// het gevraagd wordt. Polt om Vue re-renders te overleven.
+(function(){
+  var isEN = document.documentElement.lang === 'en';
+  var HINT_TEXT = isEN
+    ? 'Required for the municipal tourist tax registration. Only visible to us.'
+    : 'Verplicht voor de gemeentelijke toeristenbelasting. Alleen zichtbaar voor ons.';
+
+  function annotate(){
+    if (document.body.getAttribute('data-active-step') !== 'gegeven') return;
+    // Vind een label die "documentnummer" (NL) of "document number" (EN) bevat
+    var labels = document.querySelectorAll('.t3-widget-root .t3-form-label');
+    var target = null;
+    for (var i = 0; i < labels.length; i++) {
+      var t = labels[i].textContent.toLowerCase();
+      if (t.indexOf('documentnummer') !== -1 || t.indexOf('document number') !== -1 || t.indexOf('paspoort') !== -1 || t.indexOf('passport') !== -1) {
+        target = labels[i];
+        break;
+      }
+    }
+    if (!target) return;
+    // Zoek de dichtstbijzijnde form-group als anchor voor de hint
+    var group = target.closest('.t3-form-group') || target.parentElement;
+    if (!group || group.querySelector('.sp-field-hint')) return;
+    var hint = document.createElement('p');
+    hint.className = 'sp-field-hint';
+    hint.textContent = HINT_TEXT;
+    // Insert direct onder de label
+    if (target.nextSibling) target.parentNode.insertBefore(hint, target.nextSibling);
+    else target.parentNode.appendChild(hint);
+  }
+
+  setInterval(annotate, 800);
+  setTimeout(annotate, 1200);
+})();
+</script>
+
+<script>
+// Submit-tekst-swap op stap 4 — TOMM's default "Reserveer" leest anoniem;
+// "Bevestig mijn verblijf" is persoonlijker en herhaalt de belofte precies
+// waar aarzeling piekt. Polt omdat Vue re-renders de tekst herschrijven.
+(function(){
+  var isEN = document.documentElement.lang === 'en';
+  var NEW_LABEL = isEN ? 'Reserve my stay →' : 'Reserveer mijn verblijf →';
+
+  function swap(){
+    if (document.body.getAttribute('data-active-step') !== 'samenvatting') return;
+    // Vind de primaire submit-actie op stap 4
+    var btn = document.querySelector('.t3-widget-root a.t3-btn-next, .t3-widget-root button[type="submit"], .t3-widget-root .t3-nextprev-holder .t3-btn:not(.t3-btn-prev)');
+    if (!btn) return;
+    if (btn.getAttribute('data-sp-label-set') === '1') return;
+    btn.textContent = NEW_LABEL;
+    btn.setAttribute('data-sp-label-set', '1');
+  }
+
+  // Reset flag bij step change zodat Vue re-renders opgevangen worden
+  var lastStep = '';
+  function poll(){
+    var s = document.body.getAttribute('data-active-step') || '';
+    if (s !== lastStep) {
+      lastStep = s;
+      // Ruim vorig label-flag op zodat opnieuw geswapt wordt
+      document.querySelectorAll('[data-sp-label-set]').forEach(function(el){
+        el.removeAttribute('data-sp-label-set');
+      });
+    }
+    swap();
+  }
+
+  setInterval(poll, 500);
+  setTimeout(poll, 1200);
+})();
+</script>
+
+<script>
+// Kalender-selectie styling — Optie A
+// TOMM's widgets.css (CORS-blocked) heeft hoge specificity op range-cells,
+// dus we winnen dat NIET met externe CSS. Inline !important via JS wint
+// altijd. Vue re-rendert de cells na elke interactie, dus we pollen.
+(function(){
+  var PEACH = '#a35d44';
+  var PEACH_TINT = 'rgba(163, 93, 68, 0.15)';
+  var INK = 'oklch(0.18 0.02 80)';
+
+  function paint(){
+    var starts = document.querySelectorAll('.t3-widget-root .t3-calendar-body-dates-cell-range-start');
+    var ends   = document.querySelectorAll('.t3-widget-root .t3-calendar-body-dates-cell-range-end');
+    var betweens = document.querySelectorAll('.t3-widget-root .t3-calendar-body-dates-cell-range-between');
+
+    // Start + end: witte cirkel met peach ring
+    [starts, ends].forEach(function(list){
+      list.forEach(function(cell){
+        if (cell.getAttribute('data-sp-painted') === 'edge') return;
+        cell.style.setProperty('background', '#fff', 'important');
+        cell.style.setProperty('background-color', '#fff', 'important');
+        cell.style.setProperty('color', INK, 'important');
+        cell.style.setProperty('border', '2px solid ' + PEACH, 'important');
+        cell.style.setProperty('box-sizing', 'border-box', 'important');
+        cell.style.setProperty('box-shadow', 'none', 'important');
+        cell.setAttribute('data-sp-painted', 'edge');
+      });
+    });
+
+    // Between: zachte peach-tint strip
+    betweens.forEach(function(cell){
+      if (cell.getAttribute('data-sp-painted') === 'between') return;
+      cell.style.setProperty('background', PEACH_TINT, 'important');
+      cell.style.setProperty('background-color', PEACH_TINT, 'important');
+      cell.style.setProperty('color', INK, 'important');
+      cell.style.setProperty('border', '0', 'important');
+      cell.style.setProperty('box-shadow', 'none', 'important');
+      cell.setAttribute('data-sp-painted', 'between');
+    });
+
+    // Cellen die géén range-* meer zijn (na deselect): wis onze inline stijl
+    // zodat TOMM's originele peach-fill/beschikbaar-look terugkomt.
+    document.querySelectorAll('.t3-widget-root [data-sp-painted]').forEach(function(cell){
+      var cls = cell.className;
+      var stillRange = /range-(start|end|between)/.test(cls);
+      if (!stillRange) {
+        cell.style.removeProperty('background');
+        cell.style.removeProperty('background-color');
+        cell.style.removeProperty('color');
+        cell.style.removeProperty('border');
+        cell.style.removeProperty('box-shadow');
+        cell.style.removeProperty('box-sizing');
+        cell.removeAttribute('data-sp-painted');
+      }
+    });
+  }
+
+  // Polling — 400ms is snel genoeg om na een klik binnen 1 frame te schilderen
+  // maar goedkoop genoeg om de rest van de widget niet te storen.
+  setInterval(paint, 400);
+  setTimeout(paint, 800);
 })();
 </script>
 
