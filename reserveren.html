@@ -157,6 +157,58 @@
   .t3-widget-root {
     --dp-primary-color: var(--peach);
     --dp-success-color: var(--gold);
+    /* TOMM t3-calendar popover (searchpage-style) cell colors */
+    --t3-calendar-cell-active-background-color: #a35d44;
+    --t3-calendar-cell-active-color: #ffffff;
+    --t3-calendar-cell-hover-background-color: rgba(163, 93, 68, 0.15);
+    --t3-calendar-cell-hover-color: #a35d44;
+    /* TOMM legend-driven overrides (availability calendar op deze pagina) */
+    --t3-legend-available-color: #a35d44;
+    --t3-legend-available-text-color: #ffffff;
+    --t3-legend-available-hover-color: #8f4d38;
+    --t3-legend-available-hover-text-color: #ffffff;
+    --t3-legend-arrival-departure-color: #a35d44;
+    --t3-legend-arrival-only-color: #a35d44;
+    --t3-legend-departure-only-color: #a35d44;
+  }
+  /* Vue Datepicker popover — teleporteert naar document.body dus buiten
+     .t3-widget-root scope. Override daarom op .dp__theme_light zelf, en
+     op de individuele klassen. Zonder scope-prefix. */
+  .dp__theme_light,
+  .dp__main .dp__theme_light {
+    --dp-primary-color: #a35d44 !important;
+    --dp-primary-text-color: #ffffff !important;
+    --dp-hover-color: rgba(163, 93, 68, 0.10) !important;
+    --dp-hover-text-color: #a35d44 !important;
+    --dp-range-between-dates-background-color: rgba(163, 93, 68, 0.14) !important;
+    --dp-range-between-dates-text-color: #3c2a1f !important;
+    --dp-range-between-border-color: transparent !important;
+    --dp-success-color: #71603d !important;
+  }
+  .dp__active_date,
+  .dp__cell_inner.dp__active_date,
+  .dp__range_start,
+  .dp__range_end {
+    background: #a35d44 !important;
+    color: #fff !important;
+    border-color: #a35d44 !important;
+  }
+  .dp__range_between {
+    background: rgba(163, 93, 68, 0.14) !important;
+    color: #3c2a1f !important;
+    border-color: transparent !important;
+  }
+  .dp__today { border-color: #a35d44 !important; }
+  .dp__cell_inner:hover,
+  .dp__date_hover:hover {
+    background: rgba(163, 93, 68, 0.12) !important;
+    color: #a35d44 !important;
+    border-color: transparent !important;
+  }
+  .dp__button:hover,
+  .dp__inner_nav:hover {
+    background: rgba(163, 93, 68, 0.10) !important;
+    color: #a35d44 !important;
   }
 
   /* Wave 3 — reservation-widget polish */
@@ -1209,6 +1261,10 @@
   }
   .booking-trust a { color: var(--peach); text-decoration: none; font-weight: 500; }
   .booking-trust a:hover { color: var(--peach-h); }
+  /* Verberg op step 4 (samenvatting/bevestiging) — dezelfde reassurance staat
+     al in de story-block header boven de widget ("Binnen 24 uur hoor je van
+     David of Lisette"). Voorkomt dubbele copy. */
+  body[data-active-step="samenvatting"] .booking-trust { display: none !important; }
 
 
   @media (max-width: 640px) {
@@ -1352,8 +1408,52 @@
     padding: 14px 24px !important;
   }
 
-  /* K5/K6 — verwijderd. Sticky mobile totaal-bar is uit; de in-widget
-     Volgende-knop is de enige (en duidelijke) primaire CTA op elk device. */
+  /* K5 — Mobile price bar. Persistent totaal-anker onderaan het scherm op
+     step "extra" en "gegeven" (formulier is lang → user scrolt ver van de
+     overview-card weg). Geen CTA — de in-widget Volgende-knop blijft de
+     enige primaire actie. Alleen mobiel. */
+  .sp-mobile-price-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.06);
+    display: none;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: inherit;
+  }
+  .sp-mpb-label {
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .sp-mpb-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  /* Alleen mobiel, alleen tijdens step 2 (extra) en 3 (gegeven).
+     Extra body padding zodat widget-content niet achter de bar valt. */
+  @media (max-width: 899px) {
+    body[data-active-step="extra"] .sp-mobile-price-bar,
+    body[data-active-step="gegeven"] .sp-mobile-price-bar {
+      display: flex;
+    }
+    body[data-active-step="extra"],
+    body[data-active-step="gegeven"] {
+      padding-bottom: 72px;
+    }
+  }
+  /* K6 — verwijderd (oude sticky CTA-bar, vervangen door K5 prijs-only). */
 
   /* K7 — Progress-affordance: "van 4" achter de eyebrow */
   .page-eyebrow .eyebrow-total {
@@ -1849,6 +1949,26 @@
         cell.removeAttribute('data-sp-painted');
       }
     });
+
+    // Vue Datepicker popovers (dp__*) — Vue teleporteert ze naar document.body,
+    // dus buiten .t3-widget-root scope. Peach-fill op selected/range-endpoints.
+    document.querySelectorAll('.dp__active_date, .dp__range_start, .dp__range_end').forEach(function(cell){
+      cell.style.setProperty('background', PEACH, 'important');
+      cell.style.setProperty('background-color', PEACH, 'important');
+      cell.style.setProperty('color', '#fff', 'important');
+      cell.style.setProperty('border-color', PEACH, 'important');
+    });
+    document.querySelectorAll('.dp__range_between').forEach(function(cell){
+      cell.style.setProperty('background', PEACH_TINT, 'important');
+      cell.style.setProperty('background-color', PEACH_TINT, 'important');
+      cell.style.setProperty('color', 'inherit', 'important');
+      cell.style.setProperty('border-color', 'transparent', 'important');
+    });
+    document.querySelectorAll('.dp__today').forEach(function(cell){
+      if (!cell.classList.contains('dp__active_date')) {
+        cell.style.setProperty('border-color', PEACH, 'important');
+      }
+    });
   }
 
   // Polling — 400ms is snel genoeg om na een klik binnen 1 frame te schilderen
@@ -1859,30 +1979,11 @@
 </script>
 
 <script>
-// Confirmation-view swap — TOMM's post-submit view leest saai:
-//   "De boekingsaanvraag is gemaakt. Hartelijk dank voor uw boekingsaanvraag.
-//    Binnen 15 minuten ontvangt u de aanvraaggegevens op <email>."
-// We herschrijven kop + body naar warmere copy en behouden het dynamische
-// e-mailadres dat TOMM interpoleerde. Polling omdat Vue de view kan re-renderen.
+// Confirmation-view hide — TOMM's post-submit view zegt hetzelfde als onze
+// story-block header op step 4 ("Dankjewel, dit is jullie boekingsaanvraag /
+// Binnen 24 uur hoor je van David of Lisette"), dus we verbergen de TOMM-kaart
+// om dubbele copy te voorkomen. Alleen op deze specifieke view.
 (function(){
-  var isEN = document.documentElement.lang === 'en';
-
-  var NEW_TITLE = isEN
-    ? 'Your Le Marche escape is nearly here…'
-    : 'Die vakantie in Le Marche komt er bijna aan…';
-
-  function buildBody(email){
-    if (isEN) {
-      return 'Thanks for your request! We’re holding your spot. Lisette reviews every request personally and will let you know as soon as everything’s confirmed.'
-        + '<br><br>Within 15 minutes you’ll receive the details of your request'
-        + (email ? ' at <strong>' + email + '</strong>' : '') + '.';
-    }
-    return 'Bedankt voor je aanvraag! We houden je plekje alvast voor je vrij. Lisette bekijkt je aanvraag persoonlijk en laat je zo snel mogelijk weten of alles definitief is.'
-      + '<br><br>Binnen 15 minuten ontvang je de gegevens van je aanvraag'
-      + (email ? ' op <strong>' + email + '</strong>' : '') + '.';
-  }
-
-  // Titel-match: alles wat TOMM als kop rendert op de bevestigingsview
   function findTitle(){
     var headings = document.querySelectorAll('.t3-widget-root h1, .t3-widget-root h2, .t3-widget-root h3, .t3-widget-root .t3-heading, .t3-widget-root [class*="heading"]');
     for (var i = 0; i < headings.length; i++) {
@@ -1898,8 +1999,6 @@
     return null;
   }
 
-  // Vind body-paragraaf: zoek naar de originele "Hartelijk dank"/"Thank you"
-  // regel binnen dezelfde container als de titel, of in aangrenzende siblings.
   function findBody(titleEl){
     var scopes = [
       titleEl.parentElement,
@@ -1920,39 +2019,86 @@
     return null;
   }
 
-  function extractEmail(text){
-    var m = (text || '').match(/[\w.+\-]+@[\w\-]+\.[\w.\-]+/);
-    return m ? m[0] : '';
+  function hide(el){
+    if (!el) return;
+    if (el.getAttribute('data-sp-hidden') === '1') return;
+    el.style.setProperty('display', 'none', 'important');
+    el.setAttribute('data-sp-hidden', '1');
   }
 
-  function swap(){
+  // Zoek de kleinste gemeenschappelijke ancestor van titel + body die NIET
+  // de hele widget-root is — dat is de bevestigingskaart.
+  function findCard(title, body){
+    if (!title) return null;
+    var el = title.parentElement;
+    var maxHops = 6;
+    while (el && maxHops-- > 0) {
+      if (el.classList && el.classList.contains('t3-widget-root')) return null;
+      if (body && el.contains(body)) return el;
+      // Als er geen body is: hide op titelniveau's directe parent
+      if (!body && el !== title.parentElement) return el;
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  function hideConfirmation(){
     var title = findTitle();
     if (!title) return;
-    // Guard: alleen swappen als we 'm nog niet hebben aangeraakt
-    if (title.getAttribute('data-sp-swapped') !== '1') {
-      title.textContent = NEW_TITLE;
-      title.setAttribute('data-sp-swapped', '1');
-    } else {
-      // Vue re-rendered en heeft onze tekst overschreven — check nu:
-      if (title.textContent.trim() !== NEW_TITLE) {
-        title.textContent = NEW_TITLE;
-      }
-    }
-
-    // Body — probeer eerst de originele body-tekst te vinden en email eruit
     var body = findBody(title);
-    if (!body) return;
-    if (body.getAttribute('data-sp-swapped') === '1' && body.innerHTML.indexOf('plekje') !== -1) return;
-
-    // Extract email uit de HUIDIGE body tekst (zowel origineel als mogelijk
-    // re-rendered), of laat leeg als niets gevonden.
-    var email = extractEmail(body.textContent);
-    body.innerHTML = buildBody(email);
-    body.setAttribute('data-sp-swapped', '1');
+    var card = findCard(title, body);
+    if (card) {
+      hide(card);
+    } else {
+      // Fallback: verberg titel + body los als we de kaart niet vinden
+      hide(title);
+      hide(body);
+    }
   }
 
-  setInterval(swap, 500);
-  setTimeout(swap, 1200);
+  setInterval(hideConfirmation, 500);
+  setTimeout(hideConfirmation, 1200);
+})();
+</script>
+
+<div class="sp-mobile-price-bar" role="region" aria-label="Totaalprijs" data-sp-mpb>
+  <span class="sp-mpb-label">Totaal</span>
+  <span class="sp-mpb-value" data-sp-price>€ —</span>
+</div>
+
+<script>
+// Mobile price bar — leest totaalprijs uit de overview-card in de rechterkolom
+// en spiegelt hem in de sticky bar onderaan het scherm. De bar zelf wordt
+// getoond/verborgen via CSS op basis van body[data-active-step]. Cheap poll.
+(function(){
+  var out = document.querySelector('.sp-mpb-value');
+  if (!out) return;
+
+  function grabPrice(){
+    var card = document.querySelector('.t3-widget-root .overview-card');
+    if (!card) return '';
+    // Loop alle kandidaten in DOM-volgorde; pak het LAATSTE €-bedrag —
+    // subtotaal komt eerder dan totaal in de overview-card.
+    var candidates = card.querySelectorAll('.t3-card-footer, .details, [class*="price"], [class*="total"], strong, span, p, div');
+    var last = '';
+    for (var i = 0; i < candidates.length; i++) {
+      var t = (candidates[i].textContent || '').trim();
+      // €-teken gevolgd door bedrag (NL: 1.234,56 / EN: 1,234.56 / kaal: 123)
+      var m = t.match(/€\s?\d[\d.,]*/);
+      if (m) last = m[0];
+    }
+    return last;
+  }
+
+  function tick(){
+    var p = grabPrice();
+    if (!p) return;
+    // Normaliseer: forceer één spatie tussen € en getal
+    var normalized = p.replace(/€\s*/, '€ ');
+    if (out.textContent !== normalized) out.textContent = normalized;
+  }
+  setInterval(tick, 600);
+  setTimeout(tick, 900);
 })();
 </script>
 

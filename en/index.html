@@ -110,7 +110,7 @@ nav.scrolled {
 /* Scrolled over the beige page: darken elements so they read without a bar */
 nav.scrolled .nav-links a,
 nav.scrolled .nav-lang a { color: var(--muted); }
-nav.scrolled .nav-lang a.active { color: var(--peach); }
+nav.scrolled .nav-lang a.active { color: var(--peach); font-weight: 700; }
 nav.scrolled .btn-nav { color: var(--peach); border-color: oklch(55% 0.099 40 / 0.45); }
 nav.scrolled .nav-hamburger span { background: var(--cream); }
 
@@ -163,12 +163,13 @@ nav.scrolled .nav-hamburger span { background: var(--cream); }
 .nav-lang { display: flex; gap: 10px; }
 
 .nav-lang a {
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 1px; color: rgba(245,234,214,0.28);
-  text-decoration: none; transition: color 0.2s;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 1px; color: rgba(245,234,214,0.55);
+  text-decoration: none; transition: color 0.2s, font-weight 0.2s;
 }
 
-.nav-lang a:hover, .nav-lang a.active { color: var(--gold); }
+.nav-lang a:hover { color: rgba(255,255,255,0.9); }
+.nav-lang a.active { color: #ffffff; font-weight: 700; }
 
 .btn-nav {
   padding: 9px 22px;
@@ -1543,7 +1544,8 @@ a:focus-visible, button:focus-visible {
 
 /* Nav: peach accents */
 .nav-links a::after { background: var(--peach); }
-.nav-lang a:hover, .nav-lang a.active { color: var(--peach); }
+.nav-lang a:hover { color: rgba(255,255,255,0.9); }
+.nav-lang a.active { color: #ffffff; font-weight: 700; }
 .btn-nav { border-color: oklch(94% 0.010 90 / 0.35); color: oklch(94% 0.010 90 / 0.80); }
 .btn-nav:hover { background: var(--peach); border-color: var(--peach); color: oklch(96% 0.015 78); }
 
@@ -1926,18 +1928,40 @@ footer .footer-links a:hover   { color: var(--peach); }
       display: block !important;
       overflow: visible !important;
     }
-    /* Footer — very compact separator.
-       margin: auto 0 0 kills TOMM's default 16px bottom margin so the price
-       sits flush against the card's inner bottom padding. */
+    /* Footer — 2-kolom CSS grid via JS-verplaatsing. JS hangt onder aan de
+       footer: (a) een `.sp-card-info` wrapper met prijs + beschikbaarheid, en
+       (b) de BOEKEN-knop (uit TOMM's wrapper getrokken, waar dan ook). Grid
+       zet info links (1fr), knop rechts (auto), verticaal gecentreerd. Zo is
+       de layout onafhankelijk van waar TOMM de knop originally rendert. */
     .t3-widget-root .t3-card-footer {
-      display: flex !important;
+      display: grid !important;
+      grid-template-columns: 1fr auto !important;
+      column-gap: 12px !important;
       align-items: center !important;
-      justify-content: space-between !important;
-      gap: 8px !important;
       padding: 8px 0 0 0 !important;
       border-top: 1px solid var(--border2) !important;
       margin: auto 0 0 0 !important;
       background: transparent !important;
+    }
+    /* Info-wrapper (prijs boven, beschikbaarheid onder) — links */
+    .t3-widget-root .t3-card-footer .sp-card-info {
+      grid-column: 1 !important;
+      justify-self: start !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 6px !important;
+    }
+    /* Boeken-knop — rechts, verticaal gecentreerd */
+    .t3-widget-root .t3-card-footer .sp-card-book {
+      grid-column: 2 !important;
+      justify-self: end !important;
+      align-self: center !important;
+    }
+    /* Verberg alle TOMM-wrappers die we hebben leeggetrokken */
+    .t3-widget-root .t3-card-footer > .t3-card-link:empty,
+    .t3-widget-root .t3-card-footer > .t3-card-price:not(:has(.injected-price)):empty {
+      display: none !important;
     }
     /* Price — small, whispered */
     .t3-widget-root .t3-card-price,
@@ -2008,11 +2032,76 @@ footer .footer-links a:hover   { color: var(--peach); }
       font-weight: 400 !important;
     }
 
-    /* Datepicker + counter accents in olive/peach */
+    /* Datepicker + counter accents in olive/peach.
+       CRUCIAAL: de searchpage-aankomst/vertrek popover gebruikt TOMM's eigen
+       t3-calendar-body-dates-* widget (NIET Vue Datepicker). Die leest zijn
+       kleuren uit --t3-calendar-cell-* en --t3-legend-* op .t3-widget-root.
+       Defaults zijn blauw (#1976d2), dus we overrulen ze naar peach. */
     .t3-widget-root {
       --dp-primary-color: var(--peach);
       --dp-success-color: var(--gold);
       --dp-hover-color: rgba(163, 93, 68, 0.08);
+      /* TOMM t3-calendar popover cell colors */
+      --t3-calendar-cell-active-background-color: #a35d44;
+      --t3-calendar-cell-active-color: #ffffff;
+      --t3-calendar-cell-hover-background-color: rgba(163, 93, 68, 0.15);
+      --t3-calendar-cell-hover-color: #a35d44;
+      /* TOMM legend-driven overrides (availability calendar) */
+      --t3-legend-available-color: #a35d44;
+      --t3-legend-available-text-color: #ffffff;
+      --t3-legend-available-hover-color: #8f4d38;
+      --t3-legend-available-hover-text-color: #ffffff;
+      --t3-legend-arrival-departure-color: #a35d44;
+      --t3-legend-arrival-only-color: #a35d44;
+      --t3-legend-departure-only-color: #a35d44;
+    }
+    /* Vue Datepicker popover (aankomst/vertrek).
+       BELANGRIJK: Vue Datepicker teleporteert de popover naar document.body,
+       dus hij zit BUITEN .t3-widget-root. TOMM's widgets.css definieert
+       daarnaast --dp-primary-color: #1976d2 op .dp__theme_light — dat wint
+       van onze scope-CSS omdat de klasse op de popover zelf staat. Fix:
+       redefinieer de var op .dp__theme_light zelf (waar de popover 'm heeft
+       geërfd). Zonder .t3-widget-root prefix zodat het ook werkt na teleport. */
+    .dp__theme_light,
+    .dp__main .dp__theme_light {
+      --dp-primary-color: #a35d44 !important;
+      --dp-primary-text-color: #ffffff !important;
+      --dp-hover-color: rgba(163, 93, 68, 0.10) !important;
+      --dp-hover-text-color: #a35d44 !important;
+      --dp-range-between-dates-background-color: rgba(163, 93, 68, 0.14) !important;
+      --dp-range-between-dates-text-color: #3c2a1f !important;
+      --dp-range-between-border-color: transparent !important;
+      --dp-success-color: #71603d !important;
+    }
+    /* Ook expliciet op de klasse-namen zelf voor het geval de var-override
+       ergens niet doorkomt. Geen .t3-widget-root scope. */
+    .dp__active_date,
+    .dp__cell_inner.dp__active_date,
+    .dp__range_start,
+    .dp__range_end {
+      background: #a35d44 !important;
+      color: #fff !important;
+      border-color: #a35d44 !important;
+    }
+    .dp__range_between {
+      background: rgba(163, 93, 68, 0.14) !important;
+      color: #3c2a1f !important;
+      border-color: transparent !important;
+    }
+    .dp__today {
+      border-color: #a35d44 !important;
+    }
+    .dp__cell_inner:hover,
+    .dp__date_hover:hover {
+      background: rgba(163, 93, 68, 0.12) !important;
+      color: #a35d44 !important;
+      border-color: transparent !important;
+    }
+    /* Arrow buttons (‹ mei 2027 ›) — olive i.p.v. blauw */
+    .dp__button:hover,
+    .dp__inner_nav:hover {
+      background: rgba(163, 93, 68, 0.10) !important;
+      color: #a35d44 !important;
     }
 
     /* Counter pill (Personen / Kinderen / Baby's dropdown on the searchpage
@@ -3553,21 +3642,59 @@ setTimeout(function(){
         else titleEl.parentNode.insertBefore(factsEl, titleEl.nextSibling);
       }
 
-      // Detect a real TOMM-rendered price (contains € somewhere in the price cell)
+      // ═══ Herstructureer de footer naar 2 rollen: sp-card-info (links) en
+      //     sp-card-book (rechts). Overleeft Vue re-renders omdat we alleen
+      //     iets doen als de wrappers nog niet bestaan of de contents veranderd zijn.
+
+      // 1) Zoek/maak de info-wrapper (bevat prijs + beschikbaarheid)
+      var info = footer.querySelector('.sp-card-info');
+      if (!info) {
+        info = document.createElement('div');
+        info.className = 'sp-card-info';
+        footer.insertBefore(info, footer.firstChild);
+      }
+
+      // 2) Zoek/maak de knop-wrapper (bevat BOEKEN link)
+      var bookWrap = footer.querySelector('.sp-card-book');
+      if (!bookWrap) {
+        bookWrap = document.createElement('div');
+        bookWrap.className = 'sp-card-book';
+        footer.appendChild(bookWrap);
+      }
+
+      // 3) Vind de BOEKEN-knop — waar TOMM 'm ook rendert (in .t3-card-link,
+      //    in .t3-card-price > .t3-book, of direct in de footer)
+      var bookBtn = card.querySelector('.t3-card-footer a.t3-book, .t3-card-footer .t3-card-link a, .t3-card-footer .t3-card-price a, .t3-card-footer button.t3-book, .t3-card-footer .t3-book a');
+      if (bookBtn && bookBtn.parentElement !== bookWrap) {
+        bookWrap.appendChild(bookBtn);
+      }
+
+      // 4) Verplaats de beschikbaarheids-pill naar info (onder de prijs)
+      var availability = card.querySelector('[class*="availability"]:not(.t3-availability-calendar):not(.t3-availability-background), [class*="available-count"]');
+      if (availability && availability.parentElement !== info) {
+        info.appendChild(availability);
+      }
+
+      // 5) Zorg dat de prijs BOVEN de beschikbaarheid staat in de info-wrapper.
+      //    De prijs kan zijn: .injected-price (fallback) of .t3-card-price (real)
       var priceCell = card.querySelector('.t3-card-price');
       var hasRealPrice = priceCell && /€\s*\d/.test(priceCell.textContent);
       var injected = card.querySelector('.injected-price');
+
       if (hasRealPrice) {
         if (injected) injected.remove();
-        return;
+        // Move real price into info wrapper (bovenaan)
+        if (priceCell.parentElement !== info) {
+          info.insertBefore(priceCell, info.firstChild);
+        }
+      } else if (vanaf && !injected) {
+        var span = document.createElement('span');
+        span.className = 'injected-price';
+        span.innerHTML = vanaf + ' <span class="injected-price-unit">' + unit + '</span>';
+        info.insertBefore(span, info.firstChild);
+      } else if (injected && injected.parentElement !== info) {
+        info.insertBefore(injected, info.firstChild);
       }
-      if (!vanaf) return;
-      if (injected) return; // already there
-      var span = document.createElement('span');
-      span.className = 'injected-price';
-      span.innerHTML = vanaf + ' <span class="injected-price-unit">' + unit + '</span>';
-      // Insert BEFORE the .t3-card-price / book button so it reads left-to-right
-      footer.insertBefore(span, footer.firstChild);
     });
   }
 
@@ -3682,6 +3809,44 @@ setTimeout(function(){
       'opacity:0;transition:opacity .2s;pointer-events:none}' +
     '#stay .t3-card:hover .t3-card-image::before{opacity:0.9}';
   document.head.appendChild(css);
+})();
+</script>
+
+<script>
+// Vue Datepicker peach-painter — TOMM's widgets.css laadt cross-origin en
+// kan onze CSS-overrides op .dp__active_date verslaan. Inline style met
+// !important via JS wint altijd. Zelfde patroon als de calendar op de
+// reserveerpagina. Cheap poll (400ms) omdat de popover elke keer opnieuw
+// gemount wordt bij openen/klikken.
+(function(){
+  var PEACH = '#a35d44';
+  var PEACH_TINT = 'rgba(163, 93, 68, 0.14)';
+
+  function paintSelected(el){
+    el.style.setProperty('background', PEACH, 'important');
+    el.style.setProperty('color', '#fff', 'important');
+    el.style.setProperty('border-color', PEACH, 'important');
+  }
+  function paintRangeBetween(el){
+    el.style.setProperty('background', PEACH_TINT, 'important');
+    el.style.setProperty('color', 'inherit', 'important');
+    el.style.setProperty('border-color', 'transparent', 'important');
+  }
+
+  function tick(){
+    // GEEN .t3-widget-root scope — Vue Datepicker teleporteert de popover naar
+    // document.body, dus we moeten globaal zoeken.
+    document.querySelectorAll('.dp__active_date, .dp__range_start, .dp__range_end')
+      .forEach(paintSelected);
+    document.querySelectorAll('.dp__range_between').forEach(paintRangeBetween);
+    document.querySelectorAll('.dp__today').forEach(function(el){
+      if (!el.classList.contains('dp__active_date')) {
+        el.style.setProperty('border-color', PEACH, 'important');
+      }
+    });
+  }
+  setInterval(tick, 400);
+  setTimeout(tick, 700);
 })();
 </script>
 </body>
